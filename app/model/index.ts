@@ -14,7 +14,7 @@ export type CreateSourceResult = Omit<SourceJSON, 'posts'> & {
 };
 
 export type GetSourceListResult = Array<
-  Omit<SourceJSON, 'posts'> & { unreadCount: number }
+  Omit<SourceJSON, 'posts'> & { count: number }
 >;
 
 export class DB {
@@ -56,21 +56,29 @@ export class DB {
     return result.toJSON();
   }
 
-  public async getSourceList(): Promise<GetSourceListResult> {
+  public async getSourceList(
+    count: 'unread' | 'starred'
+  ): Promise<GetSourceListResult> {
     this.checkInitialized();
     const sourceList = await Source.findAll();
 
     return Promise.all(
       sourceList.map(async (source) => {
-        const unreadCount = await source.countPosts({
-          where: {
-            unread: true,
-          },
+        const options =
+          count === 'starred'
+            ? {
+                starred: true,
+              }
+            : {
+                count: true,
+              };
+        const sourceCount = await source.countPosts({
+          where: options,
         });
         const json = source.toJSON();
         return {
           ...json,
-          unreadCount,
+          count: sourceCount,
         };
       })
     );

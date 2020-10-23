@@ -1,13 +1,13 @@
 import { DateTime } from 'luxon';
 import React from 'react';
 import type { RssPost, RssSource } from '../Root';
-import { rssParserChild } from '../../channel/child';
-import { OverviewTarget } from '../../components/SideBar/Header';
+import { channel } from '../../channel/child';
 import { SubSideBar } from '../../components/SubSideBar';
 import { DateItem } from '../../components/SubSideBar/DateItem';
 import { PostItem } from '../../components/SubSideBar/PostItem';
 import { Toolkit } from '../../components/SubSideBar/ToolKit';
 import { Mode } from '../../constants/Mode';
+import { Preset } from '../../constants/Preset';
 
 export const ArticleList: React.FC<{
   mode: Mode;
@@ -15,7 +15,7 @@ export const ArticleList: React.FC<{
   postList: RssPost[];
   setSourceList: React.Dispatch<React.SetStateAction<RssSource[]>>;
   setPostList: React.Dispatch<React.SetStateAction<RssPost[]>>;
-  activeSourceId: number | OverviewTarget;
+  activeSourceId: number | Preset;
   activePostId: number;
   setActivePostId: React.Dispatch<React.SetStateAction<number>>;
 }> = ({
@@ -60,7 +60,7 @@ export const ArticleList: React.FC<{
               active={id === activePostId}
               onClick={async () => {
                 setActivePostId(id);
-                await rssParserChild.setPostUnread(id, false);
+                await channel.setPostUnread(id, false);
                 setSourceList((source) => {
                   const tmp = [...source];
                   const active = tmp.find((x) => x.id === activeSourceId);

@@ -18,9 +18,9 @@ type CheckResult = {
 };
 
 type Event = IpcMainInvokeEvent;
-export type Listener = ReturnType<RssParserMain['listener']>;
+export type Listener = ReturnType<ChannelMain['listener']>;
 
-export class RssParserMain {
+export class ChannelMain {
   private parser: Parser;
 
   private checkResult: CheckResult | null;
@@ -32,7 +32,8 @@ export class RssParserMain {
 
   public listener() {
     return {
-      init: () => this.init(),
+      getSourceList: (_: Event, count: 'unread' | 'starred') =>
+        this.getSourceList(count),
       checkUrl: (_: Event, url: string) => this.handleCheckUrl(url),
       confirm: (_: Event, name: string) => this.confirm(name),
       getSourceById: (_: Event, id: number) => this.db.getSourceById(id),
@@ -49,8 +50,8 @@ export class RssParserMain {
     listenToMain(this.listener());
   }
 
-  private init() {
-    return this.db.getSourceList();
+  private getSourceList(count: 'unread' | 'starred') {
+    return this.db.getSourceList(count);
   }
 
   private async handleCheckUrl(url: string): Promise<string> {

@@ -6,20 +6,14 @@ import {
   StarFilledIcon,
   ViewListIcon,
 } from '../Icon';
-import { SideBarItem } from './SideBarItem';
-
-export enum OverviewTarget {
-  All = 'All',
-  Archive = 'Archive',
-  Starred = 'Starred',
-  Unread = 'Unread',
-}
+import { OverviewItem } from './OverviewItem';
+import { Preset } from '../../constants/Preset';
 
 export type HeaderProps = {
   mode: Mode;
   count: number;
-  active: OverviewTarget;
-  onClick: (target: OverviewTarget) => void;
+  onClick: (target: Preset) => void;
+  active?: Preset | number;
 };
 
 export const Header: React.FC<HeaderProps> = ({
@@ -31,41 +25,41 @@ export const Header: React.FC<HeaderProps> = ({
   switch (mode) {
     case Mode.Starred:
       return (
-        <SideBarItem
-          active={active === OverviewTarget.Starred}
+        <OverviewItem
+          target={Preset.Starred}
           icon={<StarFilledIcon />}
-          name="Starred"
+          activeId={active}
           count={count}
-          onClick={() => onClick(OverviewTarget.Starred)}
+          onClick={onClick}
         />
       );
     case Mode.Unread:
       return (
-        <SideBarItem
-          active={active === OverviewTarget.Unread}
+        <OverviewItem
+          target={Preset.Unread}
           icon={<MailFilledIcon />}
-          name="Unread"
+          activeId={active}
           count={count}
-          onClick={() => onClick(OverviewTarget.Unread)}
+          onClick={onClick}
         />
       );
     default:
     case Mode.All:
       return (
         <>
-          <SideBarItem
-            active={active === OverviewTarget.All}
+          <OverviewItem
+            target={Preset.All}
             icon={<ViewListIcon />}
-            name="All Items"
+            activeId={active}
             count={count}
-            onClick={() => onClick(OverviewTarget.All)}
+            onClick={onClick}
           />
-          <SideBarItem
-            active={active === OverviewTarget.Archive}
+          <OverviewItem
+            target={Preset.Archive}
             icon={<ArchiveIcon />}
-            name="Archive"
+            activeId={active}
             count={0}
-            onClick={() => onClick(OverviewTarget.Archive)}
+            onClick={onClick}
           />
         </>
       );

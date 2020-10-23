@@ -16,7 +16,7 @@ import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
 import { DB } from './model';
-import { RssParserMain } from './channel/main';
+import { ChannelMain } from './channel/main';
 
 export default class AppUpdater {
   constructor() {
@@ -89,7 +89,7 @@ const createWindow = async () => {
   const connectWithDB = async (): Promise<void> => {
     const db = new DB();
     await db.init();
-    const rssParser = new RssParserMain(db);
+    const rssParser = new ChannelMain(db);
     rssParser.listen();
   };
   await connectWithDB();

@@ -1,22 +1,21 @@
 import React from 'react';
 import type { RssPost, RssSource } from '../Root';
-import { rssParserChild } from '../../channel/child';
+import { channel } from '../../channel/child';
 import { SideBar } from '../../components/SideBar';
 import { BottomBar, Step } from '../../components/SideBar/BottomBar';
 import { FeedSearchBar } from '../../components/SideBar/FeedSearchBar';
 import { FeedSubscribeBar } from '../../components/SideBar/FeedSubscribeBar';
-import { Header, OverviewTarget } from '../../components/SideBar/Header';
+import { Header } from '../../components/SideBar/Header';
 import { SideBarItem } from '../../components/SideBar/SideBarItem';
 import { Mode } from '../../constants/Mode';
+import { Preset } from '../../constants/Preset';
 
 export const SourceList: React.FC<{
   mode: Mode;
   sourceList: RssSource[];
   setSourceList: React.Dispatch<React.SetStateAction<RssSource[]>>;
-  activeSourceId: number | OverviewTarget;
-  setActiveSourceId: React.Dispatch<
-    React.SetStateAction<number | OverviewTarget>
-  >;
+  activeSourceId: number | Preset;
+  setActiveSourceId: React.Dispatch<React.SetStateAction<number | Preset>>;
   overviewCount: number;
 
   setPostList: React.Dispatch<React.SetStateAction<RssPost[]>>;
@@ -34,7 +33,7 @@ export const SourceList: React.FC<{
   const [name, setName] = React.useState('');
 
   const onSearch = async (currentLink: string) => {
-    const result = await rssParserChild.checkUrl(currentLink);
+    const result = await channel.checkUrl(currentLink);
     if (result) {
       setName(result);
       setStep(Step.EnterName);
@@ -42,7 +41,7 @@ export const SourceList: React.FC<{
   };
 
   const onConfirm = async (currentName: string) => {
-    const { posts, icon, ...rest } = await rssParserChild.confirm(currentName);
+    const { posts, icon, ...rest } = await channel.confirm(currentName);
     setSourceList((list) => [
       ...list,
       { ...rest, icon: icon ?? null, unreadCount: posts.length },
@@ -81,7 +80,7 @@ export const SourceList: React.FC<{
   const overview = (
     <Header
       mode={mode}
-      active={activeSourceId as OverviewTarget}
+      active={activeSourceId as Preset}
       count={overviewCount}
       onClick={setActiveSourceId}
     />

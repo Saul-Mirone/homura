@@ -1,7 +1,7 @@
 import { ipcMain, ipcRenderer } from 'electron';
 
-export const channel = [
-  'init',
+const channelName = [
+  'getSourceList',
   'checkUrl',
   'confirm',
   'getSourceById',
@@ -21,9 +21,9 @@ type Child<T extends Record<string, Fn>> = {
 };
 
 export function generateChild<
-  T extends Record<typeof channel[number], Fn>
+  T extends Record<typeof channelName[number], Fn>
 >(): Child<T> {
-  return channel.reduce((acc, key) => {
+  return channelName.reduce((acc, key) => {
     return {
       ...acc,
       [key]: (...args: unknown[]) => ipcRenderer.invoke(key, ...args),
@@ -31,7 +31,7 @@ export function generateChild<
   }, {}) as Child<T>;
 }
 
-export function listenToMain<T extends Record<typeof channel[number], Fn>>(
+export function listenToMain<T extends Record<typeof channelName[number], Fn>>(
   records: T
 ): void {
   Object.entries(records).forEach(([key, handler]) => {
