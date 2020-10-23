@@ -19,7 +19,9 @@ export type GetSourceListResult = Array<
 
 export class DB {
   private readonly sequelize: Sequelize;
+
   private initialized: boolean;
+
   constructor() {
     this.sequelize = new Sequelize('sqlite::memory:');
     this.initialized = false;
@@ -37,8 +39,6 @@ export class DB {
     ...sourceOptions
   }: CreateSourceOptions): Promise<CreateSourceResult> {
     this.checkInitialized();
-    console.log('------creteSource-----');
-    console.log(sourceOptions);
     const source = await Source.create(sourceOptions);
     await Promise.all(posts.map((post) => source.createPost(post)));
 

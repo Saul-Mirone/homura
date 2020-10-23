@@ -11,7 +11,6 @@ type ReaderProps = {
 };
 
 export const Reader: React.FC<ReaderProps> = ({ post }) => {
-
   return (
     <div className="w-4/6 flex flex-col bg-gray-200 h-screen">
       <Toolkit />
@@ -24,6 +23,7 @@ export const Reader: React.FC<ReaderProps> = ({ post }) => {
               <div className="leading-none">{post.sourceName}</div>
               <h1 className="mb-0">{post.title}</h1>
             </hgroup>
+            {/* eslint-disable-next-line react/no-danger */}
             <main dangerouslySetInnerHTML={{ __html: post.content }} />
           </>
         )}

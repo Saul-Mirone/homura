@@ -1,12 +1,13 @@
 import { DateTime } from 'luxon';
 import React from 'react';
-import { rssParserChild } from '../../rssParser/child';
+import type { RssPost, RssSource } from '../Root';
+import { rssParserChild } from '../../channel/child';
 import { OverviewTarget } from '../../components/SideBar/Header';
 import { SubSideBar } from '../../components/SubSideBar';
 import { DateItem } from '../../components/SubSideBar/DateItem';
 import { PostItem } from '../../components/SubSideBar/PostItem';
 import { Toolkit } from '../../components/SubSideBar/ToolKit';
-import { Mode, RssPost, RssSource } from '../Root';
+import { Mode } from '../../constants/Mode';
 
 export const ArticleList: React.FC<{
   mode: Mode;
@@ -54,8 +55,8 @@ export const ArticleList: React.FC<{
               id={id}
               name={title}
               source={name}
-              icon={icon ?? void 0}
-              unread={unread ?? void 0}
+              icon={icon ?? undefined}
+              unread={unread ?? undefined}
               active={id === activePostId}
               onClick={async () => {
                 setActivePostId(id);

@@ -20,13 +20,21 @@ export class Post
   extends Model<PostAttributes, CreatePostAttributes>
   implements PostAttributes {
   public id!: number;
+
   public sourceId!: number;
+
   public guid!: string;
+
   public title!: string;
+
   public content!: string;
+
   public unread!: boolean;
+
   public starred!: boolean;
+
   public date!: Date;
+
   public toJSON!: () => PostAttributes;
 }
 

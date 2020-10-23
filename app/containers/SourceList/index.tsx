@@ -1,12 +1,13 @@
 import React from 'react';
-import { rssParserChild } from '../../rssParser/child';
+import type { RssPost, RssSource } from '../Root';
+import { rssParserChild } from '../../channel/child';
 import { SideBar } from '../../components/SideBar';
 import { BottomBar, Step } from '../../components/SideBar/BottomBar';
 import { FeedSearchBar } from '../../components/SideBar/FeedSearchBar';
 import { FeedSubscribeBar } from '../../components/SideBar/FeedSubscribeBar';
 import { Header, OverviewTarget } from '../../components/SideBar/Header';
 import { SideBarItem } from '../../components/SideBar/SideBarItem';
-import { Mode, RssPost, RssSource } from '../Root';
+import { Mode } from '../../constants/Mode';
 
 export const SourceList: React.FC<{
   mode: Mode;
@@ -54,7 +55,7 @@ export const SourceList: React.FC<{
       }))
     );
     setActiveSourceId(rest.id);
-    setStep(void 0);
+    setStep(undefined);
   };
 
   const renderBottom = (currentStep: Step) =>
@@ -88,11 +89,11 @@ export const SourceList: React.FC<{
 
   return (
     <SideBar overview={overview} bottom={bottom}>
-      {sourceList.map(({ id, name, icon, unreadCount }) => (
+      {sourceList.map(({ id, name: sourceName, icon, unreadCount }) => (
         <SideBarItem
           key={id.toString()}
           url={icon ?? undefined}
-          name={name}
+          name={sourceName}
           count={unreadCount}
           active={id === activeSourceId}
           onClick={() => setActiveSourceId(id)}

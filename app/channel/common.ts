@@ -11,11 +11,12 @@ export const channel = [
   'countBy',
 ] as const;
 
+/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 type Fn = (...args: any[]) => any;
 
-type Tail<T extends any[]> = T extends [any, ...infer U] ? U : [];
+type Tail<T extends unknown[]> = T extends [unknown, ...infer U] ? U : [];
 
-type Child<T extends Record<any, Fn>> = {
+type Child<T extends Record<string, Fn>> = {
   [K in keyof T]: (...args: Tail<Parameters<T[K]>>) => ReturnType<T[K]>;
 };
 
@@ -25,7 +26,7 @@ export function generateChild<
   return channel.reduce((acc, key) => {
     return {
       ...acc,
-      [key]: (...args: any[]) => ipcRenderer.invoke(key, ...args),
+      [key]: (...args: unknown[]) => ipcRenderer.invoke(key, ...args),
     };
   }, {}) as Child<T>;
 }

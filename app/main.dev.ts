@@ -16,7 +16,7 @@ import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
 import { DB } from './model';
-import { RssParserMain } from './rssParser/main';
+import { RssParserMain } from './channel/main';
 
 export default class AppUpdater {
   constructor() {

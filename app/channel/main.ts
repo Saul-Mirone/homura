@@ -22,6 +22,7 @@ export type Listener = ReturnType<RssParserMain['listener']>;
 
 export class RssParserMain {
   private parser: Parser;
+
   private checkResult: CheckResult | null;
 
   constructor(private readonly db: DB) {
@@ -31,7 +32,7 @@ export class RssParserMain {
 
   public listener() {
     return {
-      init: (_: Event) => this.init(),
+      init: () => this.init(),
       checkUrl: (_: Event, url: string) => this.handleCheckUrl(url),
       confirm: (_: Event, name: string) => this.confirm(name),
       getSourceById: (_: Event, id: number) => this.db.getSourceById(id),
@@ -41,7 +42,7 @@ export class RssParserMain {
       setPostStarred: (_: Event, id: number, starred: boolean) =>
         this.setPostStarred(id, starred),
       countBy: (_: Event, type?: 'unread' | 'starred') => this.db.countBy(type),
-    }
+    };
   }
 
   public listen(): void {
@@ -81,8 +82,6 @@ export class RssParserMain {
     this.checkResult = null;
 
     if (!tmp) throw new Error();
-    console.log(Object.keys(tmp));
-    console.log(name, tmp.link, tmp.icon);
     return this.db.createSource({
       name,
       link: tmp.link,

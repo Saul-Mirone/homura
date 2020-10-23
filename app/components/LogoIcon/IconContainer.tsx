@@ -4,7 +4,13 @@ export const IconContainerSmall: React.FC<{
   size?: number;
   onClick?: () => void;
 }> = ({ children, onClick, size = 5 }) => (
-  <div className={`w-${size} h-${size} m-auto`} onClick={onClick}>
+  <div
+    role="button"
+    tabIndex={0}
+    className={`w-${size} h-${size} m-auto`}
+    onClick={onClick}
+    onKeyDown={onClick}
+  >
     {children}
   </div>
 );
@@ -14,7 +20,13 @@ export const IconContainer: React.FC<{
   onClick?: () => void;
   size?: number;
 }> = ({ children, className = '', onClick, size }) => (
-  <div className={`p-2 cursor-pointer ${className}`} onClick={onClick}>
+  <div
+    role="button"
+    tabIndex={0}
+    className={`p-2 cursor-pointer ${className}`}
+    onClick={onClick}
+    onKeyDown={onClick}
+  >
     <IconContainerSmall size={size}>{children}</IconContainerSmall>
   </div>
 );

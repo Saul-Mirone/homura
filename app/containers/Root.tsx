@@ -3,23 +3,18 @@ import React from 'react';
 import { hot } from 'react-hot-loader/root';
 import { PostAttributes } from '../model/post';
 import { SourceAttributes } from '../model/source';
-import { rssParserChild } from '../rssParser/child';
+import { rssParserChild } from '../channel/child';
 import { Reader } from '../components/Reader';
 import { OverviewTarget } from '../components/SideBar/Header';
 import { ArticleList } from './ArticleList';
 import { SourceList } from './SourceList';
+import { Mode } from '../constants/Mode';
 
 const Container: React.FC = ({ children }) => (
   <div className="bg-gray-800 w-full h-full min-h-screen flex divide-x divide-gray-900 divide-opacity-50">
     {children}
   </div>
 );
-
-export enum Mode {
-  All,
-  Unread,
-  Starred,
-}
 
 console.log(rssParserChild);
 
@@ -32,7 +27,7 @@ const Root: React.FC = () => {
   const [sourceList, setSourceList] = React.useState<Array<RssSource>>([]);
   const [activeSourceId, setActiveSourceId] = React.useState<
     number | OverviewTarget
-    >(-1);
+  >(-1);
   const [postList, setPostList] = React.useState<Array<RssPost>>([]);
   const [activePostId, setActivePostId] = React.useState(-1);
   const [post, setPost] = React.useState<{
@@ -44,20 +39,32 @@ const Root: React.FC = () => {
   const [overviewCount, setOverviewCount] = React.useState(0);
 
   React.useEffect(() => {
-    rssParserChild.init().then((xs) => setSourceList(xs));
+    rssParserChild
+      .init()
+      .then((xs) => setSourceList(xs))
+      .catch(console.error);
   }, []);
 
   React.useEffect(() => {
     switch (mode) {
       case Mode.Unread:
-        rssParserChild.countBy('unread').then(setOverviewCount);
+        rssParserChild
+          .countBy('unread')
+          .then(setOverviewCount)
+          .catch(console.error);
         break;
       case Mode.Starred:
-        rssParserChild.countBy('starred').then(setOverviewCount);
+        rssParserChild
+          .countBy('starred')
+          .then(setOverviewCount)
+          .catch(console.error);
         break;
       default:
       case Mode.All:
-        rssParserChild.countBy('unread').then(setOverviewCount);
+        rssParserChild
+          .countBy('unread')
+          .then(setOverviewCount)
+          .catch(console.error);
         break;
     }
   }, [mode]);
@@ -71,14 +78,17 @@ const Root: React.FC = () => {
     if (!source) {
       return;
     }
-    rssParserChild.getPostById(activePostId).then((post) => {
-      setPost({
-        content: post.content,
-        title: post.title,
-        sourceName: source.name,
-        date: DateTime.fromJSDate(post.date).toFormat('LLL dd, yyyy'),
-      });
-    });
+    rssParserChild
+      .getPostById(activePostId)
+      .then(({ content, title, date }) => {
+        return setPost({
+          content,
+          title,
+          sourceName: source.name,
+          date: DateTime.fromJSDate(date).toFormat('LLL dd, yyyy'),
+        });
+      })
+      .catch(console.error);
   }, [activePostId, activeSourceId, postList, sourceList]);
 
   React.useEffect(() => {
@@ -89,14 +99,15 @@ const Root: React.FC = () => {
       rssParserChild
         .getSourceById(activeSourceId)
         .then(({ posts, icon, name }) => {
-          setPostList(
+          return setPostList(
             posts.map((x) => ({
               name,
               icon: icon ?? null,
               ...x,
             }))
           );
-        });
+        })
+        .catch(console.error);
     }
   }, [activeSourceId]);
 

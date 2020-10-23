@@ -1,9 +1,9 @@
 import React from 'react';
-import { ImageIcon } from './index';
+import { ImageIcon } from './ImageIcon';
+import { RssIcon } from '../Icon';
 
 export * from './IconContainer';
 export * from './ImageIcon';
-export * from './RssLogoIcon';
 
 type ImageProps = {
   url: string;
@@ -14,13 +14,24 @@ type IconProps = {
 };
 
 function isImageProps(props: ImageProps | IconProps): props is ImageProps {
-  return Object.hasOwnProperty.call(props, 'url');
+  const { url } = props as ImageProps;
+  return url !== undefined && url !== null;
 }
 
 export const LogoIcon: React.FC<ImageProps | IconProps> = (props) => {
   if (isImageProps(props)) {
-    return <ImageIcon url={props.url} />;
+    const { url } = props;
+    return <ImageIcon url={url} />;
   }
 
-  return <div className="h-6 w-6">{props.icon}</div>;
+  const { icon } = props;
+  return <div className="h-6 w-6 flex-shrink-0">{icon}</div>;
+};
+
+export const RssLogoIcon: React.FC<{ url?: string }> = ({ url }) => {
+  if (url) {
+    return <LogoIcon url={url} />;
+  }
+
+  return <LogoIcon icon={<RssIcon />} />;
 };

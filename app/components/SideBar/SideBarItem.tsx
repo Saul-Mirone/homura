@@ -11,21 +11,29 @@ export type SideBarItemProps = {
   icon?: JSX.Element;
 };
 
-export const SideBarItem: React.FC<SideBarItemProps> = (props) => {
+export const SideBarItem: React.FC<SideBarItemProps> = ({
+  active,
+  onClick,
+  name,
+  count,
+  url,
+  icon = <RssIcon />,
+}) => {
   return (
     <div
+      role="button"
+      tabIndex={0}
       className={`${
-        props.active ? 'bg-gray-600' : ''
+        active ? 'bg-gray-600' : ''
       } leading-8 text-gray-300 flex items-center justify-between cursor-pointer px-3`}
-      onClick={props.onClick}
+      onKeyDown={onClick}
+      onClick={onClick}
     >
       <div className="flex items-center overflow-x-hidden">
-        <LogoIcon {...{ icon: <RssIcon />, ...props }} />
-        <div className="text-xs ml-2 truncate">{props.name}</div>
+        <LogoIcon url={url} icon={icon} />
+        <div className="text-xs ml-2 truncate">{name}</div>
       </div>
-      {props.count > 0 && (
-        <div className="text-xs text-gray-500">{props.count}</div>
-      )}
+      {count > 0 && <div className="text-xs text-gray-500">{count}</div>}
     </div>
   );
 };

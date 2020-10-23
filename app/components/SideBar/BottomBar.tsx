@@ -19,8 +19,8 @@ export const BottomBar: React.FC<BottomBarProps> = ({
   render,
 }) => (
   <div className="relative flex justify-between text-gray-300">
-    {step !== void 0 && (
-      <div className="absolute bottom-0 inset-x-0">{render(step!)}</div>
+    {step !== undefined && (
+      <div className="absolute bottom-0 inset-x-0">{render(step)}</div>
     )}
     <IconContainer onClick={onClickPlus}>
       <PlusIcon />

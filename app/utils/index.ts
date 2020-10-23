@@ -11,11 +11,11 @@ export async function getFaviconByUrl(
   const root = parse(html);
 
   const links = root.querySelectorAll('link');
-  const findByContent = (content: string): void | string => {
+  const findByContent = (content: string): undefined | string => {
     const target = links.find((x) => x.getAttribute('rel') === content);
-    if (!target) return;
+    if (!target) return undefined;
     const href = target.getAttribute('href');
-    if (!href) return;
+    if (!href) return undefined;
     return href.startsWith('/') ? url + href : href;
   };
   const shortCut = findByContent('shortcut icon');

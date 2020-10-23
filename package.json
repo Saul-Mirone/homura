@@ -13,7 +13,7 @@
     "electron-rebuild": "electron-rebuild --parallel --force --types prod,dev,optional --module-dir app",
     "lint": "cross-env NODE_ENV=development eslint . --cache --ext .js,.jsx,.ts,.tsx",
     "lint-fix": "yarn --silent lint --fix; exit 0",
-    "lint-styles": "stylelint --ignore-path .eslintignore '**/*.*(css|scss)' --syntax scss",
+    "lint-styles": "stylelint --ignore-path .eslintignore '**/*.*(css|pcss)'",
     "lint-styles-fix": "yarn --silent lint-styles --fix; exit 0",
     "package": "yarn build && electron-builder build --publish never",
     "package-all": "yarn build && electron-builder build -mwl",
@@ -43,7 +43,7 @@
     "{*.json,.{babelrc,eslintrc,prettierrc,stylelintrc}}": [
       "prettier --ignore-path .eslintignore --parser json --write"
     ],
-    "*.{css,scss}": [
+    "*.{css,pcss}": [
       "stylelint --ignore-path .eslintignore --syntax scss --fix",
       "prettier --ignore-path .eslintignore --single-quote --write"
     ],
@@ -333,7 +333,15 @@
     "extends": [
       "stylelint-config-standard",
       "stylelint-config-prettier"
-    ]
+    ],
+    "rules": {
+      "at-rule-no-unknown": [ true, {
+        "ignoreAtRules": [
+          "extends",
+          "tailwind"
+        ]
+      }]
+    }
   },
   "renovate": {
     "extends": [

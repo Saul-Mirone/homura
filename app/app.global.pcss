@@ -4,7 +4,9 @@
 
 @tailwind utilities;
 
-html, body, #app {
+html,
+body,
+#app {
   min-height: 100vh;
 }
 
@@ -12,14 +14,18 @@ input:focus {
   outline: none;
 }
 
+[role='button']:focus {
+  outline: none;
+}
+
 .thin-scroll {
-  @apply overflow-y-scroll
+  @apply overflow-y-scroll;
 }
 
 .thin-scroll::-webkit-scrollbar {
-  @apply bg-transparent w-2
+  @apply bg-transparent w-2;
 }
 
 .thin-scroll::-webkit-scrollbar-thumb {
-  @apply bg-gray-500 rounded-lg border-4 border-transparent bg-clip-content
+  @apply bg-gray-500 rounded-lg border-4 border-transparent bg-clip-content;
 }

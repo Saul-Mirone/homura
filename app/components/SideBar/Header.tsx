@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mode } from '../../containers/Root';
+import { Mode } from '../../constants/Mode';
 import {
   ArchiveIcon,
   MailFilledIcon,
@@ -29,25 +29,6 @@ export const Header: React.FC<HeaderProps> = ({
   onClick,
 }) => {
   switch (mode) {
-    case Mode.All:
-      return (
-        <>
-          <SideBarItem
-            active={active === OverviewTarget.All}
-            icon={<ViewListIcon />}
-            name="All Items"
-            count={count}
-            onClick={() => onClick(OverviewTarget.All)}
-          />
-          <SideBarItem
-            active={active === OverviewTarget.Archive}
-            icon={<ArchiveIcon />}
-            name="Archive"
-            count={0}
-            onClick={() => onClick(OverviewTarget.Archive)}
-          />
-        </>
-      );
     case Mode.Starred:
       return (
         <SideBarItem
@@ -67,6 +48,26 @@ export const Header: React.FC<HeaderProps> = ({
           count={count}
           onClick={() => onClick(OverviewTarget.Unread)}
         />
+      );
+    default:
+    case Mode.All:
+      return (
+        <>
+          <SideBarItem
+            active={active === OverviewTarget.All}
+            icon={<ViewListIcon />}
+            name="All Items"
+            count={count}
+            onClick={() => onClick(OverviewTarget.All)}
+          />
+          <SideBarItem
+            active={active === OverviewTarget.Archive}
+            icon={<ArchiveIcon />}
+            name="Archive"
+            count={0}
+            onClick={() => onClick(OverviewTarget.Archive)}
+          />
+        </>
       );
   }
 };

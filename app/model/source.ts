@@ -25,14 +25,21 @@ export class Source
   extends Model<SourceAttributes, CreateSourceAttributes>
   implements SourceAttributes {
   public id!: number;
+
   public name!: string;
+
   public link!: string;
+
   public icon!: string | null;
 
   public getPosts!: HasManyGetAssociationsMixin<Post>;
+
   public addPost!: HasManyAddAssociationMixin<Post, number>;
+
   public hasPost!: HasManyHasAssociationMixin<Post, number>;
+
   public countPosts!: HasManyCountAssociationsMixin;
+
   public createPost!: HasManyCreateAssociationMixin<Post>;
 
   public posts?: Post[];

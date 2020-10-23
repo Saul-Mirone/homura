@@ -1,7 +1,7 @@
 import React from 'react';
-import { Mode } from '../../containers/Root';
 import { MailFilledIcon, StarFilledIcon, ViewListFilledIcon } from '../Icon';
 import { IconContainer } from '../LogoIcon';
+import { Mode } from '../../constants/Mode';
 
 export type ToolKitProps = {
   mode: Mode;

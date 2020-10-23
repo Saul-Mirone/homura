@@ -22,6 +22,9 @@ export const PostItem: React.FC<PostItemProps> = ({
   unread = false,
 }) => (
   <div
+    role="button"
+    tabIndex={0}
+    onKeyDown={() => onClick(id)}
     onClick={() => onClick(id)}
     className={`${
       active ? 'bg-gray-700' : ''
