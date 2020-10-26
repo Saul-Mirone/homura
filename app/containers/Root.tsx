@@ -16,8 +16,6 @@ const Container: React.FC = ({ children }) => (
   </div>
 );
 
-console.log(channel);
-
 export type RssSource = SourceAttributes & { unreadCount: number };
 export type RssPost = Omit<PostAttributes, 'sourceId' | 'content'> &
   Pick<SourceAttributes, 'name' | 'icon'>;
