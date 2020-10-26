@@ -3,8 +3,8 @@ import 'prismjs/themes/prism-coy.css';
 import React, { Fragment } from 'react';
 import { render } from 'react-dom';
 import { AppContainer as ReactHotAppContainer } from 'react-hot-loader';
-import { configuredStore } from './store';
 import './app.global.pcss';
+import { configuredStore } from './store';
 
 Prism.highlightAll();
 

@@ -70,7 +70,7 @@ export class DB {
                 starred: true,
               }
             : {
-                count: true,
+                unread: true,
               };
         const sourceCount = await source.countPosts({
           where: options,

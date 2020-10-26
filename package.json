@@ -260,6 +260,7 @@
     "postcss": "^8.1.2",
     "postcss-loader": "^4.0.4",
     "prettier": "^2.0.5",
+    "prettier-plugin-organize-imports": "^1.1.1",
     "react-test-renderer": "^16.12.0",
     "redux-logger": "^3.0.6",
     "rimraf": "^3.0.0",
@@ -335,12 +336,15 @@
       "stylelint-config-prettier"
     ],
     "rules": {
-      "at-rule-no-unknown": [ true, {
-        "ignoreAtRules": [
-          "extends",
-          "tailwind"
-        ]
-      }]
+      "at-rule-no-unknown": [
+        true,
+        {
+          "ignoreAtRules": [
+            "extends",
+            "tailwind"
+          ]
+        }
+      ]
     }
   },
   "renovate": {

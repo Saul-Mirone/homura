@@ -1,5 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { channel } from '../../channel/child';
 import { Step } from '../../components/SideBar/BottomBar';
+import { Mode } from '../../constants/Mode';
+import type { AppThunk, RootState } from '../../store';
+import { create } from '../source/sourceSlice';
 
 type State = {
   link: string;
@@ -44,3 +48,42 @@ export const {
   setLink,
   setName,
 } = creatorSlice.actions;
+
+export const searchUrl = (): AppThunk => async (dispatch, getState) => {
+  const {
+    creator: { link },
+  } = getState();
+
+  const result = await channel.checkUrl(link);
+  if (!result) {
+    return;
+  }
+
+  dispatch(setName(result));
+  dispatch(stepToEnterName());
+};
+
+export const confirmName = (): AppThunk => async (dispatch, getState) => {
+  const {
+    creator: { name },
+    mode,
+  } = getState();
+
+  const { posts, icon, link, id } = await channel.confirm(name);
+
+  const rssSource = {
+    id,
+    name,
+    link,
+    icon: icon === null ? undefined : icon,
+    count: mode === Mode.Starred ? 0 : posts.length,
+  };
+
+  dispatch(create(rssSource));
+
+  dispatch(reset());
+};
+
+export const creatorReducer = creatorSlice.reducer;
+
+export const selectCreator = (state: RootState) => state.creator;

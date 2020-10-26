@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Preset } from '../../constants/Preset';
-import type { AppThunk, RootState } from '../../store';
 import { channel } from '../../channel/child';
 import { Mode } from '../../constants/Mode';
+import { Preset } from '../../constants/Preset';
+import type { AppThunk, RootState } from '../../store';
 
 type SourceItem = {
   id: number;
@@ -14,13 +14,14 @@ type SourceItem = {
 
 type State = {
   totalCount: number;
-  activeId?: number | Preset;
   list: SourceItem[];
+  activeId: number | Preset | undefined;
 };
 
 const initialState: State = {
   totalCount: 0,
   list: [],
+  activeId: undefined,
 };
 
 const sourceSlice = createSlice({
@@ -40,7 +41,10 @@ const sourceSlice = createSlice({
       state.activeId = id;
       state.totalCount += count;
     },
-    setActiveId: (state, action: PayloadAction<number | Preset>) => {
+    setActiveId: (
+      state,
+      action: PayloadAction<number | Preset | undefined>
+    ) => {
       state.activeId = action.payload;
     },
   },
@@ -48,21 +52,20 @@ const sourceSlice = createSlice({
 
 export const { loadAll, create, setActiveId } = sourceSlice.actions;
 
-export const loadSource = (): AppThunk => (dispatch, getState) => {
+export const loadSource = (): AppThunk => async (dispatch, getState) => {
   const state = getState();
   const countType = state.mode === Mode.Starred ? 'starred' : 'unread';
-  channel
-    .getSourceList(countType)
-    .then((list) =>
-      loadAll(
-        list.map(({ icon, ...rest }) => ({
-          icon: icon === null ? undefined : icon,
-          ...rest,
-        }))
-      )
-    )
-    .then(dispatch)
-    .catch(() => {});
+  const list = await channel.getSourceList(countType);
+
+  const mappedList = list.map(({ id, name, link, count, icon }) => ({
+    id,
+    icon: icon === null ? undefined : icon,
+    name,
+    link,
+    count,
+  }));
+
+  dispatch(loadAll(mappedList));
 };
 
 export const sourceReducer = sourceSlice.reducer;
