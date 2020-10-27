@@ -1,6 +1,6 @@
 import React from 'react';
-import { ImageIcon } from './ImageIcon';
 import { RssIcon } from '../Icon';
+import { ImageIcon } from './ImageIcon';
 
 export * from './IconContainer';
 export * from './ImageIcon';

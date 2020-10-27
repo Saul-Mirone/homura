@@ -1,5 +1,4 @@
 import React from 'react';
-import { Toolkit } from './Toolkit';
 
 type ReaderProps = {
   post?: {
@@ -8,12 +7,13 @@ type ReaderProps = {
     sourceName: string;
     title: string;
   };
+  toolkit: JSX.Element | null;
 };
 
-export const Reader: React.FC<ReaderProps> = ({ post }) => {
+export const Reader: React.FC<ReaderProps> = ({ post, toolkit }) => {
   return (
     <div className="w-4/6 flex flex-col bg-gray-200 h-screen">
-      <Toolkit />
+      {post && toolkit}
 
       <div className="container mx-auto prose p-5 thin-scroll">
         {post && (

@@ -1,10 +1,15 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
+import { Container } from '../components/Container';
+import { ArticleList } from './ArticleList';
+import { ArticleReader } from './ArticleReader';
+import { SourceList } from './SourceList';
 
-type Props = {
-  children: ReactNode;
+export const App: React.FC = () => {
+  return (
+    <Container>
+      <SourceList />
+      <ArticleList />
+      <ArticleReader />
+    </Container>
+  );
 };
-
-export default function App(props: Props) {
-  const { children } = props;
-  return <>{children}</>;
-}

@@ -82,4 +82,9 @@ export const initSource = (sequelize: Sequelize): void => {
     foreignKey: 'sourceId',
     as: 'posts',
   });
+  Post.belongsTo(Source, {
+    targetKey: 'id',
+    foreignKey: 'sourceId',
+    as: 'source',
+  });
 };

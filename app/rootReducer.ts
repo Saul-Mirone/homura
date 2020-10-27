@@ -1,12 +1,16 @@
 import { combineReducers } from 'redux';
-import { connectRouter } from 'connected-react-router';
-import { History } from 'history';
-// eslint-disable-next-line import/no-cycle
-import counterReducer from './features/counter/counterSlice';
+import { creatorReducer } from './features/creator/creatorSlice';
+import { listReducer } from './features/list/listSlice';
+import { modeReducer } from './features/mode/modeSlice';
+import { postReducer } from './features/post/postSlice';
+import { sourceReducer } from './features/source/sourceSlice';
 
-export default function createRootReducer(history: History) {
+export function createRootReducer() {
   return combineReducers({
-    router: connectRouter(history),
-    counter: counterReducer,
+    mode: modeReducer,
+    source: sourceReducer,
+    creator: creatorReducer,
+    list: listReducer,
+    post: postReducer,
   });
 }

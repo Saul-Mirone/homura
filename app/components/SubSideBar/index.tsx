@@ -14,19 +14,26 @@ export type Post = {
 
 export type SubSideBarProps = {
   header: JSX.Element;
+  onReadAll: () => void;
+  onSearch: (keywords: string) => void;
 };
 
-export const SubSideBar: React.FC<SubSideBarProps> = ({ header, children }) => (
+export const SubSideBar: React.FC<SubSideBarProps> = ({
+  header,
+  children,
+  onReadAll,
+  onSearch,
+}) => (
   <div className="w-1/6 flex flex-col h-screen">
     {header}
 
     <div className="flex-1 thin-scroll">{children}</div>
 
     <div className="flex justify-between text-gray-300">
-      <IconContainer>
+      <IconContainer onClick={onReadAll}>
         <MailOpenIcon />
       </IconContainer>
-      <SearchBar />
+      <SearchBar onSearch={onSearch} />
     </div>
   </div>
 );

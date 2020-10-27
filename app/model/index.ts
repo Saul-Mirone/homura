@@ -1,4 +1,5 @@
-import { Sequelize } from 'sequelize';
+import { FindOptions, Sequelize } from 'sequelize';
+import { Preset } from '../constants/Preset';
 import { CreatePostAttributes, initPost, Post, PostAttributes } from './post';
 import { CreateSourceAttributes, initSource, Source } from './source';
 
@@ -14,7 +15,7 @@ export type CreateSourceResult = Omit<SourceJSON, 'posts'> & {
 };
 
 export type GetSourceListResult = Array<
-  Omit<SourceJSON, 'posts'> & { unreadCount: number }
+  Omit<SourceJSON, 'posts'> & { count: number }
 >;
 
 export class DB {
@@ -56,21 +57,29 @@ export class DB {
     return result.toJSON();
   }
 
-  public async getSourceList(): Promise<GetSourceListResult> {
+  public async getSourceList(
+    count: 'unread' | 'starred'
+  ): Promise<GetSourceListResult> {
     this.checkInitialized();
     const sourceList = await Source.findAll();
 
     return Promise.all(
       sourceList.map(async (source) => {
-        const unreadCount = await source.countPosts({
-          where: {
-            unread: true,
-          },
+        const options =
+          count === 'starred'
+            ? {
+                starred: true,
+              }
+            : {
+                unread: true,
+              };
+        const sourceCount = await source.countPosts({
+          where: options,
         });
         const json = source.toJSON();
         return {
           ...json,
-          unreadCount,
+          count: sourceCount,
         };
       })
     );
@@ -84,6 +93,36 @@ export class DB {
     });
 
     return source.toJSON();
+  }
+
+  public getPostByPreset(
+    preset: Preset
+  ): Promise<Array<PostJSON & { sourceName: string; icon: string | null }>> {
+    this.checkInitialized();
+    const getResult = async (options?: FindOptions<PostAttributes>) => {
+      const posts = await Post.findAll(options);
+      return Promise.all(
+        posts.map(async (x) => {
+          const source = await x.getSource();
+          return {
+            sourceName: source.name,
+            icon: source.icon,
+            ...x.toJSON(),
+          };
+        })
+      );
+    };
+    switch (preset) {
+      case Preset.Unread:
+        return getResult({ where: { unread: true } });
+      case Preset.Starred:
+        return getResult({ where: { starred: true } });
+      case Preset.Archive:
+        return getResult({ where: { unread: false } });
+      case Preset.All:
+      default:
+        return getResult();
+    }
   }
 
   public async getPostById(id: number): Promise<PostJSON> {
@@ -105,6 +144,20 @@ export class DB {
         id,
       },
     });
+  }
+
+  public async markAllPostsAsReadBySourceId(sourceId: number): Promise<void> {
+    this.checkInitialized();
+    await Post.update(
+      {
+        unread: false,
+      },
+      {
+        where: {
+          sourceId,
+        },
+      }
+    );
   }
 
   public countBy(type?: 'unread' | 'starred'): Promise<number> {

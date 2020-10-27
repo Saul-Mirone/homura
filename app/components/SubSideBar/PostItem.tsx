@@ -1,15 +1,17 @@
 import React from 'react';
+import { StarFilledIcon } from '../Icon';
 import { RssLogoIcon } from '../LogoIcon';
 
 type PostItemProps = {
   id: number;
   name: string;
   source: string;
+  active: boolean;
+  unread: boolean;
+  starred: boolean;
   onClick(id: number): void;
 
   icon?: string;
-  active?: boolean;
-  unread?: boolean;
 };
 
 export const PostItem: React.FC<PostItemProps> = ({
@@ -18,8 +20,9 @@ export const PostItem: React.FC<PostItemProps> = ({
   name,
   source,
   onClick,
-  active = false,
-  unread = false,
+  active,
+  unread,
+  starred,
 }) => (
   <div
     role="button"
@@ -32,8 +35,17 @@ export const PostItem: React.FC<PostItemProps> = ({
   >
     <RssLogoIcon url={icon} />
     <div className="ml-2 leading-tight overflow-x-hidden ">
-      <div className="text-xs text-gray-600 truncate">{source}</div>
-      <div className={`text-sm ${!unread ? 'text-gray-600' : ''}`}>{name}</div>
+      <div className="truncate flex items-center">
+        <div className="text-xs text-gray-600">{source}</div>
+        {starred && (
+          <div className="ml-2 w-3 h-3">
+            <StarFilledIcon />
+          </div>
+        )}
+      </div>
+      <div className={`text-sm ${!unread && !starred ? 'text-gray-600' : ''}`}>
+        {name}
+      </div>
     </div>
   </div>
 );

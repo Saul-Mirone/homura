@@ -2,8 +2,13 @@ import React from 'react';
 import { CancelIcon, SearchIcon } from '../Icon';
 import { IconContainerSmall } from '../LogoIcon';
 
-export const SearchBar: React.FC = () => {
+type SearchBarProps = {
+  onSearch: (keywords: string) => void;
+};
+
+export const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   const [active, setActive] = React.useState(false);
+  const [value, setValue] = React.useState('');
   const inputRef = React.useRef<HTMLInputElement>(null);
 
   React.useEffect(() => {
@@ -19,16 +24,32 @@ export const SearchBar: React.FC = () => {
         active ? 'rounded bg-gray-700' : ''
       }`}
     >
-      <IconContainerSmall onClick={() => setActive(true)}>
+      <IconContainerSmall
+        onClick={() => {
+          if (!active) {
+            setActive(true);
+            return;
+          }
+          onSearch(value);
+        }}
+      >
         <SearchIcon />
       </IconContainerSmall>
       {active && (
         <>
           <input
             ref={inputRef}
+            value={value}
             className="flex-1 w-full h-5 text-xs px-2 bg-transparent text-gray-200"
+            onChange={(e) => setValue(e.target.value)}
           />
-          <IconContainerSmall onClick={() => setActive(false)}>
+          <IconContainerSmall
+            onClick={() => {
+              setActive(false);
+              setValue('');
+              onSearch('');
+            }}
+          >
             <CancelIcon />
           </IconContainerSmall>
         </>

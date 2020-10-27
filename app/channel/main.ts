@@ -1,5 +1,6 @@
 import { IpcMainInvokeEvent } from 'electron';
 import Parser from 'rss-parser';
+import { Preset } from '../constants/Preset';
 import { CreateSourceResult, DB } from '../model';
 import { getFaviconByUrl } from '../utils';
 import { listenToMain } from './common';
@@ -18,9 +19,9 @@ type CheckResult = {
 };
 
 type Event = IpcMainInvokeEvent;
-export type Listener = ReturnType<RssParserMain['listener']>;
+export type Listener = ReturnType<ChannelMain['listener']>;
 
-export class RssParserMain {
+export class ChannelMain {
   private parser: Parser;
 
   private checkResult: CheckResult | null;
@@ -32,7 +33,8 @@ export class RssParserMain {
 
   public listener() {
     return {
-      init: () => this.init(),
+      getSourceList: (_: Event, count: 'unread' | 'starred') =>
+        this.getSourceList(count),
       checkUrl: (_: Event, url: string) => this.handleCheckUrl(url),
       confirm: (_: Event, name: string) => this.confirm(name),
       getSourceById: (_: Event, id: number) => this.db.getSourceById(id),
@@ -42,6 +44,10 @@ export class RssParserMain {
       setPostStarred: (_: Event, id: number, starred: boolean) =>
         this.setPostStarred(id, starred),
       countBy: (_: Event, type?: 'unread' | 'starred') => this.db.countBy(type),
+      getPostByPreset: (_: Event, preset: Preset) =>
+        this.db.getPostByPreset(preset),
+      markAllAsReadBySourceId: (_: Event, sourceId: number) =>
+        this.db.markAllPostsAsReadBySourceId(sourceId),
     };
   }
 
@@ -49,8 +55,8 @@ export class RssParserMain {
     listenToMain(this.listener());
   }
 
-  private init() {
-    return this.db.getSourceList();
+  private getSourceList(count: 'unread' | 'starred') {
+    return this.db.getSourceList(count);
   }
 
   private async handleCheckUrl(url: string): Promise<string> {

@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`reducers creator should handle initial state 1`] = `
+Object {
+  "link": "",
+  "name": "",
+  "step": null,
+}
+`;
+
+exports[`reducers creator should handle reset 1`] = `
+Object {
+  "link": "",
+  "name": "",
+  "step": null,
+}
+`;
+
+exports[`reducers creator should handle setLink 1`] = `
+Object {
+  "link": "link",
+  "name": "",
+  "step": null,
+}
+`;
+
+exports[`reducers creator should handle setName 1`] = `
+Object {
+  "link": "",
+  "name": "name",
+  "step": null,
+}
+`;
+
+exports[`reducers creator should handle stepToEnterName 1`] = `
+Object {
+  "link": "",
+  "name": "",
+  "step": 1,
+}
+`;
+
+exports[`reducers creator should handle stepToEnterUrl 1`] = `
+Object {
+  "link": "",
+  "name": "",
+  "step": 0,
+}
+`;
+
+exports[`reducers creator should handle unknown action type 1`] = `
+Object {
+  "link": "",
+  "name": "",
+  "step": null,
+}
+`;
