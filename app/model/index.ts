@@ -70,9 +70,26 @@ export class DB {
         },
       });
       if (existPost) {
-        // TODO: update
+        await Post.update(
+          {
+            title: post.title,
+            content: post.content,
+            date: post.date,
+          },
+          {
+            where: {
+              id: existPost.id,
+            },
+          }
+        );
       } else {
-        // TODO: insert
+        await Post.create({
+          title: post.title,
+          sourceId: id,
+          content: post.content,
+          date: post.date,
+          guid: post.guid,
+        });
       }
     });
   }
