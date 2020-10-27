@@ -4,6 +4,7 @@ import { SubSideBar } from '../../components/SubSideBar';
 import { DateItem } from '../../components/SubSideBar/DateItem';
 import { PostItem } from '../../components/SubSideBar/PostItem';
 import { AppDispatch } from '../../store';
+import { countDownOne } from '../source/sourceSlice';
 import {
   loadListBySourceId,
   markActiveUnreadAs,
@@ -24,23 +25,26 @@ export const List: React.FC<{ header: JSX.Element }> = ({ header }) => {
     <SubSideBar header={header}>
       {groups.map(({ time, posts }) => (
         <DateItem key={time} date={time}>
-          {posts.map(({ id, sourceName, title, icon, unread, starred }) => (
-            <PostItem
-              key={id.toString()}
-              id={id}
-              active={id === activeId}
-              name={title}
-              source={sourceName}
-              icon={icon === null ? undefined : icon}
-              unread={unread}
-              starred={starred}
-              onClick={() => {
-                if (id === activeId) return;
-                dispatch(setActiveId(id));
-                dispatch(markActiveUnreadAs(false));
-              }}
-            />
-          ))}
+          {posts.map(
+            ({ id, sourceName, title, icon, unread, starred, sourceId }) => (
+              <PostItem
+                key={id.toString()}
+                id={id}
+                active={id === activeId}
+                name={title}
+                source={sourceName}
+                icon={icon === null ? undefined : icon}
+                unread={unread}
+                starred={starred}
+                onClick={() => {
+                  if (id === activeId) return;
+                  dispatch(setActiveId(id));
+                  dispatch(markActiveUnreadAs(false));
+                  dispatch(countDownOne(sourceId));
+                }}
+              />
+            )
+          )}
         </DateItem>
       ))}
     </SubSideBar>

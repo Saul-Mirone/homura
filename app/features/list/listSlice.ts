@@ -6,6 +6,7 @@ import type { AppThunk, RootState } from '../../store';
 
 type PostItem = {
   id: number;
+  sourceId: number;
   title: string;
   sourceName: string;
   unread: boolean;
@@ -97,15 +98,18 @@ export const loadListBySourceId = (
   if (typeof sourceId !== 'number') return;
   const source = await channel.getSourceById(sourceId);
 
-  const posts = source.posts.map(({ id, title, unread, date, starred }) => ({
-    id,
-    title,
-    sourceName: source.name,
-    icon: source.icon,
-    date: date.toISOString(),
-    unread,
-    starred,
-  }));
+  const posts = source.posts.map(
+    ({ id, title, unread, date, starred, sourceId: postSourceId }) => ({
+      id,
+      sourceId: postSourceId,
+      title,
+      sourceName: source.name,
+      icon: source.icon,
+      date: date.toISOString(),
+      unread,
+      starred,
+    })
+  );
 
   dispatch(loadAll(posts));
 };

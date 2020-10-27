@@ -13,13 +13,11 @@ type SourceItem = {
 };
 
 type State = {
-  totalCount: number;
   list: SourceItem[];
   activeId: number | Preset | undefined;
 };
 
 const initialState: State = {
-  totalCount: 0,
   list: [],
   activeId: undefined,
 };
@@ -30,16 +28,11 @@ const sourceSlice = createSlice({
   reducers: {
     loadAll: (state, action: PayloadAction<SourceItem[]>) => {
       state.list = action.payload;
-      state.totalCount = action.payload.reduce(
-        (acc, cur) => acc + cur.count,
-        0
-      );
     },
     create: (state, action: PayloadAction<SourceItem>) => {
-      const { id, count } = action.payload;
+      const { id } = action.payload;
       state.list.push(action.payload);
       state.activeId = id;
-      state.totalCount += count;
     },
     setActiveId: (
       state,
@@ -47,10 +40,20 @@ const sourceSlice = createSlice({
     ) => {
       state.activeId = action.payload;
     },
+    countDownOne: (state, action: PayloadAction<number>) => {
+      const target = state.list.find((x) => x.id === action.payload);
+      if (!target) return;
+      target.count -= 1;
+    },
   },
 });
 
-export const { loadAll, create, setActiveId } = sourceSlice.actions;
+export const {
+  loadAll,
+  create,
+  setActiveId,
+  countDownOne,
+} = sourceSlice.actions;
 
 export const loadSource = (): AppThunk => async (dispatch, getState) => {
   const state = getState();
@@ -70,7 +73,13 @@ export const loadSource = (): AppThunk => async (dispatch, getState) => {
 
 export const sourceReducer = sourceSlice.reducer;
 
-export const selectSource = (state: RootState) => ({
-  ...state.source,
-  mode: state.mode,
-});
+export const selectSource = (state: RootState) => {
+  const { source, mode } = state;
+  const totalCount = source.list.reduce((acc, cur) => acc + cur.count, 0);
+
+  return {
+    ...source,
+    totalCount,
+    mode,
+  };
+};

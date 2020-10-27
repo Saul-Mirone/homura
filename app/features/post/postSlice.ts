@@ -33,6 +33,8 @@ export const postReducer = postSlice.reducer;
 
 export const selectPost = (state: RootState) => {
   const { activeId, groups } = state.list;
+  const { content } = state.post;
+
   if (!activeId)
     return {
       activeId,
@@ -54,7 +56,7 @@ export const selectPost = (state: RootState) => {
     unread,
     date,
     starred,
-    content: state.post.content,
+    content,
   };
 
   return {
