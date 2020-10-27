@@ -5,7 +5,7 @@ const getPageUrl = ClientFunction(() => window.location.href);
 const getPageTitle = ClientFunction(() => document.title);
 const counterSelector = Selector('[data-tid="counter"]');
 const buttonsSelector = Selector('[data-tclass="btn"]');
-const clickToCounterLink = (t) =>
+const clickToCounterLink = (t: any) =>
   t.click(Selector('a').withExactText('to Counter'));
 const incrementButton = buttonsSelector.nth(0);
 const decrementButton = buttonsSelector.nth(1);

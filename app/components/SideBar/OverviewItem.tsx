@@ -1,6 +1,6 @@
 import React from 'react';
-import { SideBarItem } from './SideBarItem';
 import { Preset } from '../../constants/Preset';
+import { SideBarItem } from './SideBarItem';
 
 export type OverViewItemProps = {
   activeId?: Preset | number;

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Mode } from '../../constants/Mode';
+import { Preset } from '../../constants/Preset';
 import {
   ArchiveIcon,
   MailFilledIcon,
@@ -7,7 +8,6 @@ import {
   ViewListIcon,
 } from '../Icon';
 import { OverviewItem } from './OverviewItem';
-import { Preset } from '../../constants/Preset';
 
 export type HeaderProps = {
   mode: Mode;
