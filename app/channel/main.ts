@@ -8,6 +8,7 @@ import { listenToMain } from './common';
 type CheckResult = {
   name: string;
   link: string;
+  sourceUrl: string;
   icon?: string;
   items: Array<{
     guid: string;
@@ -66,6 +67,7 @@ export class ChannelMain {
       this.checkResult = {
         name: title,
         link,
+        sourceUrl: url,
         icon: faviconUrl,
         items: items.map((item) => ({
           title: item.title ?? '',
@@ -91,6 +93,7 @@ export class ChannelMain {
     return this.db.createSource({
       name,
       link: tmp.link,
+      sourceUrl: tmp.sourceUrl,
       icon: tmp.icon || null,
       posts: tmp.items.map(({ title, content, date, guid }) => ({
         guid,

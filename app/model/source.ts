@@ -16,6 +16,7 @@ export interface SourceAttributes {
   id: number;
   name: string;
   link: string;
+  sourceUrl: string;
   icon: string | null;
 }
 
@@ -29,6 +30,8 @@ export class Source
   public name!: string;
 
   public link!: string;
+
+  public sourceUrl!: string;
 
   public icon!: string | null;
 
@@ -60,6 +63,10 @@ export const initSource = (sequelize: Sequelize): void => {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
+      },
+      sourceUrl: {
+        type: DataTypes.STRING,
+        allowNull: false,
       },
       name: {
         type: DataTypes.STRING,
