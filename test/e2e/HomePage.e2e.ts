@@ -12,7 +12,7 @@ const decrementButton = buttonsSelector.nth(1);
 const oddButton = buttonsSelector.nth(2);
 const asyncButton = buttonsSelector.nth(3);
 const getCounterText = () => counterSelector().innerText;
-const assertNoConsoleErrors = async (t) => {
+const assertNoConsoleErrors = async (t: any) => {
   const { error } = await t.getBrowserConsoleMessages();
   await t.expect(error).eql([]);
 };
