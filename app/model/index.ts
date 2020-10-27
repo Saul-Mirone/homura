@@ -57,6 +57,26 @@ export class DB {
     return result.toJSON();
   }
 
+  public async diffWithSource(
+    id: number,
+    posts: Omit<CreatePostAttributes, 'sourceId'>[]
+  ) {
+    this.checkInitialized();
+    posts.map(async (post) => {
+      const existPost = await Post.findOne({
+        where: {
+          sourceId: id,
+          guid: post.guid,
+        },
+      });
+      if (existPost) {
+        // TODO: update
+      } else {
+        // TODO: insert
+      }
+    });
+  }
+
   public async getSourceList(
     count: 'unread' | 'starred'
   ): Promise<GetSourceListResult> {
@@ -83,6 +103,12 @@ export class DB {
         };
       })
     );
+  }
+
+  public async getSourceUrlList() {
+    this.checkInitialized();
+    const sourceList = await Source.findAll();
+    return sourceList.map(({ id, sourceUrl }) => ({ id, sourceUrl }));
   }
 
   public async getSourceById(id: number): Promise<CreateSourceResult> {

@@ -49,11 +49,36 @@ export class ChannelMain {
         this.db.getPostByPreset(preset),
       markAllAsReadBySourceId: (_: Event, sourceId: number) =>
         this.db.markAllPostsAsReadBySourceId(sourceId),
+      sync: () => this.sync(),
     };
   }
 
   public listen(): void {
     listenToMain(this.listener());
+  }
+
+  private async sync() {
+    const urlList = await this.db.getSourceUrlList();
+    urlList.map(async ({ sourceUrl, id }) => {
+      const { title = '', link = '', items = [] } = await this.checkURL(
+        sourceUrl
+      );
+      const faviconUrl = await getFaviconByUrl(link);
+      const data = {
+        id,
+        name: title,
+        link,
+        icon: faviconUrl,
+        items: items.map((item) => ({
+          title: item.title ?? '',
+          link: item.link ?? '',
+          guid: item.guid ?? '',
+          content: item['content:encoded'] ?? item.content ?? '',
+          date: new Date(item.isoDate as string),
+        })),
+      };
+      console.log(data);
+    });
   }
 
   private getSourceList(count: 'unread' | 'starred') {
