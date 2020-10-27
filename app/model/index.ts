@@ -1,4 +1,5 @@
-import { Sequelize } from 'sequelize';
+import { FindOptions, Sequelize } from 'sequelize';
+import { Preset } from '../constants/Preset';
 import { CreatePostAttributes, initPost, Post, PostAttributes } from './post';
 import { CreateSourceAttributes, initSource, Source } from './source';
 
@@ -94,6 +95,36 @@ export class DB {
     return source.toJSON();
   }
 
+  public getPostByPreset(
+    preset: Preset
+  ): Promise<Array<PostJSON & { sourceName: string; icon: string | null }>> {
+    this.checkInitialized();
+    const getResult = async (options?: FindOptions<PostAttributes>) => {
+      const posts = await Post.findAll(options);
+      return Promise.all(
+        posts.map(async (x) => {
+          const source = await x.getSource();
+          return {
+            sourceName: source.name,
+            icon: source.icon,
+            ...x.toJSON(),
+          };
+        })
+      );
+    };
+    switch (preset) {
+      case Preset.Unread:
+        return getResult({ where: { unread: true } });
+      case Preset.Starred:
+        return getResult({ where: { starred: true } });
+      case Preset.Archive:
+        return getResult({ where: { unread: false } });
+      case Preset.All:
+      default:
+        return getResult();
+    }
+  }
+
   public async getPostById(id: number): Promise<PostJSON> {
     this.checkInitialized();
     const post = await Post.findByPk(id, {
@@ -113,6 +144,20 @@ export class DB {
         id,
       },
     });
+  }
+
+  public async markAllPostsAsReadBySourceId(sourceId: number): Promise<void> {
+    this.checkInitialized();
+    await Post.update(
+      {
+        unread: false,
+      },
+      {
+        where: {
+          sourceId,
+        },
+      }
+    );
   }
 
   public countBy(type?: 'unread' | 'starred'): Promise<number> {

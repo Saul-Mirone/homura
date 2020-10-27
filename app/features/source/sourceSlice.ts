@@ -45,6 +45,16 @@ const sourceSlice = createSlice({
       if (!target) return;
       target.count -= 1;
     },
+    countUpOne: (state, action: PayloadAction<number>) => {
+      const target = state.list.find((x) => x.id === action.payload);
+      if (!target) return;
+      target.count += 1;
+    },
+    countToZero: (state, action: PayloadAction<number>) => {
+      const target = state.list.find((x) => x.id === action.payload);
+      if (!target) return;
+      target.count = 0;
+    },
   },
 });
 
@@ -53,11 +63,12 @@ export const {
   create,
   setActiveId,
   countDownOne,
+  countUpOne,
+  countToZero,
 } = sourceSlice.actions;
 
-export const loadSource = (): AppThunk => async (dispatch, getState) => {
-  const state = getState();
-  const countType = state.mode === Mode.Starred ? 'starred' : 'unread';
+export const loadSource = (mode: Mode): AppThunk => async (dispatch) => {
+  const countType = mode === Mode.Starred ? 'starred' : 'unread';
   const list = await channel.getSourceList(countType);
 
   const mappedList = list.map(({ id, name, link, count, icon }) => ({
@@ -76,10 +87,16 @@ export const sourceReducer = sourceSlice.reducer;
 export const selectSource = (state: RootState) => {
   const { source, mode } = state;
   const totalCount = source.list.reduce((acc, cur) => acc + cur.count, 0);
+  const { list, activeId } = source;
 
   return {
-    ...source,
+    activeId,
     totalCount,
     mode,
+    list: list.filter((x) => {
+      if (mode === Mode.All) return true;
+      if (activeId === x.id) return true;
+      return x.count > 0;
+    }),
   };
 };

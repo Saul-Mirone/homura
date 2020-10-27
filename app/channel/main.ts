@@ -1,5 +1,6 @@
 import { IpcMainInvokeEvent } from 'electron';
 import Parser from 'rss-parser';
+import { Preset } from '../constants/Preset';
 import { CreateSourceResult, DB } from '../model';
 import { getFaviconByUrl } from '../utils';
 import { listenToMain } from './common';
@@ -43,6 +44,10 @@ export class ChannelMain {
       setPostStarred: (_: Event, id: number, starred: boolean) =>
         this.setPostStarred(id, starred),
       countBy: (_: Event, type?: 'unread' | 'starred') => this.db.countBy(type),
+      getPostByPreset: (_: Event, preset: Preset) =>
+        this.db.getPostByPreset(preset),
+      markAllAsReadBySourceId: (_: Event, sourceId: number) =>
+        this.db.markAllPostsAsReadBySourceId(sourceId),
     };
   }
 

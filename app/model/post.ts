@@ -1,4 +1,14 @@
-import { DataTypes, Model, Optional, Sequelize } from 'sequelize';
+import {
+  Association,
+  BelongsToCreateAssociationMixin,
+  BelongsToGetAssociationMixin,
+  BelongsToSetAssociationMixin,
+  DataTypes,
+  Model,
+  Optional,
+  Sequelize,
+} from 'sequelize';
+import type { Source } from './source';
 
 export interface PostAttributes {
   id: number;
@@ -36,6 +46,16 @@ export class Post
   public date!: Date;
 
   public toJSON!: () => PostAttributes;
+
+  public getSource!: BelongsToGetAssociationMixin<Source>;
+
+  public setSource!: BelongsToSetAssociationMixin<Source, number>;
+
+  public createSource!: BelongsToCreateAssociationMixin<Source>;
+
+  public static associations: {
+    source: Association<Post, Source>;
+  };
 }
 
 export const initPost = (sequelize: Sequelize): void => {

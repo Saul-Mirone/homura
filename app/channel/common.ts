@@ -9,6 +9,8 @@ const channelName = [
   'setPostUnread',
   'setPostStarred',
   'countBy',
+  'getPostByPreset',
+  'markAllAsReadBySourceId',
 ] as const;
 
 /* eslint-disable-next-line @typescript-eslint/no-explicit-any */

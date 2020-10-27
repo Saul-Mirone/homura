@@ -11,8 +11,8 @@ export const Source: React.FC<{ bottom: JSX.Element }> = ({ bottom }) => {
   const { list, activeId, mode, totalCount } = useSelector(selectSource);
 
   React.useEffect(() => {
-    dispatch(loadSource());
-  }, [dispatch]);
+    dispatch(loadSource(mode));
+  }, [dispatch, mode]);
 
   const overview = (
     <Header

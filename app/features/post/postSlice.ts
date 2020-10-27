@@ -32,7 +32,7 @@ export const getPostContentById = (postId: number): AppThunk => async (
 export const postReducer = postSlice.reducer;
 
 export const selectPost = (state: RootState) => {
-  const { activeId, groups } = state.list;
+  const { activeId, posts } = state.list;
   const { content } = state.post;
 
   if (!activeId)
@@ -40,8 +40,7 @@ export const selectPost = (state: RootState) => {
       activeId,
     };
 
-  const postList = groups.flatMap((x) => x.posts);
-  const target = postList.find((x) => x.id === activeId);
+  const target = posts.find((x) => x.id === activeId);
 
   if (!target)
     return {

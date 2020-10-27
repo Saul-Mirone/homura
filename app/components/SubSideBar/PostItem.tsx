@@ -43,7 +43,9 @@ export const PostItem: React.FC<PostItemProps> = ({
           </div>
         )}
       </div>
-      <div className={`text-sm ${!unread ? 'text-gray-600' : ''}`}>{name}</div>
+      <div className={`text-sm ${!unread && !starred ? 'text-gray-600' : ''}`}>
+        {name}
+      </div>
     </div>
   </div>
 );
