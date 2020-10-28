@@ -10,12 +10,14 @@ export enum Step {
 export type BottomBarProps = {
   step: Step | null;
   onClickPlus: () => void;
+  onClickSync: () => void;
   render: (step: Step) => JSX.Element;
 };
 
 export const BottomBar: React.FC<BottomBarProps> = ({
   step,
   onClickPlus,
+  onClickSync,
   render,
 }) => (
   <div className="relative flex justify-between text-gray-300">
@@ -25,7 +27,7 @@ export const BottomBar: React.FC<BottomBarProps> = ({
     <IconContainer onClick={onClickPlus}>
       <PlusIcon />
     </IconContainer>
-    <IconContainer>
+    <IconContainer onClick={onClickSync}>
       <RefreshIcon />
     </IconContainer>
   </div>

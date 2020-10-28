@@ -59,26 +59,27 @@ export class ChannelMain {
 
   private async sync() {
     const urlList = await this.db.getSourceUrlList();
-    urlList.map(async ({ sourceUrl, id }) => {
-      const { title = '', link = '', items = [] } = await this.checkURL(
-        sourceUrl
-      );
-      const faviconUrl = await getFaviconByUrl(link);
-      const data = {
-        id,
-        name: title,
-        link,
-        icon: faviconUrl,
-        items: items.map((item) => ({
-          title: item.title ?? '',
-          link: item.link ?? '',
-          guid: item.guid ?? '',
-          content: item['content:encoded'] ?? item.content ?? '',
-          date: new Date(item.isoDate as string),
-        })),
-      };
-      console.log(data);
-    });
+    await Promise.all(
+      urlList.map(async ({ sourceUrl, id }) => {
+        const { title = '', link = '', items = [] } = await this.checkURL(
+          sourceUrl
+        );
+        const faviconUrl = await getFaviconByUrl(link);
+        const data = {
+          name: title,
+          link,
+          icon: faviconUrl || null,
+          posts: items.map((item) => ({
+            title: item.title ?? '',
+            link: item.link ?? '',
+            guid: item.guid ?? '',
+            content: item['content:encoded'] ?? item.content ?? '',
+            date: new Date(item.isoDate as string),
+          })),
+        };
+        await this.db.diffWithSource(id, data);
+      })
+    );
   }
 
   private getSourceList(count: 'unread' | 'starred') {

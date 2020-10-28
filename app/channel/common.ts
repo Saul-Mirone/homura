@@ -11,6 +11,7 @@ const channelName = [
   'countBy',
   'getPostByPreset',
   'markAllAsReadBySourceId',
+  'sync',
 ] as const;
 
 /* eslint-disable-next-line @typescript-eslint/no-explicit-any */

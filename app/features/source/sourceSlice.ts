@@ -82,6 +82,12 @@ export const loadSource = (mode: Mode): AppThunk => async (dispatch) => {
   dispatch(loadAll(mappedList));
 };
 
+export const sync = (): AppThunk => async (dispatch, getState) => {
+  await channel.sync();
+  const { mode } = getState();
+  return dispatch(loadSource(mode));
+};
+
 export const sourceReducer = sourceSlice.reducer;
 
 export const selectSource = (state: RootState) => {
