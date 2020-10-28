@@ -8,6 +8,7 @@ import { listenToMain } from './common';
 type CheckResult = {
   name: string;
   link: string;
+  sourceUrl: string;
   icon?: string;
   items: Array<{
     guid: string;
@@ -48,11 +49,37 @@ export class ChannelMain {
         this.db.getPostByPreset(preset),
       markAllAsReadBySourceId: (_: Event, sourceId: number) =>
         this.db.markAllPostsAsReadBySourceId(sourceId),
+      sync: () => this.sync(),
     };
   }
 
   public listen(): void {
     listenToMain(this.listener());
+  }
+
+  private async sync() {
+    const urlList = await this.db.getSourceUrlList();
+    await Promise.all(
+      urlList.map(async ({ sourceUrl, id }) => {
+        const { title = '', link = '', items = [] } = await this.checkURL(
+          sourceUrl
+        );
+        const faviconUrl = await getFaviconByUrl(link);
+        const data = {
+          name: title,
+          link,
+          icon: faviconUrl || null,
+          posts: items.map((item) => ({
+            title: item.title ?? '',
+            link: item.link ?? '',
+            guid: item.guid ?? '',
+            content: item['content:encoded'] ?? item.content ?? '',
+            date: new Date(item.isoDate as string),
+          })),
+        };
+        await this.db.diffWithSource(id, data);
+      })
+    );
   }
 
   private getSourceList(count: 'unread' | 'starred') {
@@ -66,6 +93,7 @@ export class ChannelMain {
       this.checkResult = {
         name: title,
         link,
+        sourceUrl: url,
         icon: faviconUrl,
         items: items.map((item) => ({
           title: item.title ?? '',
@@ -91,6 +119,7 @@ export class ChannelMain {
     return this.db.createSource({
       name,
       link: tmp.link,
+      sourceUrl: tmp.sourceUrl,
       icon: tmp.icon || null,
       posts: tmp.items.map(({ title, content, date, guid }) => ({
         guid,

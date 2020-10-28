@@ -4,6 +4,7 @@ import { BottomBar, Step } from '../../components/SideBar/BottomBar';
 import { FeedSearchBar } from '../../components/SideBar/FeedSearchBar';
 import { FeedSubscribeBar } from '../../components/SideBar/FeedSubscribeBar';
 import { AppDispatch } from '../../store';
+import { sync } from '../source/sourceSlice';
 import {
   confirmName,
   searchUrl,
@@ -40,6 +41,7 @@ export const Creator: React.FC = () => {
     <BottomBar
       step={step}
       onClickPlus={() => dispatch(stepToEnterUrl())}
+      onClickSync={() => dispatch(sync())}
       render={renderBottom}
     />
   );

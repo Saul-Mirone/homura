@@ -6,6 +6,10 @@ import { CreateSourceAttributes, initSource, Source } from './source';
 export type SourceJSON = ReturnType<Source['toJSON']>;
 export type PostJSON = ReturnType<Post['toJSON']>;
 
+export type DiffSourceOptions = Omit<CreateSourceAttributes, 'sourceUrl'> & {
+  posts: Omit<CreatePostAttributes, 'sourceId'>[];
+};
+
 export type CreateSourceOptions = CreateSourceAttributes & {
   posts: Omit<CreatePostAttributes, 'sourceId'>[];
 };
@@ -57,6 +61,71 @@ export class DB {
     return result.toJSON();
   }
 
+  public async diffWithSource(id: number, options: DiffSourceOptions) {
+    this.checkInitialized();
+    const { posts, ...rest } = options;
+    await Source.update(rest, {
+      where: {
+        id,
+      },
+    });
+    const prevSource = await Source.findByPk(id, {
+      include: [
+        {
+          model: Source.associations.posts.target,
+          as: Source.associations.posts.as,
+          attributes: ['id', 'title', 'unread', 'starred', 'date', 'guid'],
+        },
+      ],
+      rejectOnEmpty: true,
+    });
+    let prevPosts = [...(await prevSource.getPosts())];
+
+    await Promise.all(
+      posts.map(async (post) => {
+        const existPost = await Post.findOne({
+          where: {
+            sourceId: id,
+            guid: post.guid,
+          },
+        });
+        if (existPost) {
+          await Post.update(
+            {
+              title: post.title,
+              content: post.content,
+              date: post.date,
+            },
+            {
+              where: {
+                id: existPost.id,
+              },
+            }
+          );
+          prevPosts = prevPosts.filter((p) => p.guid === post.guid);
+          return;
+        }
+        await Post.create({
+          title: post.title,
+          sourceId: id,
+          content: post.content,
+          date: post.date,
+          guid: post.guid,
+        });
+      })
+    );
+
+    await Promise.all(
+      prevPosts.map((x) =>
+        Post.destroy({
+          where: {
+            guid: x.guid,
+          },
+        })
+      )
+    );
+  }
+
   public async getSourceList(
     count: 'unread' | 'starred'
   ): Promise<GetSourceListResult> {
@@ -83,6 +152,12 @@ export class DB {
         };
       })
     );
+  }
+
+  public async getSourceUrlList() {
+    this.checkInitialized();
+    const sourceList = await Source.findAll();
+    return sourceList.map(({ id, sourceUrl }) => ({ id, sourceUrl }));
   }
 
   public async getSourceById(id: number): Promise<CreateSourceResult> {
