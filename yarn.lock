@@ -1668,20 +1668,20 @@
     "@types/node" "*"
     form-data "^3.0.0"
 
-"@types/node@*":
+"@types/node@*", "@types/node@^14.14.5":
   version "14.14.5"
   resolved "https://registry.npm.taobao.org/@types/node/download/@types/node-14.14.5.tgz?cache=0&sync_timestamp=1603753296174&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fnode%2Fdownload%2F%40types%2Fnode-14.14.5.tgz#e92d3b8f76583efa26c1a63a21c9d3c1143daa29"
   integrity sha1-6S07j3ZYPvomwaY6IcnTwRQ9qik=
-
-"@types/node@12", "@types/node@^12.0.12":
-  version "12.19.2"
-  resolved "https://registry.npm.taobao.org/@types/node/download/@types/node-12.19.2.tgz?cache=0&sync_timestamp=1603753296174&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fnode%2Fdownload%2F%40types%2Fnode-12.19.2.tgz#9565ed5c72ba96038fc3add643edd5e7820598e7"
-  integrity sha1-lWXtXHK6lgOPw63WQ+3V54IFmOc=
 
 "@types/node@^10.12.19":
   version "10.17.43"
   resolved "https://registry.npm.taobao.org/@types/node/download/@types/node-10.17.43.tgz?cache=0&sync_timestamp=1603753296174&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fnode%2Fdownload%2F%40types%2Fnode-10.17.43.tgz#af70c6de04841d9216fc2b58e427c8a823b83418"
   integrity sha1-r3DG3gSEHZIW/CtY5CfIqCO4NBg=
+
+"@types/node@^12.0.12":
+  version "12.19.2"
+  resolved "https://registry.npm.taobao.org/@types/node/download/@types/node-12.19.2.tgz?cache=0&sync_timestamp=1603753296174&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fnode%2Fdownload%2F%40types%2Fnode-12.19.2.tgz#9565ed5c72ba96038fc3add643edd5e7820598e7"
+  integrity sha1-lWXtXHK6lgOPw63WQ+3V54IFmOc=
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
@@ -1806,10 +1806,10 @@
   resolved "https://registry.npm.taobao.org/@types/validator/download/@types/validator-13.1.0.tgz#3d776127dbce7dd31fc06f86d3428b072e631eba"
   integrity sha1-PXdhJ9vOfdMfwG+G00KLBy5jHro=
 
-"@types/webpack-env@^1.15.2":
+"@types/webpack-env@^1.15.3":
   version "1.15.3"
-  resolved "https://registry.npm.taobao.org/@types/webpack-env/download/@types/webpack-env-1.15.3.tgz?cache=0&sync_timestamp=1600358306693&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fwebpack-env%2Fdownload%2F%40types%2Fwebpack-env-1.15.3.tgz#fb602cd4c2f0b7c0fb857e922075fdf677d25d84"
-  integrity sha1-+2As1MLwt8D7hX6SIHX99nfSXYQ=
+  resolved "http://r.tnpm.oa.com/@types%2fwebpack-env/-/webpack-env-1.15.3.tgz#fb602cd4c2f0b7c0fb857e922075fdf677d25d84"
+  integrity sha512-5oiXqR7kwDGZ6+gmzIO2lTC+QsriNuQXZDWNYRV3l2XRN/zmPgnC21DLSx2D05zvD8vnXW6qUg7JnXZ4I6qLVQ==
 
 "@types/webpack-sources@*":
   version "2.0.0"
@@ -5576,10 +5576,10 @@ electron-updater@^4.3.4:
     lodash.isequal "^4.5.0"
     semver "^7.3.2"
 
-electron@^8:
-  version "8.5.2"
-  resolved "https://registry.npm.taobao.org/electron/download/electron-8.5.2.tgz#7b0246c6676a39df0e5e384b11cfe854fe5917f0"
-  integrity sha1-ewJGxmdqOd8OXjhLEc/oVP5ZF/A=
+electron@^10.1.5:
+  version "10.1.5"
+  resolved "http://r.tnpm.oa.com/electron/-/electron-10.1.5.tgz#f2b161310f627063e73fbac44efcb35dece83a90"
+  integrity sha512-fys/KnEfJq05TtMij+lFvLuKkuVH030CHYx03iZrW5DNNLwjE6cW3pysJ420lB0FRSfPjTHBMu2eVCf5TG71zQ==
   dependencies:
     "@electron/get" "^1.0.1"
     "@types/node" "^12.0.12"

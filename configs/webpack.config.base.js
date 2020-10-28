@@ -21,6 +21,16 @@ export default {
           },
         },
       },
+      {
+        test: /\.js$/,
+        include: /node_modules\/node-html-parser/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            cacheDirectory: true,
+          },
+        },
+      },
     ],
   },
 
