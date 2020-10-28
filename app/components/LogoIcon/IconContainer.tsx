@@ -24,7 +24,11 @@ export const IconContainer: React.FC<{
     role="button"
     tabIndex={0}
     className={`p-2 cursor-pointer ${className}`}
-    onClick={onClick}
+    onMouseDown={(e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      onClick?.();
+    }}
     onKeyDown={onClick}
   >
     <IconContainerSmall size={size}>{children}</IconContainerSmall>

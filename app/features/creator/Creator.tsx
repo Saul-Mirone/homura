@@ -7,6 +7,7 @@ import { AppDispatch } from '../../store';
 import { sync } from '../source/sourceSlice';
 import {
   confirmName,
+  reset,
   searchUrl,
   selectCreator,
   setLink,
@@ -23,6 +24,7 @@ export const Creator: React.FC = () => {
       currentStep === Step.EnterUrl ? (
         <FeedSearchBar
           link={link}
+          onCancel={() => dispatch(reset())}
           onLinkChange={(x) => dispatch(setLink(x))}
           onSearch={() => dispatch(searchUrl())}
         />
@@ -30,6 +32,7 @@ export const Creator: React.FC = () => {
         <FeedSubscribeBar
           link={link}
           name={name}
+          onCancel={() => dispatch(reset())}
           onNameChange={(x) => dispatch(setName(x))}
           onConfirm={() => dispatch(confirmName())}
         />
