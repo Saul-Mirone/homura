@@ -4,6 +4,7 @@ import { IconContainer } from '../LogoIcon';
 
 export type FeedSearchBarProps = {
   link: string;
+  loading: boolean;
   onLinkChange: (link: string) => void;
   onSearch: (link: string) => void;
   onCancel: () => void;
@@ -14,6 +15,7 @@ export const FeedSearchBar: React.FC<FeedSearchBarProps> = ({
   link,
   onLinkChange,
   onCancel,
+  loading,
 }) => {
   const inputEl = React.useRef<HTMLInputElement>(null);
   React.useEffect(() => {
@@ -35,8 +37,13 @@ export const FeedSearchBar: React.FC<FeedSearchBarProps> = ({
         />
       </div>
       <IconContainer
-        className="transition duration-300 text-gray-700 hover:bg-gray-700 hover:text-gray-300"
-        onClick={() => onSearch(link)}
+        className={`transition duration-300 text-gray-700 hover:bg-gray-700 hover:text-gray-300 ${
+          loading ? 'cursor-not-allowed' : ''
+        }}`}
+        onClick={() => {
+          if (loading) return;
+          onSearch(link);
+        }}
       >
         <SearchCircleFilledIcon />
       </IconContainer>

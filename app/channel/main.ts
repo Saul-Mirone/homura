@@ -69,7 +69,7 @@ export class ChannelMain {
           posts: items.map((item) => ({
             title: item.title ?? '',
             link: item.link ?? '',
-            guid: item.guid ?? '',
+            guid: item.guid ?? item.id ?? item.isoDate ?? '',
             content: item['content:encoded'] ?? item.content ?? '',
             date: new Date(item.isoDate as string),
           })),

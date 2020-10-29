@@ -8,18 +8,20 @@ type SourceItem = {
   id: number;
   name: string;
   link: string;
-  icon?: string;
   count: number;
+  icon?: string;
 };
 
 type State = {
   list: SourceItem[];
   activeId: number | Preset | undefined;
+  refreshing: boolean;
 };
 
 const initialState: State = {
   list: [],
   activeId: undefined,
+  refreshing: false,
 };
 
 const sourceSlice = createSlice({
@@ -55,6 +57,9 @@ const sourceSlice = createSlice({
       if (!target) return;
       target.count = 0;
     },
+    setRefreshing: (state, action: PayloadAction<boolean>) => {
+      state.refreshing = action.payload;
+    },
   },
 });
 
@@ -65,9 +70,11 @@ export const {
   countDownOne,
   countUpOne,
   countToZero,
+  setRefreshing,
 } = sourceSlice.actions;
 
 export const loadSource = (mode: Mode): AppThunk => async (dispatch) => {
+  dispatch(setRefreshing(true));
   const countType = mode === Mode.Starred ? 'starred' : 'unread';
   const list = await channel.getSourceList(countType);
 
@@ -80,12 +87,15 @@ export const loadSource = (mode: Mode): AppThunk => async (dispatch) => {
   }));
 
   dispatch(loadAll(mappedList));
+  dispatch(setRefreshing(false));
 };
 
 export const sync = (): AppThunk => async (dispatch, getState) => {
+  dispatch(setRefreshing(true));
   await channel.sync();
   const { mode } = getState();
-  return dispatch(loadSource(mode));
+  await dispatch(loadSource(mode));
+  dispatch(setRefreshing(false));
 };
 
 export const sourceReducer = sourceSlice.reducer;

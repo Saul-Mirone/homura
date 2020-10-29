@@ -17,12 +17,13 @@ import {
 
 export const Creator: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const { step, link, name } = useSelector(selectCreator);
+  const { step, link, name, refreshing } = useSelector(selectCreator);
 
   const renderBottom = React.useCallback(
     (currentStep: Step) =>
       currentStep === Step.EnterUrl ? (
         <FeedSearchBar
+          loading
           link={link}
           onCancel={() => dispatch(reset())}
           onLinkChange={(x) => dispatch(setLink(x))}
@@ -43,6 +44,7 @@ export const Creator: React.FC = () => {
   return (
     <BottomBar
       step={step}
+      refreshing={refreshing}
       onClickPlus={() => dispatch(stepToEnterUrl())}
       onClickSync={() => dispatch(sync())}
       render={renderBottom}
