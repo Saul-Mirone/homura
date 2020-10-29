@@ -6,7 +6,10 @@ import { CreateSourceAttributes, initSource, Source } from './source';
 export type SourceJSON = ReturnType<Source['toJSON']>;
 export type PostJSON = ReturnType<Post['toJSON']>;
 
-export type DiffSourceOptions = Omit<CreateSourceAttributes, 'sourceUrl'> & {
+export type DiffSourceOptions = Omit<
+  CreateSourceAttributes,
+  'sourceUrl' | 'name'
+> & {
   posts: Omit<CreatePostAttributes, 'sourceId'>[];
 };
 

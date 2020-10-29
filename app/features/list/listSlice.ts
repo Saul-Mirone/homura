@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { DateTime } from 'luxon';
 import { channel } from '../../channel/child';
+import { format } from '../../constants/Date';
 import { Mode } from '../../constants/Mode';
 import { Preset } from '../../constants/Preset';
 import type { AppThunk, RootState } from '../../store';
@@ -209,7 +210,7 @@ export const selectList = (state: RootState) => {
     .sort((x, y) => y.date.toSeconds() - x.date.toSeconds())
     .map(({ date, ...x }) => ({
       ...x,
-      date: date.toFormat('LLL dd, yyyy'),
+      date: date.toFormat(format),
     }))
     .filter((x) => x.title.toLowerCase().includes(filter.toLowerCase()))
     .reduce((acc, cur) => {

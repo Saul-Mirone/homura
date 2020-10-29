@@ -61,12 +61,9 @@ export class ChannelMain {
     const urlList = await this.db.getSourceUrlList();
     await Promise.all(
       urlList.map(async ({ sourceUrl, id }) => {
-        const { title = '', link = '', items = [] } = await this.checkURL(
-          sourceUrl
-        );
+        const { link = '', items = [] } = await this.checkURL(sourceUrl);
         const faviconUrl = await getFaviconByUrl(link);
         const data = {
-          name: title,
           link,
           icon: faviconUrl || null,
           posts: items.map((item) => ({
