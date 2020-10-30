@@ -8,6 +8,7 @@ import {
   loadListBySourceId,
   markActiveUnreadAs,
   markAllAsRead,
+  reset,
   selectList,
   setActiveId,
   setFilter,
@@ -18,7 +19,10 @@ export const List: React.FC<{ header: JSX.Element }> = ({ header }) => {
   const { groups, activeId, activeSourceId, mode } = useSelector(selectList);
 
   React.useEffect(() => {
-    if (!activeSourceId) return;
+    if (!activeSourceId) {
+      dispatch(reset());
+      return;
+    }
     dispatch(setActiveId());
     dispatch(loadListBySourceId(activeSourceId, mode));
   }, [activeSourceId, dispatch, mode]);

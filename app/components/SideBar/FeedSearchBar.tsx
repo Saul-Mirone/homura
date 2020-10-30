@@ -37,9 +37,12 @@ export const FeedSearchBar: React.FC<FeedSearchBarProps> = ({
         />
       </div>
       <IconContainer
-        className={`transition duration-300 text-gray-700 hover:bg-gray-700 hover:text-gray-300 ${
-          loading ? 'cursor-not-allowed' : ''
-        }}`}
+        className={`transition duration-300 ${
+          !loading
+            ? 'hover:bg-gray-700 hover:text-gray-300 text-gray-700'
+            : 'bg-gray-600 text-gray-300'
+        }`}
+        disabled={loading}
         onClick={() => {
           if (loading) return;
           onSearch(link);

@@ -40,6 +40,11 @@ const listSlice = createSlice({
   name: 'list',
   initialState,
   reducers: {
+    reset: (state) => {
+      state.posts = [];
+      state.activeId = undefined;
+      state.filter = '';
+    },
     loadAll: (state, action: PayloadAction<PostItem[]>) => {
       state.posts = action.payload;
     },
@@ -78,6 +83,7 @@ export const {
   markActiveStarred,
   markAllRead,
   setFilter,
+  reset,
 } = listSlice.actions;
 
 const loadBySourceId = async (sourceId: number, mode: Mode) => {

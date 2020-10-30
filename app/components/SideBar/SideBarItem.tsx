@@ -27,7 +27,10 @@ export const SideBarItem: React.FC<SideBarItemProps> = ({
         active ? 'bg-gray-600' : ''
       } leading-8 text-gray-300 flex items-center justify-between cursor-pointer px-3`}
       onKeyDown={onClick}
-      onClick={onClick}
+      onClick={(e) => {
+        e.stopPropagation();
+        onClick?.();
+      }}
     >
       <div className="flex items-center overflow-x-hidden">
         <LogoIcon url={url} icon={icon} />

@@ -24,7 +24,14 @@ export const Source: React.FC<{ bottom: JSX.Element }> = ({ bottom }) => {
   );
 
   return (
-    <SideBar overview={overview} bottom={bottom}>
+    <SideBar
+      onClick={() => {
+        if (!activeId) return;
+        dispatch(setActiveId());
+      }}
+      overview={overview}
+      bottom={bottom}
+    >
       {list.map(({ id, name, count, icon = undefined }) => (
         <SideBarItem
           key={id.toString()}
