@@ -34,6 +34,8 @@ export const Source: React.FC<{ bottom: JSX.Element }> = ({ bottom }) => {
     >
       {list.map(({ id, name, count, icon = undefined }) => (
         <SideBarItem
+          enableContextMenu
+          onUnsubscribe={() => console.log(id)}
           key={id.toString()}
           url={icon}
           name={name}

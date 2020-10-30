@@ -2,11 +2,15 @@ import React from 'react';
 import { RssIcon } from '../Icon';
 import { LogoIcon } from '../LogoIcon';
 
+const { remote } = require('electron');
+
 export type SideBarItemProps = {
   name: string;
   count: number;
+  enableContextMenu?: boolean;
   active?: boolean;
   onClick?: () => void;
+  onUnsubscribe?: () => void;
   url?: string;
   icon?: JSX.Element;
 };
@@ -14,13 +18,33 @@ export type SideBarItemProps = {
 export const SideBarItem: React.FC<SideBarItemProps> = ({
   active,
   onClick,
+  onUnsubscribe,
   name,
   count,
   url,
+  enableContextMenu = false,
   icon = <RssIcon />,
 }) => {
+  const divRef = React.useRef<HTMLDivElement>(null);
+  React.useEffect(() => {
+    const { current } = divRef;
+    if (!current) return;
+
+    if (enableContextMenu) {
+      current.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        const { Menu, MenuItem } = remote;
+        const menu = new Menu();
+        menu.append(
+          new MenuItem({ label: 'unsubscribe', click: () => onUnsubscribe?.() })
+        );
+        menu.popup();
+      });
+    }
+  }, []);
   return (
     <div
+      ref={divRef}
       role="button"
       tabIndex={0}
       className={`${
