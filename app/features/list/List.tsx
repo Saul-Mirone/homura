@@ -29,6 +29,10 @@ export const List: React.FC<{ header: JSX.Element }> = ({ header }) => {
 
   return (
     <SubSideBar
+      onClick={() => {
+        if (!activeId) return;
+        dispatch(setActiveId());
+      }}
       header={header}
       onReadAll={() => dispatch(markAllAsRead())}
       onSearch={(x) => dispatch(setFilter(x))}

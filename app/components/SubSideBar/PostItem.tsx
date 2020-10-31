@@ -28,7 +28,10 @@ export const PostItem: React.FC<PostItemProps> = ({
     role="button"
     tabIndex={0}
     onKeyDown={() => onClick(id)}
-    onClick={() => onClick(id)}
+    onClick={(e) => {
+      e.stopPropagation();
+      onClick(id);
+    }}
     className={`${
       active ? 'bg-gray-700' : ''
     } leading-8 text-gray-300 flex items-center justify-start cursor-pointer px-3 py-2`}

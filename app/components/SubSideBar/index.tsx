@@ -16,6 +16,7 @@ export type SubSideBarProps = {
   header: JSX.Element;
   onReadAll: () => void;
   onSearch: (keywords: string) => void;
+  onClick: () => void;
 };
 
 export const SubSideBar: React.FC<SubSideBarProps> = ({
@@ -23,8 +24,13 @@ export const SubSideBar: React.FC<SubSideBarProps> = ({
   children,
   onReadAll,
   onSearch,
+  onClick,
 }) => (
-  <div className="w-1/6 flex flex-col h-screen select-none">
+  <div
+    role="presentation"
+    onClick={onClick}
+    className="w-1/6 flex flex-col h-screen select-none"
+  >
     {header}
 
     <div className="flex-1 thin-scroll">{children}</div>

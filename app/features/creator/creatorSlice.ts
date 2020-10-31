@@ -98,7 +98,6 @@ export const confirmName = (): AppThunk => async (dispatch, getState) => {
   };
 
   dispatch(create(rssSource));
-
   dispatch(reset());
 };
 
