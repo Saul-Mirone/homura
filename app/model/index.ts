@@ -6,7 +6,10 @@ import { CreateSourceAttributes, initSource, Source } from './source';
 export type SourceJSON = ReturnType<Source['toJSON']>;
 export type PostJSON = ReturnType<Post['toJSON']>;
 
-export type DiffSourceOptions = Omit<CreateSourceAttributes, 'sourceUrl'> & {
+export type DiffSourceOptions = Omit<
+  CreateSourceAttributes,
+  'sourceUrl' | 'name'
+> & {
   posts: Omit<CreatePostAttributes, 'sourceId'>[];
 };
 
@@ -123,6 +126,18 @@ export class DB {
           },
         })
       )
+    );
+  }
+
+  public async updateSourceNameById(id: number, name: string): Promise<void> {
+    this.checkInitialized();
+    await Source.update(
+      { name },
+      {
+        where: {
+          id,
+        },
+      }
     );
   }
 
@@ -245,6 +260,20 @@ export class DB {
       default:
         return Post.count();
     }
+  }
+
+  public async removeSourceById(id: number): Promise<void> {
+    this.checkInitialized();
+    await Post.destroy({
+      where: {
+        sourceId: id,
+      },
+    });
+    await Source.destroy({
+      where: {
+        id,
+      },
+    });
   }
 
   private checkInitialized() {

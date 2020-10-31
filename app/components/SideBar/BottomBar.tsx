@@ -12,6 +12,7 @@ export type BottomBarProps = {
   onClickPlus: () => void;
   onClickSync: () => void;
   render: (step: Step) => JSX.Element;
+  refreshing: boolean;
 };
 
 export const BottomBar: React.FC<BottomBarProps> = ({
@@ -19,6 +20,7 @@ export const BottomBar: React.FC<BottomBarProps> = ({
   onClickPlus,
   onClickSync,
   render,
+  refreshing,
 }) => (
   <div className="relative flex justify-between text-gray-300">
     {step !== null && (
@@ -28,7 +30,7 @@ export const BottomBar: React.FC<BottomBarProps> = ({
       <PlusIcon />
     </IconContainer>
     <IconContainer onClick={onClickSync}>
-      <RefreshIcon />
+      <RefreshIcon spin={refreshing} />
     </IconContainer>
   </div>
 );

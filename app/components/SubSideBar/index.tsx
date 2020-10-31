@@ -24,7 +24,7 @@ export const SubSideBar: React.FC<SubSideBarProps> = ({
   onReadAll,
   onSearch,
 }) => (
-  <div className="w-1/6 flex flex-col h-screen">
+  <div className="w-1/6 flex flex-col h-screen select-none">
     {header}
 
     <div className="flex-1 thin-scroll">{children}</div>

@@ -50,6 +50,10 @@ export class ChannelMain {
       markAllAsReadBySourceId: (_: Event, sourceId: number) =>
         this.db.markAllPostsAsReadBySourceId(sourceId),
       sync: () => this.sync(),
+      removeSourceById: (_: Event, sourceId: number) =>
+        this.db.removeSourceById(sourceId),
+      updateSourceNameById: (_: Event, sourceId: number, name: string) =>
+        this.db.updateSourceNameById(sourceId, name),
     };
   }
 
@@ -61,18 +65,15 @@ export class ChannelMain {
     const urlList = await this.db.getSourceUrlList();
     await Promise.all(
       urlList.map(async ({ sourceUrl, id }) => {
-        const { title = '', link = '', items = [] } = await this.checkURL(
-          sourceUrl
-        );
+        const { link = '', items = [] } = await this.checkURL(sourceUrl);
         const faviconUrl = await getFaviconByUrl(link);
         const data = {
-          name: title,
           link,
           icon: faviconUrl || null,
           posts: items.map((item) => ({
             title: item.title ?? '',
             link: item.link ?? '',
-            guid: item.guid ?? '',
+            guid: item.guid ?? item.id ?? item.isoDate ?? '',
             content: item['content:encoded'] ?? item.content ?? '',
             date: new Date(item.isoDate as string),
           })),

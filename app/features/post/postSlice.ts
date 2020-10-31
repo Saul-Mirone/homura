@@ -1,5 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { DateTime } from 'luxon';
 import { channel } from '../../channel/child';
+import { format } from '../../constants/Date';
 import type { AppThunk, RootState } from '../../store';
 
 type State = {
@@ -53,7 +55,7 @@ export const selectPost = (state: RootState) => {
     title,
     sourceName,
     unread,
-    date,
+    date: DateTime.fromISO(date).toFormat(format),
     starred,
     content,
   };

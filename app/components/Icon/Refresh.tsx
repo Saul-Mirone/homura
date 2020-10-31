@@ -1,7 +1,8 @@
 import React from 'react';
 
-export const RefreshIcon: React.FC = () => (
+export const RefreshIcon: React.FC<{ spin?: boolean }> = ({ spin }) => (
   <svg
+    className={spin ? 'animate-spin' : ''}
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"

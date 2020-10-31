@@ -8,12 +8,16 @@ import { create } from '../source/sourceSlice';
 type State = {
   link: string;
   name: string;
+  loading: boolean;
+  parseError: boolean;
   step: Step | null;
 };
 
 const initialState: State = {
   link: '',
   name: '',
+  loading: false,
+  parseError: false,
   step: null,
 };
 
@@ -31,12 +35,20 @@ const creatorSlice = createSlice({
       state.step = null;
       state.link = '';
       state.name = '';
+      state.loading = false;
+      state.parseError = false;
+    },
+    setParserError: (state, action: PayloadAction<boolean>) => {
+      state.parseError = action.payload;
     },
     setLink: (state, action: PayloadAction<string>) => {
       state.link = action.payload;
     },
     setName: (state, action: PayloadAction<string>) => {
       state.name = action.payload;
+    },
+    setLoading: (state, action: PayloadAction<boolean>) => {
+      state.loading = action.payload;
     },
   },
 });
@@ -47,20 +59,26 @@ export const {
   reset,
   setLink,
   setName,
+  setParserError,
+  setLoading,
 } = creatorSlice.actions;
 
 export const searchUrl = (): AppThunk => async (dispatch, getState) => {
+  dispatch(setLoading(true));
   const {
     creator: { link },
   } = getState();
 
   const result = await channel.checkUrl(link);
   if (!result) {
+    dispatch(setLoading(false));
+    dispatch(setParserError(true));
     return;
   }
 
   dispatch(setName(result));
   dispatch(stepToEnterName());
+  dispatch(setLoading(false));
 };
 
 export const confirmName = (): AppThunk => async (dispatch, getState) => {
@@ -86,4 +104,9 @@ export const confirmName = (): AppThunk => async (dispatch, getState) => {
 
 export const creatorReducer = creatorSlice.reducer;
 
-export const selectCreator = (state: RootState) => state.creator;
+export const selectCreator = (state: RootState) => {
+  return {
+    ...state.creator,
+    refreshing: state.source.refreshing,
+  };
+};

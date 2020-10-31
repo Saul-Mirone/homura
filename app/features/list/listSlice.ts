@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { DateTime } from 'luxon';
 import { channel } from '../../channel/child';
+import { format } from '../../constants/Date';
 import { Mode } from '../../constants/Mode';
 import { Preset } from '../../constants/Preset';
 import type { AppThunk, RootState } from '../../store';
@@ -39,6 +40,11 @@ const listSlice = createSlice({
   name: 'list',
   initialState,
   reducers: {
+    reset: (state) => {
+      state.posts = [];
+      state.activeId = undefined;
+      state.filter = '';
+    },
     loadAll: (state, action: PayloadAction<PostItem[]>) => {
       state.posts = action.payload;
     },
@@ -77,6 +83,7 @@ export const {
   markActiveStarred,
   markAllRead,
   setFilter,
+  reset,
 } = listSlice.actions;
 
 const loadBySourceId = async (sourceId: number, mode: Mode) => {
@@ -209,7 +216,7 @@ export const selectList = (state: RootState) => {
     .sort((x, y) => y.date.toSeconds() - x.date.toSeconds())
     .map(({ date, ...x }) => ({
       ...x,
-      date: date.toFormat('LLL dd, yyyy'),
+      date: date.toFormat(format),
     }))
     .filter((x) => x.title.toLowerCase().includes(filter.toLowerCase()))
     .reduce((acc, cur) => {
