@@ -1,17 +1,24 @@
 import React from 'react';
 
 export const IconContainerSmall: React.FC<{
+  className?: string;
   size?: number;
   onClick?: () => void;
   disabled?: boolean;
-}> = ({ children, onClick, size = 5, disabled = false }) => (
+}> = ({ children, onClick, size = 5, disabled = false, className = '' }) => (
   <div
     role="button"
     tabIndex={0}
     className={`w-${size} h-${size} m-auto ${
       disabled ? 'cursor-not-allowed' : ''
-    }`}
-    onClick={onClick}
+    } ${className}`}
+    onMouseDown={(e) => {
+      if (onClick) {
+        e.stopPropagation();
+        e.preventDefault();
+        onClick();
+      }
+    }}
     onKeyDown={onClick}
   >
     {children}
@@ -23,7 +30,7 @@ export const IconContainer: React.FC<{
   onClick?: () => void;
   size?: number;
   disabled?: boolean;
-}> = ({ children, className = '', onClick, size, disabled }) => (
+}> = ({ children, onClick, size, disabled, className = '' }) => (
   <div
     role="button"
     tabIndex={0}

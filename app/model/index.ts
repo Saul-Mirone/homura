@@ -129,6 +129,18 @@ export class DB {
     );
   }
 
+  public async updateSourceNameById(id: number, name: string): Promise<void> {
+    this.checkInitialized();
+    await Source.update(
+      { name },
+      {
+        where: {
+          id,
+        },
+      }
+    );
+  }
+
   public async getSourceList(
     count: 'unread' | 'starred'
   ): Promise<GetSourceListResult> {
@@ -248,6 +260,20 @@ export class DB {
       default:
         return Post.count();
     }
+  }
+
+  public async removeSourceById(id: number): Promise<void> {
+    this.checkInitialized();
+    await Post.destroy({
+      where: {
+        sourceId: id,
+      },
+    });
+    await Source.destroy({
+      where: {
+        id,
+      },
+    });
   }
 
   private checkInitialized() {

@@ -50,6 +50,10 @@ export class ChannelMain {
       markAllAsReadBySourceId: (_: Event, sourceId: number) =>
         this.db.markAllPostsAsReadBySourceId(sourceId),
       sync: () => this.sync(),
+      removeSourceById: (_: Event, sourceId: number) =>
+        this.db.removeSourceById(sourceId),
+      updateSourceNameById: (_: Event, sourceId: number, name: string) =>
+        this.db.updateSourceNameById(sourceId, name),
     };
   }
 

@@ -60,6 +60,17 @@ const sourceSlice = createSlice({
     setRefreshing: (state, action: PayloadAction<boolean>) => {
       state.refreshing = action.payload;
     },
+    updateName: (
+      state,
+      action: PayloadAction<{ id: number; name: string }>
+    ) => {
+      const target = state.list.find((x) => x.id === action.payload.id);
+      if (!target) return;
+      target.name = action.payload.name;
+    },
+    removeById: (state, action: PayloadAction<number>) => {
+      state.list = state.list.filter((x) => x.id === action.payload);
+    },
   },
 });
 
@@ -71,6 +82,8 @@ export const {
   countUpOne,
   countToZero,
   setRefreshing,
+  updateName,
+  removeById,
 } = sourceSlice.actions;
 
 export const loadSource = (mode: Mode): AppThunk => async (dispatch) => {
@@ -88,6 +101,20 @@ export const loadSource = (mode: Mode): AppThunk => async (dispatch) => {
 
   dispatch(loadAll(mappedList));
   dispatch(setRefreshing(false));
+};
+
+export const asyncRemoveById = (id: number): AppThunk => async (dispatch) => {
+  await channel.removeSourceById(id);
+  dispatch(setActiveId());
+  dispatch(removeById(id));
+};
+
+export const asyncUpdateName = (id: number, name: string): AppThunk => async (
+  dispatch
+) => {
+  await channel.updateSourceNameById(id, name);
+  dispatch(setActiveId());
+  dispatch(updateName({ id, name }));
 };
 
 export const sync = (): AppThunk => async (dispatch, getState) => {

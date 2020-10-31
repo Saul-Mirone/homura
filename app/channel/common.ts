@@ -5,6 +5,8 @@ const channelName = [
   'checkUrl',
   'confirm',
   'getSourceById',
+  'removeSourceById',
+  'updateSourceNameById',
   'getPostById',
   'setPostUnread',
   'setPostStarred',
