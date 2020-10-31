@@ -99,7 +99,7 @@ export class ChannelMain {
         items: items.map((item) => ({
           title: item.title ?? '',
           link: item.link ?? '',
-          guid: item.guid ?? '',
+          guid: item.guid ?? item.id ?? item.isoDate ?? '',
           content: item['content:encoded'] ?? item.content ?? '',
           date: new Date(item.isoDate as string),
         })),
@@ -122,7 +122,8 @@ export class ChannelMain {
       link: tmp.link,
       sourceUrl: tmp.sourceUrl,
       icon: tmp.icon || null,
-      posts: tmp.items.map(({ title, content, date, guid }) => ({
+      posts: tmp.items.map(({ title, content, date, guid, link }) => ({
+        link,
         guid,
         title,
         content,

@@ -55,7 +55,7 @@ export class DB {
         {
           model: Source.associations.posts.target,
           as: Source.associations.posts.as,
-          attributes: ['id', 'title', 'unread', 'starred', 'date'],
+          attributes: ['id', 'title', 'unread', 'starred', 'date', 'link'],
         },
       ],
       rejectOnEmpty: true,
@@ -77,7 +77,15 @@ export class DB {
         {
           model: Source.associations.posts.target,
           as: Source.associations.posts.as,
-          attributes: ['id', 'title', 'unread', 'starred', 'date', 'guid'],
+          attributes: [
+            'id',
+            'title',
+            'unread',
+            'starred',
+            'date',
+            'guid',
+            'link',
+          ],
         },
       ],
       rejectOnEmpty: true,
@@ -97,6 +105,7 @@ export class DB {
             {
               title: post.title,
               content: post.content,
+              link: post.link,
               date: post.date,
             },
             {
@@ -111,6 +120,7 @@ export class DB {
         await Post.create({
           title: post.title,
           sourceId: id,
+          link: post.link,
           content: post.content,
           date: post.date,
           guid: post.guid,

@@ -13,6 +13,7 @@ type PostItem = {
   sourceId: number;
   title: string;
   sourceName: string;
+  link: string;
   unread: boolean;
   starred: boolean;
   date: ISOString;
@@ -90,16 +91,19 @@ const loadBySourceId = async (sourceId: number, mode: Mode) => {
   const source = await channel.getSourceById(sourceId);
 
   return source.posts
-    .map(({ id, title, unread, date, starred, sourceId: postSourceId }) => ({
-      id,
-      sourceId: postSourceId,
-      title,
-      sourceName: source.name,
-      icon: source.icon,
-      date: date.toISOString(),
-      unread,
-      starred,
-    }))
+    .map(
+      ({ id, title, unread, date, starred, sourceId: postSourceId, link }) => ({
+        id,
+        sourceId: postSourceId,
+        title,
+        link,
+        sourceName: source.name,
+        icon: source.icon,
+        date: date.toISOString(),
+        unread,
+        starred,
+      })
+    )
     .filter((x) => {
       switch (mode) {
         case Mode.Starred:

@@ -14,6 +14,7 @@ export interface PostAttributes {
   id: number;
   sourceId: number;
   guid: string;
+  link: string;
   title: string;
   content: string;
   unread: boolean;
@@ -36,6 +37,8 @@ export class Post
   public guid!: string;
 
   public title!: string;
+
+  public link!: string;
 
   public content!: string;
 
@@ -75,6 +78,10 @@ export const initPost = (sequelize: Sequelize): void => {
         allowNull: false,
       },
       title: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      link: {
         type: DataTypes.STRING,
         allowNull: false,
       },
