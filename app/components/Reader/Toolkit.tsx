@@ -13,6 +13,7 @@ type ToolkitProps = {
   onSwitchStarred: (prev: boolean) => void;
   unread: boolean;
   onSwitchUnread: (prev: boolean) => void;
+  onShare: () => void;
 };
 
 export const Toolkit: React.FC<ToolkitProps> = ({
@@ -20,6 +21,7 @@ export const Toolkit: React.FC<ToolkitProps> = ({
   onSwitchStarred,
   unread,
   onSwitchUnread,
+  onShare,
 }) => {
   return (
     <div className="flex justify-end">
@@ -33,7 +35,7 @@ export const Toolkit: React.FC<ToolkitProps> = ({
         <IconContainer className="py-1" onClick={() => onSwitchUnread(unread)}>
           {unread ? <MailFilledIcon /> : <MailIcon />}
         </IconContainer>
-        <IconContainer className="py-1">
+        <IconContainer className="py-1" onClick={() => onShare()}>
           <ShareIcon />
         </IconContainer>
       </div>

@@ -21,6 +21,7 @@ export const Post: React.FC = () => {
       onSwitchStarred={(x) => dispatch(markActiveStarredAs(!x))}
       unread={post.unread}
       onSwitchUnread={(x) => dispatch(markActiveUnreadAs(!x))}
+      onShare={() => window.open(post.link)}
     />
   ) : null;
 
