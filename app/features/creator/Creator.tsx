@@ -12,17 +12,22 @@ import {
   selectCreator,
   setLink,
   setName,
+  setParserError,
   stepToEnterUrl,
 } from './creatorSlice';
 
 export const Creator: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const { step, link, name, refreshing, loading } = useSelector(selectCreator);
+  const { step, link, name, refreshing, loading, parseError } = useSelector(
+    selectCreator
+  );
 
   const renderBottom = React.useCallback(
     (currentStep: Step) =>
       currentStep === Step.EnterUrl ? (
         <FeedSearchBar
+          onClickError={() => dispatch(setParserError(false))}
+          hasError={parseError}
           loading={loading}
           link={link}
           onCancel={() => dispatch(reset())}
@@ -38,7 +43,7 @@ export const Creator: React.FC = () => {
           onConfirm={() => dispatch(confirmName())}
         />
       ),
-    [dispatch, link, loading, name]
+    [dispatch, link, loading, name, parseError]
   );
 
   return (

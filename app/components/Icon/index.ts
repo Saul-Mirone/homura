@@ -1,6 +1,7 @@
 export * from './Archive';
 export * from './Cancel';
 export * from './Check';
+export * from './Close';
 export * from './Mail';
 export * from './Plus';
 export * from './Refresh';
