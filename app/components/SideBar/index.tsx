@@ -16,9 +16,9 @@ export const SideBar: React.FC<SideBarProps> = ({
     <div
       role="presentation"
       onClick={onClick}
-      className="w-1/6 bg-gray-700 pt-10 flex flex-col h-screen select-none"
+      className="w-1/6 bg-gray-700 flex flex-col h-screen select-none"
     >
-      <div className="flex-1 thin-scroll">
+      <div className="flex-1 thin-scroll relative">
         {overview}
         <div className="pt-10" />
         {children}
