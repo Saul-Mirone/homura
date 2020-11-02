@@ -1,14 +1,17 @@
-#  <img src="resources/homura-logo.png" height="80px" /> Homura &middot; [![Build Status][github-actions-status]][github-actions-url] [![Dependency Status][david-image]][david-url] [![DevDependency Status][david-dev-image]][david-dev-url] [![Github Tag][github-tag-image]][github-tag-url]
+# <img src="resources/homura-logo.png" height="80px" /> Homura &middot; [![Build Status][github-actions-status]][github-actions-url] [![Dependency Status][david-image]][david-url] [![DevDependency Status][david-dev-image]][david-dev-url] [![Github Tag][github-tag-image]][github-tag-url]
+
 An elegant rss reader.
 
 <img src="internals/img/preview.png" width="100%" />
 
-## Donations
+## Features
 
-**Donations will ensure the following:**
-
-- 🔨 Long term maintenance of the project
-- 🐛 Quick responses to bug reports and help requests
+- **Subscribe:** subscribe to a source, unsubscribe and edit name.
+- **Star:** star a post to make collection.
+- **Search:** search post by title name.
+- **Sync:** sync posts from rss feed source.
+- **Read Post:** parse post content and.
+- **Code Highlight:** highlight code in posts.
 
 ## Maintainers
 
