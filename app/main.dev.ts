@@ -66,6 +66,14 @@ const createWindow = async () => {
     return path.join(RESOURCES_PATH, ...paths);
   };
 
+  const connectWithDB = async (): Promise<void> => {
+    const db = new DB();
+    await db.init();
+    const rssParser = new ChannelMain(db);
+    rssParser.listen();
+  };
+  await connectWithDB();
+
   mainWindow = new BrowserWindow({
     show: false,
     width: 1024,
@@ -81,18 +89,12 @@ const createWindow = async () => {
           }
         : {
             preload: path.join(__dirname, 'dist/renderer.prod.js'),
+            nodeIntegration: true,
+            enableRemoteModule: true,
           },
   });
 
   mainWindow.loadURL(`file://${__dirname}/app.html`);
-
-  const connectWithDB = async (): Promise<void> => {
-    const db = new DB();
-    await db.init();
-    const rssParser = new ChannelMain(db);
-    rssParser.listen();
-  };
-  await connectWithDB();
 
   mainWindow.webContents.on('will-navigate', (e, url) => {
     if (url !== mainWindow?.webContents.getURL()) {

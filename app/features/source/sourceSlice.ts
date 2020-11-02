@@ -69,7 +69,7 @@ const sourceSlice = createSlice({
       target.name = action.payload.name;
     },
     removeById: (state, action: PayloadAction<number>) => {
-      state.list = state.list.filter((x) => x.id === action.payload);
+      state.list = state.list.filter((x) => x.id !== action.payload);
     },
   },
 });

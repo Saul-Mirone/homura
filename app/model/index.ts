@@ -1,7 +1,12 @@
+import { app } from 'electron';
+import path from 'path';
 import { FindOptions, Sequelize } from 'sequelize';
 import { Preset } from '../constants/Preset';
+import packageJson from '../package.json';
 import { CreatePostAttributes, initPost, Post, PostAttributes } from './post';
 import { CreateSourceAttributes, initSource, Source } from './source';
+
+const { version } = packageJson;
 
 export type SourceJSON = ReturnType<Source['toJSON']>;
 export type PostJSON = ReturnType<Post['toJSON']>;
@@ -31,14 +36,27 @@ export class DB {
   private initialized: boolean;
 
   constructor() {
-    this.sequelize = new Sequelize('sqlite::memory:');
+    // if (['development', 'test'].includes(process.env.NODE_ENV || '')) {
+    //   this.sequelize = new Sequelize('sqlite::memory:');
+    // } else {
+    this.sequelize = new Sequelize({
+      dialect: 'sqlite',
+      storage: path.resolve(
+        app.getPath('appData'),
+        'homura',
+        version,
+        'database.sqlite'
+      ),
+    });
+    // }
     this.initialized = false;
   }
 
   public async init(): Promise<void> {
     initPost(this.sequelize);
     initSource(this.sequelize);
-    await this.sequelize.sync();
+    await Post.sync();
+    await Source.sync();
     this.initialized = true;
   }
 
@@ -188,7 +206,21 @@ export class DB {
   public async getSourceById(id: number): Promise<CreateSourceResult> {
     this.checkInitialized();
     const source = await Source.findByPk(id, {
-      include: [Source.associations.posts],
+      include: [
+        {
+          model: Source.associations.posts.target,
+          as: Source.associations.posts.as,
+          attributes: [
+            'id',
+            'title',
+            'unread',
+            'starred',
+            'date',
+            'link',
+            'content',
+          ],
+        },
+      ],
       rejectOnEmpty: true,
     });
 

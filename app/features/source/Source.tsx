@@ -1,11 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { channel } from '../../channel/child';
 import { SideBar } from '../../components/SideBar';
 import { Header } from '../../components/SideBar/Header';
 import { SideBarItem } from '../../components/SideBar/SideBarItem';
 import { AppDispatch } from '../../store';
 import {
+  asyncRemoveById,
   asyncUpdateName,
   loadSource,
   selectSource,
@@ -44,8 +44,7 @@ export const Source: React.FC<{ bottom: JSX.Element }> = ({ bottom }) => {
             dispatch(asyncUpdateName(id, nextName));
           }}
           onUnsubscribe={() => {
-            dispatch(setActiveId());
-            channel.removeSourceById(id);
+            dispatch(asyncRemoveById(id));
           }}
           key={id.toString()}
           url={icon}

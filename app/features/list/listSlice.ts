@@ -122,20 +122,22 @@ const loadByPreset = async (preset: Preset) => {
       id,
       title,
       unread,
+      link,
       date,
       starred,
-      sourceId: postSourceId,
+      sourceId,
       sourceName,
       icon,
     }) => ({
       id,
-      sourceId: postSourceId,
+      sourceId,
       title,
+      link,
       sourceName,
       icon,
-      date: date.toISOString(),
       unread,
       starred,
+      date: date.toISOString(),
     })
   );
 };
