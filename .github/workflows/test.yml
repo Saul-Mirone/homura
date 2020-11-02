@@ -29,7 +29,6 @@ jobs:
         run: |
           yarn package-ci
           yarn lint
-          yarn tsc
           yarn test
           yarn build-e2e
 
