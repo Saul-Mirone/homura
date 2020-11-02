@@ -11,6 +11,7 @@ import { channel } from '../../../app/channel/child';
 import { Step } from '../../../app/components/SideBar/BottomBar';
 import { Creator } from '../../../app/features/creator/Creator';
 import * as creatorSlice from '../../../app/features/creator/creatorSlice';
+import { sourceReducer } from '../../../app/features/source/sourceSlice';
 
 jest.mock('../../../app/channel/child');
 
@@ -22,11 +23,27 @@ function setup(
       link: string;
       name: string;
       step: Step | null;
+      loading: boolean;
+      parseError: boolean;
     };
-  } = { creator: { link: '', name: '', step: null } }
+    source: {
+      refreshing: boolean;
+    };
+  } = {
+    creator: {
+      step: null,
+      link: '',
+      name: '',
+      loading: false,
+      parseError: false,
+    },
+    source: {
+      refreshing: false,
+    },
+  }
 ) {
   const store = configureStore({
-    reducer: { creator: creatorSlice.creatorReducer },
+    reducer: { creator: creatorSlice.creatorReducer, source: sourceReducer },
     preloadedState,
   });
 
@@ -66,7 +83,7 @@ describe('Creator component', () => {
     const { buttons } = setup();
     const stepToEnterUrlSpy = jest.spyOn(creatorSlice, 'stepToEnterUrl');
 
-    buttons.at(0).simulate('click');
+    buttons.at(0).simulate('keydown');
     expect(stepToEnterUrlSpy).toBeCalled();
     stepToEnterUrlSpy.mockRestore();
   });
@@ -79,6 +96,6 @@ describe('Test creator actions', () => {
     expect(fn).toBeInstanceOf(Function);
     const dispatch = jest.fn();
     await fn(dispatch, () => ({ creator: { link: 'fake-link' } }));
-    expect(dispatch).toBeCalledTimes(2);
+    expect(dispatch).toBeCalledTimes(4);
   });
 });

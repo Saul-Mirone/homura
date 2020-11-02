@@ -5,14 +5,15 @@ exports[`Creator component should match exact snapshot 1`] = `
   className="relative flex justify-between text-gray-300"
 >
   <div
-    className="p-2 cursor-pointer "
-    onClick={[Function]}
+    className="p-2  "
     onKeyDown={[Function]}
+    onMouseDown={[Function]}
     role="button"
     tabIndex={0}
   >
     <div
-      className="w-5 h-5 m-auto"
+      className="w-5 h-5 m-auto  "
+      onMouseDown={[Function]}
       role="button"
       tabIndex={0}
     >
@@ -32,18 +33,20 @@ exports[`Creator component should match exact snapshot 1`] = `
     </div>
   </div>
   <div
-    className="p-2 cursor-pointer "
-    onClick={[Function]}
+    className="p-2  "
     onKeyDown={[Function]}
+    onMouseDown={[Function]}
     role="button"
     tabIndex={0}
   >
     <div
-      className="w-5 h-5 m-auto"
+      className="w-5 h-5 m-auto  "
+      onMouseDown={[Function]}
       role="button"
       tabIndex={0}
     >
       <svg
+        className=""
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"

@@ -18,7 +18,7 @@ describe('reducers', () => {
     it('should handle stepToEnterUrl', () => {
       expect(
         creatorReducer(
-          { step: null, link: '', name: '' },
+          { step: null, link: '', name: '', loading: false, parseError: false },
           { type: stepToEnterUrl }
         )
       ).toMatchSnapshot();
@@ -27,7 +27,7 @@ describe('reducers', () => {
     it('should handle stepToEnterName', () => {
       expect(
         creatorReducer(
-          { step: null, link: '', name: '' },
+          { step: null, link: '', name: '', loading: false, parseError: false },
           { type: stepToEnterName }
         )
       ).toMatchSnapshot();
@@ -36,7 +36,13 @@ describe('reducers', () => {
     it('should handle reset', () => {
       expect(
         creatorReducer(
-          { step: Step.EnterUrl, link: 'link', name: 'name' },
+          {
+            step: Step.EnterUrl,
+            link: 'link',
+            name: 'name',
+            loading: true,
+            parseError: true,
+          },
           { type: reset }
         )
       ).toMatchSnapshot();
@@ -45,7 +51,7 @@ describe('reducers', () => {
     it('should handle setLink', () => {
       expect(
         creatorReducer(
-          { step: null, link: '', name: '' },
+          { step: null, link: '', name: '', loading: false, parseError: false },
           { type: setLink, payload: 'link' }
         )
       ).toMatchSnapshot();
@@ -54,7 +60,7 @@ describe('reducers', () => {
     it('should handle setName', () => {
       expect(
         creatorReducer(
-          { step: null, link: '', name: '' },
+          { step: null, link: '', name: '', loading: false, parseError: false },
           { type: setName, payload: 'name' }
         )
       ).toMatchSnapshot();
@@ -62,7 +68,10 @@ describe('reducers', () => {
 
     it('should handle unknown action type', () => {
       expect(
-        creatorReducer({ step: null, link: '', name: '' }, { type: 'unknown' })
+        creatorReducer(
+          { step: null, link: '', name: '', loading: false, parseError: false },
+          { type: 'unknown' }
+        )
       ).toMatchSnapshot();
     });
   });

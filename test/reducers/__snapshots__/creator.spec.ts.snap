@@ -3,7 +3,9 @@
 exports[`reducers creator should handle initial state 1`] = `
 Object {
   "link": "",
+  "loading": false,
   "name": "",
+  "parseError": false,
   "step": null,
 }
 `;
@@ -11,7 +13,9 @@ Object {
 exports[`reducers creator should handle reset 1`] = `
 Object {
   "link": "",
+  "loading": false,
   "name": "",
+  "parseError": false,
   "step": null,
 }
 `;
@@ -19,7 +23,9 @@ Object {
 exports[`reducers creator should handle setLink 1`] = `
 Object {
   "link": "link",
+  "loading": false,
   "name": "",
+  "parseError": false,
   "step": null,
 }
 `;
@@ -27,7 +33,9 @@ Object {
 exports[`reducers creator should handle setName 1`] = `
 Object {
   "link": "",
+  "loading": false,
   "name": "name",
+  "parseError": false,
   "step": null,
 }
 `;
@@ -35,7 +43,9 @@ Object {
 exports[`reducers creator should handle stepToEnterName 1`] = `
 Object {
   "link": "",
+  "loading": false,
   "name": "",
+  "parseError": false,
   "step": 1,
 }
 `;
@@ -43,7 +53,9 @@ Object {
 exports[`reducers creator should handle stepToEnterUrl 1`] = `
 Object {
   "link": "",
+  "loading": false,
   "name": "",
+  "parseError": false,
   "step": 0,
 }
 `;
@@ -51,7 +63,9 @@ Object {
 exports[`reducers creator should handle unknown action type 1`] = `
 Object {
   "link": "",
+  "loading": false,
   "name": "",
+  "parseError": false,
   "step": null,
 }
 `;
