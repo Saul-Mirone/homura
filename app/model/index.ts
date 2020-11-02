@@ -217,6 +217,7 @@ export class DB {
             'starred',
             'date',
             'link',
+            'sourceId',
             'content',
           ],
         },
