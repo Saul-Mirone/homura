@@ -4,7 +4,9 @@ import {
   creatorReducer,
   reset,
   setLink,
+  setLoading,
   setName,
+  setParserError,
   stepToEnterName,
   stepToEnterUrl,
 } from '../../app/features/creator/creatorSlice';
@@ -62,6 +64,24 @@ describe('reducers', () => {
         creatorReducer(
           { step: null, link: '', name: '', loading: false, parseError: false },
           { type: setName, payload: 'name' }
+        )
+      ).toMatchSnapshot();
+    });
+
+    it('should handle setParserError', () => {
+      expect(
+        creatorReducer(
+          { step: null, link: '', name: '', loading: false, parseError: false },
+          { type: setParserError, payload: true }
+        )
+      ).toMatchSnapshot();
+    });
+
+    it('should handle setLoading', () => {
+      expect(
+        creatorReducer(
+          { step: null, link: '', name: '', loading: false, parseError: false },
+          { type: setLoading, payload: true }
         )
       ).toMatchSnapshot();
     });

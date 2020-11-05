@@ -30,12 +30,32 @@ Object {
 }
 `;
 
+exports[`reducers creator should handle setLoading 1`] = `
+Object {
+  "link": "",
+  "loading": true,
+  "name": "",
+  "parseError": false,
+  "step": null,
+}
+`;
+
 exports[`reducers creator should handle setName 1`] = `
 Object {
   "link": "",
   "loading": false,
   "name": "name",
   "parseError": false,
+  "step": null,
+}
+`;
+
+exports[`reducers creator should handle setParserError 1`] = `
+Object {
+  "link": "",
+  "loading": false,
+  "name": "",
+  "parseError": true,
   "step": null,
 }
 `;

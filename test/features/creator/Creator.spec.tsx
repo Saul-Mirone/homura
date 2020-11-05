@@ -9,9 +9,11 @@ import renderer from 'react-test-renderer';
 import 'regenerator-runtime/runtime';
 import { channel } from '../../../app/channel/child';
 import { Step } from '../../../app/components/SideBar/BottomBar';
+import { Mode } from '../../../app/constants/Mode';
 import { Creator } from '../../../app/features/creator/Creator';
 import * as creatorSlice from '../../../app/features/creator/creatorSlice';
 import { sourceReducer } from '../../../app/features/source/sourceSlice';
+import { mockStore } from '../../test-tools/mockStore';
 
 jest.mock('../../../app/channel/child');
 
@@ -91,11 +93,43 @@ describe('Creator component', () => {
 
 describe('Test creator actions', () => {
   it('should call searchUrl', async () => {
+    const store = mockStore({
+      creator: { link: 'fake-link' },
+    });
     (channel.checkUrl as any).mockResolvedValue('name');
-    const fn: any = creatorSlice.searchUrl();
-    expect(fn).toBeInstanceOf(Function);
-    const dispatch = jest.fn();
-    await fn(dispatch, () => ({ creator: { link: 'fake-link' } }));
-    expect(dispatch).toBeCalledTimes(4);
+    await store.dispatch(creatorSlice.searchUrl());
+
+    expect(store.getActions()).toMatchSnapshot();
+  });
+
+  describe('should call confirmName', () => {
+    it('should filter icon', async () => {
+      const store = mockStore({
+        creator: { name: 'fake-name' },
+      });
+      (channel.confirm as any).mockResolvedValue({
+        posts: Array(20).fill(0),
+        icon: null,
+        link: 'fake-link',
+        id: 20,
+      });
+      await store.dispatch(creatorSlice.confirmName());
+      expect(store.getActions()).toMatchSnapshot();
+    });
+
+    it('should set count by mode', async () => {
+      const store = mockStore({
+        creator: { name: 'fake-name' },
+        mode: Mode.Starred,
+      });
+      (channel.confirm as any).mockResolvedValue({
+        posts: Array(20).fill(0),
+        icon: 'fake-icon',
+        link: 'fake-link',
+        id: 20,
+      });
+      await store.dispatch(creatorSlice.confirmName());
+      expect(store.getActions()).toMatchSnapshot();
+    });
   });
 });
