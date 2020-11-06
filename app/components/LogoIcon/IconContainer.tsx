@@ -36,9 +36,11 @@ export const IconContainer: React.FC<{
     tabIndex={0}
     className={`p-2 ${disabled ? 'cursor-not-allowed' : ''} ${className}`}
     onMouseDown={(e) => {
-      e.stopPropagation();
-      e.preventDefault();
-      onClick?.();
+      if (onClick) {
+        e.stopPropagation();
+        e.preventDefault();
+        onClick();
+      }
     }}
     onKeyDown={onClick}
   >

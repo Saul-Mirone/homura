@@ -1,4 +1,3 @@
-/* eslint react/jsx-props-no-spreading: off, import/first: off, import/order: off */
 import { configureStore } from '@reduxjs/toolkit';
 import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
