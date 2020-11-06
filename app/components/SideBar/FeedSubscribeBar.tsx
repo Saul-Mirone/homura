@@ -3,20 +3,19 @@ import { CheckCircleFilledIcon } from '../Icon';
 import { IconContainer } from '../LogoIcon';
 
 export type FeedSubscribeBarProps = {
+  initialName: string;
   link: string;
-  name: string;
-  onNameChange: (name: string) => void;
   onConfirm: (name: string) => void;
   onCancel: () => void;
 };
 
 export const FeedSubscribeBar: React.FC<FeedSubscribeBarProps> = ({
   link,
-  name,
-  onNameChange,
+  initialName,
   onConfirm,
   onCancel,
 }) => {
+  const [name, setName] = React.useState(initialName);
   const inputEl = React.useRef<HTMLInputElement>(null);
   React.useEffect(() => {
     inputEl.current?.focus();
@@ -30,7 +29,7 @@ export const FeedSubscribeBar: React.FC<FeedSubscribeBarProps> = ({
           <input
             ref={inputEl}
             value={name}
-            onChange={(e) => onNameChange(e.target.value)}
+            onChange={(e) => setName(e.target.value)}
             onBlur={() => {
               onCancel();
             }}

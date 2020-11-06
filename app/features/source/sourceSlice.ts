@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { channel } from '../../channel/child';
+import { Step } from '../../components/SideBar/BottomBar';
 import { Mode } from '../../constants/Mode';
 import { Preset } from '../../constants/Preset';
 import type { AppThunk, RootState } from '../../store';
@@ -12,16 +13,39 @@ type SourceItem = {
   icon?: string;
 };
 
-type State = {
+type SourceListState = {
   list: SourceItem[];
   activeId: number | Preset | undefined;
   refreshing: boolean;
 };
 
-const initialState: State = {
+type SourceCreationState = {
+  link: string;
+  name: string;
+  loading: boolean;
+  parseError: boolean;
+  step: Step | null;
+};
+
+type State = SourceListState & SourceCreationState;
+
+const initialSourceList: SourceListState = {
   list: [],
   activeId: undefined,
   refreshing: false,
+};
+
+const initialSourceCreationState: SourceCreationState = {
+  link: '',
+  name: '',
+  loading: false,
+  parseError: false,
+  step: null,
+};
+
+const initialState: State = {
+  ...initialSourceList,
+  ...initialSourceCreationState,
 };
 
 const sourceSlice = createSlice({

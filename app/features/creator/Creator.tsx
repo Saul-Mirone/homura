@@ -10,39 +10,45 @@ import {
   reset,
   searchUrl,
   selectCreator,
-  setLink,
-  setName,
   setParserError,
   stepToEnterUrl,
 } from './creatorSlice';
 
 export const Creator: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const { step, link, name, refreshing, loading, parseError } = useSelector(
+  const { step, name, refreshing, loading, parseError, link } = useSelector(
     selectCreator
   );
 
   const renderBottom = React.useCallback(
-    (currentStep: Step) =>
-      currentStep === Step.EnterUrl ? (
-        <FeedSearchBar
-          onClickError={() => dispatch(setParserError(false))}
-          hasError={parseError}
-          loading={loading}
-          link={link}
-          onCancel={() => dispatch(reset())}
-          onLinkChange={(x) => dispatch(setLink(x))}
-          onSearch={() => dispatch(searchUrl())}
-        />
-      ) : (
-        <FeedSubscribeBar
-          link={link}
-          name={name}
-          onCancel={() => dispatch(reset())}
-          onNameChange={(x) => dispatch(setName(x))}
-          onConfirm={() => dispatch(confirmName())}
-        />
-      ),
+    (currentStep: Step) => {
+      switch (currentStep) {
+        case Step.EnterUrl: {
+          return (
+            <FeedSearchBar
+              onClickError={() => dispatch(setParserError(false))}
+              hasError={parseError}
+              loading={loading}
+              onCancel={() => dispatch(reset())}
+              onSearch={(inputLink) => dispatch(searchUrl(inputLink))}
+            />
+          );
+        }
+        case Step.EnterName: {
+          return (
+            <FeedSubscribeBar
+              link={link}
+              initialName={name}
+              onCancel={() => dispatch(reset())}
+              onConfirm={(inputName) => dispatch(confirmName(inputName))}
+            />
+          );
+        }
+        default: {
+          throw new Error('Invalid Step');
+        }
+      }
+    },
     [dispatch, link, loading, name, parseError]
   );
 

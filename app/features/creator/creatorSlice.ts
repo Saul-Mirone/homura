@@ -63,11 +63,9 @@ export const {
   setLoading,
 } = creatorSlice.actions;
 
-export const searchUrl = (): AppThunk => async (dispatch, getState) => {
+export const searchUrl = (link: string): AppThunk => async (dispatch) => {
   dispatch(setLoading(true));
-  const {
-    creator: { link },
-  } = getState();
+  dispatch(setLink(link));
 
   const result = await channel.checkUrl(link);
   if (!result) {
@@ -81,11 +79,12 @@ export const searchUrl = (): AppThunk => async (dispatch, getState) => {
   dispatch(setLoading(false));
 };
 
-export const confirmName = (): AppThunk => async (dispatch, getState) => {
-  const {
-    creator: { name },
-    mode,
-  } = getState();
+export const confirmName = (name: string): AppThunk => async (
+  dispatch,
+  getState
+) => {
+  dispatch(setName(name));
+  const { mode } = getState();
 
   const { posts, icon, link, id } = await channel.confirm(name);
 

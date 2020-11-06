@@ -15,6 +15,7 @@ import { sourceReducer } from '../../../app/features/source/sourceSlice';
 import { mockStore } from '../../test-tools/mockStore';
 
 jest.mock('../../../app/channel/child');
+const mockChannel = (channel as unknown) as jest.Mocked<typeof channel>;
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -92,42 +93,41 @@ describe('Creator component', () => {
 
 describe('Test creator actions', () => {
   it('should call searchUrl', async () => {
-    const store = mockStore({
-      creator: { link: 'fake-link' },
-    });
-    (channel.checkUrl as any).mockResolvedValue('name');
-    await store.dispatch(creatorSlice.searchUrl());
+    const store = mockStore();
+    mockChannel.checkUrl.mockResolvedValue('name');
+    await store.dispatch(creatorSlice.searchUrl('fake-link'));
 
     expect(store.getActions()).toMatchSnapshot();
   });
 
   describe('should call confirmName', () => {
     it('should filter icon', async () => {
-      const store = mockStore({
-        creator: { name: 'fake-name' },
-      });
-      (channel.confirm as any).mockResolvedValue({
+      const store = mockStore();
+      mockChannel.confirm.mockResolvedValue({
+        name: 'fake-name',
+        sourceUrl: 'fake-url',
         posts: Array(20).fill(0),
         icon: null,
         link: 'fake-link',
         id: 20,
       });
-      await store.dispatch(creatorSlice.confirmName());
+      await store.dispatch(creatorSlice.confirmName('fake-name'));
       expect(store.getActions()).toMatchSnapshot();
     });
 
     it('should set count by mode', async () => {
       const store = mockStore({
-        creator: { name: 'fake-name' },
         mode: Mode.Starred,
       });
-      (channel.confirm as any).mockResolvedValue({
+      mockChannel.confirm.mockResolvedValue({
+        name: 'fake-name',
+        sourceUrl: 'fake-url',
         posts: Array(20).fill(0),
         icon: 'fake-icon',
         link: 'fake-link',
         id: 20,
       });
-      await store.dispatch(creatorSlice.confirmName());
+      await store.dispatch(creatorSlice.confirmName('fake-name'));
       expect(store.getActions()).toMatchSnapshot();
     });
   });
