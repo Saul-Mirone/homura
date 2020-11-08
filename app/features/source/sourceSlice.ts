@@ -1,68 +1,125 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { channel } from '../../channel/child';
 import { Step } from '../../components/SideBar/BottomBar';
 import { Mode } from '../../constants/Mode';
 import { Preset } from '../../constants/Preset';
-import type { AppThunk, RootState } from '../../store';
+import { Status } from '../../constants/Status';
+import type { RootState } from '../../store';
 
 type SourceItem = {
   id: number;
   name: string;
   link: string;
   count: number;
-  icon?: string;
+  icon: string | null;
 };
 
 type SourceListState = {
+  activeId: number | Preset | null;
   list: SourceItem[];
-  activeId: number | Preset | undefined;
-  refreshing: boolean;
+  fetchListStatus: Status;
 };
 
-type SourceCreationState = {
-  link: string;
-  name: string;
-  loading: boolean;
-  parseError: boolean;
-  step: Step | null;
+type SourceSubscribeState = {
+  subscribeLink: string;
+  subscribeName: string;
+  subscribeStep: Step | null;
+  subscribeStatus: Status;
+  subscribeError: null | string;
 };
 
-type State = SourceListState & SourceCreationState;
+export type State = SourceListState & SourceSubscribeState;
 
 const initialSourceList: SourceListState = {
   list: [],
-  activeId: undefined,
-  refreshing: false,
+  activeId: null,
+  fetchListStatus: Status.Idle,
 };
 
-const initialSourceCreationState: SourceCreationState = {
-  link: '',
-  name: '',
-  loading: false,
-  parseError: false,
-  step: null,
+const initialSourceSubscribeState: SourceSubscribeState = {
+  subscribeLink: '',
+  subscribeName: '',
+  subscribeStep: null,
+  subscribeStatus: Status.Idle,
+  subscribeError: null,
 };
 
 const initialState: State = {
   ...initialSourceList,
-  ...initialSourceCreationState,
+  ...initialSourceSubscribeState,
 };
+
+const fetchSourceListAPI = (mode: Mode) => {
+  const countType = mode === Mode.Starred ? 'starred' : 'unread';
+  return channel.getSourceList(countType);
+};
+
+export const fetchSources = createAsyncThunk(
+  'source/fetchSources',
+  (mode: Mode) => {
+    return fetchSourceListAPI(mode);
+  }
+);
+
+export const syncSources = createAsyncThunk(
+  'source/syncSources',
+  async (mode: Mode) => {
+    await channel.sync();
+    return fetchSourceListAPI(mode);
+  }
+);
+
+export const unsubscribeById = createAsyncThunk(
+  'source/unsubscribeById',
+  async (id: number) => {
+    await channel.removeSourceById(id);
+    return id;
+  }
+);
+
+export const updateSourceById = createAsyncThunk(
+  'source/updateSourceById',
+  async ({ id, name }: { id: number; name: string }) => {
+    await channel.updateSourceNameById(id, name);
+
+    return { id, name };
+  }
+);
+
+export const searchUrlForSource = createAsyncThunk<
+  string,
+  string,
+  { rejectValue: string }
+>('source/searchUrlForSource', async (link: string, thunkAPI) => {
+  const result = await channel.checkUrl(link);
+  if (!result) {
+    thunkAPI.rejectWithValue('ParseRSSFailed');
+  }
+  return result;
+});
+
+export const subscribeToSource = createAsyncThunk(
+  'source/subscribeToSource',
+  async ({ name, mode }: { name: string; mode: Mode }) => {
+    const { posts, icon, link, id } = await channel.confirm(name);
+
+    return {
+      id,
+      name,
+      link,
+      icon,
+      count: mode === Mode.Starred ? 0 : posts.length,
+    };
+  }
+);
 
 const sourceSlice = createSlice({
   name: 'source',
   initialState,
   reducers: {
-    loadAll: (state, action: PayloadAction<SourceItem[]>) => {
-      state.list = action.payload;
-    },
-    create: (state, action: PayloadAction<SourceItem>) => {
-      const { id } = action.payload;
-      state.list.push(action.payload);
-      state.activeId = id;
-    },
-    setActiveId: (
+    setCurrentSource: (
       state,
-      action: PayloadAction<number | Preset | undefined>
+      action: PayloadAction<number | Preset | null>
     ) => {
       state.activeId = action.payload;
     },
@@ -81,77 +138,91 @@ const sourceSlice = createSlice({
       if (!target) return;
       target.count = 0;
     },
-    setRefreshing: (state, action: PayloadAction<boolean>) => {
-      state.refreshing = action.payload;
+    showSubscribeBar: (state) => {
+      state.subscribeStep = Step.EnterUrl;
     },
-    updateName: (
-      state,
-      action: PayloadAction<{ id: number; name: string }>
-    ) => {
-      const target = state.list.find((x) => x.id === action.payload.id);
-      if (!target) return;
-      target.name = action.payload.name;
+    resetSubscribeError: (state) => {
+      state.subscribeError = null;
     },
-    removeById: (state, action: PayloadAction<number>) => {
-      state.list = state.list.filter((x) => x.id !== action.payload);
+    resetSubscribeState: (state) => {
+      state.subscribeStep = null;
+      state.subscribeError = null;
+      state.subscribeLink = '';
+      state.subscribeName = '';
+      state.subscribeStatus = Status.Idle;
     },
   },
+  extraReducers: (builder) =>
+    builder
+      .addCase(fetchSources.pending, (state) => {
+        state.fetchListStatus = Status.Pending;
+      })
+      .addCase(fetchSources.fulfilled, (state, action) => {
+        state.fetchListStatus = Status.Succeeded;
+        state.list = action.payload;
+      })
+      .addCase(fetchSources.rejected, (state) => {
+        state.fetchListStatus = Status.Failed;
+      })
+      .addCase(syncSources.pending, (state) => {
+        state.fetchListStatus = Status.Pending;
+      })
+      .addCase(syncSources.fulfilled, (state, action) => {
+        state.fetchListStatus = Status.Succeeded;
+        state.list = action.payload;
+      })
+      .addCase(syncSources.rejected, (state) => {
+        state.fetchListStatus = Status.Failed;
+      })
+      .addCase(unsubscribeById.fulfilled, (state, action) => {
+        state.activeId = null;
+        state.list = state.list.filter((x) => x.id !== action.payload);
+      })
+      .addCase(updateSourceById.fulfilled, (state, action) => {
+        state.activeId = null;
+        const target = state.list.find((x) => x.id === action.payload.id);
+        if (!target) return;
+        target.name = action.payload.name;
+      })
+      .addCase(searchUrlForSource.pending, (state, action) => {
+        state.subscribeLink = action.meta.arg;
+        state.subscribeStatus = Status.Pending;
+      })
+      .addCase(searchUrlForSource.fulfilled, (state, action) => {
+        state.subscribeName = action.payload;
+        state.subscribeStep = Step.EnterName;
+      })
+      .addCase(searchUrlForSource.rejected, (state, action) => {
+        state.subscribeStatus = Status.Failed;
+        if (action.payload) {
+          state.subscribeError = action.payload;
+        }
+      })
+      .addCase(subscribeToSource.fulfilled, (state, action) => {
+        const { id } = action.payload;
+        state.list.push(action.payload);
+        state.activeId = id;
+        state.subscribeStep = null;
+        state.subscribeError = null;
+        state.subscribeLink = '';
+        state.subscribeName = '';
+      }),
 });
 
 export const {
-  loadAll,
-  create,
-  setActiveId,
+  setCurrentSource,
+  resetSubscribeError,
+  resetSubscribeState,
+  showSubscribeBar,
+
   countDownOne,
   countUpOne,
   countToZero,
-  setRefreshing,
-  updateName,
-  removeById,
 } = sourceSlice.actions;
-
-export const loadSource = (mode: Mode): AppThunk => async (dispatch) => {
-  dispatch(setRefreshing(true));
-  const countType = mode === Mode.Starred ? 'starred' : 'unread';
-  const list = await channel.getSourceList(countType);
-
-  const mappedList = list.map(({ id, name, link, count, icon }) => ({
-    id,
-    icon: icon === null ? undefined : icon,
-    name,
-    link,
-    count,
-  }));
-
-  dispatch(loadAll(mappedList));
-  dispatch(setRefreshing(false));
-};
-
-export const asyncRemoveById = (id: number): AppThunk => async (dispatch) => {
-  await channel.removeSourceById(id);
-  dispatch(setActiveId());
-  dispatch(removeById(id));
-};
-
-export const asyncUpdateName = (id: number, name: string): AppThunk => async (
-  dispatch
-) => {
-  await channel.updateSourceNameById(id, name);
-  dispatch(setActiveId());
-  dispatch(updateName({ id, name }));
-};
-
-export const sync = (): AppThunk => async (dispatch, getState) => {
-  dispatch(setRefreshing(true));
-  await channel.sync();
-  const { mode } = getState();
-  await dispatch(loadSource(mode));
-  dispatch(setRefreshing(false));
-};
 
 export const sourceReducer = sourceSlice.reducer;
 
-export const selectSource = (state: RootState) => {
+export const selectSourceList = (state: RootState) => {
   const { source, mode } = state;
   const totalCount = source.list.reduce((acc, cur) => acc + cur.count, 0);
   const { list, activeId } = source;
@@ -161,9 +232,30 @@ export const selectSource = (state: RootState) => {
     totalCount,
     mode,
     list: list.filter((x) => {
-      if (mode === Mode.All) return true;
-      if (activeId === x.id) return true;
+      if (mode === Mode.All || activeId === x.id) return true;
       return x.count > 0;
     }),
+  };
+};
+
+export const selectSourceOperation = (state: RootState) => {
+  const { source, mode } = state;
+  const {
+    subscribeLink,
+    subscribeName,
+    subscribeStep,
+    subscribeStatus,
+    subscribeError,
+    fetchListStatus,
+  } = source;
+  const loading =
+    subscribeStatus === Status.Pending || fetchListStatus === Status.Pending;
+  return {
+    mode,
+    subscribeLink,
+    subscribeName,
+    subscribeStep,
+    subscribeError,
+    loading,
   };
 };

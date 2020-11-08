@@ -3,7 +3,7 @@ import { Preset } from '../../constants/Preset';
 import { LogoIcon } from '../LogoIcon';
 
 export type OverViewItemProps = {
-  activeId?: Preset | number;
+  activeId: Preset | number | null;
   target: Preset;
   count: number;
   icon: JSX.Element;

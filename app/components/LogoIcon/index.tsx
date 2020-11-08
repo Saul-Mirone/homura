@@ -5,33 +5,19 @@ import { ImageIcon } from './ImageIcon';
 export * from './IconContainer';
 export * from './ImageIcon';
 
-type ImageProps = {
-  url: string;
+type Props = {
+  url: string | null;
+  icon: JSX.Element | null;
 };
 
-type IconProps = {
-  icon: JSX.Element;
-};
-
-function isImageProps(props: ImageProps | IconProps): props is ImageProps {
-  const { url } = props as ImageProps;
-  return url !== undefined && url !== null;
-}
-
-export const LogoIcon: React.FC<ImageProps | IconProps> = (props) => {
-  if (isImageProps(props)) {
-    const { url } = props;
+export const LogoIcon: React.FC<Props> = ({ url, icon }) => {
+  if (url !== null) {
     return <ImageIcon url={url} />;
   }
 
-  const { icon } = props;
   return <div className="h-6 w-6 flex-shrink-0">{icon}</div>;
 };
 
-export const RssLogoIcon: React.FC<{ url?: string }> = ({ url }) => {
-  if (url) {
-    return <LogoIcon url={url} />;
-  }
-
-  return <LogoIcon icon={<RssIcon />} />;
+export const RssLogoIcon: React.FC<{ url: string | null }> = ({ url }) => {
+  return <LogoIcon url={url} icon={<RssIcon />} />;
 };

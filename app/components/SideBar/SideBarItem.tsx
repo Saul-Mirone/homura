@@ -12,7 +12,7 @@ export type SideBarItemProps = {
   onConfirmModify: (nextName: string) => void;
   active: boolean;
 
-  url?: string;
+  url: string | null;
   icon?: JSX.Element;
 };
 
