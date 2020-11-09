@@ -3,7 +3,6 @@ import { render } from '@testing-library/react';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
-import 'regenerator-runtime/runtime';
 import { channel } from '../../../app/channel/child';
 import { Status } from '../../../app/constants/Status';
 import { SourceList } from '../../../app/features/source/SourceList';

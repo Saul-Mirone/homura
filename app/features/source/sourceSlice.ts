@@ -130,21 +130,6 @@ const sourceSlice = createSlice({
     ) => {
       state.activeId = action.payload;
     },
-    countDownOne: (state, action: PayloadAction<number>) => {
-      const target = state.list.find((x) => x.id === action.payload);
-      if (!target) return;
-      target.count -= 1;
-    },
-    countUpOne: (state, action: PayloadAction<number>) => {
-      const target = state.list.find((x) => x.id === action.payload);
-      if (!target) return;
-      target.count += 1;
-    },
-    countToZero: (state, action: PayloadAction<number>) => {
-      const target = state.list.find((x) => x.id === action.payload);
-      if (!target) return;
-      target.count = 0;
-    },
     showSubscribeBar: (state) => {
       state.subscribeStep = Step.EnterUrl;
     },
@@ -157,6 +142,27 @@ const sourceSlice = createSlice({
       state.subscribeLink = '';
       state.subscribeName = '';
       state.subscribeStatus = Status.Idle;
+    },
+
+    // TODO: need to be reviewed
+    countDownOne: (state, action: PayloadAction<number>) => {
+      const target = state.list.find((x) => x.id === action.payload);
+      if (!target) return;
+      target.count -= 1;
+    },
+
+    // TODO: need to be reviewed
+    countUpOne: (state, action: PayloadAction<number>) => {
+      const target = state.list.find((x) => x.id === action.payload);
+      if (!target) return;
+      target.count += 1;
+    },
+
+    // TODO: need to be reviewed
+    countToZero: (state, action: PayloadAction<number>) => {
+      const target = state.list.find((x) => x.id === action.payload);
+      if (!target) return;
+      target.count = 0;
     },
   },
   extraReducers: (builder) =>
@@ -207,6 +213,7 @@ const sourceSlice = createSlice({
       })
       .addCase(subscribeToSource.fulfilled, (state, action) => {
         const { id } = action.payload;
+        state.subscribeStatus = Status.Succeeded;
         state.list.push(action.payload);
         state.activeId = id;
         state.subscribeStep = null;

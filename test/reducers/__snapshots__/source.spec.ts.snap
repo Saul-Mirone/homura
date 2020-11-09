@@ -13,14 +13,153 @@ Object {
 }
 `;
 
+exports[`reducers source should handle resetSubscribeError 1`] = `
+Object {
+  "subscribeError": null,
+}
+`;
+
+exports[`reducers source should handle resetSubscribeState 1`] = `
+Object {
+  "subscribeError": null,
+  "subscribeLink": "",
+  "subscribeName": "",
+  "subscribeStatus": 0,
+  "subscribeStep": null,
+}
+`;
+
 exports[`reducers source should handle setCurrentSource 1`] = `
 Object {
   "activeId": 1,
 }
 `;
 
+exports[`reducers source should handle showSubscribeBar 1`] = `
+Object {
+  "activeId": null,
+  "subscribeStep": 0,
+}
+`;
+
 exports[`reducers source should handle unknown action type 1`] = `
 Object {
   "subscribeStep": null,
+}
+`;
+
+exports[`reducers source thunk fetchSources should handle fetchSources.fulfilled 1`] = `
+Object {
+  "fetchListStatus": 2,
+  "list": Array [
+    Object {
+      "name": "fake-data",
+    },
+  ],
+}
+`;
+
+exports[`reducers source thunk fetchSources should handle fetchSources.pending 1`] = `
+Object {
+  "fetchListStatus": 1,
+}
+`;
+
+exports[`reducers source thunk fetchSources should handle fetchSources.rejected 1`] = `
+Object {
+  "fetchListStatus": 3,
+}
+`;
+
+exports[`reducers source thunk searchUrlForSource should handle searchUrlForSource.fulfilled 1`] = `
+Object {
+  "subscribeName": "fake-name",
+  "subscribeStatus": 0,
+  "subscribeStep": 1,
+}
+`;
+
+exports[`reducers source thunk searchUrlForSource should handle searchUrlForSource.pending 1`] = `
+Object {
+  "subscribeLink": "fake-link",
+  "subscribeStatus": 1,
+}
+`;
+
+exports[`reducers source thunk searchUrlForSource should handle searchUrlForSource.rejected 1`] = `
+Object {
+  "subscribeError": "fake-error",
+  "subscribeStatus": 3,
+}
+`;
+
+exports[`reducers source thunk subscribeToSource should handle subscribeToSource.fulfilled 1`] = `
+Object {
+  "activeId": 1,
+  "list": Array [
+    Object {
+      "id": 4,
+    },
+    Object {
+      "id": 1,
+      "name": "fake-data-1",
+    },
+  ],
+  "subscribeError": null,
+  "subscribeLink": "",
+  "subscribeName": "",
+  "subscribeStatus": 2,
+  "subscribeStep": null,
+}
+`;
+
+exports[`reducers source thunk syncSources should handle syncSources.fulfilled 1`] = `
+Object {
+  "fetchListStatus": 2,
+  "list": Array [
+    Object {
+      "name": "fake-data",
+    },
+  ],
+}
+`;
+
+exports[`reducers source thunk syncSources should handle syncSources.pending 1`] = `
+Object {
+  "fetchListStatus": 1,
+}
+`;
+
+exports[`reducers source thunk syncSources should handle syncSources.rejected 1`] = `
+Object {
+  "fetchListStatus": 3,
+}
+`;
+
+exports[`reducers source thunk unsubscribeById should handle unsubscribeById.fulfilled 1`] = `
+Object {
+  "activeId": null,
+  "list": Array [
+    Object {
+      "id": 1,
+      "name": "data-1",
+    },
+  ],
+}
+`;
+
+exports[`reducers source thunk updateSourceById should handle updateSourceById.fulfilled 1`] = `
+Object {
+  "activeId": null,
+  "list": Array [
+    Object {
+      "id": 1,
+      "name": "data-1",
+    },
+    Object {
+      "id": 2,
+      "name": "next-data-2",
+    },
+  ],
 }
 `;

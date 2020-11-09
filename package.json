@@ -151,6 +151,9 @@
     ],
     "setupFiles": [
       "./internals/scripts/CheckBuildsExist.js"
+    ],
+    "setupFilesAfterEnv": [
+      "./internals/scripts/SetupTest.js"
     ]
   },
   "devDependencies": {
