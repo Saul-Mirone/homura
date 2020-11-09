@@ -49,9 +49,16 @@ const initialState: State = {
   ...initialSourceSubscribeState,
 };
 
-const fetchSourceListAPI = (mode: Mode) => {
+const fetchSourceListAPI = async (mode: Mode) => {
   const countType = mode === Mode.Starred ? 'starred' : 'unread';
-  return channel.getSourceList(countType);
+  const data = await channel.getSourceList(countType);
+  return data.map(({ id, name, icon, link, count }) => ({
+    id,
+    name,
+    icon,
+    link,
+    count,
+  }));
 };
 
 export const fetchSources = createAsyncThunk(
