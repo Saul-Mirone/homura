@@ -83,24 +83,3 @@ exports[`Source component should match exact snapshot 1`] = `
   </div>
 </body>
 `;
-
-exports[`Test source actions should handle searchUrlForSource 1`] = `
-Array [
-  Object {
-    "meta": Object {
-      "arg": "fake-link",
-      "requestId": "fake-request-id",
-    },
-    "payload": undefined,
-    "type": "source/searchUrlForSource/pending",
-  },
-  Object {
-    "meta": Object {
-      "arg": "fake-link",
-      "requestId": "fake-request-id",
-    },
-    "payload": "name",
-    "type": "source/searchUrlForSource/fulfilled",
-  },
-]
-`;

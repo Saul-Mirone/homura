@@ -93,17 +93,16 @@ export const updateSourceById = createAsyncThunk(
   }
 );
 
-export const searchUrlForSource = createAsyncThunk<
-  string,
-  string,
-  { rejectValue: string }
->('source/searchUrlForSource', async (link: string, thunkAPI) => {
-  const result = await channel.checkUrl(link);
-  if (!result) {
-    thunkAPI.rejectWithValue('ParseRSSFailed');
+export const searchUrlForSource = createAsyncThunk(
+  'source/searchUrlForSource',
+  async (link: string) => {
+    const result = await channel.checkUrl(link);
+    if (!result) {
+      throw new Error('ParseRSSFailed');
+    }
+    return result;
   }
-  return result;
-});
+);
 
 export const subscribeToSource = createAsyncThunk(
   'source/subscribeToSource',
@@ -207,9 +206,7 @@ const sourceSlice = createSlice({
       })
       .addCase(searchUrlForSource.rejected, (state, action) => {
         state.subscribeStatus = Status.Failed;
-        if (action.payload) {
-          state.subscribeError = action.payload;
-        }
+        state.subscribeError = action.error.message ?? 'Unknown Error';
       })
       .addCase(subscribeToSource.fulfilled, (state, action) => {
         const { id } = action.payload;

@@ -3,14 +3,9 @@ import { render } from '@testing-library/react';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { channel } from '../../../app/channel/child';
 import { Status } from '../../../app/constants/Status';
 import { SourceList } from '../../../app/features/source/SourceList';
 import * as sourceSlice from '../../../app/features/source/sourceSlice';
-import { mockStore } from '../../test-tools/mockStore';
-
-jest.mock('../../../app/channel/child');
-const mockChannel = (channel as unknown) as jest.Mocked<typeof channel>;
 
 function setup(
   preloadedState: {
@@ -52,22 +47,5 @@ describe('Source component', () => {
     const { wrapper } = setup();
 
     expect(wrapper.baseElement).toMatchSnapshot();
-  });
-});
-
-describe('Test source actions', () => {
-  it('should handle searchUrlForSource', async () => {
-    const store = mockStore();
-    mockChannel.checkUrl.mockResolvedValue('name');
-    await store.dispatch(sourceSlice.searchUrlForSource('fake-link'));
-
-    expect(
-      store.getActions().map((x) => {
-        if (x.meta) {
-          x.meta.requestId = 'fake-request-id';
-        }
-        return x;
-      })
-    ).toMatchSnapshot();
   });
 });

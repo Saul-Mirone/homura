@@ -1,5 +1,10 @@
 import { AnyAction } from 'redux';
+
+// organize-imports-ignore
+import { mockChannel } from '../test-tools/mockChannel';
+
 import { Step } from '../../app/components/SideBar/BottomBar';
+import { Mode } from '../../app/constants/Mode';
 import { Status } from '../../app/constants/Status';
 import {
   fetchSources,
@@ -15,6 +20,8 @@ import {
   unsubscribeById,
   updateSourceById,
 } from '../../app/features/source/sourceSlice';
+import { formatActions } from '../test-tools/formatActions';
+import { mockStore } from '../test-tools/mockStore';
 
 describe('reducers', () => {
   describe('source', () => {
@@ -72,6 +79,30 @@ describe('reducers', () => {
 
     describe('thunk', () => {
       describe('fetchSources', () => {
+        it('should action list match snapshot', async () => {
+          const store = mockStore();
+          mockChannel.getSourceList.mockResolvedValue([
+            {
+              id: 1,
+              icon: null,
+              name: 'data-1',
+              link: 'link-1',
+              sourceUrl: 'source-url-1',
+              count: 2,
+            },
+            {
+              id: 2,
+              icon: 'test-icon',
+              name: 'data-2',
+              link: 'link-2',
+              sourceUrl: 'source-url-2',
+              count: 10,
+            },
+          ]);
+          await store.dispatch(fetchSources(Mode.All));
+          expect(formatActions(store)).toMatchSnapshot();
+        });
+
         it('should handle fetchSources.pending', () => {
           expect(
             sourceReducer(
@@ -118,6 +149,30 @@ describe('reducers', () => {
       });
 
       describe('syncSources', () => {
+        it('should action list match snapshot', async () => {
+          const store = mockStore();
+          mockChannel.getSourceList.mockResolvedValue([
+            {
+              id: 1,
+              icon: null,
+              name: 'data-1-sync',
+              link: 'link-1-sync',
+              sourceUrl: 'source-url-1',
+              count: 2,
+            },
+            {
+              id: 2,
+              icon: 'test-icon',
+              name: 'data-2-sync',
+              link: 'link-2-sync',
+              sourceUrl: 'source-url-2',
+              count: 10,
+            },
+          ]);
+          await store.dispatch(syncSources(Mode.All));
+          expect(formatActions(store)).toMatchSnapshot();
+        });
+
         it('should handle syncSources.pending', () => {
           expect(
             sourceReducer(
@@ -164,6 +219,12 @@ describe('reducers', () => {
       });
 
       describe('unsubscribeById', () => {
+        it('should action list match snapshot', async () => {
+          const store = mockStore();
+          await store.dispatch(unsubscribeById(1));
+          expect(formatActions(store)).toMatchSnapshot();
+        });
+
         it('should handle unsubscribeById.fulfilled', () => {
           expect(
             sourceReducer(
@@ -184,6 +245,12 @@ describe('reducers', () => {
       });
 
       describe('updateSourceById', () => {
+        it('should action list match snapshot', async () => {
+          const store = mockStore();
+          await store.dispatch(updateSourceById({ id: 1, name: 'next-name' }));
+          expect(formatActions(store)).toMatchSnapshot();
+        });
+
         it('should handle updateSourceById.fulfilled', () => {
           expect(
             sourceReducer(
@@ -207,6 +274,19 @@ describe('reducers', () => {
       });
 
       describe('searchUrlForSource', () => {
+        it('should action list match snapshot', async () => {
+          const store = mockStore();
+          await store.dispatch(searchUrlForSource('fake-link'));
+          expect(formatActions(store)).toMatchSnapshot();
+        });
+
+        it('should rejected action list match snapshot', async () => {
+          const store = mockStore();
+          mockChannel.checkUrl.mockResolvedValue('');
+          await store.dispatch(searchUrlForSource('fake-link'));
+          expect(formatActions(store)).toMatchSnapshot();
+        });
+
         it('should handle searchUrlForSource.pending', () => {
           expect(
             sourceReducer(
@@ -248,7 +328,24 @@ describe('reducers', () => {
               } as State,
               {
                 type: searchUrlForSource.rejected,
-                payload: 'fake-error',
+                error: {
+                  message: 'fake-error',
+                },
+              }
+            )
+          ).toMatchSnapshot();
+        });
+
+        it('should handle searchUrlForSource.rejected even when no message', () => {
+          expect(
+            sourceReducer(
+              {
+                subscribeError: null,
+                subscribeStatus: Status.Idle,
+              } as State,
+              {
+                type: searchUrlForSource.rejected,
+                error: {},
               }
             )
           ).toMatchSnapshot();
@@ -256,6 +353,38 @@ describe('reducers', () => {
       });
 
       describe('subscribeToSource', () => {
+        it('should action list match snapshot', async () => {
+          const store = mockStore();
+          mockChannel.confirm.mockResolvedValue({
+            id: 4,
+            name: '',
+            sourceUrl: 'fake-url',
+            posts: Array(5).fill({}),
+            link: 'fake-link',
+            icon: null,
+          });
+          await store.dispatch(
+            subscribeToSource({ name: 'fake-name', mode: Mode.All })
+          );
+          expect(formatActions(store)).toMatchSnapshot();
+        });
+
+        it('should action list match snapshot when mode is Starred', async () => {
+          const store = mockStore();
+          mockChannel.confirm.mockResolvedValue({
+            id: 4,
+            name: '',
+            sourceUrl: 'fake-url',
+            posts: Array(5).fill({}),
+            link: 'fake-link',
+            icon: null,
+          });
+          await store.dispatch(
+            subscribeToSource({ name: 'fake-name', mode: Mode.Starred })
+          );
+          expect(formatActions(store)).toMatchSnapshot();
+        });
+
         it('should handle subscribeToSource.fulfilled', () => {
           expect(
             sourceReducer(
