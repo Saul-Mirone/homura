@@ -142,6 +142,9 @@
       "tsx",
       "json"
     ],
+    "transform": {
+      "\\.[jt]sx?$": "babel-jest"
+    },
     "moduleDirectories": [
       "node_modules",
       "app/node_modules"
@@ -177,6 +180,8 @@
     "@babel/register": "^7.10.5",
     "@tailwindcss/typography": "^0.2.0",
     "@teamsupercell/typings-for-css-modules-loader": "^2.2.1",
+    "@testing-library/jest-dom": "^5.11.5",
+    "@testing-library/react": "^11.1.1",
     "@types/enzyme": "^3.10.5",
     "@types/enzyme-adapter-react-16": "^1.0.6",
     "@types/history": "^4.7.7",

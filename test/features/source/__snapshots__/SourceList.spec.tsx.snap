@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Source component should match exact snapshot 1`] = `
+<body>
+  <div>
+    <div
+      class="w-1/6 bg-gray-700 flex flex-col h-screen select-none"
+      role="presentation"
+    >
+      <div
+        class="flex-1 thin-scroll relative"
+      >
+        <div
+          class=" leading-8 text-gray-300 flex items-center justify-between cursor-pointer px-3"
+          role="button"
+          tabindex="0"
+        >
+          <div
+            class="flex items-center overflow-x-hidden"
+          >
+            <div
+              class="h-6 w-6 flex-shrink-0"
+            >
+              <svg
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M4 6h16M4 10h16M4 14h16M4 18h16"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                />
+              </svg>
+            </div>
+            <div
+              class="text-xs ml-2 truncate"
+            >
+              All Items
+            </div>
+          </div>
+        </div>
+        <div
+          class=" leading-8 text-gray-300 flex items-center justify-between cursor-pointer px-3"
+          role="button"
+          tabindex="0"
+        >
+          <div
+            class="flex items-center overflow-x-hidden"
+          >
+            <div
+              class="h-6 w-6 flex-shrink-0"
+            >
+              <svg
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                />
+              </svg>
+            </div>
+            <div
+              class="text-xs ml-2 truncate"
+            >
+              Archive
+            </div>
+          </div>
+        </div>
+        <div
+          class="pt-10"
+        />
+      </div>
+      <div />
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Test source actions should handle searchUrlForSource 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "arg": "fake-link",
+      "requestId": "fake-request-id",
+    },
+    "payload": undefined,
+    "type": "source/searchUrlForSource/pending",
+  },
+  Object {
+    "meta": Object {
+      "arg": "fake-link",
+      "requestId": "fake-request-id",
+    },
+    "payload": "name",
+    "type": "source/searchUrlForSource/fulfilled",
+  },
+]
+`;

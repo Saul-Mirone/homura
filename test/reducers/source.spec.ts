@@ -1,4 +1,5 @@
 import { AnyAction } from 'redux';
+import 'regenerator-runtime/runtime';
 import {
   setCurrentSource,
   sourceReducer,

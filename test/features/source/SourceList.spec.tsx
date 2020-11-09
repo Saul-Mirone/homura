@@ -1,10 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import Enzyme, { mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { render } from '@testing-library/react';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
-import renderer from 'react-test-renderer';
 import 'regenerator-runtime/runtime';
 import { channel } from '../../../app/channel/child';
 import { Status } from '../../../app/constants/Status';
@@ -14,8 +12,6 @@ import { mockStore } from '../../test-tools/mockStore';
 
 jest.mock('../../../app/channel/child');
 const mockChannel = (channel as unknown) as jest.Mocked<typeof channel>;
-
-Enzyme.configure({ adapter: new Adapter() });
 
 function setup(
   preloadedState: {
@@ -38,36 +34,25 @@ function setup(
     preloadedState,
   });
 
-  const getWrapper = () =>
-    mount(
-      <Provider store={store}>
-        <Router>
-          <SourceList bottom={<div />} />
-        </Router>
-      </Provider>
-    );
-  const component = getWrapper();
+  const wrapper = render(
+    <Provider store={store}>
+      <Router>
+        <SourceList bottom={<div />} />
+      </Router>
+    </Provider>
+  );
+
   return {
     store,
-    component,
-    buttons: component.find('IconContainer'),
+    wrapper,
   };
 }
 
 describe('Source component', () => {
   it('should match exact snapshot', () => {
-    const { store } = setup();
-    const tree = renderer
-      .create(
-        <Provider store={store}>
-          <Router>
-            <SourceList bottom={<div />} />
-          </Router>
-        </Provider>
-      )
-      .toJSON();
+    const { wrapper } = setup();
 
-    expect(tree).toMatchSnapshot();
+    expect(wrapper.baseElement).toMatchSnapshot();
   });
 });
 
@@ -77,6 +62,13 @@ describe('Test source actions', () => {
     mockChannel.checkUrl.mockResolvedValue('name');
     await store.dispatch(sourceSlice.searchUrlForSource('fake-link'));
 
-    expect(store.getActions()).toMatchSnapshot();
+    expect(
+      store.getActions().map((x) => {
+        if (x.meta) {
+          x.meta.requestId = 'fake-request-id';
+        }
+        return x;
+      })
+    ).toMatchSnapshot();
   });
 });

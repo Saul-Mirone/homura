@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`reducers source should handle initial state 1`] = `
+Object {
+  "activeId": null,
+  "fetchListStatus": 0,
+  "list": Array [],
+  "subscribeError": null,
+  "subscribeLink": "",
+  "subscribeName": "",
+  "subscribeStatus": 0,
+  "subscribeStep": null,
+}
+`;
+
+exports[`reducers source should handle setCurrentSource 1`] = `
+Object {
+  "activeId": 1,
+}
+`;
+
+exports[`reducers source should handle unknown action type 1`] = `
+Object {
+  "subscribeStep": null,
+}
+`;
