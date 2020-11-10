@@ -3,7 +3,8 @@ import { Preset } from '../../constants/Preset';
 import { LogoIcon } from '../LogoIcon';
 
 export type OverViewItemProps = {
-  activeId?: Preset | number;
+  testId?: string;
+  activeId: Preset | number | null;
   target: Preset;
   count: number;
   icon: JSX.Element;
@@ -11,6 +12,7 @@ export type OverViewItemProps = {
 };
 
 export const OverviewItem: React.FC<OverViewItemProps> = ({
+  testId,
   activeId,
   target,
   icon,
@@ -19,6 +21,7 @@ export const OverviewItem: React.FC<OverViewItemProps> = ({
 }) => (
   <div
     role="button"
+    data-testid={testId}
     tabIndex={0}
     className={`${
       activeId === target ? 'bg-gray-600' : ''
@@ -30,7 +33,7 @@ export const OverviewItem: React.FC<OverViewItemProps> = ({
     }}
   >
     <div className="flex items-center overflow-x-hidden">
-      <LogoIcon icon={icon} />
+      <LogoIcon url={null} icon={icon} />
       <div className="text-xs ml-2 truncate">{target}</div>
     </div>
     {count > 0 && <div className="text-xs text-gray-500">{count}</div>}

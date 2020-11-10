@@ -142,12 +142,18 @@
       "tsx",
       "json"
     ],
+    "transform": {
+      "\\.[jt]sx?$": "babel-jest"
+    },
     "moduleDirectories": [
       "node_modules",
       "app/node_modules"
     ],
     "setupFiles": [
       "./internals/scripts/CheckBuildsExist.js"
+    ],
+    "setupFilesAfterEnv": [
+      "./internals/scripts/SetupTest.js"
     ]
   },
   "devDependencies": {
@@ -177,8 +183,8 @@
     "@babel/register": "^7.10.5",
     "@tailwindcss/typography": "^0.2.0",
     "@teamsupercell/typings-for-css-modules-loader": "^2.2.1",
-    "@types/enzyme": "^3.10.5",
-    "@types/enzyme-adapter-react-16": "^1.0.6",
+    "@testing-library/jest-dom": "^5.11.5",
+    "@testing-library/react": "^11.1.1",
     "@types/history": "^4.7.7",
     "@types/jest": "^26.0.10",
     "@types/luxon": "^1.25.0",
@@ -215,9 +221,6 @@
     "electron-builder": "^22.3.6",
     "electron-devtools-installer": "^2.2.4",
     "electron-rebuild": "^1.10.0",
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.3",
-    "enzyme-to-json": "^3.5.0",
     "eslint": "^7.5.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-airbnb-typescript": "^9.0.0",

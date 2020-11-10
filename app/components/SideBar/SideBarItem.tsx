@@ -1,10 +1,10 @@
+import { remote } from 'electron';
 import React from 'react';
 import { CheckCircleFilledIcon, RssIcon } from '../Icon';
 import { IconContainerSmall, LogoIcon } from '../LogoIcon';
 
-const { remote } = require('electron');
-
 export type SideBarItemProps = {
+  id: number;
   name: string;
   count: number;
   onClick: () => void;
@@ -12,11 +12,12 @@ export type SideBarItemProps = {
   onConfirmModify: (nextName: string) => void;
   active: boolean;
 
-  url?: string;
+  url: string | null;
   icon?: JSX.Element;
 };
 
 export const SideBarItem: React.FC<SideBarItemProps> = ({
+  id,
   active,
   onClick,
   onUnsubscribe,
@@ -32,9 +33,8 @@ export const SideBarItem: React.FC<SideBarItemProps> = ({
 
   React.useEffect(() => {
     const { current } = divRef;
-    if (!current) return;
 
-    current.addEventListener('contextmenu', (e) => {
+    const listener = (e: MouseEvent) => {
       e.preventDefault();
       const { Menu, MenuItem } = remote;
       const menu = new Menu();
@@ -45,13 +45,21 @@ export const SideBarItem: React.FC<SideBarItemProps> = ({
         new MenuItem({ label: 'edit', click: () => setIsEditing(true) })
       );
       menu.popup();
-    });
+    };
+
+    current?.addEventListener('contextmenu', listener);
+
+    return () => {
+      current?.removeEventListener('contextmenu', listener);
+    };
   }, [onUnsubscribe]);
+
   return (
     <div
       ref={divRef}
       role="button"
-      tabIndex={0}
+      tabIndex={id}
+      data-testid={`source-list-item-${id}`}
       className={`${
         active ? 'bg-gray-600' : ''
       } leading-8 text-gray-300 flex items-center justify-between cursor-pointer px-3`}
@@ -67,6 +75,7 @@ export const SideBarItem: React.FC<SideBarItemProps> = ({
         {isEditing ? (
           <>
             <input
+              data-testid={`source-list-item-${id}:edit-input`}
               className="text-xs text-gray-800 px-2 ml-2 h-5"
               value={editedName}
               onChange={(e) => setEditedName(e.target.value)}
@@ -77,6 +86,7 @@ export const SideBarItem: React.FC<SideBarItemProps> = ({
             />
             <div className="transition duration-300">
               <IconContainerSmall
+                testId={`source-list-item-${id}:edit-button`}
                 className="bg-white text-gray-700 hover:text-gray-300 hover:bg-transparent"
                 onClick={() => {
                   onConfirmModify(editedName);

@@ -1,0 +1,418 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`reducers source should handle initial state 1`] = `
+Object {
+  "activeId": null,
+  "fetchListStatus": 0,
+  "list": Array [],
+  "subscribeError": null,
+  "subscribeLink": "",
+  "subscribeName": "",
+  "subscribeStatus": 0,
+  "subscribeStep": null,
+}
+`;
+
+exports[`reducers source should handle resetSubscribeError 1`] = `
+Object {
+  "subscribeError": null,
+}
+`;
+
+exports[`reducers source should handle resetSubscribeState 1`] = `
+Object {
+  "subscribeError": null,
+  "subscribeLink": "",
+  "subscribeName": "",
+  "subscribeStatus": 0,
+  "subscribeStep": null,
+}
+`;
+
+exports[`reducers source should handle setCurrentSource 1`] = `
+Object {
+  "activeId": 1,
+}
+`;
+
+exports[`reducers source should handle showSubscribeBar 1`] = `
+Object {
+  "activeId": null,
+  "subscribeStatus": 0,
+  "subscribeStep": 0,
+}
+`;
+
+exports[`reducers source should handle unknown action type 1`] = `
+Object {
+  "subscribeStep": null,
+}
+`;
+
+exports[`reducers source thunk fetchSources should action list match snapshot 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "arg": 0,
+      "requestId": "fake-request-id",
+    },
+    "payload": undefined,
+    "type": "source/fetchSources/pending",
+  },
+  Object {
+    "meta": Object {
+      "arg": 0,
+      "requestId": "fake-request-id",
+    },
+    "payload": Array [
+      Object {
+        "count": 2,
+        "icon": null,
+        "id": 1,
+        "link": "link-1",
+        "name": "data-1",
+      },
+      Object {
+        "count": 10,
+        "icon": "test-icon",
+        "id": 2,
+        "link": "link-2",
+        "name": "data-2",
+      },
+    ],
+    "type": "source/fetchSources/fulfilled",
+  },
+]
+`;
+
+exports[`reducers source thunk fetchSources should handle fetchSources.fulfilled 1`] = `
+Object {
+  "fetchListStatus": 2,
+  "list": Array [
+    Object {
+      "name": "fake-data",
+    },
+  ],
+}
+`;
+
+exports[`reducers source thunk fetchSources should handle fetchSources.pending 1`] = `
+Object {
+  "fetchListStatus": 1,
+}
+`;
+
+exports[`reducers source thunk fetchSources should handle fetchSources.rejected 1`] = `
+Object {
+  "fetchListStatus": 3,
+}
+`;
+
+exports[`reducers source thunk searchUrlForSource should action list match snapshot 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "arg": "fake-link",
+      "requestId": "fake-request-id",
+    },
+    "payload": undefined,
+    "type": "source/searchUrlForSource/pending",
+  },
+  Object {
+    "error": Object {
+      "message": "ParseRSSFailed",
+      "name": "Error",
+      "stack": "fake-stack",
+    },
+    "meta": Object {
+      "aborted": false,
+      "arg": "fake-link",
+      "condition": false,
+      "requestId": "fake-request-id",
+    },
+    "payload": undefined,
+    "type": "source/searchUrlForSource/rejected",
+  },
+]
+`;
+
+exports[`reducers source thunk searchUrlForSource should handle searchUrlForSource.fulfilled 1`] = `
+Object {
+  "subscribeName": "fake-name",
+  "subscribeStatus": 0,
+  "subscribeStep": 1,
+}
+`;
+
+exports[`reducers source thunk searchUrlForSource should handle searchUrlForSource.pending 1`] = `
+Object {
+  "subscribeLink": "fake-link",
+  "subscribeStatus": 1,
+}
+`;
+
+exports[`reducers source thunk searchUrlForSource should handle searchUrlForSource.rejected 1`] = `
+Object {
+  "subscribeError": "fake-error",
+  "subscribeStatus": 3,
+}
+`;
+
+exports[`reducers source thunk searchUrlForSource should handle searchUrlForSource.rejected even when no message 1`] = `
+Object {
+  "subscribeError": "Unknown Error",
+  "subscribeStatus": 3,
+}
+`;
+
+exports[`reducers source thunk searchUrlForSource should rejected action list match snapshot 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "arg": "fake-link",
+      "requestId": "fake-request-id",
+    },
+    "payload": undefined,
+    "type": "source/searchUrlForSource/pending",
+  },
+  Object {
+    "error": Object {
+      "message": "ParseRSSFailed",
+      "name": "Error",
+      "stack": "fake-stack",
+    },
+    "meta": Object {
+      "aborted": false,
+      "arg": "fake-link",
+      "condition": false,
+      "requestId": "fake-request-id",
+    },
+    "payload": undefined,
+    "type": "source/searchUrlForSource/rejected",
+  },
+]
+`;
+
+exports[`reducers source thunk subscribeToSource should action list match snapshot 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "arg": Object {
+        "mode": 0,
+        "name": "fake-name",
+      },
+      "requestId": "fake-request-id",
+    },
+    "payload": undefined,
+    "type": "source/subscribeToSource/pending",
+  },
+  Object {
+    "meta": Object {
+      "arg": Object {
+        "mode": 0,
+        "name": "fake-name",
+      },
+      "requestId": "fake-request-id",
+    },
+    "payload": Object {
+      "count": 5,
+      "icon": null,
+      "id": 4,
+      "link": "fake-link",
+      "name": "fake-name",
+    },
+    "type": "source/subscribeToSource/fulfilled",
+  },
+]
+`;
+
+exports[`reducers source thunk subscribeToSource should action list match snapshot when mode is Starred 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "arg": Object {
+        "mode": 2,
+        "name": "fake-name",
+      },
+      "requestId": "fake-request-id",
+    },
+    "payload": undefined,
+    "type": "source/subscribeToSource/pending",
+  },
+  Object {
+    "meta": Object {
+      "arg": Object {
+        "mode": 2,
+        "name": "fake-name",
+      },
+      "requestId": "fake-request-id",
+    },
+    "payload": Object {
+      "count": 0,
+      "icon": null,
+      "id": 4,
+      "link": "fake-link",
+      "name": "fake-name",
+    },
+    "type": "source/subscribeToSource/fulfilled",
+  },
+]
+`;
+
+exports[`reducers source thunk subscribeToSource should handle subscribeToSource.fulfilled 1`] = `
+Object {
+  "activeId": 1,
+  "list": Array [
+    Object {
+      "id": 4,
+    },
+    Object {
+      "id": 1,
+      "name": "fake-data-1",
+    },
+  ],
+  "subscribeError": null,
+  "subscribeLink": "",
+  "subscribeName": "",
+  "subscribeStatus": 2,
+  "subscribeStep": null,
+}
+`;
+
+exports[`reducers source thunk syncSources should action list match snapshot 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "arg": 0,
+      "requestId": "fake-request-id",
+    },
+    "payload": undefined,
+    "type": "source/syncSources/pending",
+  },
+  Object {
+    "meta": Object {
+      "arg": 0,
+      "requestId": "fake-request-id",
+    },
+    "payload": Array [
+      Object {
+        "count": 2,
+        "icon": null,
+        "id": 1,
+        "link": "link-1-sync",
+        "name": "data-1-sync",
+      },
+      Object {
+        "count": 10,
+        "icon": "test-icon",
+        "id": 2,
+        "link": "link-2-sync",
+        "name": "data-2-sync",
+      },
+    ],
+    "type": "source/syncSources/fulfilled",
+  },
+]
+`;
+
+exports[`reducers source thunk syncSources should handle syncSources.fulfilled 1`] = `
+Object {
+  "fetchListStatus": 2,
+  "list": Array [
+    Object {
+      "name": "fake-data",
+    },
+  ],
+}
+`;
+
+exports[`reducers source thunk syncSources should handle syncSources.pending 1`] = `
+Object {
+  "fetchListStatus": 1,
+}
+`;
+
+exports[`reducers source thunk syncSources should handle syncSources.rejected 1`] = `
+Object {
+  "fetchListStatus": 3,
+}
+`;
+
+exports[`reducers source thunk unsubscribeById should action list match snapshot 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "arg": 1,
+      "requestId": "fake-request-id",
+    },
+    "payload": undefined,
+    "type": "source/unsubscribeById/pending",
+  },
+  Object {
+    "meta": Object {
+      "arg": 1,
+      "requestId": "fake-request-id",
+    },
+    "payload": 1,
+    "type": "source/unsubscribeById/fulfilled",
+  },
+]
+`;
+
+exports[`reducers source thunk unsubscribeById should handle unsubscribeById.fulfilled 1`] = `
+Object {
+  "activeId": null,
+  "list": Array [
+    Object {
+      "id": 1,
+      "name": "data-1",
+    },
+  ],
+}
+`;
+
+exports[`reducers source thunk updateSourceById should action list match snapshot 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "arg": Object {
+        "id": 1,
+        "name": "next-name",
+      },
+      "requestId": "fake-request-id",
+    },
+    "payload": undefined,
+    "type": "source/updateSourceById/pending",
+  },
+  Object {
+    "meta": Object {
+      "arg": Object {
+        "id": 1,
+        "name": "next-name",
+      },
+      "requestId": "fake-request-id",
+    },
+    "payload": Object {
+      "id": 1,
+      "name": "next-name",
+    },
+    "type": "source/updateSourceById/fulfilled",
+  },
+]
+`;
+
+exports[`reducers source thunk updateSourceById should handle updateSourceById.fulfilled 1`] = `
+Object {
+  "activeId": null,
+  "list": Array [
+    Object {
+      "id": 1,
+      "name": "data-1",
+    },
+    Object {
+      "id": 2,
+      "name": "next-data-2",
+    },
+  ],
+}
+`;
