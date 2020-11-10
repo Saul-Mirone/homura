@@ -71,7 +71,7 @@ function setup(
   };
 }
 
-describe('Source component', () => {
+describe('SourceList component', () => {
   it('should match snapshot when list is empty', () => {
     const { wrapper } = setup();
 

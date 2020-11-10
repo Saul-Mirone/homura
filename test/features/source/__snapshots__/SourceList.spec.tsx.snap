@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Source component should match snapshot when list is empty 1`] = `
+exports[`SourceList component should match snapshot when list is empty 1`] = `
 <body>
   <div>
     <div
@@ -86,7 +86,7 @@ exports[`Source component should match snapshot when list is empty 1`] = `
 </body>
 `;
 
-exports[`Source component should match snapshot when list is not empty 1`] = `
+exports[`SourceList component should match snapshot when list is not empty 1`] = `
 <body>
   <div>
     <div
