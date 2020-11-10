@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Source component should match exact snapshot 1`] = `
+exports[`Source component should match snapshot when list is empty 1`] = `
 <body>
   <div>
     <div
@@ -12,6 +12,7 @@ exports[`Source component should match exact snapshot 1`] = `
       >
         <div
           class=" leading-8 text-gray-300 flex items-center justify-between cursor-pointer px-3"
+          data-testid="source-list-preset-all"
           role="button"
           tabindex="0"
         >
@@ -44,6 +45,7 @@ exports[`Source component should match exact snapshot 1`] = `
         </div>
         <div
           class=" leading-8 text-gray-300 flex items-center justify-between cursor-pointer px-3"
+          data-testid="source-list-preset-archive"
           role="button"
           tabindex="0"
         >
@@ -77,6 +79,164 @@ exports[`Source component should match exact snapshot 1`] = `
         <div
           class="pt-10"
         />
+      </div>
+      <div />
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Source component should match snapshot when list is not empty 1`] = `
+<body>
+  <div>
+    <div
+      class="w-1/6 bg-gray-700 flex flex-col h-screen select-none"
+      role="presentation"
+    >
+      <div
+        class="flex-1 thin-scroll relative"
+      >
+        <div
+          class=" leading-8 text-gray-300 flex items-center justify-between cursor-pointer px-3"
+          data-testid="source-list-preset-all"
+          role="button"
+          tabindex="0"
+        >
+          <div
+            class="flex items-center overflow-x-hidden"
+          >
+            <div
+              class="h-6 w-6 flex-shrink-0"
+            >
+              <svg
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M4 6h16M4 10h16M4 14h16M4 18h16"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                />
+              </svg>
+            </div>
+            <div
+              class="text-xs ml-2 truncate"
+            >
+              All Items
+            </div>
+          </div>
+          <div
+            class="text-xs text-gray-500"
+          >
+            24
+          </div>
+        </div>
+        <div
+          class=" leading-8 text-gray-300 flex items-center justify-between cursor-pointer px-3"
+          data-testid="source-list-preset-archive"
+          role="button"
+          tabindex="0"
+        >
+          <div
+            class="flex items-center overflow-x-hidden"
+          >
+            <div
+              class="h-6 w-6 flex-shrink-0"
+            >
+              <svg
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                />
+              </svg>
+            </div>
+            <div
+              class="text-xs ml-2 truncate"
+            >
+              Archive
+            </div>
+          </div>
+        </div>
+        <div
+          class="pt-10"
+        />
+        <div
+          class=" leading-8 text-gray-300 flex items-center justify-between cursor-pointer px-3"
+          data-testid="source-list-item-1"
+          role="button"
+          tabindex="1"
+        >
+          <div
+            class="flex items-center overflow-x-hidden"
+          >
+            <div
+              class="h-6 w-6 flex-shrink-0"
+            >
+              <svg
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6 5c7.18 0 13 5.82 13 13M6 11a7 7 0 017 7m-6 0a1 1 0 11-2 0 1 1 0 012 0z"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                />
+              </svg>
+            </div>
+            <div
+              class="text-xs ml-2 truncate"
+            >
+              data-1
+            </div>
+          </div>
+          <div
+            class="text-xs text-gray-500"
+          >
+            24
+          </div>
+        </div>
+        <div
+          class="bg-gray-600 leading-8 text-gray-300 flex items-center justify-between cursor-pointer px-3"
+          data-testid="source-list-item-2"
+          role="button"
+          tabindex="2"
+        >
+          <div
+            class="flex items-center overflow-x-hidden"
+          >
+            <div
+              class="w-6 h-6 flex justify-center items-center bg-white rounded flex-shrink-0"
+            >
+              <div
+                class="w-4 h-4"
+              >
+                <img
+                  alt="icon"
+                  class="object-cover w-full h-full"
+                  src="fake-icon-url"
+                />
+              </div>
+            </div>
+            <div
+              class="text-xs ml-2 truncate"
+            >
+              data-2
+            </div>
+          </div>
+        </div>
       </div>
       <div />
     </div>

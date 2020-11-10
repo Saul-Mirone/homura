@@ -38,6 +38,7 @@ Object {
 exports[`reducers source should handle showSubscribeBar 1`] = `
 Object {
   "activeId": null,
+  "subscribeStatus": 0,
   "subscribeStep": 0,
 }
 `;

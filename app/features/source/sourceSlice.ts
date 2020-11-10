@@ -131,6 +131,7 @@ const sourceSlice = createSlice({
     },
     showSubscribeBar: (state) => {
       state.subscribeStep = Step.EnterUrl;
+      state.subscribeStatus = Status.Idle;
     },
     resetSubscribeError: (state) => {
       state.subscribeError = null;

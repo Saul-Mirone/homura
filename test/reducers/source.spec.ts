@@ -40,9 +40,12 @@ describe('reducers', () => {
 
     it('should handle showSubscribeBar', () => {
       expect(
-        sourceReducer({ activeId: null } as State, {
-          type: showSubscribeBar,
-        })
+        sourceReducer(
+          { activeId: null, subscribeStatus: Status.Succeeded } as State,
+          {
+            type: showSubscribeBar,
+          }
+        )
       ).toMatchSnapshot();
     });
 

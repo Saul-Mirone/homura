@@ -37,17 +37,16 @@ export const SourceList: React.FC<{ bottom: JSX.Element }> = ({ bottom }) => {
     >
       {list.map(({ id, name, count, icon }) => (
         <SideBarItem
-          onConfirmModify={(nextName) => {
-            dispatch(updateSourceById({ id, name: nextName }));
-          }}
-          onUnsubscribe={() => {
-            dispatch(unsubscribeById(id));
-          }}
           key={id.toString()}
+          id={id}
           url={icon}
           name={name}
           count={count}
           active={id === activeId}
+          onConfirmModify={(nextName) =>
+            dispatch(updateSourceById({ id, name: nextName }))
+          }
+          onUnsubscribe={() => dispatch(unsubscribeById(id))}
           onClick={() => dispatch(setCurrentSource(id))}
         />
       ))}

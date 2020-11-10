@@ -1,12 +1,21 @@
 import React from 'react';
 
 export const IconContainerSmall: React.FC<{
+  testId?: string;
   className?: string;
   size?: number;
   onClick?: () => void;
   disabled?: boolean;
-}> = ({ children, onClick, size = 5, disabled = false, className = '' }) => (
+}> = ({
+  children,
+  testId,
+  onClick,
+  size = 5,
+  disabled = false,
+  className = '',
+}) => (
   <div
+    data-testid={testId}
     role="button"
     tabIndex={0}
     className={`w-${size} h-${size} m-auto ${

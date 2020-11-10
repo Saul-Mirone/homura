@@ -3,6 +3,7 @@ import { Preset } from '../../constants/Preset';
 import { LogoIcon } from '../LogoIcon';
 
 export type OverViewItemProps = {
+  testId?: string;
   activeId: Preset | number | null;
   target: Preset;
   count: number;
@@ -11,6 +12,7 @@ export type OverViewItemProps = {
 };
 
 export const OverviewItem: React.FC<OverViewItemProps> = ({
+  testId,
   activeId,
   target,
   icon,
@@ -19,6 +21,7 @@ export const OverviewItem: React.FC<OverViewItemProps> = ({
 }) => (
   <div
     role="button"
+    data-testid={testId}
     tabIndex={0}
     className={`${
       activeId === target ? 'bg-gray-600' : ''
