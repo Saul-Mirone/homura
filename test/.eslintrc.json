@@ -1,9 +1,13 @@
 {
-  "extends": "plugin:testcafe/recommended",
+  "extends": [
+    "plugin:testcafe/recommended",
+    "plugin:jest-dom/recommended",
+    "plugin:testing-library/recommended"
+  ],
   "env": {
     "jest/globals": true
   },
-  "plugins": ["jest", "testcafe"],
+  "plugins": ["jest", "testcafe", "testing-library", "jest-dom"],
   "rules": {
     "jest/no-disabled-tests": "warn",
     "jest/no-focused-tests": "error",
