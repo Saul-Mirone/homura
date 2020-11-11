@@ -22,7 +22,7 @@ export const BottomBar: React.FC<BottomBarProps> = ({
   render,
   loading,
 }) => (
-  <div className="relative flex justify-between text-gray-300">
+  <div role="toolbar" className="relative flex justify-between text-gray-300">
     {step !== null && (
       <div className="absolute bottom-0 inset-x-0 z-10">{render(step)}</div>
     )}

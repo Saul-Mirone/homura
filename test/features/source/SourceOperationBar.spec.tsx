@@ -1,8 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router } from 'react-router-dom';
 import { Status } from '../../../app/constants/Status';
 import { SourceOperationBar } from '../../../app/features/source/SourceOperationBar';
 import * as sourceSlice from '../../../app/features/source/sourceSlice';
@@ -34,24 +33,21 @@ function setup(
     preloadedState: state,
   });
 
-  const wrapper = render(
+  render(
     <Provider store={store}>
-      <Router>
-        <SourceOperationBar />
-      </Router>
+      <SourceOperationBar />
     </Provider>
   );
 
   return {
     store,
-    wrapper,
   };
 }
 
 describe('SourceOperationBar component', () => {
   it('should match snapshot when list is empty', () => {
-    const { wrapper } = setup();
+    setup();
 
-    expect(wrapper.baseElement).toMatchSnapshot();
+    expect(screen.getByRole('toolbar')).toMatchSnapshot();
   });
 });
