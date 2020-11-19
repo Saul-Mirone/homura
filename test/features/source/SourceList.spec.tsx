@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { act, fireEvent, render } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router } from 'react-router-dom';
 import { Preset } from '../../../app/constants/Preset';
 import { Status } from '../../../app/constants/Status';
 import { SourceList } from '../../../app/features/source/SourceList';
@@ -57,29 +57,28 @@ function setup(
     preloadedState: state,
   });
 
-  const wrapper = render(
+  render(
     <Provider store={store}>
-      <Router>
-        <SourceList bottom={<div />} />
-      </Router>
+      <SourceList bottom={<div />} />
     </Provider>
   );
 
   return {
     store,
-    wrapper,
   };
 }
 
-describe('Source component', () => {
+describe('SourceList component', () => {
   it('should match snapshot when list is empty', () => {
-    const { wrapper } = setup();
+    setup();
 
-    expect(wrapper.baseElement).toMatchSnapshot();
+    const sourceList = screen.getByTestId('source-side-bar');
+
+    expect(sourceList).toMatchSnapshot();
   });
 
   it('should match snapshot when list is not empty', () => {
-    const { wrapper } = setup({
+    setup({
       source: {
         list: [
           {
@@ -101,13 +100,14 @@ describe('Source component', () => {
         fetchListStatus: Status.Succeeded,
       },
     });
+    const sourceList = screen.getByTestId('source-side-bar');
 
-    expect(wrapper.baseElement).toMatchSnapshot();
+    expect(sourceList).toMatchSnapshot();
   });
 
-  it('should call setCurrentSource when click on item', async () => {
+  it('should call setCurrentSource when click on item', () => {
     const setCurrentSourceSpy = jest.spyOn(sourceSlice, 'setCurrentSource');
-    const { wrapper } = setup({
+    setup({
       source: {
         list: [
           {
@@ -130,27 +130,27 @@ describe('Source component', () => {
       },
     });
 
-    const item = await wrapper.getByTestId('source-list-item-1');
+    const item = screen.getByTestId('source-list-item-1');
 
     fireEvent.click(item);
 
     expect(setCurrentSourceSpy).toBeCalledWith(1);
     expect(item).toHaveClass('bg-gray-600');
 
-    const presetAll = await wrapper.getByTestId('source-list-preset-all');
+    const presetAll = screen.getByTestId('source-list-preset-all');
 
     fireEvent.click(presetAll);
     expect(setCurrentSourceSpy).toBeCalledWith(Preset.All);
   });
 
-  it('should create context menu when click right button on item', async () => {
+  it('should create context menu when click right button on item', () => {
     const menu: Array<{ label: string; click: () => void }> = [];
     mockAppend.mockImplementation((x) => menu.push(x));
 
     const unsubscribeSpy = jest.spyOn(sourceSlice, 'unsubscribeById');
     const updateSourceByIdSpy = jest.spyOn(sourceSlice, 'updateSourceById');
 
-    const { wrapper } = setup({
+    setup({
       source: {
         list: [
           {
@@ -173,7 +173,7 @@ describe('Source component', () => {
       },
     });
 
-    const item = await wrapper.getByTestId('source-list-item-1');
+    const item = screen.getByTestId('source-list-item-1');
 
     fireEvent.contextMenu(item);
 
@@ -187,12 +187,12 @@ describe('Source component', () => {
       menu[1].click();
     });
 
-    const input = await wrapper.getByTestId('source-list-item-1:edit-input');
-    const button = await wrapper.getByTestId('source-list-item-1:edit-button');
+    const input = screen.getByTestId('source-list-item-1:edit-input');
+    const button = screen.getByTestId('source-list-item-1:edit-button');
 
     expect(input).toHaveValue('data-1');
 
-    fireEvent.change(input, { target: { value: 'data-1-new-value' } });
+    userEvent.type(input, '-new-value');
     expect(input).toHaveValue('data-1-new-value');
 
     fireEvent.mouseDown(button);

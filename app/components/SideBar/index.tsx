@@ -14,6 +14,7 @@ export const SideBar: React.FC<SideBarProps> = ({
 }) => {
   return (
     <div
+      data-testid="source-side-bar"
       role="presentation"
       onClick={onClick}
       className="w-1/6 bg-gray-700 flex flex-col h-screen select-none"

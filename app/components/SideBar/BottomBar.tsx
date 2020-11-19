@@ -12,7 +12,7 @@ export type BottomBarProps = {
   onClickPlus: () => void;
   onClickSync: () => void;
   render: (step: Step) => JSX.Element;
-  refreshing: boolean;
+  loading: boolean;
 };
 
 export const BottomBar: React.FC<BottomBarProps> = ({
@@ -20,9 +20,9 @@ export const BottomBar: React.FC<BottomBarProps> = ({
   onClickPlus,
   onClickSync,
   render,
-  refreshing,
+  loading,
 }) => (
-  <div className="relative flex justify-between text-gray-300">
+  <div role="toolbar" className="relative flex justify-between text-gray-300">
     {step !== null && (
       <div className="absolute bottom-0 inset-x-0 z-10">{render(step)}</div>
     )}
@@ -30,7 +30,7 @@ export const BottomBar: React.FC<BottomBarProps> = ({
       <PlusIcon />
     </IconContainer>
     <IconContainer onClick={onClickSync}>
-      <RefreshIcon spin={refreshing} />
+      <RefreshIcon spin={loading} />
     </IconContainer>
   </div>
 );
