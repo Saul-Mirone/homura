@@ -23,7 +23,7 @@ jobs:
       - name: Install Node.js, NPM and Yarn
         uses: actions/setup-node@v1
         with:
-          node-version: 14
+          node-version: 15
 
       - name: yarn install
         run: |
@@ -36,17 +36,18 @@ jobs:
           yarn package-ci
           yarn lint
           yarn test
-          yarn build-e2e
 
-      - if: matrix.os == 'ubuntu-latest'
-        run: |
-          Xvfb :99 &
-          disown -ar
-          echo "::set-env name=DISPLAY:::99"
-
-      # TODO: Testcafe e2e are broken because of:
-      # https://github.com/DevExpress/testcafe/issues/4512
-      # Tests are currently broken on linux and macos
-      - if: matrix.os == 'windows-latest'
-        run: |
-          yarn test-e2e
+#          yarn build-e2e
+#
+#      - if: matrix.os == 'ubuntu-latest'
+#        run: |
+#          Xvfb :99 &
+#          disown -ar
+#          echo "::set-env name=DISPLAY:::99"
+#
+#      # TODO: Testcafe e2e are broken because of:
+#      # https://github.com/DevExpress/testcafe/issues/4512
+#      # Tests are currently broken on linux and macos
+#      - if: matrix.os == 'windows-latest'
+#        run: |
+#          yarn test-e2e
