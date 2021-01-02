@@ -55,6 +55,7 @@ Array [
     "meta": Object {
       "arg": 0,
       "requestId": "fake-request-id",
+      "requestStatus": "pending",
     },
     "payload": undefined,
     "type": "source/fetchSources/pending",
@@ -63,6 +64,7 @@ Array [
     "meta": Object {
       "arg": 0,
       "requestId": "fake-request-id",
+      "requestStatus": "fulfilled",
     },
     "payload": Array [
       Object {
@@ -114,6 +116,7 @@ Array [
     "meta": Object {
       "arg": "fake-link",
       "requestId": "fake-request-id",
+      "requestStatus": "pending",
     },
     "payload": undefined,
     "type": "source/searchUrlForSource/pending",
@@ -128,7 +131,9 @@ Array [
       "aborted": false,
       "arg": "fake-link",
       "condition": false,
+      "rejectedWithValue": false,
       "requestId": "fake-request-id",
+      "requestStatus": "rejected",
     },
     "payload": undefined,
     "type": "source/searchUrlForSource/rejected",
@@ -171,6 +176,7 @@ Array [
     "meta": Object {
       "arg": "fake-link",
       "requestId": "fake-request-id",
+      "requestStatus": "pending",
     },
     "payload": undefined,
     "type": "source/searchUrlForSource/pending",
@@ -185,7 +191,9 @@ Array [
       "aborted": false,
       "arg": "fake-link",
       "condition": false,
+      "rejectedWithValue": false,
       "requestId": "fake-request-id",
+      "requestStatus": "rejected",
     },
     "payload": undefined,
     "type": "source/searchUrlForSource/rejected",
@@ -202,6 +210,7 @@ Array [
         "name": "fake-name",
       },
       "requestId": "fake-request-id",
+      "requestStatus": "pending",
     },
     "payload": undefined,
     "type": "source/subscribeToSource/pending",
@@ -213,6 +222,7 @@ Array [
         "name": "fake-name",
       },
       "requestId": "fake-request-id",
+      "requestStatus": "fulfilled",
     },
     "payload": Object {
       "count": 5,
@@ -235,6 +245,7 @@ Array [
         "name": "fake-name",
       },
       "requestId": "fake-request-id",
+      "requestStatus": "pending",
     },
     "payload": undefined,
     "type": "source/subscribeToSource/pending",
@@ -246,6 +257,7 @@ Array [
         "name": "fake-name",
       },
       "requestId": "fake-request-id",
+      "requestStatus": "fulfilled",
     },
     "payload": Object {
       "count": 0,
@@ -285,6 +297,7 @@ Array [
     "meta": Object {
       "arg": 0,
       "requestId": "fake-request-id",
+      "requestStatus": "pending",
     },
     "payload": undefined,
     "type": "source/syncSources/pending",
@@ -293,6 +306,7 @@ Array [
     "meta": Object {
       "arg": 0,
       "requestId": "fake-request-id",
+      "requestStatus": "fulfilled",
     },
     "payload": Array [
       Object {
@@ -344,6 +358,7 @@ Array [
     "meta": Object {
       "arg": 1,
       "requestId": "fake-request-id",
+      "requestStatus": "pending",
     },
     "payload": undefined,
     "type": "source/unsubscribeById/pending",
@@ -352,6 +367,7 @@ Array [
     "meta": Object {
       "arg": 1,
       "requestId": "fake-request-id",
+      "requestStatus": "fulfilled",
     },
     "payload": 1,
     "type": "source/unsubscribeById/fulfilled",
@@ -380,6 +396,7 @@ Array [
         "name": "next-name",
       },
       "requestId": "fake-request-id",
+      "requestStatus": "pending",
     },
     "payload": undefined,
     "type": "source/updateSourceById/pending",
@@ -391,6 +408,7 @@ Array [
         "name": "next-name",
       },
       "requestId": "fake-request-id",
+      "requestStatus": "fulfilled",
     },
     "payload": Object {
       "id": 1,
