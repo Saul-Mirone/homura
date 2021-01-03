@@ -1,4 +1,4 @@
-# <img src="resources/homura-logo.png" height="80px" /> Homura &middot; [![Build Status][github-actions-status]][github-actions-url] [![Dependency Status][david-image]][david-url] [![DevDependency Status][david-dev-image]][david-dev-url] [![Github Tag][github-tag-image]][github-tag-url]
+# <img src="assets/homura-logo.png" height="80px" /> Homura &middot; [![Build Status][github-actions-status]][github-actions-url] [![Dependency Status][david-image]][david-url] [![DevDependency Status][david-dev-image]][david-dev-url] [![Github Tag][github-tag-image]][github-tag-url]
 
 An elegant rss reader.
 
