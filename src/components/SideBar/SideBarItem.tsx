@@ -62,7 +62,7 @@ export const SideBarItem: React.FC<SideBarItemProps> = ({
       data-testid={`source-list-item-${id}`}
       className={`${
         active ? 'bg-gray-600' : ''
-      } leading-8 text-gray-300 flex items-center justify-between cursor-pointer px-3`}
+      } leading-8 text-gray-300 flex items-center justify-between cursor-pointer px-3 py-2`}
       onKeyDown={onClick}
       onClick={(e) => {
         e.stopPropagation();

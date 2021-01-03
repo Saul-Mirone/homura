@@ -5,10 +5,7 @@
     <title>Homura</title>
     <script>
       (() => {
-        if (
-          typeof process !== 'object' ||
-          (typeof process === 'object' && !process.env.START_HOT)
-        ) {
+        if (typeof process !== 'object') {
           const link = document.createElement('link');
           link.rel = 'stylesheet';
           link.href = './dist/style.css';
@@ -27,9 +24,7 @@
         if (process.env.NODE_ENV === 'development') {
           // Dynamically insert the DLL script in development env in the
           // renderer process
-          scripts.push('../dll/renderer.dev.dll.js');
-        }
-        if (process.env.START_HOT) {
+          scripts.push('../.erb/dll/renderer.dev.dll.js');
           // Dynamically insert the bundled src script in the renderer process
           const port = process.env.PORT || 1212;
           scripts.push(`http://localhost:${port}/dist/renderer.dev.js`);

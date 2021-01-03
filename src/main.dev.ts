@@ -80,9 +80,7 @@ const createWindow = async () => {
     height: 728,
     icon: getAssetPath('icon.png'),
     webPreferences:
-      (process.env.NODE_ENV === 'development' ||
-        process.env.E2E_BUILD === 'true') &&
-      process.env.ERB_SECURE !== 'true'
+      process.env.NODE_ENV === 'development'
         ? {
             nodeIntegration: true,
             enableRemoteModule: true,

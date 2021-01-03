@@ -98,6 +98,9 @@ export default merge(baseConfig, {
           },
           {
             loader: 'postcss-loader',
+            options: {
+              sourceMap: true,
+            },
           },
         ],
       },
