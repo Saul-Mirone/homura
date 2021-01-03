@@ -35,5 +35,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           yarn package
-          yarn lint
-          yarn test
+          yarn test-all

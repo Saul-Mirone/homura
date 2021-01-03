@@ -23,7 +23,7 @@
     "start:main": "cross-env NODE_ENV=development electron -r ./.erb/scripts/BabelRegister ./src/main.dev.ts",
     "start:renderer": "cross-env NODE_ENV=development webpack serve --config ./.erb/configs/webpack.config.renderer.dev.babel.js",
     "test": "cross-env BABEL_DISABLE_CACHE=1 jest",
-    "test-all": "yarn lint && yarn tsc && yarn build && yarn test",
+    "test-all": "yarn lint && yarn build && yarn test",
     "test-watch": "yarn test --watch"
   },
   "lint-staged": {
