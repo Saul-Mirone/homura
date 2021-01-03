@@ -3,9 +3,9 @@ import { AnyAction } from 'redux';
 // organize-imports-ignore
 import { mockChannel } from '../test-tools/mockChannel';
 
-import { Step } from '../../app/components/SideBar/BottomBar';
-import { Mode } from '../../app/constants/Mode';
-import { Status } from '../../app/constants/Status';
+import { Step } from '../../src/components/SideBar/BottomBar';
+import { Mode } from '../../src/constants/Mode';
+import { Status } from '../../src/constants/Status';
 import {
   fetchSources,
   resetSubscribeError,
@@ -19,7 +19,7 @@ import {
   syncSources,
   unsubscribeById,
   updateSourceById,
-} from '../../app/features/source/sourceSlice';
+} from '../../src/features/source/sourceSlice';
 import { formatActions } from '../test-tools/formatActions';
 import { mockStore } from '../test-tools/mockStore';
 

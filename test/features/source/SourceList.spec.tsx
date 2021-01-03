@@ -3,10 +3,10 @@ import { act, fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { Provider } from 'react-redux';
-import { Preset } from '../../../app/constants/Preset';
-import { Status } from '../../../app/constants/Status';
-import { SourceList } from '../../../app/features/source/SourceList';
-import * as sourceSlice from '../../../app/features/source/sourceSlice';
+import { Preset } from '../../../src/constants/Preset';
+import { Status } from '../../../src/constants/Status';
+import { SourceList } from '../../../src/features/source/SourceList';
+import * as sourceSlice from '../../../src/features/source/sourceSlice';
 
 const mockAppend = jest.fn();
 const mockPopup = jest.fn();

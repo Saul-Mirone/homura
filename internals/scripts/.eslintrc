@@ -1,9 +1,0 @@
-{
-  "rules": {
-    "no-console": "off",
-    "global-require": "off",
-    "react/jsx-curly-newline": "off",
-    "import/no-dynamic-require": "off",
-    "import/no-extraneous-dependencies": "off"
-  }
-}

@@ -1,5 +1,5 @@
-import { channel } from '../../app/channel/child';
+import { channel } from '../../src/channel/child';
 
-jest.mock('../../app/channel/child');
+jest.mock('../../src/channel/child');
 
 export const mockChannel = (channel as unknown) as jest.Mocked<typeof channel>;

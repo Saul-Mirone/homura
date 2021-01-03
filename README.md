@@ -2,7 +2,7 @@
 
 An elegant rss reader.
 
-<img src="internals/img/preview.png" width="100%" />
+<img src=".erb/img/preview.png" width="100%" />
 
 ## Features
 
