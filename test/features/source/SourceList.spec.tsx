@@ -135,7 +135,7 @@ describe('SourceList component', () => {
     fireEvent.click(item);
 
     expect(setCurrentSourceSpy).toBeCalledWith(1);
-    expect(item).toHaveClass('bg-gray-600');
+    expect(item).toHaveClass('active');
 
     const presetAll = screen.getByTestId('source-list-preset-all');
 

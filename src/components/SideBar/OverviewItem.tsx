@@ -23,9 +23,7 @@ export const OverviewItem: React.FC<OverViewItemProps> = ({
     role="button"
     data-testid={testId}
     tabIndex={0}
-    className={`${
-      activeId === target ? 'bg-gray-600' : ''
-    } leading-8 text-gray-300 flex items-center justify-between cursor-pointer px-3 py-2`}
+    className={`${activeId === target ? 'active' : ''} rss-item`}
     onKeyDown={() => onClick(target)}
     onClick={(e) => {
       e.stopPropagation();
