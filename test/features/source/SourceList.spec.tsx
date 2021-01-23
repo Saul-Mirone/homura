@@ -178,11 +178,11 @@ describe('SourceList component', () => {
     expect(mockPopup).toBeCalledTimes(1);
     expect(menu.map((x) => x.label)).toEqual(['unsubscribe', 'edit']);
 
-    menu[0].click();
+    menu[0]?.click();
     expect(unsubscribeSpy).toBeCalledWith(1);
 
     act(() => {
-      menu[1].click();
+      menu[1]?.click();
     });
 
     const input = screen.getByTestId('source-list-item-1:edit-input');

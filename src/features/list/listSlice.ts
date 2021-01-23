@@ -248,7 +248,7 @@ export const selectList = (state: RootState) => {
         },
         ...acc.slice(result + 1),
       ];
-    }, [] as TimeGroup[]);
+    }, [] as any[]) as TimeGroup[];
   return {
     activeId,
     groups,

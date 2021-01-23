@@ -36,7 +36,7 @@ export const PostItem: React.FC<PostItemProps> = ({
       active ? 'bg-gray-700' : ''
     } leading-8 text-gray-300 flex items-center justify-start cursor-pointer px-3 py-2`}
   >
-    <RssLogoIcon url={icon} />
+    <RssLogoIcon url={icon || null} />
     <div className="ml-2 leading-tight overflow-x-hidden ">
       <div className="truncate flex items-center">
         <div className="text-xs text-gray-600">{source}</div>

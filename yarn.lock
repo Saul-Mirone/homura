@@ -1596,17 +1596,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hot-loader/react-dom@npm:^16.13.0":
-  version: 16.14.0
-  resolution: "@hot-loader/react-dom@npm:16.14.0::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40hot-loader%2Freact-dom%2Fdownload%2F%40hot-loader%2Freact-dom-16.14.0.tgz"
+"@hot-loader/react-dom@npm:^17.0.1":
+  version: 17.0.1
+  resolution: "@hot-loader/react-dom@npm:17.0.1::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40hot-loader%2Freact-dom%2Fdownload%2F%40hot-loader%2Freact-dom-17.0.1.tgz"
   dependencies:
     loose-envify: ^1.1.0
     object-assign: ^4.1.1
-    prop-types: ^15.6.2
-    scheduler: ^0.19.1
+    scheduler: ^0.20.1
   peerDependencies:
-    react: ^16.14.0
-  checksum: 9daa45e45f89021c6be0e87b644e6764dcb4584513d3155fe1fcfed55558b260ee892c374c929d83bc6e1045bf17a45493508ca05c9e0439c3c07ef7e05f53d8
+    react: 17.0.1
+  checksum: f852a8296e61a728dfa7365c04efd88ae90e37e2bd4e64d504f58a35444721afec0f9f33b3546f06d33eeed9066971e346135c1ac9f91f56832dc1e227f66697
   languageName: node
   linkType: hard
 
@@ -1913,7 +1912,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@reduxjs/toolkit@npm:^1.4.0":
+"@reduxjs/toolkit@npm:^1.5.0":
   version: 1.5.0
   resolution: "@reduxjs/toolkit@npm:1.5.0::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40reduxjs%2Ftoolkit%2Fdownload%2F%40reduxjs%2Ftoolkit-1.5.0.tgz"
   dependencies:
@@ -2080,10 +2079,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/anymatch@npm:*":
-  version: 1.3.1
-  resolution: "@types/anymatch@npm:1.3.1::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fanymatch%2Fdownload%2F%40types%2Fanymatch-1.3.1.tgz"
-  checksum: 1647865e528a168f66f57a077e9651c10a4c172b656cc3686fddf176555d42ca0a1647bfc626ea2fceb68fc7701426ab708224be1762b4a5216fe8368ffdba3c
+"@type-config/strict@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "@type-config/strict@npm:1.1.1::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40type-config%2Fstrict%2Fdownload%2F%40type-config%2Fstrict-1.1.1.tgz"
+  checksum: 1c2b6ee02837b6804a4e1adc6bb6fd7d49fb13837549f4f0987e62b8b47592ee6b7fdc002eaee44bde30556f4157e8ae07277d54d3ba285db7d0eb7b71911584
   languageName: node
   linkType: hard
 
@@ -2406,28 +2405,28 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^16.9.8":
-  version: 16.9.10
-  resolution: "@types/react-dom@npm:16.9.10::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact-dom%2Fdownload%2F%40types%2Freact-dom-16.9.10.tgz"
+"@types/react-dom@npm:^17.0.0":
+  version: 17.0.0
+  resolution: "@types/react-dom@npm:17.0.0::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact-dom%2Fdownload%2F%40types%2Freact-dom-17.0.0.tgz"
   dependencies:
-    "@types/react": ^16
-  checksum: 910dd9894ba67438f8c80e71dc4f2ef1c15e2d62145309679dc3b2c0a6f2c4e5a611566a15174e4a7891f9fb6149f21a0a393488716665ff20f10b1181745964
+    "@types/react": "*"
+  checksum: 7ca9351b6c2523327cd7afe40082a37034898f65e9d86700236682efed910ba7c9cec10e9a3b829aa7b804b18791a28743ce468fcb42e9a788bfc33b84137e45
   languageName: node
   linkType: hard
 
-"@types/react-redux@npm:^7.1.9":
-  version: 7.1.15
-  resolution: "@types/react-redux@npm:7.1.15::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact-redux%2Fdownload%2F%40types%2Freact-redux-7.1.15.tgz"
+"@types/react-redux@npm:^7.1.16":
+  version: 7.1.16
+  resolution: "@types/react-redux@npm:7.1.16::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact-redux%2Fdownload%2F%40types%2Freact-redux-7.1.16.tgz"
   dependencies:
     "@types/hoist-non-react-statics": ^3.3.0
     "@types/react": "*"
     hoist-non-react-statics: ^3.3.0
     redux: ^4.0.0
-  checksum: c6c3701ee68142e89f28dd0fd10e94461988066791371f86bd624eee62044e2dc55dfc1f07c5261f6d75af79e8aeccb429e1e5bcd879d5754aa3afe366e0dc2f
+  checksum: c19c8f94dbadae42e9622c0b1b38324bbc6f5997fdc3989e71b202bf750d5869f73bb349ca4102f624188c2212c7907d3c3594449f099818abc87d1478d20996
   languageName: node
   linkType: hard
 
-"@types/react-router-dom@npm:^5.1.5":
+"@types/react-router-dom@npm:^5.1.7":
   version: 5.1.7
   resolution: "@types/react-router-dom@npm:5.1.7::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact-router-dom%2Fdownload%2F%40types%2Freact-router-dom-5.1.7.tgz"
   dependencies:
@@ -2438,7 +2437,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-router@npm:*, @types/react-router@npm:^5.1.8":
+"@types/react-router@npm:*":
   version: 5.1.9
   resolution: "@types/react-router@npm:5.1.9::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact-router%2Fdownload%2F%40types%2Freact-router-5.1.9.tgz"
   dependencies:
@@ -2448,32 +2447,32 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-test-renderer@npm:^16.9.3":
-  version: 16.9.4
-  resolution: "@types/react-test-renderer@npm:16.9.4::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact-test-renderer%2Fdownload%2F%40types%2Freact-test-renderer-16.9.4.tgz"
+"@types/react-router@npm:^5.1.11":
+  version: 5.1.11
+  resolution: "@types/react-router@npm:5.1.11::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact-router%2Fdownload%2F%40types%2Freact-router-5.1.11.tgz"
   dependencies:
-    "@types/react": ^16
-  checksum: ce75c5e51594e673391cd8d37523e95e2735703ab54763ce17d8c6bbed19a9ab8f14d5f3c75f2b99762ac33d92dd5aa0087add8e209f678619fdfb307e226b8a
+    "@types/history": "*"
+    "@types/react": "*"
+  checksum: 330389d79802c516d9217ae3dd959425cd7104fba9cf7ab84bf4ee706ab3f0a4f8dc1d9deb0cef63519f7da068c53ac79590cac2755170c7c9fcb67d603ffe08
   languageName: node
   linkType: hard
 
-"@types/react@npm:*":
+"@types/react-test-renderer@npm:^17.0.0":
+  version: 17.0.0
+  resolution: "@types/react-test-renderer@npm:17.0.0::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact-test-renderer%2Fdownload%2F%40types%2Freact-test-renderer-17.0.0.tgz"
+  dependencies:
+    "@types/react": "*"
+  checksum: 4931f75cfd17a43d257e9b6a021d1b01f8c859e8ee76353ab881cc3a8f6842c238b68ed643cfd69998193a16536b31f9dae329d8beca1e7c8425f6663f853750
+  languageName: node
+  linkType: hard
+
+"@types/react@npm:*, @types/react@npm:^17.0.0":
   version: 17.0.0
   resolution: "@types/react@npm:17.0.0::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact%2Fdownload%2F%40types%2Freact-17.0.0.tgz"
   dependencies:
     "@types/prop-types": "*"
     csstype: ^3.0.2
   checksum: dcef2034b822a949c5528fa8fa3c64da654fdbb822bd8f0488c0084d84cadb8b90af68813a6c95153d4754079f50b1cab206552c7c20f6b67a26c3641383fe31
-  languageName: node
-  linkType: hard
-
-"@types/react@npm:^16, @types/react@npm:^16.9.44":
-  version: 16.14.2
-  resolution: "@types/react@npm:16.14.2::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact%2Fdownload%2F%40types%2Freact-16.14.2.tgz"
-  dependencies:
-    "@types/prop-types": "*"
-    csstype: ^3.0.2
-  checksum: 41d227d4e9a45b1ad6d80c9b0fe9af003d95d03a0f2f2495a537c36d69541439fcff67edcef241e88c8ab7257377dbe8737d013d3f9b9503b76174165083f7b6
   languageName: node
   linkType: hard
 
@@ -2520,24 +2519,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/source-list-map@npm:*":
-  version: 0.1.2
-  resolution: "@types/source-list-map@npm:0.1.2::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fsource-list-map%2Fdownload%2F%40types%2Fsource-list-map-0.1.2.tgz"
-  checksum: 191f0e3b056b481e7a0bbb38f3d5b54b015556e38075726ca2637a35d3694df85cd16761b1b188729ac687a55aec3cbc2b07033ac090bcc13efe09ad10a3e935
-  languageName: node
-  linkType: hard
-
 "@types/stack-utils@npm:^2.0.0":
   version: 2.0.0
   resolution: "@types/stack-utils@npm:2.0.0::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fstack-utils%2Fdownload%2F%40types%2Fstack-utils-2.0.0.tgz"
   checksum: 662312302e07685c99a1c45c6753eb997b31d2af66e646c5937f62d593a63a111289503d0b06a8d1e6f3922b67fc2ed94889d84653a08861a7fee67b81ce5b92
-  languageName: node
-  linkType: hard
-
-"@types/tapable@npm:*":
-  version: 1.0.6
-  resolution: "@types/tapable@npm:1.0.6::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Ftapable%2Fdownload%2F%40types%2Ftapable-1.0.6.tgz"
-  checksum: 01709a2f8dbea665a39c008ba6995c76210fabb52434815e7632c7fff22ecad1dd49a1d75b8f5b2e9b365c6d7a6407127bed834587df4777b800110c2a74fc36
   languageName: node
   linkType: hard
 
@@ -2547,15 +2532,6 @@ __metadata:
   dependencies:
     "@types/jest": "*"
   checksum: 32aa324a83e67fd81eb7f0ba3e4c86406db86c1e5361b6e8091d224a1fefbfcb4e493039db3ce3faf8afa133a4f68cc7c42bcdbcae1dd91b13d741a040791038
-  languageName: node
-  linkType: hard
-
-"@types/uglify-js@npm:*":
-  version: 3.11.1
-  resolution: "@types/uglify-js@npm:3.11.1::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fuglify-js%2Fdownload%2F%40types%2Fuglify-js-3.11.1.tgz"
-  dependencies:
-    source-map: ^0.6.1
-  checksum: 75f1c06245dc31cb44496a4f4b685d313863561892c9cb51e7ba3a90522d4775b276f0febf43b797102309cb44e2226fba15a08aa043cd2423455ff3662d4039
   languageName: node
   linkType: hard
 
@@ -2584,31 +2560,6 @@ __metadata:
   version: 1.16.0
   resolution: "@types/webpack-env@npm:1.16.0::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fwebpack-env%2Fdownload%2F%40types%2Fwebpack-env-1.16.0.tgz"
   checksum: eaf62fb65ba18737174a520a444bb7407e5a6f32581690c5a7a687e6f86e9d4ce336fd9e79989aafa19e5f390046ad54b9100cd3d70a43dcf0ab0161d30cd5bd
-  languageName: node
-  linkType: hard
-
-"@types/webpack-sources@npm:*":
-  version: 2.1.0
-  resolution: "@types/webpack-sources@npm:2.1.0::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fwebpack-sources%2Fdownload%2F%40types%2Fwebpack-sources-2.1.0.tgz"
-  dependencies:
-    "@types/node": "*"
-    "@types/source-list-map": "*"
-    source-map: ^0.7.3
-  checksum: 26aba8ae682529be737eff726dcf08019460b180e9d22e80925e65240c908312096067b5547ac3dcb6d7b383a4bf0473eb68d0fd4ff483b17f3147fefce149af
-  languageName: node
-  linkType: hard
-
-"@types/webpack@npm:^4.41.21":
-  version: 4.41.25
-  resolution: "@types/webpack@npm:4.41.25::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fwebpack%2Fdownload%2F%40types%2Fwebpack-4.41.25.tgz"
-  dependencies:
-    "@types/anymatch": "*"
-    "@types/node": "*"
-    "@types/tapable": "*"
-    "@types/uglify-js": "*"
-    "@types/webpack-sources": "*"
-    source-map: ^0.6.0
-  checksum: 3bf453406c6479efedfee3b847b4274f5e8e1533cda91828c0f90fe32c9e17c12c5bdbbd99b1ad983460c845776554c54c5548d3cdd5bc13d2cf47f5f85fe57a
   languageName: node
   linkType: hard
 
@@ -5010,7 +4961,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"connected-react-router@npm:^6.6.1":
+"connected-react-router@npm:^6.8.0":
   version: 6.8.0
   resolution: "connected-react-router@npm:6.8.0::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Fconnected-react-router%2Fdownload%2Fconnected-react-router-6.8.0.tgz"
   dependencies:
@@ -6836,7 +6787,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-react-hooks@npm:^4.0.8":
+"eslint-plugin-react-hooks@npm:^4.2.0":
   version: 4.2.0
   resolution: "eslint-plugin-react-hooks@npm:4.2.0::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Feslint-plugin-react-hooks%2Fdownload%2Feslint-plugin-react-hooks-4.2.0.tgz"
   peerDependencies:
@@ -6845,7 +6796,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-react@npm:^7.20.6":
+"eslint-plugin-react@npm:^7.22.0":
   version: 7.22.0
   resolution: "eslint-plugin-react@npm:7.22.0::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Feslint-plugin-react%2Fdownload%2Feslint-plugin-react-7.22.0.tgz"
   dependencies:
@@ -8300,31 +8251,31 @@ fsevents@^2.1.2:
     "@babel/preset-typescript": ^7.12.7
     "@babel/register": ^7.12.1
     "@fortawesome/fontawesome-free": ^5.14.0
-    "@hot-loader/react-dom": ^16.13.0
+    "@hot-loader/react-dom": ^17.0.1
     "@pmmmwh/react-refresh-webpack-plugin": ^0.4.3
-    "@reduxjs/toolkit": ^1.4.0
+    "@reduxjs/toolkit": ^1.5.0
     "@tailwindcss/typography": ^0.2.0
     "@teamsupercell/typings-for-css-modules-loader": ^2.2.1
     "@testing-library/dom": ^7.26.6
     "@testing-library/jest-dom": ^5.11.5
     "@testing-library/react": ^11.1.1
     "@testing-library/user-event": 12.2.0
+    "@type-config/strict": ^1.1.1
     "@types/history": ^4.7.7
     "@types/jest": ^26.0.10
     "@types/luxon": ^1.25.0
     "@types/node": ^14.14.5
     "@types/node-fetch": ^2.5.7
     "@types/prismjs": ^1.16.1
-    "@types/react": ^16.9.44
-    "@types/react-dom": ^16.9.8
-    "@types/react-redux": ^7.1.9
-    "@types/react-router": ^5.1.8
-    "@types/react-router-dom": ^5.1.5
-    "@types/react-test-renderer": ^16.9.3
+    "@types/react": ^17.0.0
+    "@types/react-dom": ^17.0.0
+    "@types/react-redux": ^7.1.16
+    "@types/react-router": ^5.1.11
+    "@types/react-router-dom": ^5.1.7
+    "@types/react-test-renderer": ^17.0.0
     "@types/redux-logger": ^3.0.8
     "@types/redux-mock-store": ^1.0.2
     "@types/validator": ^13.1.0
-    "@types/webpack": ^4.41.21
     "@types/webpack-env": ^1.15.3
     "@types/xml2js": ^0.4.5
     "@typescript-eslint/eslint-plugin": ^4.11.1
@@ -8339,7 +8290,7 @@ fsevents@^2.1.2:
     browserslist-config-erb: ^0.0.1
     chalk: ^4.1.0
     concurrently: ^5.3.0
-    connected-react-router: ^6.6.1
+    connected-react-router: ^6.8.0
     core-js: ^3.6.5
     cross-env: ^7.0.2
     css-loader: ^5.0.1
@@ -8365,8 +8316,8 @@ fsevents@^2.1.2:
     eslint-plugin-jsx-a11y: 6.4.1
     eslint-plugin-prettier: ^3.1.4
     eslint-plugin-promise: ^4.2.1
-    eslint-plugin-react: ^7.20.6
-    eslint-plugin-react-hooks: ^4.0.8
+    eslint-plugin-react: ^7.22.0
+    eslint-plugin-react-hooks: ^4.2.0
     eslint-plugin-testing-library: ^3.10.0
     file-loader: ^6.0.0
     history: ^4.7.2
@@ -8386,13 +8337,13 @@ fsevents@^2.1.2:
     prettier: ^2.0.5
     prettier-plugin-organize-imports: ^1.1.1
     prismjs: ^1.22.0
-    react: ^16.13.1
-    react-dom: ^16.12.0
+    react: ^17.0.1
+    react-dom: ^17.0.1
     react-hot-loader: ^4.12.21
-    react-redux: ^7.2.1
+    react-redux: ^7.2.2
     react-refresh: ^0.9.0
     react-router-dom: ^5.2.0
-    react-test-renderer: ^16.12.0
+    react-test-renderer: ^17.0.1
     redux: ^4.0.5
     redux-logger: ^3.0.6
     redux-mock-store: ^1.5.4
@@ -13426,17 +13377,16 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
-"react-dom@npm:^16.12.0":
-  version: 16.14.0
-  resolution: "react-dom@npm:16.14.0::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Freact-dom%2Fdownload%2Freact-dom-16.14.0.tgz"
+"react-dom@npm:^17.0.1":
+  version: 17.0.1
+  resolution: "react-dom@npm:17.0.1::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Freact-dom%2Fdownload%2Freact-dom-17.0.1.tgz"
   dependencies:
     loose-envify: ^1.1.0
     object-assign: ^4.1.1
-    prop-types: ^15.6.2
-    scheduler: ^0.19.1
+    scheduler: ^0.20.1
   peerDependencies:
-    react: ^16.14.0
-  checksum: a13558f0e7c6d1a98684214460bcd4b9005500015b5048fb1b0d2856786b8764dbc713e6b078a5b1a56e17866400e1d862183c7a0a513ae8351de11f6f6749d2
+    react: 17.0.1
+  checksum: 6a70028fbe3c95e0056c5e8ce065b4a9b8d4ff3bffde9b016454072bde5e4b012af7668ca45b7235ace428267d5be5237b68ea87ce8c296e54e81a8d678a4355
   languageName: node
   linkType: hard
 
@@ -13463,17 +13413,17 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
-"react-is@npm:^16.13.1, react-is@npm:^16.6.0, react-is@npm:^16.7.0, react-is@npm:^16.8.1, react-is@npm:^16.8.6":
-  version: 16.13.1
-  resolution: "react-is@npm:16.13.1::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Freact-is%2Fdownload%2Freact-is-16.13.1.tgz"
-  checksum: 11bcf1267a314a522615f626f3ce3727a3a24cdbf61c4d452add3550a7875326669631326cfb1ba3e92b6f72244c32ffecf93ad21c0cad8455d3e169d0e3f060
-  languageName: node
-  linkType: hard
-
-"react-is@npm:^17.0.1":
+"react-is@npm:^16.12.0 || ^17.0.0, react-is@npm:^17.0.1":
   version: 17.0.1
   resolution: "react-is@npm:17.0.1::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Freact-is%2Fdownload%2Freact-is-17.0.1.tgz"
   checksum: 5a83dfc78e7adcb93d632bf367b0733db650e3abd2e9c57c33b87e50d201212c1884b0d7bcf13e692f1556189fa1b87f9f3e0ba10fe858fd6aebe83ed4fcd1ea
+  languageName: node
+  linkType: hard
+
+"react-is@npm:^16.13.1, react-is@npm:^16.6.0, react-is@npm:^16.7.0, react-is@npm:^16.8.1":
+  version: 16.13.1
+  resolution: "react-is@npm:16.13.1::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Freact-is%2Fdownload%2Freact-is-16.13.1.tgz"
+  checksum: 11bcf1267a314a522615f626f3ce3727a3a24cdbf61c4d452add3550a7875326669631326cfb1ba3e92b6f72244c32ffecf93ad21c0cad8455d3e169d0e3f060
   languageName: node
   linkType: hard
 
@@ -13484,7 +13434,7 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
-"react-redux@npm:^7.2.1":
+"react-redux@npm:^7.2.2":
   version: 7.2.2
   resolution: "react-redux@npm:7.2.2::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Freact-redux%2Fdownload%2Freact-redux-7.2.2.tgz"
   dependencies:
@@ -13549,28 +13499,39 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
-"react-test-renderer@npm:^16.12.0":
-  version: 16.14.0
-  resolution: "react-test-renderer@npm:16.14.0::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Freact-test-renderer%2Fdownload%2Freact-test-renderer-16.14.0.tgz"
+"react-shallow-renderer@npm:^16.13.1":
+  version: 16.14.1
+  resolution: "react-shallow-renderer@npm:16.14.1::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Freact-shallow-renderer%2Fdownload%2Freact-shallow-renderer-16.14.1.tgz"
   dependencies:
     object-assign: ^4.1.1
-    prop-types: ^15.6.2
-    react-is: ^16.8.6
-    scheduler: ^0.19.1
+    react-is: ^16.12.0 || ^17.0.0
   peerDependencies:
-    react: ^16.14.0
-  checksum: 0905787bfd68865098743ca2d18d874ef09929b80730131c017ced55bcf7082e84f66ec76685799a759812d376de6db718f6d643a2705779a491003d01d45956
+    react: ^16.0.0 || ^17.0.0
+  checksum: d52cb869e25605b00d4a67ff16598dbbf2826b0f09535de499b2f21a339cabf8b954d4b8855e0e6bdaf0a95603a2b6702e2b47eca8797a7d6bf7e6170ab8b2f3
   languageName: node
   linkType: hard
 
-"react@npm:^16.13.1":
-  version: 16.14.0
-  resolution: "react@npm:16.14.0::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Freact%2Fdownload%2Freact-16.14.0.tgz"
+"react-test-renderer@npm:^17.0.1":
+  version: 17.0.1
+  resolution: "react-test-renderer@npm:17.0.1::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Freact-test-renderer%2Fdownload%2Freact-test-renderer-17.0.1.tgz"
+  dependencies:
+    object-assign: ^4.1.1
+    react-is: ^17.0.1
+    react-shallow-renderer: ^16.13.1
+    scheduler: ^0.20.1
+  peerDependencies:
+    react: 17.0.1
+  checksum: 6ec269430beea4356180d90868a9959399781a03ae8de6a29f2edc29d6ca41432653d4103991467ebcc47be5bd2d9197789411e913da66369c2aa2f13311105f
+  languageName: node
+  linkType: hard
+
+"react@npm:^17.0.1":
+  version: 17.0.1
+  resolution: "react@npm:17.0.1::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Freact%2Fdownload%2Freact-17.0.1.tgz"
   dependencies:
     loose-envify: ^1.1.0
     object-assign: ^4.1.1
-    prop-types: ^15.6.2
-  checksum: 2769580b22952a52de3b5b2ea0f09cb904030b762d759739f49ab4da0b1f550e5c087ce3728c4be90f423d09481e0c075483c0c30b1ea9c549445c8b12020fd3
+  checksum: a76d86ec973eb4b25a46071ac7f974adfd66ed89ad1db63043be1d976ec25417520a210e6d724b0ad937422b706afcf9962cedda9e92125992a8c0e8a95f2051
   languageName: node
   linkType: hard
 
@@ -14338,13 +14299,13 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
-"scheduler@npm:^0.19.1":
-  version: 0.19.1
-  resolution: "scheduler@npm:0.19.1::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Fscheduler%2Fdownload%2Fscheduler-0.19.1.tgz"
+"scheduler@npm:^0.20.1":
+  version: 0.20.1
+  resolution: "scheduler@npm:0.20.1::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Fscheduler%2Fdownload%2Fscheduler-0.20.1.tgz"
   dependencies:
     loose-envify: ^1.1.0
     object-assign: ^4.1.1
-  checksum: 804f990b9f370cca6d42b65f3cba2cc2bfed4973ee5623bed1ea36a6627842db8c891e2e5ac003f06f9ee892d1d3396921e27fa077346caf0213af05776e8dee
+  checksum: 377b4ad0d8313c4548bac7374bc38409e9d142799979ce396787efa04d1bcabf2591540f243f2131e3df8e56e7f5b29c5415248523e88ecb60f13a32db2e076f
   languageName: node
   linkType: hard
 
