@@ -11,24 +11,22 @@ import * as sourceSlice from '../../../src/features/source/sourceSlice';
 const mockAppend = jest.fn();
 const mockPopup = jest.fn();
 
-jest.mock('electron', () => {
-  return {
-    remote: {
-      Menu: jest.fn(() => {
-        return {
-          append: mockAppend,
-          popup: mockPopup,
-        };
-      }),
-      MenuItem: jest.fn(({ label, click }) => {
-        return {
-          label,
-          click,
-        };
-      }),
-    },
-  };
-});
+jest.mock('electron', () => ({
+  remote: {
+    Menu: jest.fn(() => {
+      return {
+        append: mockAppend,
+        popup: mockPopup,
+      };
+    }),
+    MenuItem: jest.fn(({ label, click }) => {
+      return {
+        label,
+        click,
+      };
+    }),
+  },
+}));
 
 function setup(
   preloadedState: {
