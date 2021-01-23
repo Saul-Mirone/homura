@@ -2,7 +2,7 @@
   "name": "homuraDev",
   "productName": "HomuraDev",
   "version": "0.0.1",
-  "description": "Electron application boilerplate based on React, React Router, Webpack, React Hot Loader for rapid application development",
+  "description": "Homura RSS Reader",
   "workspaces": [
     "src"
   ],
@@ -98,7 +98,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/saul-mirone/homura.git"
+    "url": "git+https://github.com/Saul-Mirone/homura.git"
   },
   "author": {
     "name": "Saul-Mirone",
@@ -120,7 +120,7 @@
     "homura",
     "rss"
   ],
-  "homepage": "https://github.com/saul-mirone/homura#readme",
+  "homepage": "https://github.com/Saul-Mirone/homura#readme",
   "jest": {
     "testURL": "http://localhost/",
     "moduleNameMapper": {
