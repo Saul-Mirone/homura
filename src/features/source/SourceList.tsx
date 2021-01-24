@@ -8,6 +8,7 @@ import {
   fetchSources,
   selectSourceList,
   setCurrentSource,
+  syncSources,
   unsubscribeById,
   updateSourceById,
 } from './sourceSlice';
@@ -15,8 +16,14 @@ import {
 export const SourceList: React.FC<{ bottom: JSX.Element }> = ({ bottom }) => {
   const dispatch = useDispatch<AppDispatch>();
   const { list, activeId, mode, totalCount } = useSelector(selectSourceList);
+  const isFirstRender = React.useRef(true);
 
   React.useEffect(() => {
+    if (isFirstRender.current) {
+      dispatch(syncSources(mode));
+      isFirstRender.current = false;
+      return;
+    }
     dispatch(fetchSources(mode));
   }, [dispatch, mode]);
 
