@@ -83,11 +83,13 @@ const createWindow = async () => {
       process.env.NODE_ENV === 'development'
         ? {
             nodeIntegration: true,
+            contextIsolation: false,
             enableRemoteModule: true,
           }
         : {
             preload: path.join(__dirname, 'dist/renderer.prod.js'),
             nodeIntegration: true,
+            contextIsolation: false,
             enableRemoteModule: true,
           },
   });
