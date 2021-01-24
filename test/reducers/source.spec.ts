@@ -283,6 +283,13 @@ describe('reducers', () => {
           expect(formatActions(store)).toMatchSnapshot();
         });
 
+        it('should success action list match snapshot', async () => {
+          const store = mockStore();
+          mockChannel.checkUrl.mockResolvedValueOnce('fake-result');
+          await store.dispatch(searchUrlForSource('fake-link'));
+          expect(formatActions(store)).toMatchSnapshot();
+        });
+
         it('should rejected action list match snapshot', async () => {
           const store = mockStore();
           mockChannel.checkUrl.mockResolvedValue('');

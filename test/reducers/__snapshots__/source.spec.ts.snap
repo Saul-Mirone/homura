@@ -201,6 +201,29 @@ Array [
 ]
 `;
 
+exports[`reducers source thunk searchUrlForSource should success action list match snapshot 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "arg": "fake-link",
+      "requestId": "fake-request-id",
+      "requestStatus": "pending",
+    },
+    "payload": undefined,
+    "type": "source/searchUrlForSource/pending",
+  },
+  Object {
+    "meta": Object {
+      "arg": "fake-link",
+      "requestId": "fake-request-id",
+      "requestStatus": "fulfilled",
+    },
+    "payload": "fake-result",
+    "type": "source/searchUrlForSource/fulfilled",
+  },
+]
+`;
+
 exports[`reducers source thunk subscribeToSource should action list match snapshot 1`] = `
 Array [
   Object {
