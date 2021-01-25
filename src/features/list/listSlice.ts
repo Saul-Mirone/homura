@@ -5,7 +5,7 @@ import { format } from '../../constants/Date';
 import { Mode } from '../../constants/Mode';
 import { Preset } from '../../constants/Preset';
 import type { AppThunk, RootState } from '../../store';
-import { countDownOne, countToZero, countUpOne } from '../source/sourceSlice';
+import { modifyCount } from '../source/sourceSlice';
 
 type ISOString = string;
 type PostItem = {
@@ -163,11 +163,11 @@ export const markAllAsRead = (): AppThunk => async (dispatch, getState) => {
 
   if (typeof activeId === 'number') {
     await channel.markAllAsReadBySourceId(activeId);
-    dispatch(countToZero(activeId));
+    dispatch(modifyCount({ id: activeId, modifier: () => 0 }));
   } else if (activeId && [Preset.Unread, Preset.All].includes(activeId)) {
     await Promise.all(list.map((x) => channel.markAllAsReadBySourceId(x.id)));
     list.forEach((x) => {
-      dispatch(countToZero(x.id));
+      dispatch(modifyCount({ id: x.id, modifier: () => 0 }));
     });
   }
   dispatch(markAllRead());
@@ -184,9 +184,13 @@ export const markActiveUnreadAs = (unread: boolean): AppThunk => async (
   const active = posts.find((x) => x.id === state.list.activeId);
   if (active && state.mode !== Mode.Starred) {
     if (unread) {
-      dispatch(countUpOne(active.sourceId));
+      dispatch(
+        modifyCount({ id: active.sourceId, modifier: (x: number) => x + 1 })
+      );
     } else {
-      dispatch(countDownOne(active.sourceId));
+      dispatch(
+        modifyCount({ id: active.sourceId, modifier: (x: number) => x - 1 })
+      );
     }
   }
   dispatch(markActiveUnread(unread));
@@ -202,9 +206,13 @@ export const markActiveStarredAs = (starred: boolean): AppThunk => async (
   const active = posts.find((x) => x.id === state.list.activeId);
   if (active && state.mode === Mode.Starred) {
     if (starred) {
-      dispatch(countUpOne(active.sourceId));
+      dispatch(
+        modifyCount({ id: active.sourceId, modifier: (x: number) => x + 1 })
+      );
     } else {
-      dispatch(countDownOne(active.sourceId));
+      dispatch(
+        modifyCount({ id: active.sourceId, modifier: (x: number) => x - 1 })
+      );
     }
   }
   dispatch(markActiveStarred(starred));

@@ -28,7 +28,7 @@ jobs:
       - name: yarn install
         run: |
           yarn install --immutable
-          yarn bootstrap
+          yarn setup
 
       - name: yarn test
         env:
