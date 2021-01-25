@@ -2430,17 +2430,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/user-event@npm:12.2.0":
-  version: 12.2.0
-  resolution: "@testing-library/user-event@npm:12.2.0::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40testing-library%2Fuser-event%2Fdownload%2F%40testing-library%2Fuser-event-12.2.0.tgz"
-  dependencies:
-    "@babel/runtime": ^7.10.2
-  peerDependencies:
-    "@testing-library/dom": ">=7.21.4"
-  checksum: 012a3d24c7bbc52d1e6f68f3d7401f61b7a63422e74819f26096b746994ef88962d0698e224bb39966e988ed81d9050e24dab004d60ff91173736e667e2ae9c3
-  languageName: node
-  linkType: hard
-
 "@type-config/strict@npm:^1.1.1":
   version: 1.1.1
   resolution: "@type-config/strict@npm:1.1.1::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40type-config%2Fstrict%2Fdownload%2F%40type-config%2Fstrict-1.1.1.tgz"
@@ -9301,7 +9290,6 @@ fsevents@~2.3.1:
     "@testing-library/dom": ^7.26.6
     "@testing-library/jest-dom": ^5.11.5
     "@testing-library/react": ^11.1.1
-    "@testing-library/user-event": 12.2.0
     "@type-config/strict": ^1.1.1
     "@types/history": ^4.7.7
     "@types/jest": ^26.0.10

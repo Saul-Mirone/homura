@@ -33,9 +33,6 @@ export class DB {
   private initialized: boolean;
 
   constructor() {
-    // if (['development', 'test'].includes(process.env.NODE_ENV || '')) {
-    //   this.sequelize = new Sequelize('sqlite::memory:');
-    // } else {
     this.sequelize = new Sequelize({
       dialect: 'sqlite',
       storage: path.resolve(
@@ -45,7 +42,6 @@ export class DB {
         'database.sqlite'
       ),
     });
-    // }
     this.initialized = false;
   }
 

@@ -131,14 +131,10 @@
       "\\.[jt]sx?$": "babel-jest"
     },
     "moduleDirectories": [
-      "node_modules",
-      "src/node_modules"
-    ],
-    "setupFiles": [
-      "./.erb/scripts/CheckBuildsExist.js"
+      "node_modules"
     ],
     "setupFilesAfterEnv": [
-      "./.erb/scripts/SetupTest.js"
+      "./config/SetupTest.js"
     ]
   },
   "devDependencies": {
@@ -178,7 +174,6 @@
     "@testing-library/dom": "^7.26.6",
     "@testing-library/jest-dom": "^5.11.5",
     "@testing-library/react": "^11.1.1",
-    "@testing-library/user-event": "12.2.0",
     "@type-config/strict": "^1.1.1",
     "@types/history": "^4.7.7",
     "@types/jest": "^26.0.10",
