@@ -1,24 +1,16 @@
 {
-  "name": "homuraDev",
-  "productName": "HomuraDev",
+  "main": ".webpack/main",
+  "name": "homura",
+  "productName": "Homura",
   "version": "0.0.1",
   "description": "Homura RSS Reader",
-  "workspaces": [
-    "src"
-  ],
   "scripts": {
-    "build": "concurrently \"yarn build-main\" \"yarn build-renderer\"",
-    "build-main": "cross-env NODE_ENV=production webpack --config ./.erb/configs/webpack.config.main.prod.babel.js",
-    "build-renderer": "cross-env NODE_ENV=production webpack --config ./.erb/configs/webpack.config.renderer.prod.babel.js",
-    "rebuild": "electron-rebuild --parallel --types prod,dev,optional --module-dir src",
     "lint": "cross-env NODE_ENV=development eslint . --cache --ext .js,.jsx,.ts,.tsx",
-    "package": "yarn build && electron-builder build --publish never",
-    "bootstrap": "yarn setup && yarn workspace homura run setup",
-    "setup": "node -r @babel/register .erb/scripts/CheckNativeDep.js && electron-builder install-app-deps && yarn cross-env NODE_ENV=development webpack --config ./.erb/configs/webpack.config.renderer.dev.dll.babel.js && opencollective-postinstall",
-    "start": "node -r @babel/register ./.erb/scripts/CheckPortInUse.js && cross-env yarn start:renderer",
-    "start:main": "cross-env NODE_ENV=development electron -r ./.erb/scripts/BabelRegister ./src/main.dev.ts",
-    "start:renderer": "cross-env NODE_ENV=development webpack serve --config ./.erb/configs/webpack.config.renderer.dev.babel.js",
-    "test": "jest"
+    "test": "jest",
+    "package": "electron-forge package",
+    "publish": "electron-forge publish",
+    "start": "electron-forge start",
+    "make": "electron-forge make"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -173,6 +165,13 @@
     "@babel/preset-react": "^7.12.7",
     "@babel/preset-typescript": "^7.12.7",
     "@babel/register": "^7.12.1",
+    "@electron-forge/cli": "^6.0.0-beta.54",
+    "@electron-forge/maker-deb": "^6.0.0-beta.54",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.54",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
+    "@electron-forge/maker-zip": "^6.0.0-beta.54",
+    "@electron-forge/plugin-webpack": "^6.0.0-beta.54",
+    "@marshallofsound/webpack-asset-relocator-loader": "^0.5.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
     "@tailwindcss/typography": "^0.2.0",
     "@teamsupercell/typings-for-css-modules-loader": "^2.2.1",
@@ -215,7 +214,6 @@
     "css-loader": "^5.0.1",
     "detect-port": "^1.3.0",
     "electron": "^11.0.1",
-    "electron-builder": "^22.9.1",
     "electron-devtools-installer": "^3.1.1",
     "electron-notarize": "^1.0.0",
     "electron-rebuild": "^2.3.2",
@@ -236,6 +234,7 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-testing-library": "^3.10.0",
     "file-loader": "^6.0.0",
+    "fork-ts-checker-webpack-plugin": "^6.1.0",
     "husky": "^4.2.5",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^26.1.0",
@@ -275,6 +274,7 @@
     "connected-react-router": "^6.8.0",
     "electron-debug": "^3.1.0",
     "electron-log": "^4.2.4",
+    "electron-squirrel-startup": "^1.0.0",
     "electron-updater": "^4.3.4",
     "history": "^4.7.2",
     "luxon": "^1.25.0",
@@ -290,7 +290,9 @@
     "redux-thunk": "^2.3.0",
     "regenerator-runtime": "^0.13.5",
     "rss-parser": "^3.9.0",
-    "source-map-support": "^0.5.19"
+    "sequelize": "^6.4.0",
+    "source-map-support": "^0.5.19",
+    "sqlite3": "^5.0.0"
   },
   "devEngines": {
     "node": ">=7.x",

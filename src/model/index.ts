@@ -2,11 +2,8 @@ import { app } from 'electron';
 import path from 'path';
 import { FindOptions, Sequelize } from 'sequelize';
 import { Preset } from '../constants/Preset';
-import packageJson from '../package.json';
 import { CreatePostAttributes, initPost, Post, PostAttributes } from './post';
 import { CreateSourceAttributes, initSource, Source } from './source';
-
-const { version } = packageJson;
 
 export type SourceJSON = ReturnType<Source['toJSON']>;
 export type PostJSON = ReturnType<Post['toJSON']>;
@@ -44,7 +41,7 @@ export class DB {
       storage: path.resolve(
         app.getPath('appData'),
         'homura',
-        version,
+        '0.0.1',
         'database.sqlite'
       ),
     });

@@ -1,3 +1,7 @@
+// organize-imports-ignore
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
+
 import Prism from 'prismjs';
 import 'prismjs/themes/prism-coy.css';
 import React, { Fragment } from 'react';
