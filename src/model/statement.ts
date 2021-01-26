@@ -67,6 +67,14 @@ DELETE FROM sources where id = ? ;`;
 export const updateSourceNameById = `
 UPDATE sources SET name = :name, updatedAt = CURRENT_TIMESTAMP WHERE id = :id ;`;
 
+// TODO: test this
+export const selectSourcesUrl = `
+SELECT id, sourceUrl FROM sources;`;
+
+// TODO: test this
+export const updateSourceById = `
+UPDATE sources SET link = :link, icon = :icon, updatedAt = CURRENT_TIMESTAMP WHERE id = :id ;`;
+
 export const selectPostById = `
 SELECT id, title, link, content, unread, starred, date from posts where id = ? ;`;
 
