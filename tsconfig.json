@@ -13,11 +13,6 @@
     "moduleResolution": "node",
     "resolveJsonModule": true
   },
-  "exclude": [
-    "release",
-    "src/main.prod.js",
-    "src/renderer.prod.js",
-    "src/dist",
-    ".erb/dll"
-  ]
+  "include": ["src"],
+  "exclude": ["node_modules", ".webpack"]
 }

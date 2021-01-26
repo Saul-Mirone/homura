@@ -2492,6 +2492,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/better-sqlite3@npm:^5.4.1":
+  version: 5.4.1
+  resolution: "@types/better-sqlite3@npm:5.4.1::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fbetter-sqlite3%2Fdownload%2F%40types%2Fbetter-sqlite3-5.4.1.tgz"
+  dependencies:
+    "@types/integer": "*"
+  checksum: d1a44e5917c874021e3daa6887a193240d53851b6ebac6d2f87f39bbacfa77bd7373a943b9ef96920162d0d4cd9eab2246a3de870f0c78b618fd184ff4f949db
+  languageName: node
+  linkType: hard
+
 "@types/cacheable-request@npm:^6.0.1":
   version: 6.0.1
   resolution: "@types/cacheable-request@npm:6.0.1"
@@ -2587,6 +2596,13 @@ __metadata:
   version: 4.0.0
   resolution: "@types/http-cache-semantics@npm:4.0.0"
   checksum: e16fae56d4daea4ed678b4d5918b693b44ca12fb5e479b87d242d3a35bf3a014974dcf9ed7aba7e29149fdb6c3719f9987fca51b20ef10aa84b58f86553c2f74
+  languageName: node
+  linkType: hard
+
+"@types/integer@npm:*":
+  version: 1.0.1
+  resolution: "@types/integer@npm:1.0.1::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Finteger%2Fdownload%2F%40types%2Finteger-1.0.1.tgz"
+  checksum: 9ddde7342e4d2abf55d7af6601bb32e79df4c09f3ec7a4bad899e19abddd4f30770b76467b87933dd3fbec6f98d9aaf9ddbcfe2bed998a2eafbe7e672693f4cf
   languageName: node
   linkType: hard
 
@@ -4442,6 +4458,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"better-sqlite3@npm:^7.1.2":
+  version: 7.1.2
+  resolution: "better-sqlite3@npm:7.1.2::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Fbetter-sqlite3%2Fdownload%2Fbetter-sqlite3-7.1.2.tgz"
+  dependencies:
+    bindings: ^1.5.0
+    node-gyp: latest
+    prebuild-install: ^5.3.3
+    tar: ^6.0.5
+  checksum: d52cd1e456e0bcfd594b3c305e8b2d28388114a812db3c70752780d369fc210572c8a0ad7a52bd4e29295d362c9fa86498a67564cb771d415d9cf5e2cf01e7e5
+  languageName: node
+  linkType: hard
+
 "big.js@npm:^5.2.2":
   version: 5.2.2
   resolution: "big.js@npm:5.2.2::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Fbig.js%2Fdownload%2Fbig.js-5.2.2.tgz"
@@ -6235,6 +6263,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"decompress-response@npm:^4.2.0":
+  version: 4.2.1
+  resolution: "decompress-response@npm:4.2.1::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Fdecompress-response%2Fdownload%2Fdecompress-response-4.2.1.tgz"
+  dependencies:
+    mimic-response: ^2.0.0
+  checksum: d854171a100833d66171ffba0990fc581133cfb62befc18edd2365edc40e8a48f9f96b6156465f1a74802112b9c241c792d865f5ee27e285c2e4417a17ac6c66
+  languageName: node
+  linkType: hard
+
 "decompress-response@npm:^6.0.0":
   version: 6.0.0
   resolution: "decompress-response@npm:6.0.0"
@@ -7056,7 +7093,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"end-of-stream@npm:^1.0.0, end-of-stream@npm:^1.1.0":
+"end-of-stream@npm:^1.0.0, end-of-stream@npm:^1.1.0, end-of-stream@npm:^1.4.1":
   version: 1.4.4
   resolution: "end-of-stream@npm:1.4.4::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Fend-of-stream%2Fdownload%2Fend-of-stream-1.4.4.tgz"
   dependencies:
@@ -7859,6 +7896,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"expand-template@npm:^2.0.3":
+  version: 2.0.3
+  resolution: "expand-template@npm:2.0.3::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Fexpand-template%2Fdownload%2Fexpand-template-2.0.3.tgz"
+  checksum: d1c08a374a2335647562d6958bf23a40371fd9eb64362f3a2475b232a8d2e4bfa8f746066ff45c17efde185dab66f5d0824eaaa26e3e491d03bff50be0be7c3d
+  languageName: node
+  linkType: hard
+
 "expand-tilde@npm:^2.0.0, expand-tilde@npm:^2.0.2":
   version: 2.0.2
   resolution: "expand-tilde@npm:2.0.2::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Fexpand-tilde%2Fdownload%2Fexpand-tilde-2.0.2.tgz"
@@ -8441,6 +8485,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fs-constants@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "fs-constants@npm:1.0.0::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Ffs-constants%2Fdownload%2Ffs-constants-1.0.0.tgz"
+  checksum: b8382395f555012591b20bddf08d258723f660b4e7312943d10431a893e2af879295fefc15a917df43c9ed52d80d2f014c0ca8ca359367969be5c8a133e39742
+  languageName: node
+  linkType: hard
+
 "fs-extra@npm:^4.0.0":
   version: 4.0.3
   resolution: "fs-extra@npm:4.0.3::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Ffs-extra%2Fdownload%2Ffs-extra-4.0.3.tgz"
@@ -8789,6 +8840,13 @@ fsevents@~2.3.1:
   dependencies:
     assert-plus: ^1.0.0
   checksum: 2650725bc6939616da8432e5351ca87d8b29421bb8dc19c21bad2c37cd337d2a50d36fcc398ce0c16a075f6079afe114131780dca7e2f4b96063e53e7d28fd7a
+  languageName: node
+  linkType: hard
+
+"github-from-package@npm:0.0.0":
+  version: 0.0.0
+  resolution: "github-from-package@npm:0.0.0::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Fgithub-from-package%2Fdownload%2Fgithub-from-package-0.0.0.tgz"
+  checksum: 9c3bae601535f7de7e2f54cc58dcd2ae62aa7afd262e9edea9021a264e633859ad0aef6ec23328e26607e4259f1efb97ce9b5b01e3f80d7d258085a628c9b710
   languageName: node
   linkType: hard
 
@@ -9291,6 +9349,7 @@ fsevents@~2.3.1:
     "@testing-library/jest-dom": ^5.11.5
     "@testing-library/react": ^11.1.1
     "@type-config/strict": ^1.1.1
+    "@types/better-sqlite3": ^5.4.1
     "@types/history": ^4.7.7
     "@types/jest": ^26.0.10
     "@types/luxon": ^1.25.0
@@ -9317,6 +9376,7 @@ fsevents@~2.3.1:
     babel-loader: ^8.1.0
     babel-plugin-dev-expression: ^0.2.2
     babel-plugin-transform-react-remove-prop-types: ^0.4.24
+    better-sqlite3: ^7.1.2
     browserslist-config-erb: ^0.0.1
     chalk: ^4.1.0
     concurrently: ^5.3.0
@@ -12162,6 +12222,13 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
+"mimic-response@npm:^2.0.0":
+  version: 2.1.0
+  resolution: "mimic-response@npm:2.1.0::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Fmimic-response%2Fdownload%2Fmimic-response-2.1.0.tgz"
+  checksum: 9c206f3aebdc8de306550394301de8ce593e7757f3f9be43b5f99728e38ae787d17e6b72b96eb1b7a998d041da0ee465c48d29c927be4ff6ac3319453285d075
+  languageName: node
+  linkType: hard
+
 "mimic-response@npm:^3.1.0":
   version: 3.1.0
   resolution: "mimic-response@npm:3.1.0"
@@ -12245,7 +12312,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"minimist@npm:^1.1.0, minimist@npm:^1.1.1, minimist@npm:^1.1.3, minimist@npm:^1.2.0, minimist@npm:^1.2.5":
+"minimist@npm:^1.1.0, minimist@npm:^1.1.1, minimist@npm:^1.1.3, minimist@npm:^1.2.0, minimist@npm:^1.2.3, minimist@npm:^1.2.5":
   version: 1.2.5
   resolution: "minimist@npm:1.2.5::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Fminimist%2Fdownload%2Fminimist-1.2.5.tgz"
   checksum: b77b8590147a4e217ff34266236bc39de23b52e6e33054076991ff674c7397a1380a7bde11111916f16f003a94aaa7e4f3d92595a32189644ff607fabc65a5b6
@@ -12315,6 +12382,13 @@ fsevents@~2.3.1:
     for-in: ^1.0.2
     is-extendable: ^1.0.1
   checksum: 68da98bc1af57ffccde7abdc86ac49feec263b73b3c483ab7e6e2fab9aa2b06fba075da9e86bcda725133c1d2a59e4c810a17b55865c67c827871c25d5713c33
+  languageName: node
+  linkType: hard
+
+"mkdirp-classic@npm:^0.5.2, mkdirp-classic@npm:^0.5.3":
+  version: 0.5.3
+  resolution: "mkdirp-classic@npm:0.5.3::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Fmkdirp-classic%2Fdownload%2Fmkdirp-classic-0.5.3.tgz"
+  checksum: b3c46c62840bdc82c2a5bee417e4e7518a8109d32a85a6dc67bdcfecbe6aff5cfc73cdb98844a61178ddd8ac75743f977857f0badd6e12d14fd18cf1639e41a1
   languageName: node
   linkType: hard
 
@@ -12466,6 +12540,13 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
+"napi-build-utils@npm:^1.0.1":
+  version: 1.0.2
+  resolution: "napi-build-utils@npm:1.0.2::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Fnapi-build-utils%2Fdownload%2Fnapi-build-utils-1.0.2.tgz"
+  checksum: e4dfbec94d315533fea33a96ef5fb4de0d9e8828f2bb2b30e38de089500dfe35fe058ea5bcd72e104381457263f854c3d52d4d8700df9e1f9e6b78e9500ba435
+  languageName: node
+  linkType: hard
+
 "native-url@npm:^0.2.6":
   version: 0.2.6
   resolution: "native-url@npm:0.2.6::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Fnative-url%2Fdownload%2Fnative-url-0.2.6.tgz"
@@ -12529,6 +12610,15 @@ fsevents@~2.3.1:
 "node-abi@npm:^2.19.2":
   version: 2.19.3
   resolution: "node-abi@npm:2.19.3"
+  dependencies:
+    semver: ^5.4.1
+  checksum: 503acaa092dbf3e1d4cd96fb8496f726d6d0b3f441e37c8e8be8a622fe88d9fcda495e2016a687c1c147a28c2a9b24bd9ce39f5ae5ac8223c30ab20aece376d8
+  languageName: node
+  linkType: hard
+
+"node-abi@npm:^2.7.0":
+  version: 2.19.3
+  resolution: "node-abi@npm:2.19.3::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Fnode-abi%2Fdownload%2Fnode-abi-2.19.3.tgz"
   dependencies:
     semver: ^5.4.1
   checksum: 503acaa092dbf3e1d4cd96fb8496f726d6d0b3f441e37c8e8be8a622fe88d9fcda495e2016a687c1c147a28c2a9b24bd9ce39f5ae5ac8223c30ab20aece376d8
@@ -12733,6 +12823,13 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
+"noop-logger@npm:^0.1.1":
+  version: 0.1.1
+  resolution: "noop-logger@npm:0.1.1::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Fnoop-logger%2Fdownload%2Fnoop-logger-0.1.1.tgz"
+  checksum: 353d31cd08698c797af21069df593772a081b694d0edbb3f1d9aca526ddc414bb0992e3deb9aaf69ad197ddee3a5e3be6dd09043023d3abe385d2872a863829c
+  languageName: node
+  linkType: hard
+
 "nopt@npm:2 || 3":
   version: 3.0.6
   resolution: "nopt@npm:3.0.6::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Fnopt%2Fdownload%2Fnopt-3.0.6.tgz"
@@ -12890,7 +12987,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"npmlog@npm:0 || 1 || 2 || 3 || 4, npmlog@npm:^4.1.2":
+"npmlog@npm:0 || 1 || 2 || 3 || 4, npmlog@npm:^4.0.1, npmlog@npm:^4.1.2":
   version: 4.1.2
   resolution: "npmlog@npm:4.1.2::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Fnpmlog%2Fdownload%2Fnpmlog-4.1.2.tgz"
   dependencies:
@@ -14402,6 +14499,31 @@ fsevents@~2.3.1:
     nanoid: ^3.1.20
     source-map: ^0.6.1
   checksum: c661b093d245ef8e3b0340958f672e3abeb89627afa7064771dafafa49c80742f0b6e05c55ee5ab14aa1da2095aebfd69325778df8a90d4e41fdf685a76993f2
+  languageName: node
+  linkType: hard
+
+"prebuild-install@npm:^5.3.3":
+  version: 5.3.6
+  resolution: "prebuild-install@npm:5.3.6::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Fprebuild-install%2Fdownload%2Fprebuild-install-5.3.6.tgz"
+  dependencies:
+    detect-libc: ^1.0.3
+    expand-template: ^2.0.3
+    github-from-package: 0.0.0
+    minimist: ^1.2.3
+    mkdirp-classic: ^0.5.3
+    napi-build-utils: ^1.0.1
+    node-abi: ^2.7.0
+    noop-logger: ^0.1.1
+    npmlog: ^4.0.1
+    pump: ^3.0.0
+    rc: ^1.2.7
+    simple-get: ^3.0.3
+    tar-fs: ^2.0.0
+    tunnel-agent: ^0.6.0
+    which-pm-runs: ^1.0.0
+  bin:
+    prebuild-install: bin.js
+  checksum: 81ff157668dc26349e1f8076fce0ba990f45481e39a64645efad60c9ae2d61e73e3c420d56f5f38fbe6dc3275e8e27067d2613d941c778f41658a6110e544130
   languageName: node
   linkType: hard
 
@@ -16214,6 +16336,24 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
+"simple-concat@npm:^1.0.0":
+  version: 1.0.1
+  resolution: "simple-concat@npm:1.0.1::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Fsimple-concat%2Fdownload%2Fsimple-concat-1.0.1.tgz"
+  checksum: 4623960448a49731b5abeedc5430f8158c5caa05f10a685b405b13ed8532c80b5d99e6ef5d53f76a695e66f551cdbcca22c1363ceef8f8b246cda1e21b9ef871
+  languageName: node
+  linkType: hard
+
+"simple-get@npm:^3.0.3":
+  version: 3.1.0
+  resolution: "simple-get@npm:3.1.0::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Fsimple-get%2Fdownload%2Fsimple-get-3.1.0.tgz"
+  dependencies:
+    decompress-response: ^4.2.0
+    once: ^1.3.1
+    simple-concat: ^1.0.0
+  checksum: f56f08765eafde034b379d38d3dd1eb9b9ffb41d090d8216e71dce6ea3936499ee34b20942773a2605b08e8abce940691bd06e110ac12d08f83917493078831e
+  languageName: node
+  linkType: hard
+
 "simple-swizzle@npm:^0.2.2":
   version: 0.2.2
   resolution: "simple-swizzle@npm:0.2.2::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Fsimple-swizzle%2Fdownload%2Fsimple-swizzle-0.2.2.tgz"
@@ -17195,6 +17335,31 @@ fsevents@~2.3.1:
   version: 2.2.0
   resolution: "tapable@npm:2.2.0::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Ftapable%2Fdownload%2Ftapable-2.2.0.tgz"
   checksum: f8ed725aedb3d777bf908ff06c02d1a2108667d3e64af87dd45354ac8de67e7e4fe1a567e215057fb1a2a5437b31d80cc5e5ddbb8327f7280afd4494967a9a93
+  languageName: node
+  linkType: hard
+
+"tar-fs@npm:^2.0.0":
+  version: 2.1.1
+  resolution: "tar-fs@npm:2.1.1::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Ftar-fs%2Fdownload%2Ftar-fs-2.1.1.tgz"
+  dependencies:
+    chownr: ^1.1.1
+    mkdirp-classic: ^0.5.2
+    pump: ^3.0.0
+    tar-stream: ^2.1.4
+  checksum: 4739382487b6ed646670a52cac637c818ecdceb728eb4718847dfdaddd7322d8cce2ea9db160ba8ad2920194034fda7c307b44f4eeb50d244f198bd7e28f2914
+  languageName: node
+  linkType: hard
+
+"tar-stream@npm:^2.1.4":
+  version: 2.2.0
+  resolution: "tar-stream@npm:2.2.0::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Ftar-stream%2Fdownload%2Ftar-stream-2.2.0.tgz"
+  dependencies:
+    bl: ^4.0.3
+    end-of-stream: ^1.4.1
+    fs-constants: ^1.0.0
+    inherits: ^2.0.3
+    readable-stream: ^3.1.1
+  checksum: 7eec0a7fc8d0337729c1c2356d567a7527141d6ba0dd4804db979e17fc6389163e70fd4abdb855fc5ab54b944aeff7988e35e95ab6cee34a4156ca2d42980576
   languageName: node
   linkType: hard
 

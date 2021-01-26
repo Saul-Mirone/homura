@@ -10,7 +10,6 @@ const channelName = [
   'getPostById',
   'setPostUnread',
   'setPostStarred',
-  'countBy',
   'getPostByPreset',
   'markAllAsReadBySourceId',
   'sync',

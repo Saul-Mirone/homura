@@ -44,7 +44,6 @@ export class ChannelMain {
         this.setPostUnread(id, unread),
       setPostStarred: (_: Event, id: number, starred: boolean) =>
         this.setPostStarred(id, starred),
-      countBy: (_: Event, type?: 'unread' | 'starred') => this.db.countBy(type),
       getPostByPreset: (_: Event, preset: Preset) =>
         this.db.getPostByPreset(preset),
       markAllAsReadBySourceId: (_: Event, sourceId: number) =>

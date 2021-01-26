@@ -33,18 +33,22 @@ export class DB {
   private initialized: boolean;
 
   constructor() {
+    const dbPath = path.resolve(
+      app.getPath('appData'),
+      'homura',
+      '0.0.1',
+      'database.sqlite'
+    );
+    console.log(dbPath);
+    // const dbPath = ':memory:';
     this.sequelize = new Sequelize({
       dialect: 'sqlite',
-      storage: path.resolve(
-        app.getPath('appData'),
-        'homura',
-        '0.0.1',
-        'database.sqlite'
-      ),
+      storage: dbPath,
     });
     this.initialized = false;
   }
 
+  // @DONE
   public async init(): Promise<void> {
     initPost(this.sequelize);
     initSource(this.sequelize);
@@ -53,6 +57,7 @@ export class DB {
     this.initialized = true;
   }
 
+  // @DONE
   public async createSource({
     posts,
     ...sourceOptions
@@ -150,6 +155,7 @@ export class DB {
     );
   }
 
+  // @DONE
   public async updateSourceNameById(id: number, name: string): Promise<void> {
     this.checkInitialized();
     await Source.update(
@@ -162,6 +168,7 @@ export class DB {
     );
   }
 
+  // @DONE
   public async getSourceList(
     count: 'unread' | 'starred'
   ): Promise<GetSourceListResult> {
@@ -196,6 +203,7 @@ export class DB {
     return sourceList.map(({ id, sourceUrl }) => ({ id, sourceUrl }));
   }
 
+  // @DONE
   public async getSourceById(id: number): Promise<CreateSourceResult> {
     this.checkInitialized();
     const source = await Source.findByPk(id, {
@@ -221,6 +229,7 @@ export class DB {
     return source.toJSON();
   }
 
+  // @DONE
   public getPostByPreset(
     preset: Preset
   ): Promise<Array<PostJSON & { sourceName: string; icon: string | null }>> {
@@ -251,6 +260,7 @@ export class DB {
     }
   }
 
+  // @DONE
   public async getPostById(id: number): Promise<PostJSON> {
     this.checkInitialized();
     const post = await Post.findByPk(id, {
@@ -260,6 +270,7 @@ export class DB {
     return post.toJSON();
   }
 
+  // @DONE
   public async updatePostById(
     id: number,
     options: Partial<Pick<PostAttributes, 'unread' | 'starred'>>
@@ -272,6 +283,7 @@ export class DB {
     });
   }
 
+  // @DONE
   public async markAllPostsAsReadBySourceId(sourceId: number): Promise<void> {
     this.checkInitialized();
     await Post.update(
@@ -286,18 +298,7 @@ export class DB {
     );
   }
 
-  public countBy(type?: 'unread' | 'starred'): Promise<number> {
-    this.checkInitialized();
-    switch (type) {
-      case 'unread':
-        return Post.count({ where: { unread: true } });
-      case 'starred':
-        return Post.count({ where: { starred: true } });
-      default:
-        return Post.count();
-    }
-  }
-
+  // @DONE
   public async removeSourceById(id: number): Promise<void> {
     this.checkInitialized();
     await Post.destroy({
