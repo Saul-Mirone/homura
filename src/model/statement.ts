@@ -55,6 +55,9 @@ ON p.sourceId = s.id
 ${type !== undefined ? `WHERE p.${type} = 1` : ''}
 ORDER BY p.date DESC;`;
 
+export const updatePostStatusById = (type: 'unread' | 'starred') => `
+UPDATE posts SET ${type} = :value, updatedAt = CURRENT_TIMESTAMP WHERE id = :id ;`;
+
 export const deletePostsBySourceId = `
 DELETE FROM posts where sourceId = ? ;`;
 
@@ -63,9 +66,6 @@ DELETE FROM sources where id = ? ;`;
 
 export const updateSourceNameById = `
 UPDATE sources SET name = :name, updatedAt = CURRENT_TIMESTAMP WHERE id = :id ;`;
-
-export const updatePostById = (type: 'unread' | 'starred') => `
-UPDATE posts SET ${type} = :value, updatedAt = CURRENT_TIMESTAMP WHERE id = :id ;`;
 
 export const selectPostById = `
 SELECT id, title, link, content, unread, starred, date from posts where id = ? ;`;
