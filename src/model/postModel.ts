@@ -8,7 +8,7 @@ import {
   Optional,
   Sequelize,
 } from 'sequelize';
-import type { Source } from './source';
+import type { Source } from './sourceModel';
 
 export interface PostAttributes {
   id: number;

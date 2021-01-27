@@ -2,8 +2,13 @@ import { app } from 'electron';
 import path from 'path';
 import { FindOptions, Sequelize } from 'sequelize';
 import { Preset } from '../constants/Preset';
-import { CreatePostAttributes, initPost, Post, PostAttributes } from './post';
-import { CreateSourceAttributes, initSource, Source } from './source';
+import {
+  CreatePostAttributes,
+  initPost,
+  Post,
+  PostAttributes,
+} from './postModel';
+import { CreateSourceAttributes, initSource, Source } from './sourceModel';
 
 export type SourceJSON = ReturnType<Source['toJSON']>;
 export type PostJSON = ReturnType<Post['toJSON']>;

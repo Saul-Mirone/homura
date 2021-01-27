@@ -10,7 +10,7 @@ import {
   Optional,
   Sequelize,
 } from 'sequelize';
-import { Post } from './post';
+import { Post } from './postModel';
 
 export interface SourceAttributes {
   id: number;
