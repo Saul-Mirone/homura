@@ -13,11 +13,10 @@ type PostItem = {
   sourceId: number;
   title: string;
   sourceName: string;
-  link: string;
   unread: boolean;
   starred: boolean;
   date: ISOString;
-  icon: string | null;
+  icon?: string;
 };
 
 type TimeGroup = {
@@ -88,22 +87,19 @@ export const {
 } = listSlice.actions;
 
 const loadBySourceId = async (sourceId: number, mode: Mode) => {
-  const source = await channel.getSourceById(sourceId);
+  const posts = await channel.getSourceById(sourceId);
 
-  return source.posts
-    .map(
-      ({ id, title, unread, date, starred, sourceId: postSourceId, link }) => ({
-        id,
-        sourceId: postSourceId,
-        title,
-        link,
-        sourceName: source.name,
-        icon: source.icon,
-        date: date.toISOString(),
-        unread,
-        starred,
-      })
-    )
+  return posts
+    .map(({ id, title, unread, date, starred, name, icon }) => ({
+      id,
+      sourceId,
+      title,
+      sourceName: name,
+      icon,
+      date: date.toISOString(),
+      unread: unread === 1,
+      starred: starred === 1,
+    }))
     .filter((x) => {
       switch (mode) {
         case Mode.Starred:
@@ -118,25 +114,14 @@ const loadBySourceId = async (sourceId: number, mode: Mode) => {
 };
 const loadByPreset = async (preset: Preset) => {
   return (await channel.getPostByPreset(preset)).map(
-    ({
-      id,
-      title,
-      unread,
-      link,
-      date,
-      starred,
-      sourceId,
-      sourceName,
-      icon,
-    }) => ({
+    ({ id, title, unread, date, starred, name, icon, sourceId }) => ({
       id,
       sourceId,
       title,
-      link,
-      sourceName,
+      sourceName: name,
       icon,
-      unread,
-      starred,
+      unread: unread === 1,
+      starred: starred === 1,
       date: date.toISOString(),
     })
   );

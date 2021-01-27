@@ -14,5 +14,5 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.ts', '.json'],
   },
-  externals: ['sqlite3', 'sequelize'],
+  externals: ['better-sqlite3'],
 };

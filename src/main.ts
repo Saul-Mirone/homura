@@ -6,7 +6,7 @@ import path from 'path';
 import 'regenerator-runtime/runtime';
 import { ChannelMain } from './channel/main';
 import MenuBuilder from './menu';
-import { DB } from './model';
+import { DB } from './model/sqlite';
 
 declare const MAIN_WINDOW_WEBPACK_ENTRY: any;
 
@@ -40,13 +40,12 @@ const createWindow = async () => {
     return path.join(RESOURCES_PATH, ...paths);
   };
 
-  const connectWithDB = async (): Promise<void> => {
+  const connectWithDB = () => {
     const db = new DB();
-    await db.init();
     const rssParser = new ChannelMain(db);
     rssParser.listen();
   };
-  await connectWithDB();
+  connectWithDB();
 
   mainWindow = new BrowserWindow({
     show: false,

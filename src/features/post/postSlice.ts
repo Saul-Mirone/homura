@@ -49,13 +49,12 @@ export const selectPost = (state: RootState) => {
       activeId,
     };
 
-  const { title, sourceName, unread, starred, date, link } = target;
+  const { title, sourceName, unread, starred, date } = target;
 
   const post = {
     title,
     sourceName,
     unread,
-    link,
     date: DateTime.fromISO(date).toFormat(format),
     starred,
     content,

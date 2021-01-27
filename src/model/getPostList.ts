@@ -3,7 +3,7 @@ import { Preset } from '../constants/Preset';
 import { Post, PostStatus, Source } from './types';
 
 export const selectPostsBySourceId = (type?: PostStatus) => `
-SELECT s.name, s.icon, p.id, p.title, p.unread, p.starred, p.date
+SELECT s.name, s.icon, p.id, p.sourceId, p.title, p.unread, p.starred, p.date
 FROM sources s
 LEFT OUTER JOIN posts p
 ON s.id = p.sourceId
@@ -12,7 +12,7 @@ ${type !== undefined ? ` AND p.${type} = 1` : ''}
 ORDER BY p.date DESC;`;
 
 export const selectPostsByPreset = (type?: PostStatus) => `
-SELECT s.name, s.icon, p.id, p.title, p.unread, p.starred, p.date
+SELECT s.name, s.icon, p.id, p.sourceId, p.title, p.unread, p.starred, p.date
 FROM sources s
 LEFT OUTER JOIN posts p
 ON p.sourceId = s.id
@@ -28,7 +28,7 @@ export type GetPostListOptions =
 
 type PostList = Array<
   Pick<Source, 'name' | 'icon'> &
-    Pick<Post, 'id' | 'title' | 'unread' | 'starred' | 'date'>
+    Pick<Post, 'id' | 'title' | 'unread' | 'starred' | 'date' | 'sourceId'>
 >;
 
 export function getPostList(
