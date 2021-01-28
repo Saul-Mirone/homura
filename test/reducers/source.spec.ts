@@ -369,9 +369,8 @@ describe('reducers', () => {
             id: 4,
             name: '',
             sourceUrl: 'fake-url',
-            posts: Array(5).fill({}),
             link: 'fake-link',
-            icon: null,
+            count: 5,
           });
           await store.dispatch(
             subscribeToSource({ name: 'fake-name', mode: Mode.All })

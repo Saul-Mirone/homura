@@ -2392,6 +2392,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@testing-library/user-event@npm:^12.6.2":
+  version: 12.6.2
+  resolution: "@testing-library/user-event@npm:12.6.2::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40testing-library%2Fuser-event%2Fdownload%2F%40testing-library%2Fuser-event-12.6.2.tgz"
+  dependencies:
+    "@babel/runtime": ^7.12.5
+  peerDependencies:
+    "@testing-library/dom": ">=7.21.4"
+  checksum: 79d9b1c9ce252eadfaa646399cd49d312562ea787f5a41617bd891dba50a891acc146d9939079728cd1e09b12257aec66ded91d1668e79c648a091a5eff9e310
+  languageName: node
+  linkType: hard
+
 "@type-config/strict@npm:^1.1.1":
   version: 1.1.1
   resolution: "@type-config/strict@npm:1.1.1::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40type-config%2Fstrict%2Fdownload%2F%40type-config%2Fstrict-1.1.1.tgz"
@@ -8695,6 +8706,7 @@ fsevents@^1.2.7:
     "@testing-library/dom": ^7.26.6
     "@testing-library/jest-dom": ^5.11.5
     "@testing-library/react": ^11.1.1
+    "@testing-library/user-event": ^12.6.2
     "@type-config/strict": ^1.1.1
     "@types/better-sqlite3": ^5.4.1
     "@types/history": ^4.7.7

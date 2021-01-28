@@ -249,7 +249,7 @@ Array [
     },
     "payload": Object {
       "count": 5,
-      "icon": null,
+      "icon": undefined,
       "id": 4,
       "link": "fake-link",
       "name": "fake-name",
