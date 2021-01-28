@@ -17,9 +17,10 @@ export class DB {
   constructor() {
     const dbPath = ':memory:';
     this.sqlite = new Database(dbPath, { verbose: console.log });
+    this.initialize();
   }
 
-  public initialize() {
+  private initialize() {
     return initialize(this.sqlite);
   }
 

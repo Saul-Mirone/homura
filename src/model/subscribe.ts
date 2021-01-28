@@ -9,8 +9,10 @@ const insertPost = `
 INSERT INTO posts (id, sourceId, guid, title, link, content, unread, starred, date, createdAt, updatedAt)
 VALUES (NULL, :sourceId, :guid, :title, :link, :content, :unread, :starred, :date, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);`;
 
+const selectSource = `SELECT id, name, icon, link FROM sources where id = ? ;`;
+
 type CreateSourceOptions = Omit<Source, 'id'>;
-type CreatePostOptions = Omit<Post, 'id'>;
+type CreatePostOptions = Omit<Post, 'id' | 'date'> & { date: Date };
 
 export type SubscribePayload = CreateSourceOptions & {
   posts: Omit<CreatePostOptions, 'sourceId' | 'unread' | 'starred'>[];
@@ -19,18 +21,27 @@ export type SubscribePayload = CreateSourceOptions & {
 export function subscribe(db: Database, payload: SubscribePayload) {
   const { posts: createPostOptions, ...creatOptions } = payload;
 
-  const source: Source = db
+  const sourceInfo = db
     .prepare<CreateSourceOptions>(insertSource)
-    .get(creatOptions);
+    .run(creatOptions);
 
-  const posts: Post[] = createPostOptions.map((createPostOption) =>
-    db
-      .prepare<CreatePostOptions>(insertPost)
-      .get({ ...createPostOption, sourceId: source.id, unread: 1, starred: 0 })
-  );
+  const { lastInsertRowid } = sourceInfo;
+
+  createPostOptions.forEach((createPostOption) => {
+    const { date, ...rest } = createPostOption;
+    db.prepare<Omit<Post, 'id'>>(insertPost).run({
+      ...rest,
+      date: date.toISOString(),
+      sourceId: lastInsertRowid as number,
+      unread: 1,
+      starred: 0,
+    });
+  });
+
+  const source = db.prepare(selectSource).get(lastInsertRowid);
 
   return {
     ...source,
-    posts,
+    posts: [],
   };
 }

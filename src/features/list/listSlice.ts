@@ -96,7 +96,7 @@ const loadBySourceId = async (sourceId: number, mode: Mode) => {
       title,
       sourceName: name,
       icon,
-      date: date.toISOString(),
+      date,
       unread: unread === 1,
       starred: starred === 1,
     }))
@@ -122,7 +122,7 @@ const loadByPreset = async (preset: Preset) => {
       icon,
       unread: unread === 1,
       starred: starred === 1,
-      date: date.toISOString(),
+      date,
     })
   );
 };

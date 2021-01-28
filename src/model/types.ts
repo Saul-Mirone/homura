@@ -17,7 +17,7 @@ export interface Post {
   content: string;
   unread: Status;
   starred: Status;
-  date: Date;
+  date: string;
 }
 
 export type PostStatus = 'unread' | 'starred';

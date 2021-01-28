@@ -73,7 +73,7 @@ export class ChannelMain {
           link: item.link ?? '',
           guid: item.guid ?? item.id ?? item.isoDate ?? '',
           content: item['content:encoded'] ?? item.content ?? '',
-          date: new Date(item.isoDate as string),
+          date: new Date(item.isoDate as string).toISOString(),
         })),
       };
     });

@@ -32,7 +32,7 @@ const createPostsIndex = `PRAGMA INDEX_LIST(posts);`;
 
 export function initialize(db: Database) {
   db.prepare(createSourcesTable).run();
-  db.prepare(createSourcesIndex).run();
+  db.prepare(createSourcesIndex).get();
   db.prepare(createPostsTable).run();
-  db.prepare(createPostsIndex).run();
+  db.prepare(createPostsIndex).get();
 }

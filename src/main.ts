@@ -10,8 +10,6 @@ import { DB } from './model/sqlite';
 
 declare const MAIN_WINDOW_WEBPACK_ENTRY: any;
 
-let mainWindow: BrowserWindow | null = null;
-
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
   sourceMapSupport.install();
@@ -28,17 +26,21 @@ const installExtensions = async () => {
 };
 
 const createWindow = async () => {
+  console.log('--------createWindow------------');
+  console.log(process.env.NODE_ENV);
   if (process.env.NODE_ENV === 'development') {
     await installExtensions();
   }
 
   const RESOURCES_PATH = app.isPackaged
     ? path.join(process.resourcesPath, 'assets')
-    : path.join(__dirname, '../assets');
+    : path.join(__dirname, '../../assets');
 
   const getAssetPath = (...paths: string[]): string => {
     return path.join(RESOURCES_PATH, ...paths);
   };
+
+  console.log(getAssetPath('icon.png'));
 
   const connectWithDB = () => {
     const db = new DB();
@@ -47,7 +49,7 @@ const createWindow = async () => {
   };
   connectWithDB();
 
-  mainWindow = new BrowserWindow({
+  const mainWindow = new BrowserWindow({
     show: false,
     width: 1024,
     height: 728,
@@ -83,10 +85,6 @@ const createWindow = async () => {
     }
   });
 
-  mainWindow.on('closed', () => {
-    mainWindow = null;
-  });
-
   const menuBuilder = new MenuBuilder(mainWindow);
   menuBuilder.buildMenu();
 };
@@ -94,13 +92,13 @@ const createWindow = async () => {
 app.on('ready', createWindow);
 
 app.on('window-all-closed', () => {
-  // Respect the OSX convention of having the application in memory even
-  // after all windows have been closed
   if (process.platform !== 'darwin') {
     app.quit();
   }
 });
 
 app.on('activate', () => {
-  if (mainWindow === null) createWindow();
+  if (BrowserWindow.getAllWindows().length === 0) {
+    createWindow();
+  }
 });

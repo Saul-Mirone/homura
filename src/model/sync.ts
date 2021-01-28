@@ -11,7 +11,7 @@ const updateSourceById = `
 UPDATE sources SET link = :link, icon = :icon, updatedAt = CURRENT_TIMESTAMP WHERE id = :id ;`;
 
 const updatePostById = `
-UPDATE posts SET title = :title, content = :content, link = :link; updatedAt = CURRENT_TIMESTAMP FROM posts WHERE id = :id ;`;
+UPDATE posts SET title = :title, content = :content, link = :link, updatedAt = CURRENT_TIMESTAMP WHERE id = :id ;`;
 
 const insertPost = `
 INSERT INTO posts (id, sourceId, guid, title, link, content, unread, starred, date, createdAt, updatedAt)
