@@ -84,13 +84,11 @@ describe('reducers', () => {
       describe('fetchSources', () => {
         it('should action list match snapshot', async () => {
           const store = mockStore();
-          mockChannel.getSourceList.mockResolvedValue([
+          mockChannel.getSourceList.mockReturnValue([
             {
               id: 1,
-              icon: null,
               name: 'data-1',
               link: 'link-1',
-              sourceUrl: 'source-url-1',
               count: 2,
             },
             {
@@ -98,7 +96,6 @@ describe('reducers', () => {
               icon: 'test-icon',
               name: 'data-2',
               link: 'link-2',
-              sourceUrl: 'source-url-2',
               count: 10,
             },
           ]);
@@ -154,13 +151,11 @@ describe('reducers', () => {
       describe('syncSources', () => {
         it('should action list match snapshot', async () => {
           const store = mockStore();
-          mockChannel.getSourceList.mockResolvedValue([
+          mockChannel.getSourceList.mockReturnValue([
             {
               id: 1,
-              icon: null,
               name: 'data-1-sync',
               link: 'link-1-sync',
-              sourceUrl: 'source-url-1',
               count: 2,
             },
             {
@@ -168,7 +163,6 @@ describe('reducers', () => {
               icon: 'test-icon',
               name: 'data-2-sync',
               link: 'link-2-sync',
-              sourceUrl: 'source-url-2',
               count: 10,
             },
           ]);
@@ -365,10 +359,9 @@ describe('reducers', () => {
       describe('subscribeToSource', () => {
         it('should action list match snapshot', async () => {
           const store = mockStore();
-          mockChannel.confirm.mockResolvedValue({
+          mockChannel.confirm.mockReturnValue({
             id: 4,
             name: '',
-            sourceUrl: 'fake-url',
             link: 'fake-link',
             count: 5,
           });
@@ -380,13 +373,11 @@ describe('reducers', () => {
 
         it('should action list match snapshot when mode is Starred', async () => {
           const store = mockStore();
-          mockChannel.confirm.mockResolvedValue({
+          mockChannel.confirm.mockReturnValue({
             id: 4,
             name: '',
-            sourceUrl: 'fake-url',
-            posts: Array(5).fill({}),
             link: 'fake-link',
-            icon: null,
+            count: 5,
           });
           await store.dispatch(
             subscribeToSource({ name: 'fake-name', mode: Mode.Starred })

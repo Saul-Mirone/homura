@@ -69,7 +69,7 @@ Array [
     "payload": Array [
       Object {
         "count": 2,
-        "icon": null,
+        "icon": undefined,
         "id": 1,
         "link": "link-1",
         "name": "data-1",
@@ -284,7 +284,7 @@ Array [
     },
     "payload": Object {
       "count": 0,
-      "icon": null,
+      "icon": undefined,
       "id": 4,
       "link": "fake-link",
       "name": "fake-name",
@@ -334,7 +334,7 @@ Array [
     "payload": Array [
       Object {
         "count": 2,
-        "icon": null,
+        "icon": undefined,
         "id": 1,
         "link": "link-1-sync",
         "name": "data-1-sync",
