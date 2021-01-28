@@ -14,8 +14,8 @@ const updatePostById = `
 UPDATE posts SET title = :title, content = :content, link = :link, updatedAt = CURRENT_TIMESTAMP WHERE id = :id ;`;
 
 const insertPost = `
-INSERT INTO posts (id, sourceId, guid, title, link, content, unread, starred, date, createdAt, updatedAt)
-VALUES (NULL, :sourceId, :guid, :title, :link, :content, :unread, :starred, :date, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);`;
+INSERT INTO posts (id, sourceId, guid, title, link, content, date, createdAt, updatedAt)
+VALUES (NULL, :sourceId, :guid, :title, :link, :content, :date, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);`;
 
 const deletePostById = `
 DELETE FROM posts where id = ? ;`;
@@ -28,14 +28,7 @@ type UpdateSourcePayload = Pick<Source, 'link' | 'icon'> & {
 type PostItem = Pick<Post, 'id' | 'sourceId' | 'guid'>;
 type CreatePostPayload = Pick<
   Post,
-  | 'sourceId'
-  | 'guid'
-  | 'title'
-  | 'link'
-  | 'content'
-  | 'unread'
-  | 'starred'
-  | 'date'
+  'sourceId' | 'guid' | 'title' | 'link' | 'content' | 'date'
 >;
 type UpdatePostPayload = Pick<Post, 'title' | 'content' | 'link' | 'id'>;
 
@@ -74,8 +67,6 @@ export async function sync(db: Database, sourceToPayload: SourceToPayload) {
           db.prepare<CreatePostPayload>(insertPost).run({
             ...payload,
             sourceId: id,
-            unread: 1,
-            starred: 0,
           });
           return;
         }
