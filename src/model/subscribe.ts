@@ -18,7 +18,10 @@ export type SubscribePayload = CreateSourceOptions & {
   posts: Omit<CreatePostOptions, 'sourceId' | 'unread' | 'starred'>[];
 };
 
-export function subscribe(db: Database, payload: SubscribePayload) {
+export function subscribe(
+  db: Database,
+  payload: SubscribePayload
+): Pick<Source, 'id' | 'name' | 'icon' | 'link'> & { count: number } {
   const { posts: createPostOptions, ...creatOptions } = payload;
 
   const sourceInfo = db
@@ -34,10 +37,8 @@ export function subscribe(db: Database, payload: SubscribePayload) {
     });
   });
 
-  const source = db.prepare(selectSource).get(lastInsertRowid);
-
   return {
-    ...source,
-    posts: [],
+    ...db.prepare(selectSource).get(lastInsertRowid),
+    count: createPostOptions.length,
   };
 }

@@ -11,7 +11,7 @@ type SourceItem = {
   name: string;
   link: string;
   count: number;
-  icon: string | null;
+  icon?: string;
 };
 
 type SourceListState = {
@@ -23,9 +23,9 @@ type SourceListState = {
 type SourceSubscribeState = {
   subscribeLink: string;
   subscribeName: string;
-  subscribeStep: Step | null;
   subscribeStatus: Status;
-  subscribeError: null | string;
+  subscribeStep: Step | null;
+  subscribeError: string | null;
 };
 
 export type State = SourceListState & SourceSubscribeState;
@@ -107,14 +107,14 @@ export const searchUrlForSource = createAsyncThunk(
 export const subscribeToSource = createAsyncThunk(
   'source/subscribeToSource',
   async ({ name, mode }: { name: string; mode: Mode }) => {
-    const { posts, icon, link, id } = await channel.confirm(name);
+    const { count, icon, link, id } = await channel.confirm(name);
 
     return {
       id,
       name,
       link,
       icon,
-      count: mode === Mode.Starred ? 0 : posts.length,
+      count: mode === Mode.Starred ? 0 : count,
     };
   }
 );

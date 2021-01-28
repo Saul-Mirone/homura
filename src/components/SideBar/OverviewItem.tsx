@@ -31,7 +31,7 @@ export const OverviewItem: React.FC<OverViewItemProps> = ({
     }}
   >
     <div className="flex items-center overflow-x-hidden">
-      <LogoIcon url={null} icon={icon} />
+      <LogoIcon icon={icon} />
       <div className="text-xs ml-2 truncate">{target}</div>
     </div>
     {count > 0 && <div className="text-xs text-gray-500">{count}</div>}
