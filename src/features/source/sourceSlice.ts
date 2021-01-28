@@ -144,13 +144,20 @@ const sourceSlice = createSlice({
       state.subscribeStatus = Status.Idle;
     },
 
-    modifyCount: (
-      state,
-      action: PayloadAction<{ id: number; modifier: (x: number) => number }>
-    ) => {
-      const target = state.list.find((x) => x.id === action.payload.id);
+    setCountToZero: (state, action: PayloadAction<number>) => {
+      const target = state.list.find((x) => x.id === action.payload);
       if (!target) return;
-      target.count = action.payload.modifier(target.count);
+      target.count = 0;
+    },
+    incCount: (state, action: PayloadAction<number>) => {
+      const target = state.list.find((x) => x.id === action.payload);
+      if (!target) return;
+      target.count += 1;
+    },
+    decCount: (state, action: PayloadAction<number>) => {
+      const target = state.list.find((x) => x.id === action.payload);
+      if (!target) return;
+      target.count -= 1;
     },
   },
   extraReducers: (builder) =>
@@ -214,7 +221,9 @@ export const {
   resetSubscribeError,
   resetSubscribeState,
   showSubscribeBar,
-  modifyCount,
+  setCountToZero,
+  decCount,
+  incCount,
 } = sourceSlice.actions;
 
 export const sourceReducer = sourceSlice.reducer;

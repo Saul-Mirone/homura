@@ -85,7 +85,7 @@ export async function sync(db: Database, sourceToPayload: SourceToPayload) {
           content: payload.content,
           link: payload.link,
         });
-        posts = posts.filter((p) => p.id === target.id);
+        posts = posts.filter((p) => p.id !== target.id);
       });
     });
 

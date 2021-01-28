@@ -51,5 +51,3 @@ npm-debug.log.*
 !.yarn/plugins
 !.yarn/sdks
 !.yarn/versions
-
-out/
