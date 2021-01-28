@@ -27,12 +27,13 @@ type Child<T extends Record<string, Fn>> = {
 export function generateChild<
   T extends Record<typeof channelName[number], Fn>
 >(): Child<T> {
-  return channelName.reduce((acc, key) => {
-    return {
+  return channelName.reduce(
+    (acc, key) => ({
       ...acc,
       [key]: (...args: unknown[]) => ipcRenderer.invoke(key, ...args),
-    };
-  }, {}) as Child<T>;
+    }),
+    {}
+  ) as Child<T>;
 }
 
 export function listenToMain<T extends Record<typeof channelName[number], Fn>>(

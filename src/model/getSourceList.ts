@@ -9,10 +9,22 @@ SELECT id, name, icon, link, SUM(counter) as count FROM (
   ON p.sourceId = s.id
 ) t GROUP BY id;`;
 
-export type SourceList = Array<
-  Pick<Source, 'id' | 'name' | 'icon' | 'link'> & { count: number }
->;
+type SourceKeys = 'id' | 'name' | 'icon' | 'link';
+
+type SourceItem = Pick<Source, SourceKeys> & { count: number };
+
+export type SourceList = SourceItem[];
 
 export function getSourceList(db: Database, type: PostStatus): SourceList {
-  return db.prepare(selectSourcesWithPostsCountByType(type)).all();
+  return db
+    .prepare(selectSourcesWithPostsCountByType(type))
+    .all()
+    .map(({ icon, ...x }) =>
+      icon
+        ? {
+            ...x,
+            icon,
+          }
+        : x
+    );
 }

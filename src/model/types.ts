@@ -8,6 +8,8 @@ export interface Source {
   icon?: string;
 }
 
+type ISOString = string;
+
 export interface Post {
   id: number;
   sourceId: number;
@@ -17,7 +19,7 @@ export interface Post {
   content: string;
   unread: Status;
   starred: Status;
-  date: string;
+  date: ISOString;
 }
 
 export type PostStatus = 'unread' | 'starred';

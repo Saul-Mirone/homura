@@ -11,7 +11,7 @@ import { unsubscribe } from './unsubscribe';
 import { updatePostStatus, UpdatePostStatusOptions } from './updatePostStatus';
 import { updateSource, UpdateSourceOptions } from './updateSource';
 
-export class DB {
+export class Model {
   private readonly sqlite: Database.Database;
 
   constructor() {

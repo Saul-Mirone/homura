@@ -15,6 +15,7 @@ type PostItem = {
   sourceName: string;
   unread: boolean;
   starred: boolean;
+  link: string;
   date: ISOString;
   icon?: string;
 };
@@ -90,13 +91,14 @@ const loadBySourceId = async (sourceId: number, mode: Mode) => {
   const posts = await channel.getSourceById(sourceId);
 
   return posts
-    .map(({ id, title, unread, date, starred, name, icon }) => ({
+    .map(({ id, title, unread, date, starred, name, icon, link }) => ({
       id,
       sourceId,
       title,
       sourceName: name,
       icon,
       date,
+      link,
       unread: unread === 1,
       starred: starred === 1,
     }))
@@ -114,11 +116,12 @@ const loadBySourceId = async (sourceId: number, mode: Mode) => {
 };
 const loadByPreset = async (preset: Preset) => {
   return (await channel.getPostByPreset(preset)).map(
-    ({ id, title, unread, date, starred, name, icon, sourceId }) => ({
+    ({ id, title, unread, date, starred, name, icon, sourceId, link }) => ({
       id,
       sourceId,
       title,
       sourceName: name,
+      link,
       icon,
       unread: unread === 1,
       starred: starred === 1,

@@ -5,8 +5,8 @@ import { app, BrowserWindow, shell } from 'electron';
 import path from 'path';
 import 'regenerator-runtime/runtime';
 import { ChannelMain } from './channel/main';
-import MenuBuilder from './menu';
-import { DB } from './model/sqlite';
+import { MenuBuilder } from './menu';
+import { Model } from './model';
 
 declare const MAIN_WINDOW_WEBPACK_ENTRY: any;
 
@@ -26,8 +26,6 @@ const installExtensions = async () => {
 };
 
 const createWindow = async () => {
-  console.log('--------createWindow------------');
-  console.log(process.env.NODE_ENV);
   if (process.env.NODE_ENV === 'development') {
     await installExtensions();
   }
@@ -43,7 +41,7 @@ const createWindow = async () => {
   console.log(getAssetPath('icon.png'));
 
   const connectWithDB = () => {
-    const db = new DB();
+    const db = new Model();
     const rssParser = new ChannelMain(db);
     rssParser.listen();
   };

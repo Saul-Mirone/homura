@@ -1,7 +1,7 @@
 import { IpcMainInvokeEvent } from 'electron';
 import Parser from 'rss-parser';
 import { Preset } from '../constants/Preset';
-import { DB } from '../model/sqlite';
+import { Model } from '../model';
 import { PostStatus } from '../model/types';
 import { getFaviconByUrl } from '../utils';
 import { listenToMain } from './common';
@@ -16,7 +16,7 @@ type CheckResult = {
     title: string;
     link: string;
     content: string;
-    date: Date;
+    date: string;
   }>;
 };
 
@@ -28,7 +28,7 @@ export class ChannelMain {
 
   private checkResult: CheckResult | null;
 
-  constructor(private readonly db: DB) {
+  constructor(private readonly db: Model) {
     this.parser = new Parser();
     this.checkResult = null;
   }
@@ -73,7 +73,7 @@ export class ChannelMain {
           link: item.link ?? '',
           guid: item.guid ?? item.id ?? item.isoDate ?? '',
           content: item['content:encoded'] ?? item.content ?? '',
-          date: new Date(item.isoDate as string).toISOString(),
+          date: item.isoDate as string,
         })),
       };
     });
@@ -93,7 +93,7 @@ export class ChannelMain {
           link: item.link ?? '',
           guid: item.guid ?? item.id ?? item.isoDate ?? '',
           content: item['content:encoded'] ?? item.content ?? '',
-          date: new Date(item.isoDate as string),
+          date: item.isoDate as string,
         })),
       };
       return title;
