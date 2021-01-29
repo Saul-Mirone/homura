@@ -2,12 +2,12 @@
 
 exports[`SourceList component should match snapshot when list is empty 1`] = `
 <div
-  class="w-1/6 bg-gray-700 flex flex-col h-screen select-none"
+  class="sidebar-container"
   data-testid="source-side-bar"
   role="presentation"
 >
   <div
-    class="flex-1 thin-scroll relative"
+    class="relative flex-1 thin-scroll"
   >
     <div
       class=" rss-item"
@@ -16,10 +16,10 @@ exports[`SourceList component should match snapshot when list is empty 1`] = `
       tabindex="0"
     >
       <div
-        class="flex items-center overflow-x-hidden"
+        class="sidebar-overview-item"
       >
         <div
-          class="h-6 w-6 flex-shrink-0"
+          class="logo-icon"
         >
           <svg
             fill="none"
@@ -36,7 +36,7 @@ exports[`SourceList component should match snapshot when list is empty 1`] = `
           </svg>
         </div>
         <div
-          class="text-xs ml-2 truncate"
+          class="sidebar-overview-item__text"
         >
           All Items
         </div>
@@ -49,10 +49,10 @@ exports[`SourceList component should match snapshot when list is empty 1`] = `
       tabindex="0"
     >
       <div
-        class="flex items-center overflow-x-hidden"
+        class="sidebar-overview-item"
       >
         <div
-          class="h-6 w-6 flex-shrink-0"
+          class="logo-icon"
         >
           <svg
             fill="none"
@@ -69,7 +69,7 @@ exports[`SourceList component should match snapshot when list is empty 1`] = `
           </svg>
         </div>
         <div
-          class="text-xs ml-2 truncate"
+          class="sidebar-overview-item__text"
         >
           Archive
         </div>
@@ -85,12 +85,12 @@ exports[`SourceList component should match snapshot when list is empty 1`] = `
 
 exports[`SourceList component should match snapshot when list is not empty 1`] = `
 <div
-  class="w-1/6 bg-gray-700 flex flex-col h-screen select-none"
+  class="sidebar-container"
   data-testid="source-side-bar"
   role="presentation"
 >
   <div
-    class="flex-1 thin-scroll relative"
+    class="relative flex-1 thin-scroll"
   >
     <div
       class=" rss-item"
@@ -99,10 +99,10 @@ exports[`SourceList component should match snapshot when list is not empty 1`] =
       tabindex="0"
     >
       <div
-        class="flex items-center overflow-x-hidden"
+        class="sidebar-overview-item"
       >
         <div
-          class="h-6 w-6 flex-shrink-0"
+          class="logo-icon"
         >
           <svg
             fill="none"
@@ -119,13 +119,13 @@ exports[`SourceList component should match snapshot when list is not empty 1`] =
           </svg>
         </div>
         <div
-          class="text-xs ml-2 truncate"
+          class="sidebar-overview-item__text"
         >
           All Items
         </div>
       </div>
       <div
-        class="text-xs text-gray-500"
+        class="sidebar-overview-item__count"
       >
         24
       </div>
@@ -137,10 +137,10 @@ exports[`SourceList component should match snapshot when list is not empty 1`] =
       tabindex="0"
     >
       <div
-        class="flex items-center overflow-x-hidden"
+        class="sidebar-overview-item"
       >
         <div
-          class="h-6 w-6 flex-shrink-0"
+          class="logo-icon"
         >
           <svg
             fill="none"
@@ -157,7 +157,7 @@ exports[`SourceList component should match snapshot when list is not empty 1`] =
           </svg>
         </div>
         <div
-          class="text-xs ml-2 truncate"
+          class="sidebar-overview-item__text"
         >
           Archive
         </div>
@@ -173,10 +173,10 @@ exports[`SourceList component should match snapshot when list is not empty 1`] =
       tabindex="1"
     >
       <div
-        class="flex items-center overflow-x-hidden"
+        class="sidebar-item__container"
       >
         <div
-          class="h-6 w-6 flex-shrink-0"
+          class="logo-icon"
         >
           <svg
             fill="none"
@@ -193,13 +193,13 @@ exports[`SourceList component should match snapshot when list is not empty 1`] =
           </svg>
         </div>
         <div
-          class="text-xs ml-2 truncate"
+          class="ml-2 text-xs truncate"
         >
           data-1
         </div>
       </div>
       <div
-        class="text-xs text-gray-500"
+        class="sidebar-item__count"
       >
         24
       </div>
@@ -211,23 +211,20 @@ exports[`SourceList component should match snapshot when list is not empty 1`] =
       tabindex="2"
     >
       <div
-        class="flex items-center overflow-x-hidden"
+        class="sidebar-item__container"
       >
         <div
-          class="w-6 h-6 flex justify-center items-center bg-white rounded flex-shrink-0"
+          class="image-icon"
         >
-          <div
-            class="w-4 h-4"
-          >
+          <div>
             <img
               alt="icon"
-              class="object-cover w-full h-full"
               src="fake-icon-url"
             />
           </div>
         </div>
         <div
-          class="text-xs ml-2 truncate"
+          class="ml-2 text-xs truncate"
         >
           data-2
         </div>

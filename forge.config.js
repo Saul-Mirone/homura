@@ -1,7 +1,11 @@
+const path = require('path');
+
 const isProd = process.env.NODE_ENV === 'production';
 
 module.exports = {
-  packagerConfig: {},
+  packagerConfig: {
+    icon: path.resolve(__dirname, 'assets/icon.png'),
+  },
   makers: [
     {
       name: '@electron-forge/maker-squirrel',

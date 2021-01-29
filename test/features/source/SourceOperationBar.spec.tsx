@@ -15,13 +15,14 @@ function setup(
 ) {
   const initialSourceState = {
     list: [],
-    activeId: null,
+    activeId: undefined,
     fetchListStatus: Status.Idle,
+    syncListStatus: Status.Idle,
     subscribeLink: '',
     subscribeName: '',
-    subscribeStep: null,
+    subscribeStep: undefined,
     subscribeStatus: Status.Idle,
-    subscribeError: null,
+    subscribeError: undefined,
   };
   const state: {
     source: sourceSlice.State;

@@ -117,7 +117,7 @@
   "jest": {
     "testURL": "http://localhost/",
     "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/internals/mocks/fileMock.js",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/config/test/FileMock.js",
       "\\.(css|pcss)$": "identity-obj-proxy"
     },
     "moduleFileExtensions": [
@@ -134,7 +134,7 @@
       "node_modules"
     ],
     "setupFilesAfterEnv": [
-      "./config/SetupTest.js"
+      "<rootDir>/config/test/SetupTest.js"
     ]
   },
   "devDependencies": {

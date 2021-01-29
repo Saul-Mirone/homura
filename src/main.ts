@@ -30,16 +30,6 @@ const createWindow = async () => {
     await installExtensions();
   }
 
-  // const RESOURCES_PATH = app.isPackaged
-  //   ? path.join(process.resourcesPath, 'assets')
-  //   : path.join(__dirname, '../../assets');
-
-  // const getAssetPath = (...paths: string[]): string => {
-  //   return path.join(RESOURCES_PATH, ...paths);
-  // };
-
-  // console.log(getAssetPath('icon.png'));
-
   const connectWithDB = () => {
     const db = new Model();
     const rssParser = new ChannelMain(db);
@@ -51,7 +41,6 @@ const createWindow = async () => {
     show: false,
     width: 1024,
     height: 728,
-    // icon: getAssetPath('icon.png'),
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
