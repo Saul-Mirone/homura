@@ -1,4 +1,5 @@
 import React from 'react';
+import './style.pcss';
 
 export type SideBarProps = {
   overview: JSX.Element;
@@ -17,7 +18,7 @@ export const SideBar: React.FC<SideBarProps> = ({
       data-testid="source-side-bar"
       role="presentation"
       onClick={onClick}
-      className="flex flex-col w-1/6 h-screen bg-gray-700 select-none"
+      className="sidebar-container"
     >
       <div className="relative flex-1 thin-scroll">
         {overview}

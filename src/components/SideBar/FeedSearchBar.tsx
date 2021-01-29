@@ -34,11 +34,11 @@ export const FeedSearchBar: React.FC<FeedSearchBarProps> = ({
     <>
       {hasError && <Alert onClick={clickAlertError} />}
 
-      <div className="flex text-gray-800 bg-gray-300">
+      <div className="sidebar-feed-search-bar__container">
         <div className="flex-1">
           <input
             ref={inputEl}
-            className="p-2 w-full text-xs bg-transparent"
+            className="sidebar-feed-search-bar__input"
             placeholder="Feed URL"
             value={link}
             onChange={(e) => setLink(e.target.value)}
@@ -49,10 +49,8 @@ export const FeedSearchBar: React.FC<FeedSearchBarProps> = ({
           />
         </div>
         <IconContainer
-          className={`transition duration-300 ${
-            !loading
-              ? 'hover:bg-gray-700 hover:text-gray-300 text-gray-700'
-              : 'bg-gray-600 text-gray-300'
+          className={`sidebar-feed-search-bar__icon ${
+            !loading ? 'show' : 'loading'
           }`}
           disabled={loading}
           onClick={() => {

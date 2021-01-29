@@ -30,12 +30,10 @@ export const PostItem: React.FC<PostItemProps> = ({
       e.stopPropagation();
       onClick();
     }}
-    className={`${
-      active ? 'bg-gray-700' : ''
-    } leading-8 text-gray-300 flex items-center justify-start cursor-pointer px-3 py-2`}
+    className={`${active ? 'bg-gray-700' : ''} sub-side-bar__post-item`}
   >
     <RssLogoIcon url={icon} />
-    <div className="overflow-x-hidden ml-2 leading-tight">
+    <div className="sub-side-bar__post-item-content">
       <div className="flex items-center truncate">
         <div className="text-xs text-gray-600">{source}</div>
         {starred && (

@@ -1,0 +1,95 @@
+.sidebar-container {
+  @apply flex flex-col w-1/6 h-screen bg-gray-700 select-none;
+}
+
+.sidebar-alert {
+  @apply relative py-3 px-4 text-xs text-red-700 bg-red-100 rounded border border-red-400;
+}
+
+.sidebar-alert strong {
+  @apply font-bold;
+}
+
+.sidebar-alert__logo {
+  @apply absolute top-0 right-0 bottom-0 py-3 px-4;
+}
+
+.sidebar-alert__logo > div {
+  @apply w-4 h-4 text-red-700 cursor-pointer;
+}
+
+.sidebar-bottom-bar {
+  @apply flex relative justify-between text-gray-300;
+}
+
+.sidebar-bottom-bar__step {
+  @apply absolute inset-x-0 bottom-0 z-10;
+}
+
+.sidebar-feed-search-bar__container {
+  @apply flex text-gray-800 bg-gray-300;
+}
+
+.sidebar-feed-search-bar__input {
+  @apply p-2 w-full text-xs bg-transparent;
+}
+
+.sidebar-feed-search-bar__icon {
+  @apply transition duration-300;
+}
+
+.sidebar-feed-search-bar__icon.loading {
+  @apply bg-gray-600 text-gray-300;
+}
+
+.sidebar-feed-search-bar__icon.show {
+  @apply hover:bg-gray-700 hover:text-gray-300 text-gray-700;
+}
+
+.sidebar-subscribe-bar__link {
+  @apply p-2 text-xs truncate;
+}
+
+.sidebar-subscribe-bar__content {
+  @apply flex text-gray-800 bg-gray-300;
+}
+
+.sidebar-subscribe-bar__input {
+  @apply p-2 w-full text-xs bg-transparent;
+}
+
+.sidebar-subscribe-bar__icon {
+  @apply text-gray-700 transition duration-300 hover:bg-gray-700 hover:text-gray-300;
+}
+
+.sidebar-overview-item {
+  @apply flex overflow-x-hidden items-center;
+}
+
+.sidebar-overview-item__text {
+  @apply ml-2 text-xs truncate;
+}
+
+.sidebar-overview-item__count {
+  @apply text-xs text-gray-500;
+}
+
+.sidebar-item__container {
+  @apply flex overflow-x-hidden items-center;
+}
+
+.sidebar-item__count {
+  @apply text-xs text-gray-500;
+}
+
+.sidebar-item__input {
+  @apply px-2 ml-2 h-5 text-xs text-gray-800;
+}
+
+.sidebar-item__confirm-container {
+  @apply transition duration-300;
+}
+
+.sidebar-item__confirm-icon {
+  @apply text-gray-700 bg-white hover:text-gray-300 hover:bg-transparent;
+}

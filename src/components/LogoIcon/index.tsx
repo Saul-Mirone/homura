@@ -1,6 +1,7 @@
 import React from 'react';
 import { RssIcon } from '../Icon';
 import { ImageIcon } from './ImageIcon';
+import './style.pcss';
 
 export * from './IconContainer';
 export * from './ImageIcon';
@@ -15,7 +16,7 @@ export const LogoIcon: React.FC<Props> = ({ url, icon }) => {
     return <ImageIcon url={url} />;
   }
 
-  return <div className="flex-shrink-0 w-6 h-6">{icon}</div>;
+  return <div className="logo-icon">{icon}</div>;
 };
 
 export const RssLogoIcon: React.FC<{ url?: string }> = ({ url }) => {

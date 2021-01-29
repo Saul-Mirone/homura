@@ -22,9 +22,9 @@ export const BottomBar: React.FC<BottomBarProps> = ({
   render,
   loading,
 }) => (
-  <div role="toolbar" className="flex relative justify-between text-gray-300">
+  <div role="toolbar" className="sidebar-bottom-bar">
     {step !== undefined && (
-      <div className="absolute inset-x-0 bottom-0 z-10">{render(step)}</div>
+      <div className="sidebar-bottom-bar__step">{render(step)}</div>
     )}
     <IconContainer onClick={onClickPlus}>
       <PlusIcon />

@@ -3898,24 +3898,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"autoprefixer@npm:^9.8.6":
-  version: 9.8.6
-  resolution: "autoprefixer@npm:9.8.6::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Fautoprefixer%2Fdownload%2Fautoprefixer-9.8.6.tgz"
-  dependencies:
-    browserslist: ^4.12.0
-    caniuse-lite: ^1.0.30001109
-    colorette: ^1.2.1
-    normalize-range: ^0.1.2
-    num2fraction: ^1.2.2
-    postcss: ^7.0.32
-    postcss-value-parser: ^4.1.0
-  bin:
-    autoprefixer: bin/autoprefixer
-  checksum: b406d8047a97fcc39c9c6d208fd6f1974e5957800461d9a79457a3ecaca2c0ea090bd06f30c8653f48f751c31115c63a80502ff8c9a6bb7b8a5a5063021827d4
-  languageName: node
-  linkType: hard
-
-"autoprefixer@npm:latest":
+"autoprefixer@npm:^10.2.3":
   version: 10.2.3
   resolution: "autoprefixer@npm:10.2.3::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Fautoprefixer%2Fdownload%2Fautoprefixer-10.2.3.tgz"
   dependencies:
@@ -3930,6 +3913,23 @@ __metadata:
   bin:
     autoprefixer: bin/autoprefixer
   checksum: 18c9075d7af705de1de72108afe2b3bac454dfb97988a576a6f67b7a61a3dcc31e1da9c10911c34b536151ece291d117698549e838f690ba6b5de9a89d782a65
+  languageName: node
+  linkType: hard
+
+"autoprefixer@npm:^9.8.6":
+  version: 9.8.6
+  resolution: "autoprefixer@npm:9.8.6::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Fautoprefixer%2Fdownload%2Fautoprefixer-9.8.6.tgz"
+  dependencies:
+    browserslist: ^4.12.0
+    caniuse-lite: ^1.0.30001109
+    colorette: ^1.2.1
+    normalize-range: ^0.1.2
+    num2fraction: ^1.2.2
+    postcss: ^7.0.32
+    postcss-value-parser: ^4.1.0
+  bin:
+    autoprefixer: bin/autoprefixer
+  checksum: b406d8047a97fcc39c9c6d208fd6f1974e5957800461d9a79457a3ecaca2c0ea090bd06f30c8653f48f751c31115c63a80502ff8c9a6bb7b8a5a5063021827d4
   languageName: node
   linkType: hard
 
@@ -8737,7 +8737,7 @@ fsevents@^1.2.7:
     "@typescript-eslint/eslint-plugin": ^4.11.1
     "@typescript-eslint/parser": ^4.11.1
     "@webpack-cli/serve": ^1.2.1
-    autoprefixer: latest
+    autoprefixer: ^10.2.3
     babel-eslint: ^10.1.0
     babel-jest: ^26.1.0
     babel-loader: ^8.1.0
@@ -8791,7 +8791,7 @@ fsevents@^1.2.7:
     opencollective-postinstall: ^2.0.3
     optimize-css-assets-webpack-plugin: ^5.0.3
     pg-hstore: ^2.3.3
-    postcss: latest
+    postcss: ^8.2.4
     postcss-loader: ^4.1.0
     prettier: ^2.0.5
     prettier-plugin-organize-imports: ^1.1.1
@@ -8815,7 +8815,7 @@ fsevents@^1.2.7:
     stylelint: ^13.6.1
     stylelint-config-prettier: ^8.0.2
     stylelint-config-standard: ^20.0.0
-    tailwindcss: latest
+    tailwindcss: ^2.0.2
     terser-webpack-plugin: ^5.0.3
     typescript: ^4.0.3
     url-loader: ^4.1.0
@@ -13443,7 +13443,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.1.4, postcss@npm:^8.1.6, postcss@npm:^8.2.1, postcss@npm:latest":
+"postcss@npm:^8.1.4, postcss@npm:^8.1.6, postcss@npm:^8.2.1, postcss@npm:^8.2.4":
   version: 8.2.4
   resolution: "postcss@npm:8.2.4::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Fpostcss%2Fdownload%2Fpostcss-8.2.4.tgz"
   dependencies:
@@ -15982,7 +15982,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"tailwindcss@npm:latest":
+"tailwindcss@npm:^2.0.2":
   version: 2.0.2
   resolution: "tailwindcss@npm:2.0.2::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Ftailwindcss%2Fdownload%2Ftailwindcss-2.0.2.tgz"
   dependencies:

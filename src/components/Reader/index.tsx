@@ -1,5 +1,6 @@
 import React from 'react';
 import homura from '../../../assets/homura.png';
+import './style.pcss';
 
 type ReaderProps = {
   post?: {
@@ -13,16 +14,16 @@ type ReaderProps = {
 };
 
 export const Reader: React.FC<ReaderProps> = ({ post, toolkit }) => (
-  <div className="flex flex-col w-4/6 h-screen bg-gray-200">
+  <div className="reader-container">
     {post && toolkit}
 
     {post ? (
       <div className="thin-scroll">
-        <div className="container p-5 mx-auto prose">
+        <div className="reader-post">
           <hgroup>
-            <small className="uppercase">{post.date}</small>
-            <div className="leading-none">{post.sourceName}</div>
-            <h1 className="mb-0">{post.title}</h1>
+            <small>{post.date}</small>
+            <div>{post.sourceName}</div>
+            <h1>{post.title}</h1>
           </hgroup>
           <base href={post.link} />
           {/* eslint-disable-next-line react/no-danger */}
@@ -30,9 +31,9 @@ export const Reader: React.FC<ReaderProps> = ({ post, toolkit }) => (
         </div>
       </div>
     ) : (
-      <div className="flex justify-center items-center w-full h-full select-none">
-        <div className="w-40">
-          <img className="opacity-75" alt="homura" src={homura} />
+      <div className="reader-empty">
+        <div>
+          <img alt="homura" src={homura} />
         </div>
       </div>
     )}

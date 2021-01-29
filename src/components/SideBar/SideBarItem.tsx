@@ -74,7 +74,7 @@ export const SideBarItem: React.FC<SideBarItemProps> = ({
       <>
         <input
           data-testid={`source-list-item-${id}:edit-input`}
-          className="px-2 ml-2 h-5 text-xs text-gray-800"
+          className="sidebar-item__input"
           value={editedName}
           onChange={(e) => setEditedName(e.target.value)}
           onBlur={() => {
@@ -82,10 +82,10 @@ export const SideBarItem: React.FC<SideBarItemProps> = ({
             setIsEditing(false);
           }}
         />
-        <div className="transition duration-300">
+        <div className="sidebar-item__confirm-container">
           <IconContainerSmall
             testId={`source-list-item-${id}:edit-button`}
-            className="text-gray-700 bg-white hover:text-gray-300 hover:bg-transparent"
+            className="sidebar-item__confirm-icon"
             onClick={onConfirmEdit}
           >
             <CheckCircleFilledIcon />
@@ -106,11 +106,11 @@ export const SideBarItem: React.FC<SideBarItemProps> = ({
       onKeyDown={onClick}
       onClick={interceptClick}
     >
-      <div className="flex overflow-x-hidden items-center">
+      <div className="sidebar-item__container">
         <LogoIcon url={url} icon={icon} />
         {isEditing ? nameEditor : pureName}
       </div>
-      {count > 0 && <div className="text-xs text-gray-500">{count}</div>}
+      {count > 0 && <div className="sidebar-item__count">{count}</div>}
     </div>
   );
 };

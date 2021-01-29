@@ -28,21 +28,21 @@ export const FeedSubscribeBar: React.FC<FeedSubscribeBarProps> = ({
 
   return (
     <>
-      <div className="p-2 text-xs truncate">{link}</div>
-      <div className="flex text-gray-800 bg-gray-300">
+      <div className="sidebar-subscribe-bar__link">{link}</div>
+      <div className="sidebar-subscribe-bar__content">
         <div className="flex-1">
           <input
             ref={inputEl}
             value={name}
             onChange={onChange}
             onBlur={onBlur}
-            className="p-2 w-full text-xs bg-transparent"
+            className="sidebar-subscribe-bar__input"
             placeholder="Save as Name"
           />
         </div>
         <IconContainer
           onClick={onClick}
-          className="text-gray-700 transition duration-300 hover:bg-gray-700 hover:text-gray-300"
+          className="sidebar-subscribe-bar__icon"
         >
           <CheckCircleFilledIcon />
         </IconContainer>

@@ -1,0 +1,39 @@
+.sub-side-bar__container {
+  @apply flex flex-col w-1/6 h-screen select-none;
+}
+
+.sub-side-bar__bottom-container {
+  @apply flex justify-between text-gray-300;
+}
+
+.sub-side-bar__date-item {
+  @apply py-2 pl-8 text-xs text-gray-300 uppercase;
+}
+
+.sub-side-bar__post-item {
+  @apply leading-8 text-gray-300 flex items-center justify-start cursor-pointer px-3 py-2;
+}
+
+.sub-side-bar__post-item-content {
+  @apply overflow-x-hidden ml-2 leading-tight;
+}
+
+.sub-side-bar__search {
+  @apply p-2 cursor-pointer flex;
+}
+
+.sub-side-bar__search.active {
+  @apply rounded bg-gray-700;
+}
+
+.sub-side-bar__search-input {
+  @apply flex-1 px-2 w-full h-5 text-xs text-gray-200 bg-transparent;
+}
+
+.sub-side-bar__toolkit {
+  @apply flex justify-end;
+}
+
+.sub-side-bar__toolkit > div {
+  @apply inline-flex my-1 mr-1 text-gray-300 rounded border border-gray-300 divide-x;
+}
