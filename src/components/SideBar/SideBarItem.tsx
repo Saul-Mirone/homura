@@ -93,7 +93,7 @@ export const SideBarItem: React.FC<SideBarItemProps> = ({
         </div>
       </>
     ),
-    [editedName, id, name, onConfirmModify]
+    [editedName, id, name, onConfirmEdit]
   );
 
   return (
