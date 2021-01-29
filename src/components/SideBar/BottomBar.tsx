@@ -8,7 +8,7 @@ export enum Step {
 }
 
 export type BottomBarProps = {
-  step: Step | null;
+  step: Step | undefined;
   onClickPlus: () => void;
   onClickSync: () => void;
   render: (step: Step) => JSX.Element;
@@ -22,9 +22,9 @@ export const BottomBar: React.FC<BottomBarProps> = ({
   render,
   loading,
 }) => (
-  <div role="toolbar" className="relative flex justify-between text-gray-300">
-    {step !== null && (
-      <div className="absolute bottom-0 inset-x-0 z-10">{render(step)}</div>
+  <div role="toolbar" className="flex relative justify-between text-gray-300">
+    {step !== undefined && (
+      <div className="absolute inset-x-0 bottom-0 z-10">{render(step)}</div>
     )}
     <IconContainer onClick={onClickPlus}>
       <PlusIcon />

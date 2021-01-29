@@ -1,5 +1,3 @@
-export type Status = 0 | 1;
-
 export interface Source {
   id: number;
   name: string;
@@ -8,7 +6,7 @@ export interface Source {
   icon?: string;
 }
 
-type ISOString = string;
+export type ISOString = string;
 
 export interface Post {
   id: number;
@@ -17,8 +15,8 @@ export interface Post {
   link: string;
   title: string;
   content: string;
-  unread: Status;
-  starred: Status;
+  unread: boolean;
+  starred: boolean;
   date: ISOString;
 }
 

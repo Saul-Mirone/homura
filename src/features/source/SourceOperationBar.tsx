@@ -31,11 +31,11 @@ export const SourceOperationBar: React.FC = () => {
         case Step.EnterUrl: {
           return (
             <FeedSearchBar
-              onClickError={() => dispatch(resetSubscribeError())}
               hasError={subscribeError === 'ParseRSSFailed'}
               loading={loading}
-              onCancel={() => dispatch(resetSubscribeState())}
               onSearch={(inputLink) => dispatch(searchUrlForSource(inputLink))}
+              onCancel={() => dispatch(resetSubscribeState())}
+              onClickError={() => dispatch(resetSubscribeError())}
             />
           );
         }
@@ -69,7 +69,7 @@ export const SourceOperationBar: React.FC = () => {
       step={subscribeStep}
       loading={loading}
       onClickPlus={() => dispatch(showSubscribeBar())}
-      onClickSync={() => dispatch(syncSources(mode))}
+      onClickSync={() => dispatch(syncSources())}
       render={renderBottom}
     />
   );

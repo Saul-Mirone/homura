@@ -1,4 +1,5 @@
 import { Database } from 'better-sqlite3';
+import { isNil, negate, pickBy } from 'lodash';
 import { PostStatus, Source } from './types';
 
 export const selectSourcesWithPostsCountByType = (type: PostStatus) => `
@@ -19,12 +20,5 @@ export function getSourceList(db: Database, type: PostStatus): SourceList {
   return db
     .prepare(selectSourcesWithPostsCountByType(type))
     .all()
-    .map(({ icon, ...x }) =>
-      icon
-        ? {
-            ...x,
-            icon,
-          }
-        : x
-    );
+    .map((x) => pickBy(x, negate(isNil)) as SourceItem);
 }

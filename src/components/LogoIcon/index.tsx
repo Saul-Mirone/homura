@@ -15,7 +15,7 @@ export const LogoIcon: React.FC<Props> = ({ url, icon }) => {
     return <ImageIcon url={url} />;
   }
 
-  return <div className="h-6 w-6 flex-shrink-0">{icon}</div>;
+  return <div className="flex-shrink-0 w-6 h-6">{icon}</div>;
 };
 
 export const RssLogoIcon: React.FC<{ url?: string }> = ({ url }) => {

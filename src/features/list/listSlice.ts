@@ -4,21 +4,21 @@ import { channel } from '../../channel/child';
 import { format } from '../../constants/Date';
 import { Mode } from '../../constants/Mode';
 import { Preset } from '../../constants/Preset';
+import { Post, Source } from '../../model/types';
 import type { AppThunk, RootState } from '../../store';
 import { decCount, incCount, setCountToZero } from '../source/sourceSlice';
 
-type ISOString = string;
-type PostItem = {
-  id: number;
-  sourceId: number;
-  title: string;
-  sourceName: string;
-  unread: boolean;
-  starred: boolean;
-  link: string;
-  date: ISOString;
-  icon?: string;
-};
+type PostKeys =
+  | 'id'
+  | 'sourceId'
+  | 'title'
+  | 'unread'
+  | 'starred'
+  | 'link'
+  | 'date';
+
+type PostItem = Pick<Post, PostKeys> &
+  Pick<Source, 'icon'> & { sourceName: string };
 
 type TimeGroup = {
   time: string;
@@ -99,8 +99,8 @@ const loadBySourceId = async (sourceId: number, mode: Mode) => {
       icon,
       date,
       link,
-      unread: unread === 1,
-      starred: starred === 1,
+      unread,
+      starred,
     }))
     .filter((x) => {
       switch (mode) {
@@ -123,8 +123,8 @@ const loadByPreset = async (preset: Preset) => {
       sourceName: name,
       link,
       icon,
-      unread: unread === 1,
-      starred: starred === 1,
+      unread,
+      starred,
       date,
     })
   );

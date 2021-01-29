@@ -1,4 +1,5 @@
 import { Database } from 'better-sqlite3';
+import { assign, pick } from 'lodash';
 import { Post, Source } from './types';
 
 const selectSourcesUrl = `
@@ -58,26 +59,26 @@ export async function sync(db: Database, sourceToPayload: SourceToPayload) {
       });
       return [id, payloads] as const;
     })
-    .forEach(([id, payloads]) => {
-      payloads.forEach((payload) => {
-        const target = posts.find(
-          (post) => post.guid === payload.guid && post.sourceId === id
-        );
-        if (!target) {
-          db.prepare<CreatePostPayload>(insertPost).run({
-            ...payload,
-            sourceId: id,
-          });
-          return;
-        }
-        db.prepare<UpdatePostPayload>(updatePostById).run({
-          id: target.id,
-          title: payload.title,
-          content: payload.content,
-          link: payload.link,
-        });
-        posts = posts.filter((p) => p.id !== target.id);
+    .flatMap(([id, payloads]) =>
+      payloads.map((payload) => ({ ...payload, sourceId: id }))
+    )
+    .forEach((payload) => {
+      const target = posts.find(
+        (post) =>
+          post.guid === payload.guid && post.sourceId === payload.sourceId
+      );
+      if (!target) {
+        db.prepare<CreatePostPayload>(insertPost).run(payload);
+        return;
+      }
+
+      const { id } = target;
+      const params = assign(pick(payload, ['title', 'content', 'link']), {
+        id,
       });
+      db.prepare<UpdatePostPayload>(updatePostById).run(params);
+
+      posts = posts.filter((p) => p.id !== id);
     });
 
   posts.forEach((post) => db.prepare(deletePostById).run(post.id));

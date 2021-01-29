@@ -4,44 +4,42 @@ import { Step } from '../../components/SideBar/BottomBar';
 import { Mode } from '../../constants/Mode';
 import { Preset } from '../../constants/Preset';
 import { Status } from '../../constants/Status';
+import { Source } from '../../model/types';
 import type { RootState } from '../../store';
 
-type SourceItem = {
-  id: number;
-  name: string;
-  link: string;
-  count: number;
-  icon?: string;
-};
+type SourceKeys = 'id' | 'name' | 'link' | 'icon';
+type SourceItem = Pick<Source, SourceKeys> & { count: number };
 
 type SourceListState = {
-  activeId: number | Preset | null;
+  activeId: number | Preset | undefined;
   list: SourceItem[];
   fetchListStatus: Status;
+  syncListStatus: Status;
 };
 
 type SourceSubscribeState = {
   subscribeLink: string;
   subscribeName: string;
   subscribeStatus: Status;
-  subscribeStep: Step | null;
-  subscribeError: string | null;
+  subscribeStep: Step | undefined;
+  subscribeError: string | undefined;
 };
 
 export type State = SourceListState & SourceSubscribeState;
 
 const initialSourceList: SourceListState = {
   list: [],
-  activeId: null,
+  activeId: undefined,
   fetchListStatus: Status.Idle,
+  syncListStatus: Status.Idle,
 };
 
 const initialSourceSubscribeState: SourceSubscribeState = {
   subscribeLink: '',
   subscribeName: '',
-  subscribeStep: null,
+  subscribeStep: undefined,
   subscribeStatus: Status.Idle,
-  subscribeError: null,
+  subscribeError: undefined,
 };
 
 const initialState: State = {
@@ -49,31 +47,18 @@ const initialState: State = {
   ...initialSourceSubscribeState,
 };
 
-const fetchSourceListAPI = async (mode: Mode) => {
+const fetchSourceListAPI = (mode: Mode) => {
   const countType = mode === Mode.Starred ? 'starred' : 'unread';
-  const data = await channel.getSourceList(countType);
-  return data.map(({ id, name, icon, link, count }) => ({
-    id,
-    name,
-    icon,
-    link,
-    count,
-  }));
+  return channel.getSourceList(countType);
 };
 
 export const fetchSources = createAsyncThunk(
   'source/fetchSources',
-  (mode: Mode) => {
-    return fetchSourceListAPI(mode);
-  }
+  (mode: Mode) => fetchSourceListAPI(mode)
 );
 
-export const syncSources = createAsyncThunk(
-  'source/syncSources',
-  async (mode: Mode) => {
-    await channel.sync();
-    return fetchSourceListAPI(mode);
-  }
+export const syncSources = createAsyncThunk('source/syncSources', () =>
+  channel.sync()
 );
 
 export const unsubscribeById = createAsyncThunk(
@@ -125,7 +110,7 @@ const sourceSlice = createSlice({
   reducers: {
     setCurrentSource: (
       state,
-      action: PayloadAction<number | Preset | null>
+      action: PayloadAction<number | Preset | undefined>
     ) => {
       state.activeId = action.payload;
     },
@@ -134,11 +119,11 @@ const sourceSlice = createSlice({
       state.subscribeStatus = Status.Idle;
     },
     resetSubscribeError: (state) => {
-      state.subscribeError = null;
+      state.subscribeError = undefined;
     },
     resetSubscribeState: (state) => {
-      state.subscribeStep = null;
-      state.subscribeError = null;
+      state.subscribeStep = undefined;
+      state.subscribeError = undefined;
       state.subscribeLink = '';
       state.subscribeName = '';
       state.subscribeStatus = Status.Idle;
@@ -173,21 +158,20 @@ const sourceSlice = createSlice({
         state.fetchListStatus = Status.Failed;
       })
       .addCase(syncSources.pending, (state) => {
-        state.fetchListStatus = Status.Pending;
+        state.syncListStatus = Status.Pending;
       })
-      .addCase(syncSources.fulfilled, (state, action) => {
-        state.fetchListStatus = Status.Succeeded;
-        state.list = action.payload;
+      .addCase(syncSources.fulfilled, (state) => {
+        state.syncListStatus = Status.Succeeded;
       })
       .addCase(syncSources.rejected, (state) => {
-        state.fetchListStatus = Status.Failed;
+        state.syncListStatus = Status.Failed;
       })
       .addCase(unsubscribeById.fulfilled, (state, action) => {
-        state.activeId = null;
+        state.activeId = undefined;
         state.list = state.list.filter((x) => x.id !== action.payload);
       })
       .addCase(updateSourceById.fulfilled, (state, action) => {
-        state.activeId = null;
+        state.activeId = undefined;
         const target = state.list.find((x) => x.id === action.payload.id);
         if (!target) return;
         target.name = action.payload.name;
@@ -209,8 +193,8 @@ const sourceSlice = createSlice({
         state.subscribeStatus = Status.Succeeded;
         state.list.push(action.payload);
         state.activeId = id;
-        state.subscribeStep = null;
-        state.subscribeError = null;
+        state.subscribeStep = undefined;
+        state.subscribeError = undefined;
         state.subscribeLink = '';
         state.subscribeName = '';
       }),
@@ -231,12 +215,13 @@ export const sourceReducer = sourceSlice.reducer;
 export const selectSourceList = (state: RootState) => {
   const { source, mode } = state;
   const totalCount = source.list.reduce((acc, cur) => acc + cur.count, 0);
-  const { list, activeId } = source;
+  const { list, activeId, syncListStatus } = source;
 
   return {
     activeId,
     totalCount,
     mode,
+    syncStatus: syncListStatus,
     list: list.filter((x) => {
       if (mode === Mode.All || activeId === x.id) return true;
       return x.count > 0;
@@ -253,9 +238,12 @@ export const selectSourceOperation = (state: RootState) => {
     subscribeStatus,
     subscribeError,
     fetchListStatus,
+    syncListStatus,
   } = source;
   const loading =
-    subscribeStatus === Status.Pending || fetchListStatus === Status.Pending;
+    subscribeStatus === Status.Pending ||
+    fetchListStatus === Status.Pending ||
+    syncListStatus === Status.Pending;
   return {
     mode,
     subscribeLink,

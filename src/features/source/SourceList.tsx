@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { SideBar } from '../../components/SideBar';
 import { Header } from '../../components/SideBar/Header';
 import { SideBarItem } from '../../components/SideBar/SideBarItem';
+import { Status } from '../../constants/Status';
 import { AppDispatch } from '../../store';
 import {
   fetchSources,
@@ -15,17 +16,19 @@ import {
 
 export const SourceList: React.FC<{ bottom: JSX.Element }> = ({ bottom }) => {
   const dispatch = useDispatch<AppDispatch>();
-  const { list, activeId, mode, totalCount } = useSelector(selectSourceList);
-  const isFirstRender = React.useRef(true);
+  const { list, activeId, mode, totalCount, syncStatus } = useSelector(
+    selectSourceList
+  );
 
   React.useEffect(() => {
-    if (isFirstRender.current) {
-      dispatch(syncSources(mode));
-      isFirstRender.current = false;
-      return;
+    dispatch(syncSources());
+  }, [dispatch]);
+
+  React.useEffect(() => {
+    if (syncStatus === Status.Succeeded) {
+      dispatch(fetchSources(mode));
     }
-    dispatch(fetchSources(mode));
-  }, [dispatch, mode]);
+  }, [dispatch, mode, syncStatus]);
 
   const overview = (
     <Header
@@ -38,7 +41,11 @@ export const SourceList: React.FC<{ bottom: JSX.Element }> = ({ bottom }) => {
 
   return (
     <SideBar
-      onClick={() => dispatch(setCurrentSource(null))}
+      onClick={() => {
+        if (activeId) {
+          dispatch(setCurrentSource());
+        }
+      }}
       overview={overview}
       bottom={bottom}
     >

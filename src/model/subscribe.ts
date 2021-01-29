@@ -11,11 +11,22 @@ VALUES (NULL, :sourceId, :guid, :title, :link, :content, :date, CURRENT_TIMESTAM
 
 const selectSource = `SELECT id, name, icon, link FROM sources where id = ? ;`;
 
-type CreateSourceOptions = Omit<Source, 'id'>;
-type CreatePostOptions = Omit<Post, 'id'>;
+type CreateSourceKeys = 'sourceUrl' | 'name' | 'icon' | 'link';
+type CreatePostKeys =
+  | 'sourceId'
+  | 'guid'
+  | 'title'
+  | 'link'
+  | 'content'
+  | 'date';
+
+type CreateSourceOptions = Pick<Source, CreateSourceKeys>;
+type CreatePostOptions = Pick<Post, CreatePostKeys>;
+
+type PostParams = Omit<Post, 'id' | 'unread' | 'starred'>;
 
 export type SubscribePayload = CreateSourceOptions & {
-  posts: Omit<CreatePostOptions, 'sourceId' | 'unread' | 'starred'>[];
+  posts: Omit<CreatePostOptions, 'sourceId'>[];
 };
 
 export function subscribe(
@@ -30,12 +41,11 @@ export function subscribe(
 
   const { lastInsertRowid } = sourceInfo;
 
-  createPostOptions.forEach((createPostOption) => {
-    db.prepare<Omit<Post, 'id' | 'unread' | 'starred'>>(insertPost).run({
-      ...createPostOption,
-      sourceId: lastInsertRowid as number,
+  createPostOptions
+    .map((x) => ({ ...x, sourceId: lastInsertRowid as number }))
+    .forEach((params) => {
+      db.prepare<PostParams>(insertPost).run(params);
     });
-  });
 
   return {
     ...db.prepare(selectSource).get(lastInsertRowid),

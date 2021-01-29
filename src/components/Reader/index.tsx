@@ -13,12 +13,12 @@ type ReaderProps = {
 };
 
 export const Reader: React.FC<ReaderProps> = ({ post, toolkit }) => (
-  <div className="w-4/6 flex flex-col bg-gray-200 h-screen">
+  <div className="flex flex-col w-4/6 h-screen bg-gray-200">
     {post && toolkit}
 
     {post ? (
       <div className="thin-scroll">
-        <div className="container mx-auto prose p-5">
+        <div className="container p-5 mx-auto prose">
           <hgroup>
             <small className="uppercase">{post.date}</small>
             <div className="leading-none">{post.sourceName}</div>
@@ -30,7 +30,7 @@ export const Reader: React.FC<ReaderProps> = ({ post, toolkit }) => (
         </div>
       </div>
     ) : (
-      <div className="w-full h-full flex items-center justify-center select-none">
+      <div className="flex justify-center items-center w-full h-full select-none">
         <div className="w-40">
           <img className="opacity-75" alt="homura" src={homura} />
         </div>

@@ -47,7 +47,6 @@ module.exports = {
   },
   plugins: [
     new ForkTsCheckerWebpackPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
     new ReactRefreshWebpackPlugin(),
     new webpack.EnvironmentPlugin({ NODE_ENV: 'development' }),
   ],

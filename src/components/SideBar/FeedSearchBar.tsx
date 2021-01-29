@@ -34,11 +34,11 @@ export const FeedSearchBar: React.FC<FeedSearchBarProps> = ({
     <>
       {hasError && <Alert onClick={clickAlertError} />}
 
-      <div className="flex bg-gray-300 text-gray-800">
+      <div className="flex text-gray-800 bg-gray-300">
         <div className="flex-1">
           <input
             ref={inputEl}
-            className="w-full p-2 text-xs bg-transparent"
+            className="p-2 w-full text-xs bg-transparent"
             placeholder="Feed URL"
             value={link}
             onChange={(e) => setLink(e.target.value)}

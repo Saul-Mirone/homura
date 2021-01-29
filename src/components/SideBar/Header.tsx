@@ -13,7 +13,7 @@ export type HeaderProps = {
   mode: Mode;
   count: number;
   onClick: (target: Preset) => void;
-  active: Preset | number | null;
+  active: Preset | number | undefined;
 };
 
 export const Header: React.FC<HeaderProps> = ({

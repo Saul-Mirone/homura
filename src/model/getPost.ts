@@ -11,5 +11,10 @@ export function getPost(
   Post,
   'id' | 'title' | 'link' | 'content' | 'unread' | 'starred' | 'date'
 > {
-  return db.prepare(selectPostById).get(id);
+  const { unread, starred, ...rest } = db.prepare(selectPostById).get(id);
+  return {
+    ...rest,
+    unread: Boolean(unread),
+    starred: Boolean(starred),
+  };
 }

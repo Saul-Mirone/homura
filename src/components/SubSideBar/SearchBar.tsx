@@ -40,7 +40,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
           <input
             ref={inputRef}
             value={value}
-            className="flex-1 w-full h-5 text-xs px-2 bg-transparent text-gray-200"
+            className="flex-1 px-2 w-full h-5 text-xs text-gray-200 bg-transparent"
             onChange={(e) => setValue(e.target.value)}
           />
           <IconContainerSmall

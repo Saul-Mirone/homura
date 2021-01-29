@@ -29,7 +29,7 @@ export const SubSideBar: React.FC<SubSideBarProps> = ({
   <div
     role="presentation"
     onClick={onClick}
-    className="w-1/6 flex flex-col h-screen select-none"
+    className="flex flex-col w-1/6 h-screen select-none"
   >
     {header}
 
