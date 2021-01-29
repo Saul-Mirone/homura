@@ -28,7 +28,9 @@ module.exports = {
       {
         mainConfig: './config/webpack/webpack.main.config.js',
         renderer: {
-          config: './config/webpack/webpack.renderer.config.dev.js',
+          config: isProd
+            ? './config/webpack/webpack.renderer.config.prod.js'
+            : './config/webpack/webpack.renderer.config.dev.js',
           entryPoints: [
             {
               html: './src/index.html',

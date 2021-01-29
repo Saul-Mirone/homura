@@ -5,12 +5,12 @@
   "version": "0.0.1",
   "description": "Homura RSS Reader",
   "scripts": {
+    "start": "cross-env NODE_ENV=development electron-forge start",
     "lint": "cross-env NODE_ENV=development eslint . --cache --ext .js,.jsx,.ts,.tsx",
-    "test": "jest",
-    "package": "electron-forge package",
-    "publish": "electron-forge publish",
-    "start": "electron-forge start",
-    "make": "electron-forge make"
+    "package": "cross-env NODE_ENV=production electron-forge package",
+    "publish": "cross-env NODE_ENV=production electron-forge publish",
+    "make": "cross-env NODE_ENV=production electron-forge make",
+    "test": "jest"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [

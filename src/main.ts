@@ -1,8 +1,8 @@
-/* eslint global-require: off, no-console: off */
+/* eslint global-require: off */
 
 import 'core-js/stable';
 import { app, BrowserWindow, shell } from 'electron';
-import path from 'path';
+// import path from 'path';
 import 'regenerator-runtime/runtime';
 import { ChannelMain } from './channel/main';
 import { MenuBuilder } from './menu';
@@ -30,15 +30,15 @@ const createWindow = async () => {
     await installExtensions();
   }
 
-  const RESOURCES_PATH = app.isPackaged
-    ? path.join(process.resourcesPath, 'assets')
-    : path.join(__dirname, '../../assets');
+  // const RESOURCES_PATH = app.isPackaged
+  //   ? path.join(process.resourcesPath, 'assets')
+  //   : path.join(__dirname, '../../assets');
 
-  const getAssetPath = (...paths: string[]): string => {
-    return path.join(RESOURCES_PATH, ...paths);
-  };
+  // const getAssetPath = (...paths: string[]): string => {
+  //   return path.join(RESOURCES_PATH, ...paths);
+  // };
 
-  console.log(getAssetPath('icon.png'));
+  // console.log(getAssetPath('icon.png'));
 
   const connectWithDB = () => {
     const db = new Model();
@@ -51,7 +51,7 @@ const createWindow = async () => {
     show: false,
     width: 1024,
     height: 728,
-    icon: getAssetPath('icon.png'),
+    // icon: getAssetPath('icon.png'),
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
