@@ -3,6 +3,48 @@ import React from 'react';
 import { CheckCircleFilledIcon, RssIcon } from '../Icon';
 import { IconContainerSmall, LogoIcon } from '../LogoIcon';
 
+type NameEditorProps = {
+    id: number;
+    name: string;
+    finishEdit(): void;
+    onConfirmModify: (nextName: string) => void;
+};
+
+const NameEditor: React.FC<NameEditorProps> = ({ id, name, finishEdit, onConfirmModify }) => {
+    const [editedName, setEditedName] = React.useState(name);
+
+    const onConfirmEdit = () => {
+        onConfirmModify(editedName);
+        finishEdit();
+    };
+
+    return (
+        <>
+            <input
+                data-testid={`source-list-item-${id}:edit-input`}
+                className="sidebar-item__input"
+                value={editedName}
+                onChange={(e) => setEditedName(e.target.value)}
+                onBlur={() => {
+                    setEditedName(name);
+                    finishEdit();
+                }}
+            />
+            <div className="sidebar-item__confirm-container">
+                <IconContainerSmall
+                    testId={`source-list-item-${id}:edit-button`}
+                    className="sidebar-item__confirm-icon"
+                    onClick={onConfirmEdit}
+                >
+                    <CheckCircleFilledIcon />
+                </IconContainerSmall>
+            </div>
+        </>
+    );
+};
+
+const PureNameContent: React.FC<{ name: string }> = ({ name }) => <div className="ml-2 text-xs truncate">{name}</div>;
+
 export type SideBarItemProps = {
     id: number;
     name: string;
@@ -29,7 +71,8 @@ export const SideBarItem: React.FC<SideBarItemProps> = ({
 }) => {
     const divRef = React.useRef<HTMLDivElement>(null);
     const [isEditing, setIsEditing] = React.useState(false);
-    const [editedName, setEditedName] = React.useState(name);
+
+    const finishEdit = React.useCallback(() => setIsEditing(false), []);
 
     React.useEffect(() => {
         const { current } = divRef;
@@ -56,39 +99,6 @@ export const SideBarItem: React.FC<SideBarItemProps> = ({
         onClick();
     };
 
-    const onConfirmEdit = React.useCallback(() => {
-        onConfirmModify(editedName);
-        setIsEditing(false);
-    }, [editedName, onConfirmModify]);
-
-    const pureName = React.useMemo(() => <div className="ml-2 text-xs truncate">{name}</div>, [name]);
-    const nameEditor = React.useMemo(
-        () => (
-            <>
-                <input
-                    data-testid={`source-list-item-${id}:edit-input`}
-                    className="sidebar-item__input"
-                    value={editedName}
-                    onChange={(e) => setEditedName(e.target.value)}
-                    onBlur={() => {
-                        setEditedName(name);
-                        setIsEditing(false);
-                    }}
-                />
-                <div className="sidebar-item__confirm-container">
-                    <IconContainerSmall
-                        testId={`source-list-item-${id}:edit-button`}
-                        className="sidebar-item__confirm-icon"
-                        onClick={onConfirmEdit}
-                    >
-                        <CheckCircleFilledIcon />
-                    </IconContainerSmall>
-                </div>
-            </>
-        ),
-        [editedName, id, name, onConfirmEdit],
-    );
-
     return (
         <div
             ref={divRef}
@@ -101,7 +111,11 @@ export const SideBarItem: React.FC<SideBarItemProps> = ({
         >
             <div className="sidebar-item__container">
                 <LogoIcon url={url} icon={icon} />
-                {isEditing ? nameEditor : pureName}
+                {isEditing ? (
+                    <NameEditor id={id} name={name} onConfirmModify={onConfirmModify} finishEdit={finishEdit} />
+                ) : (
+                    <PureNameContent name={name} />
+                )}
             </div>
             {count > 0 && <div className="sidebar-item__count">{count}</div>}
         </div>
