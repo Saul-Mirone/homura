@@ -5,11 +5,11 @@ import { ArticleReader } from './ArticleReader';
 import { SourceBar } from './SourceBar';
 
 export const App: React.FC = () => {
-  return (
-    <Container>
-      <SourceBar />
-      <ArticleList />
-      <ArticleReader />
-    </Container>
-  );
+    return (
+        <Container>
+            <SourceBar />
+            <ArticleList />
+            <ArticleReader />
+        </Container>
+    );
 };

@@ -3,34 +3,26 @@ import { PlusIcon, RefreshIcon } from '../Icon';
 import { IconContainer } from '../LogoIcon';
 
 export enum Step {
-  EnterUrl,
-  EnterName,
+    EnterUrl,
+    EnterName,
 }
 
 export type BottomBarProps = {
-  step: Step | undefined;
-  onClickPlus: () => void;
-  onClickSync: () => void;
-  render: (step: Step) => JSX.Element;
-  loading: boolean;
+    step: Step | undefined;
+    onClickPlus: () => void;
+    onClickSync: () => void;
+    render: (step: Step) => JSX.Element;
+    loading: boolean;
 };
 
-export const BottomBar: React.FC<BottomBarProps> = ({
-  step,
-  onClickPlus,
-  onClickSync,
-  render,
-  loading,
-}) => (
-  <div role="toolbar" className="sidebar-bottom-bar">
-    {step !== undefined && (
-      <div className="sidebar-bottom-bar__step">{render(step)}</div>
-    )}
-    <IconContainer onClick={onClickPlus}>
-      <PlusIcon />
-    </IconContainer>
-    <IconContainer onClick={onClickSync}>
-      <RefreshIcon spin={loading} />
-    </IconContainer>
-  </div>
+export const BottomBar: React.FC<BottomBarProps> = ({ step, onClickPlus, onClickSync, render, loading }) => (
+    <div role="toolbar" className="sidebar-bottom-bar">
+        {step !== undefined && <div className="sidebar-bottom-bar__step">{render(step)}</div>}
+        <IconContainer onClick={onClickPlus}>
+            <PlusIcon />
+        </IconContainer>
+        <IconContainer onClick={onClickSync}>
+            <RefreshIcon spin={loading} />
+        </IconContainer>
+    </div>
 );

@@ -1,20 +1,20 @@
 {
-  "extends": "@type-config/strict",
-  "compilerOptions": {
-    "baseUrl": ".",
-    "target": "ES2018",
-    "module": "CommonJS",
-    "lib": ["dom", "esnext"],
-    "declaration": true,
-    "declarationMap": true,
-    "noEmit": true,
-    "jsx": "react",
-    "pretty": true,
-    "sourceMap": true,
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "esModuleInterop": true
-  },
-  "include": ["src"],
-  "exclude": ["node_modules", ".webpack"]
+    "extends": "@type-config/strict",
+    "compilerOptions": {
+        "baseUrl": ".",
+        "target": "ES2018",
+        "module": "CommonJS",
+        "lib": ["dom", "esnext"],
+        "declaration": true,
+        "declarationMap": true,
+        "noEmit": true,
+        "jsx": "react",
+        "pretty": true,
+        "sourceMap": true,
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "esModuleInterop": true
+    },
+    "include": ["src"],
+    "exclude": ["node_modules", ".webpack"]
 }

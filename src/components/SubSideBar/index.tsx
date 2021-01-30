@@ -5,42 +5,32 @@ import { SearchBar } from './SearchBar';
 import './style.pcss';
 
 export type Post = {
-  id: number;
-  name: string;
-  source: string;
-  icon?: string;
-  unread?: boolean;
-  active?: boolean;
+    id: number;
+    name: string;
+    source: string;
+    icon?: string;
+    unread?: boolean;
+    active?: boolean;
 };
 
 export type SubSideBarProps = {
-  header: JSX.Element;
-  onReadAll: () => void;
-  onSearch: (keywords: string) => void;
-  onClick: () => void;
+    header: JSX.Element;
+    onReadAll: () => void;
+    onSearch: (keywords: string) => void;
+    onClick: () => void;
 };
 
-export const SubSideBar: React.FC<SubSideBarProps> = ({
-  header,
-  children,
-  onReadAll,
-  onSearch,
-  onClick,
-}) => (
-  <div
-    role="presentation"
-    onClick={onClick}
-    className="sub-side-bar__container"
-  >
-    {header}
+export const SubSideBar: React.FC<SubSideBarProps> = ({ header, children, onReadAll, onSearch, onClick }) => (
+    <div role="presentation" onClick={onClick} className="sub-side-bar__container">
+        {header}
 
-    <div className="flex-1 thin-scroll">{children}</div>
+        <div className="flex-1 thin-scroll">{children}</div>
 
-    <div className="sub-side-bar__bottom-container">
-      <IconContainer onClick={onReadAll}>
-        <MailOpenIcon />
-      </IconContainer>
-      <SearchBar onSearch={onSearch} />
+        <div className="sub-side-bar__bottom-container">
+            <IconContainer onClick={onReadAll}>
+                <MailOpenIcon />
+            </IconContainer>
+            <SearchBar onSearch={onSearch} />
+        </div>
     </div>
-  </div>
 );

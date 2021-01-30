@@ -17,5 +17,5 @@ Prism.highlightAll();
 const store = configuredStore();
 
 document.addEventListener('DOMContentLoaded', () => {
-  render(<Root store={store} />, document.getElementById('root'));
+    render(<Root store={store} />, document.getElementById('root'));
 });

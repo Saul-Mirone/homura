@@ -1,39 +1,39 @@
 module.exports = {
-  future: {
-    removeDeprecatedGapUtilities: true,
-    purgeLayersByDefault: true,
-  },
-  purge: [],
-  theme: {
-    extend: {},
-    typography: {
-      default: {
-        css: {
-          code: {
-            color: 'none',
-            backgroundColor: 'none',
-          },
-          pre: {
-            color: 'none',
-            backgroundColor: 'none',
-            paddingTop: 'auto',
-            paddingLeft: 'auto',
-            paddingBottom: 'auto',
-            paddingRight: 'auto',
-          },
-          'pre code': {
-            padding: 'auto',
-            backgroundColor: 'auto',
-            borderWidth: 'auto',
-            borderRadius: 'auto',
-            color: 'auto',
-            lineHeight: 'auto',
-          },
-        },
-      },
+    future: {
+        removeDeprecatedGapUtilities: true,
+        purgeLayersByDefault: true,
     },
-  },
-  variants: {},
-  // eslint-disable-next-line global-require
-  plugins: [require('@tailwindcss/typography')],
+    purge: [],
+    theme: {
+        extend: {},
+        typography: {
+            default: {
+                css: {
+                    code: {
+                        color: 'none',
+                        backgroundColor: 'none',
+                    },
+                    pre: {
+                        color: 'none',
+                        backgroundColor: 'none',
+                        paddingTop: 'auto',
+                        paddingLeft: 'auto',
+                        paddingBottom: 'auto',
+                        paddingRight: 'auto',
+                    },
+                    'pre code': {
+                        padding: 'auto',
+                        backgroundColor: 'auto',
+                        borderWidth: 'auto',
+                        borderRadius: 'auto',
+                        color: 'auto',
+                        lineHeight: 'auto',
+                    },
+                },
+            },
+        },
+    },
+    variants: {},
+    // eslint-disable-next-line global-require
+    plugins: [require('@tailwindcss/typography')],
 };

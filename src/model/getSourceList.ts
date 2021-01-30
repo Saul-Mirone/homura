@@ -17,8 +17,8 @@ type SourceItem = Pick<Source, SourceKeys> & { count: number };
 export type SourceList = SourceItem[];
 
 export function getSourceList(db: Database, type: PostStatus): SourceList {
-  return db
-    .prepare(selectSourcesWithPostsCountByType(type))
-    .all()
-    .map((x) => pickBy(x, negate(isNil)) as SourceItem);
+    return db
+        .prepare(selectSourcesWithPostsCountByType(type))
+        .all()
+        .map((x) => pickBy(x, negate(isNil)) as SourceItem);
 }

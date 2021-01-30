@@ -7,18 +7,18 @@ export * from './IconContainer';
 export * from './ImageIcon';
 
 type Props = {
-  url?: string;
-  icon: JSX.Element | null;
+    url?: string;
+    icon: JSX.Element | null;
 };
 
 export const LogoIcon: React.FC<Props> = ({ url, icon }) => {
-  if (url !== null && url !== undefined) {
-    return <ImageIcon url={url} />;
-  }
+    if (url !== null && url !== undefined) {
+        return <ImageIcon url={url} />;
+    }
 
-  return <div className="logo-icon">{icon}</div>;
+    return <div className="logo-icon">{icon}</div>;
 };
 
 export const RssLogoIcon: React.FC<{ url?: string }> = ({ url }) => {
-  return <LogoIcon url={url} icon={<RssIcon />} />;
+    return <LogoIcon url={url} icon={<RssIcon />} />;
 };

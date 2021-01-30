@@ -7,33 +7,33 @@
 html,
 body,
 #app {
-  min-height: 100vh;
+    min-height: 100vh;
 }
 
 input:focus {
-  outline: none;
+    outline: none;
 }
 
 [role='button']:focus {
-  outline: none;
+    outline: none;
 }
 
 .thin-scroll {
-  @apply overflow-y-scroll;
+    @apply overflow-y-scroll;
 }
 
 .thin-scroll::-webkit-scrollbar {
-  @apply bg-transparent w-2;
+    @apply bg-transparent w-2;
 }
 
 .thin-scroll::-webkit-scrollbar-thumb {
-  @apply bg-gray-500 rounded-lg border-4 border-transparent bg-clip-content;
+    @apply bg-gray-500 rounded-lg border-4 border-transparent bg-clip-content;
 }
 
 .rss-item {
-  @apply leading-8 text-gray-300 flex items-center justify-between cursor-pointer px-3 py-2;
+    @apply leading-8 text-gray-300 flex items-center justify-between cursor-pointer px-3 py-2;
 }
 
 .rss-item.active {
-  @apply bg-gray-600;
+    @apply bg-gray-600;
 }

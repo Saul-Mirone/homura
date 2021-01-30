@@ -12,51 +12,51 @@ import { updatePostStatus, UpdatePostStatusOptions } from './updatePostStatus';
 import { updateSource, UpdateSourceOptions } from './updateSource';
 
 export class Model {
-  private readonly sqlite: Database.Database;
+    private readonly sqlite: Database.Database;
 
-  constructor() {
-    const dbPath = ':memory:';
-    this.sqlite = new Database(dbPath, { verbose: console.log });
-    this.initialize();
-  }
+    constructor() {
+        const dbPath = ':memory:';
+        this.sqlite = new Database(dbPath, { verbose: console.log });
+        this.initialize();
+    }
 
-  private initialize() {
-    return initialize(this.sqlite);
-  }
+    private initialize() {
+        return initialize(this.sqlite);
+    }
 
-  public subscribe(payload: SubscribePayload) {
-    return subscribe(this.sqlite, payload);
-  }
+    public subscribe(payload: SubscribePayload) {
+        return subscribe(this.sqlite, payload);
+    }
 
-  public unsubscribe(id: number) {
-    return unsubscribe(this.sqlite, id);
-  }
+    public unsubscribe(id: number) {
+        return unsubscribe(this.sqlite, id);
+    }
 
-  public getSourceList(type: PostStatus) {
-    return getSourceList(this.sqlite, type);
-  }
+    public getSourceList(type: PostStatus) {
+        return getSourceList(this.sqlite, type);
+    }
 
-  public getPostList(options: GetPostListOptions) {
-    return getPostList(this.sqlite, options);
-  }
+    public getPostList(options: GetPostListOptions) {
+        return getPostList(this.sqlite, options);
+    }
 
-  public updateSource(options: UpdateSourceOptions) {
-    return updateSource(this.sqlite, options);
-  }
+    public updateSource(options: UpdateSourceOptions) {
+        return updateSource(this.sqlite, options);
+    }
 
-  public markPostsAsRead(sourceId?: number) {
-    return markPostsAsRead(this.sqlite, sourceId);
-  }
+    public markPostsAsRead(sourceId?: number) {
+        return markPostsAsRead(this.sqlite, sourceId);
+    }
 
-  public updatePostStatus(options: UpdatePostStatusOptions) {
-    return updatePostStatus(this.sqlite, options);
-  }
+    public updatePostStatus(options: UpdatePostStatusOptions) {
+        return updatePostStatus(this.sqlite, options);
+    }
 
-  public getPost(id: number) {
-    return getPost(this.sqlite, id);
-  }
+    public getPost(id: number) {
+        return getPost(this.sqlite, id);
+    }
 
-  public sync(fn: SourceToPayload) {
-    return sync(this.sqlite, fn);
-  }
+    public sync(fn: SourceToPayload) {
+        return sync(this.sqlite, fn);
+    }
 }

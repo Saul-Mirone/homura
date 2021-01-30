@@ -12,13 +12,7 @@ VALUES (NULL, :sourceId, :guid, :title, :link, :content, :date, CURRENT_TIMESTAM
 const selectSource = `SELECT id, name, icon, link FROM sources where id = ? ;`;
 
 type CreateSourceKeys = 'sourceUrl' | 'name' | 'icon' | 'link';
-type CreatePostKeys =
-  | 'sourceId'
-  | 'guid'
-  | 'title'
-  | 'link'
-  | 'content'
-  | 'date';
+type CreatePostKeys = 'sourceId' | 'guid' | 'title' | 'link' | 'content' | 'date';
 
 type CreateSourceOptions = Pick<Source, CreateSourceKeys>;
 type CreatePostOptions = Pick<Post, CreatePostKeys>;
@@ -26,29 +20,27 @@ type CreatePostOptions = Pick<Post, CreatePostKeys>;
 type PostParams = Omit<Post, 'id' | 'unread' | 'starred'>;
 
 export type SubscribePayload = CreateSourceOptions & {
-  posts: Omit<CreatePostOptions, 'sourceId'>[];
+    posts: Omit<CreatePostOptions, 'sourceId'>[];
 };
 
 export function subscribe(
-  db: Database,
-  payload: SubscribePayload
+    db: Database,
+    payload: SubscribePayload,
 ): Pick<Source, 'id' | 'name' | 'icon' | 'link'> & { count: number } {
-  const { posts: createPostOptions, ...creatOptions } = payload;
+    const { posts: createPostOptions, ...creatOptions } = payload;
 
-  const sourceInfo = db
-    .prepare<CreateSourceOptions>(insertSource)
-    .run(creatOptions);
+    const sourceInfo = db.prepare<CreateSourceOptions>(insertSource).run(creatOptions);
 
-  const { lastInsertRowid } = sourceInfo;
+    const { lastInsertRowid } = sourceInfo;
 
-  createPostOptions
-    .map((x) => ({ ...x, sourceId: lastInsertRowid as number }))
-    .forEach((params) => {
-      db.prepare<PostParams>(insertPost).run(params);
-    });
+    createPostOptions
+        .map((x) => ({ ...x, sourceId: lastInsertRowid as number }))
+        .forEach((params) => {
+            db.prepare<PostParams>(insertPost).run(params);
+        });
 
-  return {
-    ...db.prepare(selectSource).get(lastInsertRowid),
-    count: createPostOptions.length,
-  };
+    return {
+        ...db.prepare(selectSource).get(lastInsertRowid),
+        count: createPostOptions.length,
+    };
 }

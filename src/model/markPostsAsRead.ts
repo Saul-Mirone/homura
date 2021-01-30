@@ -7,9 +7,9 @@ const updateAllPostsAsRead = `
 UPDATE posts SET unread = 0, updatedAt = CURRENT_TIMESTAMP;`;
 
 export function markPostsAsRead(db: Database, id?: number) {
-  if (id) {
-    return db.prepare(updateAllPostsAsReadBySourceId).run(id);
-  }
+    if (id) {
+        return db.prepare(updateAllPostsAsReadBySourceId).run(id);
+    }
 
-  return db.prepare(updateAllPostsAsRead).run();
+    return db.prepare(updateAllPostsAsRead).run();
 }

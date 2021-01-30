@@ -3,37 +3,30 @@ import { Preset } from '../../constants/Preset';
 import { LogoIcon } from '../LogoIcon';
 
 export type OverViewItemProps = {
-  testId?: string;
-  activeId: Preset | number | undefined;
-  target: Preset;
-  count: number;
-  icon: JSX.Element;
-  onClick: (target: Preset) => void;
+    testId?: string;
+    activeId: Preset | number | undefined;
+    target: Preset;
+    count: number;
+    icon: JSX.Element;
+    onClick: (target: Preset) => void;
 };
 
-export const OverviewItem: React.FC<OverViewItemProps> = ({
-  testId,
-  activeId,
-  target,
-  icon,
-  count,
-  onClick,
-}) => (
-  <div
-    role="button"
-    data-testid={testId}
-    tabIndex={0}
-    className={`${activeId === target ? 'active' : ''} rss-item`}
-    onKeyDown={() => onClick(target)}
-    onClick={(e) => {
-      e.stopPropagation();
-      onClick(target);
-    }}
-  >
-    <div className="sidebar-overview-item">
-      <LogoIcon icon={icon} />
-      <div className="sidebar-overview-item__text">{target}</div>
+export const OverviewItem: React.FC<OverViewItemProps> = ({ testId, activeId, target, icon, count, onClick }) => (
+    <div
+        role="button"
+        data-testid={testId}
+        tabIndex={0}
+        className={`${activeId === target ? 'active' : ''} rss-item`}
+        onKeyDown={() => onClick(target)}
+        onClick={(e) => {
+            e.stopPropagation();
+            onClick(target);
+        }}
+    >
+        <div className="sidebar-overview-item">
+            <LogoIcon icon={icon} />
+            <div className="sidebar-overview-item__text">{target}</div>
+        </div>
+        {count > 0 && <div className="sidebar-overview-item__count">{count}</div>}
     </div>
-    {count > 0 && <div className="sidebar-overview-item__count">{count}</div>}
-  </div>
 );

@@ -5,8 +5,8 @@ import { AppDispatch } from '../../store';
 import { selectMode, switchMode } from './modeSlice';
 
 export const Mode: React.FC = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  const mode = useSelector(selectMode);
+    const dispatch = useDispatch<AppDispatch>();
+    const mode = useSelector(selectMode);
 
-  return <Toolkit mode={mode} onSwitchMode={(m) => dispatch(switchMode(m))} />;
+    return <Toolkit mode={mode} onSwitchMode={(m) => dispatch(switchMode(m))} />;
 };

@@ -5,10 +5,10 @@ import { postReducer } from './features/post/postSlice';
 import { sourceReducer } from './features/source/sourceSlice';
 
 export function createRootReducer() {
-  return combineReducers({
-    mode: modeReducer,
-    source: sourceReducer,
-    list: listReducer,
-    post: postReducer,
-  });
+    return combineReducers({
+        mode: modeReducer,
+        source: sourceReducer,
+        list: listReducer,
+        post: postReducer,
+    });
 }

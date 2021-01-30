@@ -3,11 +3,11 @@ import { Mode } from '../../constants/Mode';
 import type { RootState } from '../../store';
 
 const modeSlice = createSlice({
-  name: 'mode',
-  initialState: Mode.All,
-  reducers: {
-    switchMode: (_, action: PayloadAction<Mode>) => action.payload,
-  },
+    name: 'mode',
+    initialState: Mode.All,
+    reducers: {
+        switchMode: (_, action: PayloadAction<Mode>) => action.payload,
+    },
 });
 
 export const { switchMode } = modeSlice.actions;

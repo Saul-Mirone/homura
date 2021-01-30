@@ -23,63 +23,52 @@ DELETE FROM posts where id = ? ;`;
 
 type SourceUrl = Pick<Source, 'id' | 'sourceUrl'>;
 type UpdateSourcePayload = Pick<Source, 'link' | 'icon'> & {
-  posts: Pick<Post, 'title' | 'link' | 'guid' | 'content' | 'date'>[];
+    posts: Pick<Post, 'title' | 'link' | 'guid' | 'content' | 'date'>[];
 };
 
 type PostItem = Pick<Post, 'id' | 'sourceId' | 'guid'>;
-type CreatePostPayload = Pick<
-  Post,
-  'sourceId' | 'guid' | 'title' | 'link' | 'content' | 'date'
->;
+type CreatePostPayload = Pick<Post, 'sourceId' | 'guid' | 'title' | 'link' | 'content' | 'date'>;
 type UpdatePostPayload = Pick<Post, 'title' | 'content' | 'link' | 'id'>;
 
-export type SourceToPayload = (
-  source: SourceUrl
-) => Promise<UpdateSourcePayload>;
+export type SourceToPayload = (source: SourceUrl) => Promise<UpdateSourcePayload>;
 
 export async function sync(db: Database, sourceToPayload: SourceToPayload) {
-  const sources: SourceUrl[] = db.prepare(selectSourcesUrl).all();
-  let posts: PostItem[] = db.prepare(selectPosts).all();
+    const sources: SourceUrl[] = db.prepare(selectSourcesUrl).all();
+    let posts: PostItem[] = db.prepare(selectPosts).all();
 
-  const data = await Promise.all(
-    sources.map(async (source) => {
-      const payload = await sourceToPayload(source);
+    const data = await Promise.all(
+        sources.map(async (source) => {
+            const payload = await sourceToPayload(source);
 
-      return [source.id, payload] as const;
+            return [source.id, payload] as const;
+        }),
+    );
+
+    data.map(([id, updatePayload]: readonly [number, UpdateSourcePayload]) => {
+        const { link, icon, posts: payloads } = updatePayload;
+        db.prepare(updateSourceById).run({
+            id,
+            link,
+            icon,
+        });
+        return [id, payloads] as const;
     })
-  );
+        .flatMap(([id, payloads]) => payloads.map((payload) => ({ ...payload, sourceId: id })))
+        .forEach((payload) => {
+            const target = posts.find((post) => post.guid === payload.guid && post.sourceId === payload.sourceId);
+            if (!target) {
+                db.prepare<CreatePostPayload>(insertPost).run(payload);
+                return;
+            }
 
-  data
-    .map(([id, updatePayload]: readonly [number, UpdateSourcePayload]) => {
-      const { link, icon, posts: payloads } = updatePayload;
-      db.prepare(updateSourceById).run({
-        id,
-        link,
-        icon,
-      });
-      return [id, payloads] as const;
-    })
-    .flatMap(([id, payloads]) =>
-      payloads.map((payload) => ({ ...payload, sourceId: id }))
-    )
-    .forEach((payload) => {
-      const target = posts.find(
-        (post) =>
-          post.guid === payload.guid && post.sourceId === payload.sourceId
-      );
-      if (!target) {
-        db.prepare<CreatePostPayload>(insertPost).run(payload);
-        return;
-      }
+            const { id } = target;
+            const params = assign(pick(payload, ['title', 'content', 'link']), {
+                id,
+            });
+            db.prepare<UpdatePostPayload>(updatePostById).run(params);
 
-      const { id } = target;
-      const params = assign(pick(payload, ['title', 'content', 'link']), {
-        id,
-      });
-      db.prepare<UpdatePostPayload>(updatePostById).run(params);
+            posts = posts.filter((p) => p.id !== id);
+        });
 
-      posts = posts.filter((p) => p.id !== id);
-    });
-
-  posts.forEach((post) => db.prepare(deletePostById).run(post.id));
+    posts.forEach((post) => db.prepare(deletePostById).run(post.id));
 }
