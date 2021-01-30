@@ -2,7 +2,7 @@
 
 exports[`SourceOperationBar component should match snapshot when list is empty 1`] = `
 <div
-  class="relative flex justify-between text-gray-300"
+  class="sidebar-bottom-bar"
   role="toolbar"
 >
   <div

@@ -2,30 +2,31 @@
 
 exports[`reducers source should handle initial state 1`] = `
 Object {
-  "activeId": null,
+  "activeId": undefined,
   "fetchListStatus": 0,
   "list": Array [],
-  "subscribeError": null,
+  "subscribeError": undefined,
   "subscribeLink": "",
   "subscribeName": "",
   "subscribeStatus": 0,
-  "subscribeStep": null,
+  "subscribeStep": undefined,
+  "syncListStatus": 0,
 }
 `;
 
 exports[`reducers source should handle resetSubscribeError 1`] = `
 Object {
-  "subscribeError": null,
+  "subscribeError": undefined,
 }
 `;
 
 exports[`reducers source should handle resetSubscribeState 1`] = `
 Object {
-  "subscribeError": null,
+  "subscribeError": undefined,
   "subscribeLink": "",
   "subscribeName": "",
   "subscribeStatus": 0,
-  "subscribeStep": null,
+  "subscribeStep": undefined,
 }
 `;
 
@@ -69,7 +70,6 @@ Array [
     "payload": Array [
       Object {
         "count": 2,
-        "icon": null,
         "id": 1,
         "link": "link-1",
         "name": "data-1",
@@ -249,7 +249,7 @@ Array [
     },
     "payload": Object {
       "count": 5,
-      "icon": null,
+      "icon": undefined,
       "id": 4,
       "link": "fake-link",
       "name": "fake-name",
@@ -284,7 +284,7 @@ Array [
     },
     "payload": Object {
       "count": 0,
-      "icon": null,
+      "icon": undefined,
       "id": 4,
       "link": "fake-link",
       "name": "fake-name",
@@ -306,11 +306,11 @@ Object {
       "name": "fake-data-1",
     },
   ],
-  "subscribeError": null,
+  "subscribeError": undefined,
   "subscribeLink": "",
   "subscribeName": "",
   "subscribeStatus": 2,
-  "subscribeStep": null,
+  "subscribeStep": undefined,
 }
 `;
 
@@ -331,22 +331,7 @@ Array [
       "requestId": "fake-request-id",
       "requestStatus": "fulfilled",
     },
-    "payload": Array [
-      Object {
-        "count": 2,
-        "icon": null,
-        "id": 1,
-        "link": "link-1-sync",
-        "name": "data-1-sync",
-      },
-      Object {
-        "count": 10,
-        "icon": "test-icon",
-        "id": 2,
-        "link": "link-2-sync",
-        "name": "data-2-sync",
-      },
-    ],
+    "payload": undefined,
     "type": "source/syncSources/fulfilled",
   },
 ]
@@ -354,24 +339,22 @@ Array [
 
 exports[`reducers source thunk syncSources should handle syncSources.fulfilled 1`] = `
 Object {
-  "fetchListStatus": 2,
-  "list": Array [
-    Object {
-      "name": "fake-data",
-    },
-  ],
+  "fetchListStatus": 0,
+  "syncListStatus": 2,
 }
 `;
 
 exports[`reducers source thunk syncSources should handle syncSources.pending 1`] = `
 Object {
-  "fetchListStatus": 1,
+  "fetchListStatus": 0,
+  "syncListStatus": 1,
 }
 `;
 
 exports[`reducers source thunk syncSources should handle syncSources.rejected 1`] = `
 Object {
-  "fetchListStatus": 3,
+  "fetchListStatus": 0,
+  "syncListStatus": 3,
 }
 `;
 
@@ -400,7 +383,7 @@ Array [
 
 exports[`reducers source thunk unsubscribeById should handle unsubscribeById.fulfilled 1`] = `
 Object {
-  "activeId": null,
+  "activeId": undefined,
   "list": Array [
     Object {
       "id": 1,
@@ -444,7 +427,7 @@ Array [
 
 exports[`reducers source thunk updateSourceById should handle updateSourceById.fulfilled 1`] = `
 Object {
-  "activeId": null,
+  "activeId": undefined,
   "list": Array [
     Object {
       "id": 1,

@@ -1,24 +1,21 @@
+// organize-imports-ignore
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
+import React from 'react';
+
 import Prism from 'prismjs';
-import 'prismjs/themes/prism-coy.css';
-import React, { Fragment } from 'react';
 import { render } from 'react-dom';
-import { AppContainer as ReactHotAppContainer } from 'react-hot-loader';
-import './app.pcss';
+import { Root } from './containers/Root';
 import { configuredStore } from './store';
+
+// organize-imports-ignore
+import 'prismjs/themes/prism-coy.css';
+import './app.pcss';
 
 Prism.highlightAll();
 
 const store = configuredStore();
 
-const AppContainer = process.env.PLAIN_HMR ? Fragment : ReactHotAppContainer;
-
 document.addEventListener('DOMContentLoaded', () => {
-  // eslint-disable-next-line global-require
-  const Root = require('./containers/Root').default;
-  render(
-    <AppContainer>
-      <Root store={store} />
-    </AppContainer>,
-    document.getElementById('root')
-  );
+  render(<Root store={store} />, document.getElementById('root'));
 });

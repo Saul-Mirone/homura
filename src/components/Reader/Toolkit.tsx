@@ -25,7 +25,7 @@ export const Toolkit: React.FC<ToolkitProps> = ({
 }) => {
   return (
     <div className="flex justify-end">
-      <div className="inline-flex text-gray-800 my-1 mr-1">
+      <div className="inline-flex my-1 mr-1 text-gray-800">
         <IconContainer
           className="py-1"
           onClick={() => onSwitchStarred(starred)}

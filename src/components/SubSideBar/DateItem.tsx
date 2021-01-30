@@ -6,7 +6,7 @@ export type DateItemProps = {
 
 export const DateItem: React.FC<DateItemProps> = ({ date, children }) => (
   <div className="mb-4">
-    <div className="uppercase text-gray-300 text-xs py-2 pl-8">{date}</div>
+    <div className="sub-side-bar__date-item">{date}</div>
     {children}
   </div>
 );

@@ -1,9 +1,10 @@
 import React from 'react';
+import './style.pcss';
 
 export type SideBarProps = {
   overview: JSX.Element;
   bottom: JSX.Element;
-  onClick: () => void;
+  onClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 };
 
 export const SideBar: React.FC<SideBarProps> = ({
@@ -17,9 +18,9 @@ export const SideBar: React.FC<SideBarProps> = ({
       data-testid="source-side-bar"
       role="presentation"
       onClick={onClick}
-      className="w-1/6 bg-gray-700 flex flex-col h-screen select-none"
+      className="sidebar-container"
     >
-      <div className="flex-1 thin-scroll relative">
+      <div className="relative flex-1 thin-scroll">
         {overview}
         <div className="pt-10" />
         {children}

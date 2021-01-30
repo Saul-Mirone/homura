@@ -1,6 +1,7 @@
 {
   "extends": "@type-config/strict",
   "compilerOptions": {
+    "baseUrl": ".",
     "target": "ES2018",
     "module": "CommonJS",
     "lib": ["dom", "esnext"],
@@ -11,13 +12,9 @@
     "pretty": true,
     "sourceMap": true,
     "moduleResolution": "node",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "esModuleInterop": true
   },
-  "exclude": [
-    "release",
-    "src/main.prod.js",
-    "src/renderer.prod.js",
-    "src/dist",
-    ".erb/dll"
-  ]
+  "include": ["src"],
+  "exclude": ["node_modules", ".webpack"]
 }

@@ -42,7 +42,6 @@ export const List: React.FC<{ header: JSX.Element }> = ({ header }) => {
           {posts.map(({ id, sourceName, title, icon, unread, starred }) => (
             <PostItem
               key={id.toString()}
-              id={id}
               active={id === activeId}
               name={title}
               source={sourceName}

@@ -83,7 +83,6 @@ describe('SourceList component', () => {
             id: 1,
             name: 'data-1',
             count: 24,
-            icon: null,
             link: 'link-1',
           },
           {
@@ -112,7 +111,6 @@ describe('SourceList component', () => {
             id: 1,
             name: 'data-1',
             count: 24,
-            icon: null,
             link: 'link-1',
           },
           {
@@ -155,7 +153,6 @@ describe('SourceList component', () => {
             id: 1,
             name: 'data-1',
             count: 24,
-            icon: null,
             link: 'link-1',
           },
           {

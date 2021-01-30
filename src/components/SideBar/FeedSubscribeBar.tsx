@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { CheckCircleFilledIcon } from '../Icon';
 import { IconContainer } from '../LogoIcon';
 
@@ -21,25 +21,28 @@ export const FeedSubscribeBar: React.FC<FeedSubscribeBarProps> = ({
     inputEl.current?.focus();
   }, []);
 
+  const onChange = (e: ChangeEvent<HTMLInputElement>) =>
+    setName(e.target.value);
+  const onBlur = () => onCancel();
+  const onClick = () => onConfirm(name);
+
   return (
     <>
-      <div className="p-2 text-xs truncate">{link}</div>
-      <div className="flex bg-gray-300 text-gray-800">
+      <div className="sidebar-subscribe-bar__link">{link}</div>
+      <div className="sidebar-subscribe-bar__content">
         <div className="flex-1">
           <input
             ref={inputEl}
             value={name}
-            onChange={(e) => setName(e.target.value)}
-            onBlur={() => {
-              onCancel();
-            }}
-            className="w-full p-2 text-xs bg-transparent"
+            onChange={onChange}
+            onBlur={onBlur}
+            className="sidebar-subscribe-bar__input"
             placeholder="Save as Name"
           />
         </div>
         <IconContainer
-          onClick={() => onConfirm(name)}
-          className="transition duration-300 text-gray-700 hover:bg-gray-700 hover:text-gray-300"
+          onClick={onClick}
+          className="sidebar-subscribe-bar__icon"
         >
           <CheckCircleFilledIcon />
         </IconContainer>

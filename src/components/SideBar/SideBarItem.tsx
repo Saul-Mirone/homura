@@ -12,19 +12,19 @@ export type SideBarItemProps = {
   onConfirmModify: (nextName: string) => void;
   active: boolean;
 
-  url: string | null;
+  url?: string;
   icon?: JSX.Element;
 };
 
 export const SideBarItem: React.FC<SideBarItemProps> = ({
   id,
   active,
-  onClick,
-  onUnsubscribe,
   name,
   count,
   url,
   onConfirmModify,
+  onClick,
+  onUnsubscribe,
   icon = <RssIcon />,
 }) => {
   const divRef = React.useRef<HTMLDivElement>(null);
@@ -54,6 +54,48 @@ export const SideBarItem: React.FC<SideBarItemProps> = ({
     };
   }, [onUnsubscribe]);
 
+  const interceptClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.stopPropagation();
+    if (isEditing) return;
+    onClick();
+  };
+
+  const onConfirmEdit = () => {
+    onConfirmModify(editedName);
+    setIsEditing(false);
+  };
+
+  const pureName = React.useMemo(
+    () => <div className="ml-2 text-xs truncate">{name}</div>,
+    [name]
+  );
+  const nameEditor = React.useMemo(
+    () => (
+      <>
+        <input
+          data-testid={`source-list-item-${id}:edit-input`}
+          className="sidebar-item__input"
+          value={editedName}
+          onChange={(e) => setEditedName(e.target.value)}
+          onBlur={() => {
+            setEditedName(name);
+            setIsEditing(false);
+          }}
+        />
+        <div className="sidebar-item__confirm-container">
+          <IconContainerSmall
+            testId={`source-list-item-${id}:edit-button`}
+            className="sidebar-item__confirm-icon"
+            onClick={onConfirmEdit}
+          >
+            <CheckCircleFilledIcon />
+          </IconContainerSmall>
+        </div>
+      </>
+    ),
+    [editedName, id, name, onConfirmEdit]
+  );
+
   return (
     <div
       ref={divRef}
@@ -62,44 +104,13 @@ export const SideBarItem: React.FC<SideBarItemProps> = ({
       data-testid={`source-list-item-${id}`}
       className={`${active ? 'active' : ''} rss-item`}
       onKeyDown={onClick}
-      onClick={(e) => {
-        e.stopPropagation();
-        if (isEditing) return;
-        onClick();
-      }}
+      onClick={interceptClick}
     >
-      <div className="flex items-center overflow-x-hidden">
+      <div className="sidebar-item__container">
         <LogoIcon url={url} icon={icon} />
-        {isEditing ? (
-          <>
-            <input
-              data-testid={`source-list-item-${id}:edit-input`}
-              className="text-xs text-gray-800 px-2 ml-2 h-5"
-              value={editedName}
-              onChange={(e) => setEditedName(e.target.value)}
-              onBlur={() => {
-                setEditedName(name);
-                setIsEditing(false);
-              }}
-            />
-            <div className="transition duration-300">
-              <IconContainerSmall
-                testId={`source-list-item-${id}:edit-button`}
-                className="bg-white text-gray-700 hover:text-gray-300 hover:bg-transparent"
-                onClick={() => {
-                  onConfirmModify(editedName);
-                  setIsEditing(false);
-                }}
-              >
-                <CheckCircleFilledIcon />
-              </IconContainerSmall>
-            </div>
-          </>
-        ) : (
-          <div className="text-xs ml-2 truncate">{name}</div>
-        )}
+        {isEditing ? nameEditor : pureName}
       </div>
-      {count > 0 && <div className="text-xs text-gray-500">{count}</div>}
+      {count > 0 && <div className="sidebar-item__count">{count}</div>}
     </div>
   );
 };

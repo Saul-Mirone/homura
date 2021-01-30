@@ -21,8 +21,8 @@ const ToolkitItem: React.FC<
 );
 
 export const Toolkit: React.FC<ToolKitProps> = ({ mode, onSwitchMode }) => (
-  <div className="flex justify-end">
-    <div className="inline-flex text-gray-300 divide-x border border-gray-300 rounded my-1 mr-1">
+  <div className="sub-side-bar__toolkit">
+    <div>
       <ToolkitItem
         mode={mode}
         onSwitchMode={onSwitchMode}

@@ -4,7 +4,7 @@ import { LogoIcon } from '../LogoIcon';
 
 export type OverViewItemProps = {
   testId?: string;
-  activeId: Preset | number | null;
+  activeId: Preset | number | undefined;
   target: Preset;
   count: number;
   icon: JSX.Element;
@@ -30,10 +30,10 @@ export const OverviewItem: React.FC<OverViewItemProps> = ({
       onClick(target);
     }}
   >
-    <div className="flex items-center overflow-x-hidden">
-      <LogoIcon url={null} icon={icon} />
-      <div className="text-xs ml-2 truncate">{target}</div>
+    <div className="sidebar-overview-item">
+      <LogoIcon icon={icon} />
+      <div className="sidebar-overview-item__text">{target}</div>
     </div>
-    {count > 0 && <div className="text-xs text-gray-500">{count}</div>}
+    {count > 0 && <div className="sidebar-overview-item__count">{count}</div>}
   </div>
 );

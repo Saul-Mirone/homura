@@ -2,6 +2,7 @@ import React from 'react';
 import { MailOpenIcon } from '../Icon';
 import { IconContainer } from '../LogoIcon';
 import { SearchBar } from './SearchBar';
+import './style.pcss';
 
 export type Post = {
   id: number;
@@ -29,13 +30,13 @@ export const SubSideBar: React.FC<SubSideBarProps> = ({
   <div
     role="presentation"
     onClick={onClick}
-    className="w-1/6 flex flex-col h-screen select-none"
+    className="sub-side-bar__container"
   >
     {header}
 
     <div className="flex-1 thin-scroll">{children}</div>
 
-    <div className="flex justify-between text-gray-300">
+    <div className="sub-side-bar__bottom-container">
       <IconContainer onClick={onReadAll}>
         <MailOpenIcon />
       </IconContainer>

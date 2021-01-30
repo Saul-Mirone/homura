@@ -19,11 +19,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   }, [active]);
 
   return (
-    <div
-      className={`p-2 cursor-pointer flex ${
-        active ? 'rounded bg-gray-700' : ''
-      }`}
-    >
+    <div className={`sub-side-bar__search ${active ? 'active' : ''}`}>
       <IconContainerSmall
         onClick={() => {
           if (!active) {
@@ -40,7 +36,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
           <input
             ref={inputRef}
             value={value}
-            className="flex-1 w-full h-5 text-xs px-2 bg-transparent text-gray-200"
+            className="sub-side-bar__search-input"
             onChange={(e) => setValue(e.target.value)}
           />
           <IconContainerSmall
