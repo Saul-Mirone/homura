@@ -19,6 +19,4 @@ export const LogoIcon: React.FC<Props> = ({ url, icon }) => {
     return <div className="logo-icon">{icon}</div>;
 };
 
-export const RssLogoIcon: React.FC<{ url?: string }> = ({ url }) => {
-    return <LogoIcon url={url} icon={<RssIcon />} />;
-};
+export const RssLogoIcon: React.FC<{ url?: string }> = ({ url }) => <LogoIcon url={url} icon={<RssIcon />} />;

@@ -10,20 +10,18 @@ type ToolkitProps = {
     onShare: () => void;
 };
 
-export const Toolkit: React.FC<ToolkitProps> = ({ starred, onSwitchStarred, unread, onSwitchUnread, onShare }) => {
-    return (
-        <div className="flex justify-end">
-            <div className="inline-flex my-1 mr-1 text-gray-800">
-                <IconContainer className="py-1" onClick={() => onSwitchStarred(starred)}>
-                    {starred ? <StarFilledIcon /> : <StarIcon />}
-                </IconContainer>
-                <IconContainer className="py-1" onClick={() => onSwitchUnread(unread)}>
-                    {unread ? <MailFilledIcon /> : <MailIcon />}
-                </IconContainer>
-                <IconContainer className="py-1" onClick={() => onShare()}>
-                    <ShareIcon />
-                </IconContainer>
-            </div>
+export const Toolkit: React.FC<ToolkitProps> = ({ starred, onSwitchStarred, unread, onSwitchUnread, onShare }) => (
+    <div className="flex justify-end">
+        <div className="inline-flex my-1 mr-1 text-gray-800">
+            <IconContainer className="py-1" onClick={() => onSwitchStarred(starred)}>
+                {starred ? <StarFilledIcon /> : <StarIcon />}
+            </IconContainer>
+            <IconContainer className="py-1" onClick={() => onSwitchUnread(unread)}>
+                {unread ? <MailFilledIcon /> : <MailIcon />}
+            </IconContainer>
+            <IconContainer className="py-1" onClick={() => onShare()}>
+                <ShareIcon />
+            </IconContainer>
         </div>
-    );
-};
+    </div>
+);
