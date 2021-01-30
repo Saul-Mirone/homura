@@ -60,10 +60,10 @@ export const SideBarItem: React.FC<SideBarItemProps> = ({
     onClick();
   };
 
-  const onConfirmEdit = () => {
+  const onConfirmEdit = React.useCallback(() => {
     onConfirmModify(editedName);
     setIsEditing(false);
-  };
+  }, [editedName, onConfirmModify]);
 
   const pureName = React.useMemo(
     () => <div className="ml-2 text-xs truncate">{name}</div>,

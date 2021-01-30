@@ -1,23 +1,45 @@
 module.exports = {
-  extends: 'erb',
+  root: true,
+  parser: '@typescript-eslint/parser',
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:jest/recommended',
+    'plugin:promise/recommended',
+    'plugin:react-hooks/recommended',
+    'plugin:prettier/recommended',
+    'prettier/@typescript-eslint',
+    'prettier/react',
+  ],
+  env: {
+    browser: true,
+    node: true,
+  },
   rules: {
-    // A temporary hack related to IDE not resolving correct package.json
-    'import/no-extraneous-dependencies': 'off',
-
     'react/prop-types': 'off',
     'import/prefer-default-export': 'off',
     'react/jsx-curly-newline': 'off',
-  },
-  parserOptions: {
-    ecmaVersion: 2020,
-    sourceType: 'module',
-    project: './tsconfig.json',
-    tsconfigRootDir: __dirname,
-    createDefaultProgram: true,
+
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
+
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
   },
   settings: {
-    'import/parsers': {
-      '@typescript-eslint/parser': ['.ts', '.tsx'],
+    react: {
+      version: 'detect',
     },
   },
+  overrides: [
+    {
+      files: ['**/*.js'],
+      rules: {
+        'global-require': 'off',
+        '@typescript-eslint/no-require-imports': 'off',
+        '@typescript-eslint/no-var-requires': 'off',
+        '@typescript-eslint/naming-convention': 'off',
+      },
+    },
+  ],
 };

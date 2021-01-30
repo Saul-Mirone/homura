@@ -1,21 +1,20 @@
-/* eslint global-require: off */
-
+// organize-imports-ignore
 import 'core-js/stable';
-import { app, BrowserWindow, shell } from 'electron';
-// import path from 'path';
 import 'regenerator-runtime/runtime';
+
+import { app, BrowserWindow, shell } from 'electron';
 import { ChannelMain } from './channel/main';
 import { MenuBuilder } from './menu';
 import { Model } from './model';
 
-declare const MAIN_WINDOW_WEBPACK_ENTRY: any;
-
 if (process.env.NODE_ENV === 'production') {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   const sourceMapSupport = require('source-map-support');
   sourceMapSupport.install();
 }
 
 const installExtensions = async () => {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   const installer = require('electron-devtools-installer');
   const forceDownload = !!process.env.UPGRADE_EXTENSIONS;
   const extensions = ['REACT_DEVELOPER_TOOLS', 'REDUX_DEVTOOLS'];
@@ -55,7 +54,7 @@ const createWindow = async () => {
   }
 
   mainWindow.once('ready-to-show', () => {
-    mainWindow!.show();
+    mainWindow.show();
   });
 
   mainWindow.webContents.on('will-navigate', (e, url) => {

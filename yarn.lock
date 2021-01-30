@@ -2927,7 +2927,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:^4.11.1":
+"@typescript-eslint/eslint-plugin@npm:^4.14.1":
   version: 4.14.1
   resolution: "@typescript-eslint/eslint-plugin@npm:4.14.1::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40typescript-eslint%2Feslint-plugin%2Fdownload%2F%40typescript-eslint%2Feslint-plugin-4.14.1.tgz"
   dependencies:
@@ -2997,7 +2997,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:^4.11.1":
+"@typescript-eslint/parser@npm:^4.14.1":
   version: 4.14.1
   resolution: "@typescript-eslint/parser@npm:4.14.1::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40typescript-eslint%2Fparser%2Fdownload%2F%40typescript-eslint%2Fparser-4.14.1.tgz"
   dependencies:
@@ -4366,15 +4366,6 @@ __metadata:
   dependencies:
     pako: ~1.0.5
   checksum: 877c864e68a3f1dc9355eea71ee84c894c40f906f737bdf1e5d98d3641182099208e757356b5906160f0b2b22fa4976c4534ac1782bbdd39823b605ae2210f9a
-  languageName: node
-  linkType: hard
-
-"browserslist-config-erb@npm:^0.0.1":
-  version: 0.0.1
-  resolution: "browserslist-config-erb@npm:0.0.1::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Fbrowserslist-config-erb%2Fdownload%2Fbrowserslist-config-erb-0.0.1.tgz"
-  peerDependencies:
-    electron: ^7.0.0
-  checksum: c51bac173546c9e06c44439df225dc949766f0758ec376c4bbf17dddcdad843ea72386f7969e16da6067ff2bda80851de0d29c2db0682c9afdc9dea8762d4e58
   languageName: node
   linkType: hard
 
@@ -6881,43 +6872,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-erb@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "eslint-config-erb@npm:2.0.0::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Feslint-config-erb%2Fdownload%2Feslint-config-erb-2.0.0.tgz"
-  dependencies:
-    babel-eslint: ^10.1.0
+"eslint-config-prettier@npm:^7.2.0":
+  version: 7.2.0
+  resolution: "eslint-config-prettier@npm:7.2.0::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Feslint-config-prettier%2Fdownload%2Feslint-config-prettier-7.2.0.tgz"
   peerDependencies:
-    eslint: ^7.2.0
-    eslint-config-airbnb: ^18.1.0
-    eslint-config-airbnb-typescript: ^8.0.2
-    eslint-config-prettier: ^6.11.0
-    eslint-import-resolver-webpack: ^0.12.2
-    eslint-plugin-compat: ^3.7.0
-    eslint-plugin-import: ^2.21.2
-    eslint-plugin-jest: ^23.13.2
-    eslint-plugin-jsx-a11y: 6.2.3
-    eslint-plugin-prettier: ^3.1.4
-    eslint-plugin-promise: ^4.2.1
-    eslint-plugin-react: ^7.20.0
-    eslint-plugin-react-hooks: ^4.0.4
-    eslint-plugin-testcafe: ^0.2.1
-    jest: ^26.0.1
-    prettier: ^2.0.5
-    react: ^16.13.1
-  checksum: fe83d37298424457f1b23b32f23697739a7807b88a8de3adcdb13e8e3b898abaf5c072e0923601579d7fa5ed09fc8df67c25d60278007cdc769493178541ea17
-  languageName: node
-  linkType: hard
-
-"eslint-config-prettier@npm:^6.11.0":
-  version: 6.15.0
-  resolution: "eslint-config-prettier@npm:6.15.0::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Feslint-config-prettier%2Fdownload%2Feslint-config-prettier-6.15.0.tgz"
-  dependencies:
-    get-stdin: ^6.0.0
-  peerDependencies:
-    eslint: ">=3.14.1"
+    eslint: ">=7.0.0"
   bin:
-    eslint-config-prettier-check: bin/cli.js
-  checksum: a790bc61699e43a2edc5453488576cd977fad3b3cf99c129c10760ce6970d422923fddf80b65b2b10a93c00af0180a854e4b7824cc268e5957826cbe5b969e90
+    eslint-config-prettier: bin/cli.js
+  checksum: 6812150ea49703cd64035527205b4905bc1edcd34646e71f71665e1acff9ab4648f872598389bdb209964093ad73993830a2c821ba12642764a5293513b92a58
   languageName: node
   linkType: hard
 
@@ -7048,7 +7010,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-prettier@npm:^3.1.4":
+"eslint-plugin-prettier@npm:^3.3.1":
   version: 3.3.1
   resolution: "eslint-plugin-prettier@npm:3.3.1::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Feslint-plugin-prettier%2Fdownload%2Feslint-plugin-prettier-3.3.1.tgz"
   dependencies:
@@ -8187,13 +8149,6 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"get-stdin@npm:^6.0.0":
-  version: 6.0.0
-  resolution: "get-stdin@npm:6.0.0::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Fget-stdin%2Fdownload%2Fget-stdin-6.0.0.tgz"
-  checksum: b51d664838aef7f8353dc57371ce59cea54d8d584fec015a9d89d24561e95b97806d5b5ba120bc81574c9ed63cb3e210176ffa0ff9263c7e7ba4d56d0fe54913
-  languageName: node
-  linkType: hard
-
 "get-stdin@npm:^8.0.0":
   version: 8.0.0
   resolution: "get-stdin@npm:8.0.0::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Fget-stdin%2Fdownload%2Fget-stdin-8.0.0.tgz"
@@ -8734,8 +8689,8 @@ fsevents@^1.2.7:
     "@types/validator": ^13.1.0
     "@types/webpack-env": ^1.15.3
     "@types/xml2js": ^0.4.5
-    "@typescript-eslint/eslint-plugin": ^4.11.1
-    "@typescript-eslint/parser": ^4.11.1
+    "@typescript-eslint/eslint-plugin": ^4.14.1
+    "@typescript-eslint/parser": ^4.14.1
     "@webpack-cli/serve": ^1.2.1
     autoprefixer: ^10.2.3
     babel-eslint: ^10.1.0
@@ -8744,7 +8699,6 @@ fsevents@^1.2.7:
     babel-plugin-dev-expression: ^0.2.2
     babel-plugin-transform-react-remove-prop-types: ^0.4.24
     better-sqlite3: ^7.1.2
-    browserslist-config-erb: ^0.0.1
     chalk: ^4.1.0
     concurrently: ^5.3.0
     connected-react-router: ^6.8.0
@@ -8763,15 +8717,14 @@ fsevents@^1.2.7:
     eslint: ^7.5.0
     eslint-config-airbnb: ^18.2.0
     eslint-config-airbnb-typescript: ^12.0.0
-    eslint-config-erb: ^2.0.0
-    eslint-config-prettier: ^6.11.0
+    eslint-config-prettier: ^7.2.0
     eslint-import-resolver-webpack: ^0.13.0
     eslint-plugin-compat: ^3.8.0
     eslint-plugin-import: ^2.22.0
     eslint-plugin-jest: ^24.1.3
     eslint-plugin-jest-dom: ^3.2.4
     eslint-plugin-jsx-a11y: 6.4.1
-    eslint-plugin-prettier: ^3.1.4
+    eslint-plugin-prettier: ^3.3.1
     eslint-plugin-promise: ^4.2.1
     eslint-plugin-react: ^7.22.0
     eslint-plugin-react-hooks: ^4.2.0
