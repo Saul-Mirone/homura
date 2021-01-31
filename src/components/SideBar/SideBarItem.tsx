@@ -30,7 +30,7 @@ const NameEditor: React.FC<NameEditorProps> = ({ id, name, finishEdit, onConfirm
                     finishEdit();
                 }}
             />
-            <div className="sidebar-item__confirm-container">
+            <div className="sidebar-item__confirm-container" data-testid={`source-list-item-${id}:edit-button`}>
                 <IconContainer mini className="sidebar-item__confirm-icon" onClick={onConfirmEdit}>
                     <CheckCircleFilledIcon />
                 </IconContainer>

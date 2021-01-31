@@ -12,8 +12,6 @@ exports[`SourceOperationBar component should match snapshot when list is empty 1
   >
     <div
       class="w-5 h-5 m-auto  "
-      role="button"
-      tabindex="0"
     >
       <svg
         fill="none"
@@ -37,8 +35,6 @@ exports[`SourceOperationBar component should match snapshot when list is empty 1
   >
     <div
       class="w-5 h-5 m-auto  "
-      role="button"
-      tabindex="0"
     >
       <svg
         class=""

@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, getByRole, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { Provider } from 'react-redux';
@@ -37,13 +37,14 @@ function setup(
 ) {
     const initialSourceState = {
         list: [],
-        activeId: null,
+        activeId: undefined,
         fetchListStatus: Status.Idle,
+        syncListStatus: Status.Idle,
         subscribeLink: '',
         subscribeName: '',
-        subscribeStep: null,
+        subscribeStep: undefined,
         subscribeStatus: Status.Idle,
-        subscribeError: null,
+        subscribeError: undefined,
     };
     const state: {
         source: sourceSlice.State;
@@ -183,14 +184,15 @@ describe('SourceList component', () => {
         });
 
         const input = screen.getByTestId('source-list-item-1:edit-input');
-        const button = screen.getByTestId('source-list-item-1:edit-button');
+        const buttonContainer = screen.getByTestId('source-list-item-1:edit-button');
+        const button = getByRole(buttonContainer, 'button');
 
         expect(input).toHaveValue('data-1');
 
         userEvent.type(input, '-new-value');
         expect(input).toHaveValue('data-1-new-value');
 
-        fireEvent.mouseDown(button);
+        fireEvent.click(button);
 
         expect(updateSourceByIdSpy).toBeCalledWith({
             id: 1,
