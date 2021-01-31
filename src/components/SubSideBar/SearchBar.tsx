@@ -1,6 +1,6 @@
 import React from 'react';
 import { CancelIcon, SearchIcon } from '../Icon';
-import { IconContainerSmall } from '../LogoIcon';
+import { IconContainer } from '../LogoIcon';
 
 type SearchBarProps = {
     onSearch: (keywords: string) => void;
@@ -20,7 +20,8 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
 
     return (
         <div className={`sub-side-bar__search ${active ? 'active' : ''}`}>
-            <IconContainerSmall
+            <IconContainer
+                mini
                 onClick={() => {
                     if (!active) {
                         setActive(true);
@@ -30,7 +31,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
                 }}
             >
                 <SearchIcon />
-            </IconContainerSmall>
+            </IconContainer>
             {active && (
                 <>
                     <input
@@ -39,7 +40,8 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
                         className="sub-side-bar__search-input"
                         onChange={(e) => setValue(e.target.value)}
                     />
-                    <IconContainerSmall
+                    <IconContainer
+                        mini
                         onClick={() => {
                             setActive(false);
                             setValue('');
@@ -47,7 +49,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
                         }}
                     >
                         <CancelIcon />
-                    </IconContainerSmall>
+                    </IconContainer>
                 </>
             )}
         </div>

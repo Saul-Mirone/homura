@@ -1,51 +1,53 @@
 import React from 'react';
 
-export const IconContainerSmall: React.FC<{
-    testId?: string;
+export type IconContainerProps = {
+    mini?: boolean;
     className?: string;
     size?: number;
-    onClick?: () => void;
     disabled?: boolean;
-}> = ({ children, testId, onClick, size = 5, disabled = false, className = '' }) => (
+    onClick?: () => void;
+};
+
+const ButtonDiv: React.FC<Pick<IconContainerProps, 'className' | 'onClick'>> = ({ className, onClick, children }) => (
     <div
-        data-testid={testId}
         role="button"
         tabIndex={0}
-        className={`w-${size} h-${size} m-auto ${disabled ? 'cursor-not-allowed' : ''} ${className}`}
-        onMouseDown={(e) => {
-            if (onClick) {
-                e.stopPropagation();
-                e.preventDefault();
-                onClick();
-            }
-        }}
+        className={className}
+        onMouseDown={(e) => e.preventDefault()}
+        onClick={onClick}
         onKeyDown={onClick}
     >
         {children}
     </div>
 );
 
-export const IconContainer: React.FC<{
-    className?: string;
-    onClick?: () => void;
-    size?: number;
-    disabled?: boolean;
-}> = ({ children, onClick, size, disabled, className = '' }) => (
-    <div
-        role="button"
-        tabIndex={0}
-        className={`p-2 ${disabled ? 'cursor-not-allowed' : ''} ${className}`}
-        onMouseDown={(e) => {
-            if (onClick) {
-                e.stopPropagation();
-                e.preventDefault();
-                onClick();
-            }
-        }}
-        onKeyDown={onClick}
-    >
-        <IconContainerSmall disabled={disabled} size={size}>
-            {children}
-        </IconContainerSmall>
-    </div>
-);
+export const IconContainer: React.FC<IconContainerProps> = ({
+    children,
+    mini = false,
+    size = 5,
+    disabled = false,
+    className = '',
+    onClick,
+}) => {
+    const disabledClassName = React.useMemo(() => (disabled ? 'cursor-not-allowed' : ''), [disabled]);
+    const innerClassName = React.useMemo(() => `w-${size} h-${size} m-auto ${disabledClassName} `, [
+        disabledClassName,
+        size,
+    ]);
+    const outerClassName = React.useMemo(
+        () => (mini ? `${innerClassName} ${className}` : `p-2 ${disabledClassName} ${className}`),
+        [className, disabledClassName, innerClassName, mini],
+    );
+
+    const child = React.useMemo(() => (mini ? <>{children}</> : <div className={innerClassName}>{children}</div>), [
+        children,
+        innerClassName,
+        mini,
+    ]);
+
+    return (
+        <ButtonDiv className={outerClassName} onClick={onClick}>
+            {child}
+        </ButtonDiv>
+    );
+};

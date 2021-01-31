@@ -1,7 +1,7 @@
 import { remote } from 'electron';
 import React from 'react';
 import { CheckCircleFilledIcon, RssIcon } from '../Icon';
-import { IconContainerSmall, LogoIcon } from '../LogoIcon';
+import { IconContainer, LogoIcon } from '../LogoIcon';
 
 type NameEditorProps = {
     id: number;
@@ -31,13 +31,9 @@ const NameEditor: React.FC<NameEditorProps> = ({ id, name, finishEdit, onConfirm
                 }}
             />
             <div className="sidebar-item__confirm-container">
-                <IconContainerSmall
-                    testId={`source-list-item-${id}:edit-button`}
-                    className="sidebar-item__confirm-icon"
-                    onClick={onConfirmEdit}
-                >
+                <IconContainer mini className="sidebar-item__confirm-icon" onClick={onConfirmEdit}>
                     <CheckCircleFilledIcon />
-                </IconContainerSmall>
+                </IconContainer>
             </div>
         </>
     );
