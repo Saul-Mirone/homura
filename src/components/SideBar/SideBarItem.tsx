@@ -26,6 +26,7 @@ const NameEditor: React.FC<NameEditorProps> = ({ id, name, finishEdit, onConfirm
                 value={editedName}
                 onChange={(e) => setEditedName(e.target.value)}
                 onBlur={() => {
+                    if (!document.hasFocus()) return;
                     setEditedName(name);
                     finishEdit();
                 }}

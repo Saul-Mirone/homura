@@ -17,7 +17,10 @@ export const FeedSubscribeBar: React.FC<FeedSubscribeBarProps> = ({ link, initia
     }, []);
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => setName(e.target.value);
-    const onBlur = () => onCancel();
+    const onBlur = () => {
+        if (!document.hasFocus()) return;
+        onCancel();
+    };
     const onClick = () => onConfirm(name);
 
     return (

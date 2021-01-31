@@ -43,7 +43,7 @@ export const FeedSearchBar: React.FC<FeedSearchBarProps> = ({
                         value={link}
                         onChange={(e) => setLink(e.target.value)}
                         onBlur={() => {
-                            if (hasError) return;
+                            if (!document.hasFocus() || hasError) return;
                             onCancel();
                         }}
                     />
