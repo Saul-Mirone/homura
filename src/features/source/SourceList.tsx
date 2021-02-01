@@ -4,6 +4,7 @@ import { SideBar } from '../../components/SideBar';
 import { Header } from '../../components/SideBar/Header';
 import { SideBarItem } from '../../components/SideBar/SideBarItem';
 import { Status } from '../../constants/Status';
+import { useActions } from '../../hooks';
 import { AppDispatch } from '../../store';
 import {
     fetchSources,
@@ -16,11 +17,18 @@ import {
 
 export const SourceList: React.FC<{ bottom: JSX.Element }> = ({ bottom }) => {
     const dispatch = useDispatch<AppDispatch>();
+    const [
+        setCurrentSourceDispatch,
+        syncSourcesDispatch,
+        updateSourceByIdDispatch,
+        unsubscribeByIdDispatch,
+    ] = useActions([setCurrentSource, syncSources, updateSourceById, unsubscribeById]);
+
     const { list, activeId, mode, totalCount, syncStatus } = useSelector(selectSourceList);
 
     React.useEffect(() => {
-        dispatch(syncSources());
-    }, [dispatch]);
+        syncSourcesDispatch();
+    }, [syncSourcesDispatch]);
 
     React.useEffect(() => {
         if (syncStatus === Status.Succeeded) {
@@ -28,21 +36,20 @@ export const SourceList: React.FC<{ bottom: JSX.Element }> = ({ bottom }) => {
         }
     }, [dispatch, mode, syncStatus]);
 
-    const overview = (
-        <Header mode={mode} active={activeId} count={totalCount} onClick={(id) => dispatch(setCurrentSource(id))} />
+    const onClickEmptyArea = React.useCallback(() => {
+        if (activeId) {
+            setCurrentSourceDispatch();
+        }
+    }, [activeId, setCurrentSourceDispatch]);
+
+    const overview = React.useMemo(
+        () => <Header mode={mode} active={activeId} count={totalCount} onClick={setCurrentSourceDispatch} />,
+        [activeId, mode, setCurrentSourceDispatch, totalCount],
     );
 
-    return (
-        <SideBar
-            onClick={() => {
-                if (activeId) {
-                    dispatch(setCurrentSource());
-                }
-            }}
-            overview={overview}
-            bottom={bottom}
-        >
-            {list.map(({ id, name, count, icon }) => (
+    const renderList = React.useMemo(
+        () =>
+            list.map(({ id, name, count, icon }) => (
                 <SideBarItem
                     key={id.toString()}
                     id={id}
@@ -50,11 +57,17 @@ export const SourceList: React.FC<{ bottom: JSX.Element }> = ({ bottom }) => {
                     name={name}
                     count={count}
                     active={id === activeId}
-                    onConfirmModify={(nextName) => dispatch(updateSourceById({ id, name: nextName }))}
-                    onUnsubscribe={() => dispatch(unsubscribeById(id))}
-                    onClick={() => dispatch(setCurrentSource(id))}
+                    onConfirmModify={(nextName) => updateSourceByIdDispatch({ id, name: nextName })}
+                    onUnsubscribe={() => unsubscribeByIdDispatch(id)}
+                    onClick={() => setCurrentSourceDispatch(id)}
                 />
-            ))}
+            )),
+        [activeId, list, setCurrentSourceDispatch, unsubscribeByIdDispatch, updateSourceByIdDispatch],
+    );
+
+    return (
+        <SideBar onClick={onClickEmptyArea} overview={overview} bottom={bottom}>
+            {renderList}
         </SideBar>
     );
 };

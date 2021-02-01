@@ -115,17 +115,17 @@ const sourceSlice = createSlice({
             state.subscribeStatus = Status.Idle;
         },
 
-        setCountToZero: (state, action: PayloadAction<number>) => {
+        clearCountById: (state, action: PayloadAction<number>) => {
             const target = state.list.find((x) => x.id === action.payload);
             if (!target) return;
             target.count = 0;
         },
-        incCount: (state, action: PayloadAction<number>) => {
+        incCountById: (state, action: PayloadAction<number>) => {
             const target = state.list.find((x) => x.id === action.payload);
             if (!target) return;
             target.count += 1;
         },
-        decCount: (state, action: PayloadAction<number>) => {
+        decCountById: (state, action: PayloadAction<number>) => {
             const target = state.list.find((x) => x.id === action.payload);
             if (!target) return;
             target.count -= 1;
@@ -191,9 +191,9 @@ export const {
     resetSubscribeError,
     resetSubscribeState,
     showSubscribeBar,
-    setCountToZero,
-    decCount,
-    incCount,
+    incCountById,
+    decCountById,
+    clearCountById,
 } = sourceSlice.actions;
 
 export const sourceReducer = sourceSlice.reducer;

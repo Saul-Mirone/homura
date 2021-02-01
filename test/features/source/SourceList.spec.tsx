@@ -3,8 +3,10 @@ import { act, fireEvent, getByRole, render, screen } from '@testing-library/reac
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { Provider } from 'react-redux';
+import { Mode } from '../../../src/constants/Mode';
 import { Preset } from '../../../src/constants/Preset';
 import { Status } from '../../../src/constants/Status';
+import * as modeSlice from '../../../src/features/mode/modeSlice';
 import { SourceList } from '../../../src/features/source/SourceList';
 import * as sourceSlice from '../../../src/features/source/sourceSlice';
 
@@ -31,8 +33,10 @@ jest.mock('electron', () => ({
 function setup(
     preloadedState: {
         source: Partial<sourceSlice.State>;
+        mode?: Mode;
     } = {
         source: {},
+        mode: Mode.All,
     },
 ) {
     const initialSourceState = {
@@ -48,11 +52,13 @@ function setup(
     };
     const state: {
         source: sourceSlice.State;
+        mode: Mode;
     } = {
         source: { ...initialSourceState, ...preloadedState.source },
+        mode: preloadedState.mode ?? Mode.All,
     };
     const store = configureStore({
-        reducer: { source: sourceSlice.sourceReducer },
+        reducer: { source: sourceSlice.sourceReducer, mode: modeSlice.modeReducer },
         preloadedState: state,
     });
 
@@ -138,6 +144,77 @@ describe('SourceList component', () => {
 
         fireEvent.click(presetAll);
         expect(setCurrentSourceSpy).toBeCalledWith(Preset.All);
+    });
+
+    it('should call fetchSources when sync finished', () => {
+        const fetchSourcesSpy = jest.spyOn(sourceSlice, 'fetchSources');
+        setup({
+            source: {
+                list: [
+                    {
+                        id: 1,
+                        name: 'data-1',
+                        count: 24,
+                        link: 'link-1',
+                    },
+                    {
+                        id: 2,
+                        name: 'data-2',
+                        count: 0,
+                        icon: 'fake-icon-url',
+                        link: 'link-2',
+                    },
+                ],
+                activeId: 2,
+                fetchListStatus: Status.Succeeded,
+                syncListStatus: Status.Succeeded,
+            },
+            mode: Mode.Starred,
+        });
+
+        expect(fetchSourcesSpy).toBeCalledWith(Mode.Starred);
+    });
+
+    it('should reset setCurrentSource when click on empty area', () => {
+        const setCurrentSourceSpy = jest.spyOn(sourceSlice, 'setCurrentSource');
+        setup({
+            source: {
+                list: [
+                    {
+                        id: 1,
+                        name: 'data-1',
+                        count: 24,
+                        link: 'link-1',
+                    },
+                    {
+                        id: 2,
+                        name: 'data-2',
+                        count: 0,
+                        icon: 'fake-icon-url',
+                        link: 'link-2',
+                    },
+                ],
+                activeId: 2,
+                fetchListStatus: Status.Succeeded,
+            },
+        });
+
+        const item = screen.getByTestId('source-list-item-1');
+
+        fireEvent.click(item);
+
+        expect(setCurrentSourceSpy).toBeCalledWith(1);
+        expect(item).toHaveClass('active');
+        const sourceList = screen.getByTestId('source-side-bar');
+
+        fireEvent.click(sourceList);
+
+        expect(setCurrentSourceSpy).toBeCalledWith();
+        expect(item).not.toHaveClass('active');
+
+        const count = setCurrentSourceSpy.mock.calls.length;
+        fireEvent.click(sourceList);
+        expect(setCurrentSourceSpy).toBeCalledTimes(count);
     });
 
     it('should create context menu when click right button on item', () => {

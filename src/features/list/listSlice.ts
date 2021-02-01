@@ -6,7 +6,7 @@ import { Mode } from '../../constants/Mode';
 import { Preset } from '../../constants/Preset';
 import { Post, Source } from '../../model/types';
 import type { AppThunk, RootState } from '../../store';
-import { decCount, incCount, setCountToZero } from '../source/sourceSlice';
+import { clearCountById, decCountById, incCountById } from '../source/sourceSlice';
 
 type PostKeys = 'id' | 'sourceId' | 'title' | 'unread' | 'starred' | 'link' | 'date';
 
@@ -141,11 +141,11 @@ export const markAllAsRead = (): AppThunk => async (dispatch, getState) => {
     if (typeof activeId === 'number') {
         await channel.markAllAsReadBySourceId(activeId);
 
-        setCountToZero(activeId);
+        clearCountById(activeId);
     } else if (activeId && [Preset.Unread, Preset.All].includes(activeId)) {
         await Promise.all(list.map((x) => channel.markAllAsReadBySourceId(x.id)));
         list.forEach((x) => {
-            setCountToZero(x.id);
+            clearCountById(x.id);
         });
     }
     dispatch(markAllRead());
@@ -159,9 +159,9 @@ export const markActiveUnreadAs = (unread: boolean): AppThunk => async (dispatch
     const active = posts.find((x) => x.id === state.list.activeId);
     if (active && state.mode !== Mode.Starred) {
         if (unread) {
-            dispatch(incCount(active.sourceId));
+            dispatch(incCountById(active.sourceId));
         } else {
-            dispatch(decCount(active.sourceId));
+            dispatch(decCountById(active.sourceId));
         }
     }
     dispatch(markActiveUnread(unread));
@@ -174,9 +174,9 @@ export const markActiveStarredAs = (starred: boolean): AppThunk => async (dispat
     const active = posts.find((x) => x.id === state.list.activeId);
     if (active && state.mode === Mode.Starred) {
         if (starred) {
-            dispatch(incCount(active.sourceId));
+            dispatch(incCountById(active.sourceId));
         } else {
-            dispatch(decCount(active.sourceId));
+            dispatch(decCountById(active.sourceId));
         }
     }
     dispatch(markActiveStarred(starred));

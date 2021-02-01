@@ -19,6 +19,9 @@ import {
     syncSources,
     unsubscribeById,
     updateSourceById,
+    clearCountById,
+    incCountById,
+    decCountById,
 } from '../../src/features/source/sourceSlice';
 import { formatActions } from '../test-tools/formatActions';
 import { mockStore } from '../test-tools/mockStore';
@@ -31,7 +34,7 @@ describe('reducers', () => {
 
         it('should handle setCurrentSource', () => {
             expect(
-                sourceReducer({ activeId: null } as State, {
+                sourceReducer({ activeId: undefined } as State, {
                     type: setCurrentSource,
                     payload: 1,
                 }),
@@ -40,7 +43,7 @@ describe('reducers', () => {
 
         it('should handle showSubscribeBar', () => {
             expect(
-                sourceReducer({ activeId: null, subscribeStatus: Status.Succeeded } as State, {
+                sourceReducer({ activeId: undefined, subscribeStatus: Status.Succeeded } as State, {
                     type: showSubscribeBar,
                 }),
             ).toMatchSnapshot();
@@ -71,8 +74,59 @@ describe('reducers', () => {
             ).toMatchSnapshot();
         });
 
+        it('should handle clearCountById', () => {
+            expect(
+                sourceReducer(
+                    {
+                        list: [
+                            { id: 0, count: 10 },
+                            { id: 1, count: 20 },
+                        ],
+                    } as State,
+                    {
+                        type: clearCountById,
+                        payload: 1,
+                    },
+                ),
+            ).toMatchSnapshot();
+        });
+
+        it('should handle incCountById', () => {
+            expect(
+                sourceReducer(
+                    {
+                        list: [
+                            { id: 0, count: 10 },
+                            { id: 1, count: 20 },
+                        ],
+                    } as State,
+                    {
+                        type: incCountById,
+                        payload: 1,
+                    },
+                ),
+            ).toMatchSnapshot();
+        });
+
+        it('should handle decCountById', () => {
+            expect(
+                sourceReducer(
+                    {
+                        list: [
+                            { id: 0, count: 10 },
+                            { id: 1, count: 20 },
+                        ],
+                    } as State,
+                    {
+                        type: decCountById,
+                        payload: 0,
+                    },
+                ),
+            ).toMatchSnapshot();
+        });
+
         it('should handle unknown action type', () => {
-            expect(sourceReducer({ subscribeStep: null } as State, { type: 'unknown' })).toMatchSnapshot();
+            expect(sourceReducer({ subscribeStep: undefined } as State, { type: 'unknown' })).toMatchSnapshot();
         });
 
         describe('thunk', () => {
@@ -161,7 +215,7 @@ describe('reducers', () => {
                             count: 10,
                         },
                     ]);
-                    await store.dispatch(syncSources(Mode.All));
+                    await store.dispatch(syncSources());
                     expect(formatActions(store)).toMatchSnapshot();
                 });
 
@@ -322,7 +376,7 @@ describe('reducers', () => {
                     expect(
                         sourceReducer(
                             {
-                                subscribeError: null,
+                                subscribeError: undefined,
                                 subscribeStatus: Status.Idle,
                             } as State,
                             {
@@ -339,7 +393,7 @@ describe('reducers', () => {
                     expect(
                         sourceReducer(
                             {
-                                subscribeError: null,
+                                subscribeError: undefined,
                                 subscribeStatus: Status.Idle,
                             } as State,
                             {

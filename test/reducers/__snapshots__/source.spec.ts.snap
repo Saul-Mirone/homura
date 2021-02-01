@@ -1,5 +1,50 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`reducers source should handle clearCountById 1`] = `
+Object {
+  "list": Array [
+    Object {
+      "count": 10,
+      "id": 0,
+    },
+    Object {
+      "count": 0,
+      "id": 1,
+    },
+  ],
+}
+`;
+
+exports[`reducers source should handle decCountById 1`] = `
+Object {
+  "list": Array [
+    Object {
+      "count": 9,
+      "id": 0,
+    },
+    Object {
+      "count": 20,
+      "id": 1,
+    },
+  ],
+}
+`;
+
+exports[`reducers source should handle incCountById 1`] = `
+Object {
+  "list": Array [
+    Object {
+      "count": 10,
+      "id": 0,
+    },
+    Object {
+      "count": 21,
+      "id": 1,
+    },
+  ],
+}
+`;
+
 exports[`reducers source should handle initial state 1`] = `
 Object {
   "activeId": undefined,
@@ -38,7 +83,7 @@ Object {
 
 exports[`reducers source should handle showSubscribeBar 1`] = `
 Object {
-  "activeId": null,
+  "activeId": undefined,
   "subscribeStatus": 0,
   "subscribeStep": 0,
 }
@@ -46,7 +91,7 @@ Object {
 
 exports[`reducers source should handle unknown action type 1`] = `
 Object {
-  "subscribeStep": null,
+  "subscribeStep": undefined,
 }
 `;
 
@@ -318,7 +363,7 @@ exports[`reducers source thunk syncSources should action list match snapshot 1`]
 Array [
   Object {
     "meta": Object {
-      "arg": 0,
+      "arg": undefined,
       "requestId": "fake-request-id",
       "requestStatus": "pending",
     },
@@ -327,7 +372,7 @@ Array [
   },
   Object {
     "meta": Object {
-      "arg": 0,
+      "arg": undefined,
       "requestId": "fake-request-id",
       "requestStatus": "fulfilled",
     },
