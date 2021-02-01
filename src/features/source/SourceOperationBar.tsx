@@ -1,9 +1,9 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { BottomBar, Step } from '../../components/SideBar/BottomBar';
 import { FeedSearchBar } from '../../components/SideBar/FeedSearchBar';
 import { FeedSubscribeBar } from '../../components/SideBar/FeedSubscribeBar';
-import { AppDispatch } from '../../store';
+import { useActions } from '../../hooks';
 import {
     resetSubscribeError,
     resetSubscribeState,
@@ -15,10 +15,24 @@ import {
 } from './sourceSlice';
 
 export const SourceOperationBar: React.FC = () => {
-    const dispatch = useDispatch<AppDispatch>();
     const { mode, loading, subscribeStep, subscribeName, subscribeLink, subscribeError } = useSelector(
         selectSourceOperation,
     );
+    const [
+        searchUrlForSourceDispatch,
+        resetSubscribeStateDispatch,
+        resetSubscribeErrorDispatch,
+        subscribeToSourceDispatch,
+        showSubscribeBarDispatch,
+        syncSourcesDispatch,
+    ] = useActions([
+        searchUrlForSource,
+        resetSubscribeState,
+        resetSubscribeError,
+        subscribeToSource,
+        showSubscribeBar,
+        syncSources,
+    ]);
 
     const renderBottom = React.useCallback(
         (currentStep: Step) => {
@@ -28,9 +42,9 @@ export const SourceOperationBar: React.FC = () => {
                         <FeedSearchBar
                             hasError={subscribeError === 'ParseRSSFailed'}
                             loading={loading}
-                            onSearch={(inputLink) => dispatch(searchUrlForSource(inputLink))}
-                            onCancel={() => dispatch(resetSubscribeState())}
-                            onClickError={() => dispatch(resetSubscribeError())}
+                            onSearch={searchUrlForSourceDispatch}
+                            onCancel={resetSubscribeStateDispatch}
+                            onClickError={resetSubscribeErrorDispatch}
                         />
                     );
                 }
@@ -39,14 +53,12 @@ export const SourceOperationBar: React.FC = () => {
                         <FeedSubscribeBar
                             link={subscribeLink}
                             initialName={subscribeName}
-                            onCancel={() => dispatch(resetSubscribeState())}
+                            onCancel={resetSubscribeStateDispatch}
                             onConfirm={(inputName) => {
-                                dispatch(
-                                    subscribeToSource({
-                                        name: inputName,
-                                        mode,
-                                    }),
-                                );
+                                subscribeToSourceDispatch({
+                                    name: inputName,
+                                    mode,
+                                });
                             }}
                         />
                     );
@@ -56,15 +68,25 @@ export const SourceOperationBar: React.FC = () => {
                 }
             }
         },
-        [subscribeError, subscribeLink, subscribeName, dispatch, loading, mode],
+        [
+            loading,
+            mode,
+            resetSubscribeErrorDispatch,
+            resetSubscribeStateDispatch,
+            searchUrlForSourceDispatch,
+            subscribeError,
+            subscribeLink,
+            subscribeName,
+            subscribeToSourceDispatch,
+        ],
     );
 
     return (
         <BottomBar
             step={subscribeStep}
             loading={loading}
-            onClickPlus={() => dispatch(showSubscribeBar())}
-            onClickSync={() => dispatch(syncSources())}
+            onClickPlus={showSubscribeBarDispatch}
+            onClickSync={syncSourcesDispatch}
             render={renderBottom}
         />
     );

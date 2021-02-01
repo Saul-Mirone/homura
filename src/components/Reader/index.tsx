@@ -32,7 +32,6 @@ export const Reader: React.FC<ReaderProps> = ({ post, toolkit }) => {
                             <h1>{post.title}</h1>
                         </hgroup>
                         <base href={post.link} />
-                        {/* eslint-disable-next-line react/no-danger */}
                         <main dangerouslySetInnerHTML={{ __html: post.content }} />
                     </div>
                 </div>
