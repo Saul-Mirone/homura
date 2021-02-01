@@ -1,11 +1,10 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { SideBar } from '../../components/SideBar';
 import { Header } from '../../components/SideBar/Header';
 import { SideBarItem } from '../../components/SideBar/SideBarItem';
 import { Status } from '../../constants/Status';
 import { useActions } from '../../hooks';
-import { AppDispatch } from '../../store';
 import {
     fetchSources,
     selectSourceList,
@@ -16,7 +15,6 @@ import {
 } from './sourceSlice';
 
 export const SourceList: React.FC<{ bottom: JSX.Element }> = ({ bottom }) => {
-    const dispatch = useDispatch<AppDispatch>();
     const [
         setCurrentSourceDispatch,
         syncSourcesDispatch,
@@ -35,7 +33,7 @@ export const SourceList: React.FC<{ bottom: JSX.Element }> = ({ bottom }) => {
         if (syncStatus === Status.Succeeded) {
             fetchSourcesDispatch(mode);
         }
-    }, [dispatch, mode, syncStatus]);
+    }, [fetchSourcesDispatch, mode, syncStatus]);
 
     const onClickEmptyArea = React.useCallback(() => {
         if (activeId) {
