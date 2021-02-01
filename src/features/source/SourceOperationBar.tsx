@@ -63,9 +63,6 @@ export const SourceOperationBar: React.FC = () => {
                         />
                     );
                 }
-                default: {
-                    throw new Error('Invalid Step');
-                }
             }
         },
         [
