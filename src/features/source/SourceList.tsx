@@ -22,7 +22,8 @@ export const SourceList: React.FC<{ bottom: JSX.Element }> = ({ bottom }) => {
         syncSourcesDispatch,
         updateSourceByIdDispatch,
         unsubscribeByIdDispatch,
-    ] = useActions([setCurrentSource, syncSources, updateSourceById, unsubscribeById]);
+        fetchSourcesDispatch,
+    ] = useActions([setCurrentSource, syncSources, updateSourceById, unsubscribeById, fetchSources]);
 
     const { list, activeId, mode, totalCount, syncStatus } = useSelector(selectSourceList);
 
@@ -32,7 +33,7 @@ export const SourceList: React.FC<{ bottom: JSX.Element }> = ({ bottom }) => {
 
     React.useEffect(() => {
         if (syncStatus === Status.Succeeded) {
-            dispatch(fetchSources(mode));
+            fetchSourcesDispatch(mode);
         }
     }, [dispatch, mode, syncStatus]);
 
