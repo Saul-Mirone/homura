@@ -1,29 +1,45 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Reader } from '../../components/Reader';
 import { Toolkit } from '../../components/Reader/Toolkit';
-import { AppDispatch } from '../../store';
+import { useActions } from '../../hooks';
 import { markActiveStarredAs, markActiveUnreadAs } from '../list/listSlice';
 import { getPostContentById, selectPost } from './postSlice';
 
 export const Post: React.FC = () => {
-    const dispatch = useDispatch<AppDispatch>();
     const { post, activeId } = useSelector(selectPost);
+    const [getPostContentByIdDispatch, markActiveStarredAsDispatch, markActiveUnreadAsDispatch] = useActions([
+        getPostContentById,
+        markActiveStarredAs,
+        markActiveUnreadAs,
+    ]);
 
     React.useEffect(() => {
         if (!activeId) return;
-        dispatch(getPostContentById(activeId));
-    }, [activeId, dispatch]);
+        getPostContentByIdDispatch(activeId);
+    }, [activeId, getPostContentByIdDispatch]);
 
-    const toolkit = post ? (
-        <Toolkit
-            starred={post.starred}
-            onSwitchStarred={(x) => dispatch(markActiveStarredAs(!x))}
-            unread={post.unread}
-            onSwitchUnread={(x) => dispatch(markActiveUnreadAs(!x))}
-            onShare={() => window.open(post.link)}
-        />
-    ) : null;
+    const onSwitchStarred = React.useCallback((x: boolean) => markActiveStarredAsDispatch(!x), [
+        markActiveStarredAsDispatch,
+    ]);
+    const onSwitchUnread = React.useCallback((x: boolean) => markActiveUnreadAsDispatch(!x), [
+        markActiveUnreadAsDispatch,
+    ]);
+    const onShare = React.useCallback(() => window.open(post?.link), [post?.link]);
+
+    const toolkit = React.useMemo(
+        () =>
+            post ? (
+                <Toolkit
+                    starred={post.starred}
+                    onSwitchStarred={onSwitchStarred}
+                    unread={post.unread}
+                    onSwitchUnread={onSwitchUnread}
+                    onShare={onShare}
+                />
+            ) : null,
+        [onShare, onSwitchStarred, onSwitchUnread, post],
+    );
 
     return <Reader post={post} toolkit={toolkit} />;
 };

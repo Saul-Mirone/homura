@@ -17,7 +17,7 @@ type TimeGroup = {
     posts: PostItem[];
 };
 
-type State = {
+export type State = {
     posts: PostItem[];
     activeId: number | undefined;
     filter: string;

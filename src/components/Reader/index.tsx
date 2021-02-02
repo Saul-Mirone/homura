@@ -13,25 +13,28 @@ type ReaderProps = {
     toolkit: JSX.Element | null;
 };
 
-export const Reader: React.FC<ReaderProps> = ({ post, toolkit }) => {
-    const postContainer = React.useRef<HTMLDivElement>(null);
+const useScrollToTop = (ref: React.RefObject<HTMLElement>, deps: unknown[] = []) => {
     React.useEffect(() => {
-        postContainer.current?.scrollTo(0, 0);
-    }, [post]);
+        ref.current?.scrollTo(0, 0);
+    }, deps);
+};
+
+export const Reader: React.FC<ReaderProps> = ({ post, toolkit }) => {
+    const postContainerRef = React.useRef<HTMLDivElement>(null);
+    useScrollToTop(postContainerRef, [post]);
 
     return (
-        <div className="reader-container">
+        <div role="article" className="reader-container">
             {post && toolkit}
 
             {post ? (
-                <div ref={postContainer} className="thin-scroll">
+                <div ref={postContainerRef} className="thin-scroll">
                     <div className="reader-post">
                         <hgroup>
                             <small>{post.date}</small>
                             <div>{post.sourceName}</div>
                             <h1>{post.title}</h1>
                         </hgroup>
-                        <base href={post.link} />
                         <main dangerouslySetInnerHTML={{ __html: post.content }} />
                     </div>
                 </div>

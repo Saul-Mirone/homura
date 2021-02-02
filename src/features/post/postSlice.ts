@@ -1,10 +1,11 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { pick } from 'lodash';
 import { DateTime } from 'luxon';
 import { channel } from '../../channel/child';
 import { format } from '../../constants/Date';
-import type { AppThunk, RootState } from '../../store';
+import type { RootState } from '../../store';
 
-type State = {
+export type State = {
     content: string;
 };
 
@@ -12,22 +13,20 @@ const initialState: State = {
     content: '',
 };
 
+export const getPostContentById = createAsyncThunk('post/getPostContentById', async (postId: number) => {
+    const { content } = await channel.getPostById(postId);
+    return content;
+});
+
 const postSlice = createSlice({
     name: 'post',
     initialState,
-    reducers: {
-        setContent: (state, action: PayloadAction<string>) => {
+    reducers: {},
+    extraReducers: (builder) =>
+        builder.addCase(getPostContentById.fulfilled, (state, action) => {
             state.content = action.payload;
-        },
-    },
+        }),
 });
-
-export const { setContent } = postSlice.actions;
-
-export const getPostContentById = (postId: number): AppThunk => async (dispatch) => {
-    const post = await channel.getPostById(postId);
-    dispatch(setContent(post.content));
-};
 
 export const postReducer = postSlice.reducer;
 
@@ -47,16 +46,13 @@ export const selectPost = (state: RootState) => {
             activeId,
         };
 
-    const { title, sourceName, unread, starred, date, link } = target;
+    const data = pick(target, ['title', 'sourceName', 'unread', 'starred', 'link']);
+    const { date } = target;
 
     const post = {
-        title,
-        sourceName,
-        unread,
-        link,
-        date: DateTime.fromISO(date).toFormat(format),
-        starred,
+        ...data,
         content,
+        date: DateTime.fromISO(date).toFormat(format),
     };
 
     return {

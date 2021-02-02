@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`reducers post should handle initial state 1`] = `
+Object {
+  "content": "",
+}
+`;
+
+exports[`reducers post thunk getPostContentById should action list match snapshot 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "arg": 123,
+      "requestId": "fake-request-id",
+      "requestStatus": "pending",
+    },
+    "payload": undefined,
+    "type": "post/getPostContentById/pending",
+  },
+  Object {
+    "meta": Object {
+      "arg": 123,
+      "requestId": "fake-request-id",
+      "requestStatus": "fulfilled",
+    },
+    "payload": "test-content",
+    "type": "post/getPostContentById/fulfilled",
+  },
+]
+`;
+
+exports[`reducers post thunk getPostContentById should handle getPostContentById.fulfilled 1`] = `
+Object {
+  "content": Object {
+    "content": "fake-content",
+  },
+}
+`;
