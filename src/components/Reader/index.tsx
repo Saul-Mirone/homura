@@ -13,15 +13,12 @@ type ReaderProps = {
     toolkit: JSX.Element | null;
 };
 
-const useScrollToTop = (ref: React.RefObject<HTMLElement>, deps: unknown[] = []) => {
-    React.useEffect(() => {
-        ref.current?.scrollTo(0, 0);
-    }, deps);
-};
-
 export const Reader: React.FC<ReaderProps> = ({ post, toolkit }) => {
     const postContainerRef = React.useRef<HTMLDivElement>(null);
-    useScrollToTop(postContainerRef, [post]);
+
+    React.useEffect(() => {
+        postContainerRef.current?.scrollTo(0, 0);
+    }, []);
 
     return (
         <div role="article" className="reader-container">
