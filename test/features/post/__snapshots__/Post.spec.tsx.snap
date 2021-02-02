@@ -75,5 +75,3 @@ exports[`Post component should match snapshot when has post 1`] = `
   </div>
 </div>
 `;
-
-exports[`Post component should match snapshot when no post 1`] = `null`;
