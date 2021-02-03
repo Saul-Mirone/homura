@@ -32,8 +32,8 @@ export const Post: React.FC = () => {
             post ? (
                 <Toolkit
                     starred={post.starred}
-                    onSwitchStarred={onSwitchStarred}
                     unread={post.unread}
+                    onSwitchStarred={onSwitchStarred}
                     onSwitchUnread={onSwitchUnread}
                     onShare={onShare}
                 />

@@ -8,7 +8,7 @@ export type SideBarProps = {
 };
 
 export const SideBar: React.FC<SideBarProps> = ({ overview, bottom, children, onClick }) => (
-    <div data-testid="source-side-bar" role="presentation" onClick={onClick} className="sidebar-container">
+    <div role="list" onClick={onClick} className="sidebar-container">
         <div className="relative flex-1 thin-scroll">
             {overview}
             <div className="pt-10" />

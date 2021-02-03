@@ -100,7 +100,7 @@ export const SideBarItem: React.FC<SideBarItemProps> = ({
         <div
             ref={divRef}
             role="button"
-            tabIndex={id}
+            tabIndex={0}
             data-testid={`source-list-item-${id}`}
             className={`${active ? 'active' : ''} rss-item`}
             onKeyDown={onClick}

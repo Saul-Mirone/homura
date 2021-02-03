@@ -20,8 +20,10 @@ type Fn = (...args: any[]) => any;
 
 type Tail<T extends unknown[]> = T extends [unknown, ...infer U] ? U : [];
 
+type MakePromise<T> = T extends Promise<any> ? T : Promise<T>;
+
 type Child<T extends Record<string, Fn>> = {
-    [K in keyof T]: (...args: Tail<Parameters<T[K]>>) => ReturnType<T[K]>;
+    [K in keyof T]: (...args: Tail<Parameters<T[K]>>) => MakePromise<ReturnType<T[K]>>;
 };
 
 export function generateChild<T extends Record<typeof channelName[number], Fn>>(): Child<T> {
