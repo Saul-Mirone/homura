@@ -3,7 +3,7 @@
 import { mockChannel } from '../../test-tools/mockChannel';
 
 import { configureStore } from '@reduxjs/toolkit';
-import { act, fireEvent, getByRole, render, waitFor } from '@testing-library/react';
+import { act, fireEvent, render, waitFor } from '@testing-library/react';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { Mode } from '../../../src/constants/Mode';
@@ -71,7 +71,15 @@ function setup(
     return {
         ...utils,
         store,
-        list: utils.getByRole('list'),
+        el: {
+            list: utils.getByRole('list'),
+            get items() {
+                return utils.getAllByRole('listitem');
+            },
+            get totalCount() {
+                return Number(utils.container.querySelector('.sidebar-overview-item__count')!.innerHTML);
+            },
+        },
     };
 }
 
@@ -106,7 +114,7 @@ test('SourceList', async () => {
     mockChannel.sync.mockResolvedValue();
     mockChannel.removeSourceById.mockResolvedValue();
 
-    const menu: Array<Menu> = [];
+    let menu: Array<Menu> = [];
     mockAppend.mockImplementation((x) => menu.push(x));
 
     const fetchSourcesSpy = jest.spyOn(sourceSlice, 'fetchSources');
@@ -116,13 +124,12 @@ test('SourceList', async () => {
     const updateSourceByIdSpy = jest.spyOn(sourceSlice, 'updateSourceById');
 
     // setup
-    const { getAllByRole, getByTestId, list, container } = setup();
+    const { el, container } = setup();
 
     // first init
-    expect(list).toMatchSnapshot();
+    expect(el.list).toMatchSnapshot();
 
-    const preloadedItems = getAllByRole('button');
-    expect(preloadedItems).toHaveLength(2);
+    expect(el.items).toHaveLength(2);
 
     expect(syncSourcesSpy).toBeCalledTimes(1);
 
@@ -130,12 +137,11 @@ test('SourceList', async () => {
 
     expect(fetchSourcesSpy).toBeCalledWith(Mode.All);
 
-    const items = getAllByRole('button');
-    expect(items).toHaveLength(5);
+    expect(el.items).toHaveLength(5);
 
-    expect(list).toMatchSnapshot();
+    expect(el.list).toMatchSnapshot();
 
-    const data1Item = items[2]!;
+    const data1Item = el.items[2]!;
 
     fireEvent.click(data1Item);
     expect(setCurrentSourceSpy).toBeCalledWith(1);
@@ -144,52 +150,50 @@ test('SourceList', async () => {
     expect(container.querySelectorAll('.sidebar-item__count')).toHaveLength(2);
     expect(container.querySelector('.sidebar-item__count')!.innerHTML).toBe('24');
 
-    expect(container.querySelector('.sidebar-overview-item__count')!.innerHTML).toBe('26');
+    expect(el.totalCount).toBe(26);
 
-    const presetAll = items[0]!;
+    const presetAll = el.items[0]!;
 
     fireEvent.click(presetAll);
     expect(setCurrentSourceSpy).toBeCalledWith(Preset.All);
     expect(data1Item).not.toHaveClass('active');
     expect(presetAll).toHaveClass('active');
 
-    fireEvent.click(list);
+    fireEvent.click(el.list);
     expect(setCurrentSourceSpy).toBeCalledWith();
     expect(presetAll).not.toHaveClass('active');
 
     const count = setCurrentSourceSpy.mock.calls.length;
-    fireEvent.click(list);
+    fireEvent.click(el.list);
     expect(setCurrentSourceSpy).toBeCalledTimes(count);
 
     fireEvent.contextMenu(data1Item);
     expect(mockPopup).toBeCalledTimes(1);
     expect(menu.map((x) => x.label)).toEqual(['unsubscribe', 'edit']);
 
-    const [unsubscribeMenuButton, editMenuButton] = menu as [Menu, Menu];
-
-    await act(() => unsubscribeMenuButton.click());
-
-    const nextItems = getAllByRole('button');
-    expect(nextItems).toHaveLength(4);
+    await act(() => menu[0]!.click());
 
     expect(unsubscribeSpy).toBeCalledWith(1);
+    expect(el.totalCount).toBe(2);
+    expect(el.items).toHaveLength(4);
 
-    // Fixme
-    act(() => editMenuButton.click());
+    menu = [];
+    const data2Item = el.items[2]!;
+    fireEvent.contextMenu(data2Item);
+    act(() => menu[1]!.click());
 
-    const input = getByTestId('source-list-item-1:edit-input');
-    const buttonContainer = getByTestId('source-list-item-1:edit-button');
-    const button = getByRole(buttonContainer, 'button');
+    const input = container.querySelector('input')!;
+    const button = container.querySelector('.sidebar-item__confirm-icon')!;
 
-    expect(input).toHaveValue('data-1');
+    expect(input).toHaveValue('data-2');
 
     userEvent.type(input, '-new-value');
-    expect(input).toHaveValue('data-1-new-value');
+    expect(input).toHaveValue('data-2-new-value');
 
     fireEvent.click(button);
 
     expect(updateSourceByIdSpy).toBeCalledWith({
-        id: 1,
-        name: 'data-1-new-value',
+        id: 2,
+        name: 'data-2-new-value',
     });
 });

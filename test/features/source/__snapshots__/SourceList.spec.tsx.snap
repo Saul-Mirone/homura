@@ -10,8 +10,7 @@ exports[`SourceList 1`] = `
   >
     <div
       class=" rss-item"
-      data-testid="source-list-preset-all"
-      role="button"
+      role="listitem"
       tabindex="0"
     >
       <div
@@ -43,8 +42,7 @@ exports[`SourceList 1`] = `
     </div>
     <div
       class=" rss-item"
-      data-testid="source-list-preset-archive"
-      role="button"
+      role="listitem"
       tabindex="0"
     >
       <div
@@ -92,8 +90,7 @@ exports[`SourceList 2`] = `
   >
     <div
       class=" rss-item"
-      data-testid="source-list-preset-all"
-      role="button"
+      role="listitem"
       tabindex="0"
     >
       <div
@@ -130,8 +127,7 @@ exports[`SourceList 2`] = `
     </div>
     <div
       class=" rss-item"
-      data-testid="source-list-preset-archive"
-      role="button"
+      role="listitem"
       tabindex="0"
     >
       <div
@@ -166,8 +162,7 @@ exports[`SourceList 2`] = `
     />
     <div
       class=" rss-item"
-      data-testid="source-list-item-1"
-      role="button"
+      role="listitem"
       tabindex="0"
     >
       <div
@@ -204,8 +199,7 @@ exports[`SourceList 2`] = `
     </div>
     <div
       class=" rss-item"
-      data-testid="source-list-item-2"
-      role="button"
+      role="listitem"
       tabindex="0"
     >
       <div
@@ -230,8 +224,7 @@ exports[`SourceList 2`] = `
     </div>
     <div
       class=" rss-item"
-      data-testid="source-list-item-3"
-      role="button"
+      role="listitem"
       tabindex="0"
     >
       <div

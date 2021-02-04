@@ -16,7 +16,6 @@ export const Header: React.FC<HeaderProps> = ({ active, mode, count, onClick }) 
         case Mode.Starred:
             return (
                 <OverviewItem
-                    testId="source-list-preset-starred"
                     target={Preset.Starred}
                     icon={<StarFilledIcon />}
                     activeId={active}
@@ -27,7 +26,6 @@ export const Header: React.FC<HeaderProps> = ({ active, mode, count, onClick }) 
         case Mode.Unread:
             return (
                 <OverviewItem
-                    testId="source-list-preset-unread"
                     target={Preset.Unread}
                     icon={<MailFilledIcon />}
                     activeId={active}
@@ -40,7 +38,6 @@ export const Header: React.FC<HeaderProps> = ({ active, mode, count, onClick }) 
             return (
                 <>
                     <OverviewItem
-                        testId="source-list-preset-all"
                         target={Preset.All}
                         icon={<ViewListIcon />}
                         activeId={active}
@@ -48,7 +45,6 @@ export const Header: React.FC<HeaderProps> = ({ active, mode, count, onClick }) 
                         onClick={onClick}
                     />
                     <OverviewItem
-                        testId="source-list-preset-archive"
                         target={Preset.Archive}
                         icon={<ArchiveIcon />}
                         activeId={active}
