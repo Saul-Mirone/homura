@@ -88,8 +88,7 @@ type Menu = {
     click: () => void;
 };
 
-test('SourceList', async () => {
-    // prepare
+function prepareChannel() {
     mockChannel.getSourceList.mockResolvedValue([
         {
             id: 1,
@@ -114,14 +113,29 @@ test('SourceList', async () => {
     mockChannel.sync.mockResolvedValue();
     mockChannel.removeSourceById.mockResolvedValue();
     mockChannel.updateSourceNameById.mockResolvedValue();
+}
 
+function prepareMenu() {
     let menu: Array<Menu> = [];
-    mockAppend.mockImplementation((x) => menu.push(x));
+    let menuBuffer: Array<Menu> = [];
+    mockAppend.mockImplementation((x) => menuBuffer.push(x));
+    mockPopup.mockImplementation(() => {
+        menu = [...menuBuffer];
+        menuBuffer = [];
+    });
 
-    const fetchSourcesSpy = jest.spyOn(sourceSlice, 'fetchSources');
+    return () => menu;
+}
+
+test('SourceList', async () => {
+    prepareChannel();
+
+    const getMenu = prepareMenu();
+
     const syncSourcesSpy = jest.spyOn(sourceSlice, 'syncSources');
-    const setCurrentSourceSpy = jest.spyOn(sourceSlice, 'setCurrentSource');
     const unsubscribeSpy = jest.spyOn(sourceSlice, 'unsubscribeById');
+    const fetchSourcesSpy = jest.spyOn(sourceSlice, 'fetchSources');
+    const setCurrentSourceSpy = jest.spyOn(sourceSlice, 'setCurrentSource');
     const updateSourceByIdSpy = jest.spyOn(sourceSlice, 'updateSourceById');
 
     // setup
@@ -129,19 +143,18 @@ test('SourceList', async () => {
 
     // first init
     expect(el.list).toMatchSnapshot();
-
     expect(el.items).toHaveLength(2);
-
     expect(syncSourcesSpy).toBeCalledTimes(1);
 
     await waitFor(() => expect(fetchSourcesSpy).toHaveBeenCalledTimes(1));
 
     expect(fetchSourcesSpy).toBeCalledWith(Mode.All);
-
     expect(el.items).toHaveLength(5);
-
     expect(el.list).toMatchSnapshot();
 
+    expect(el.totalCount).toBe(26);
+
+    // click on item
     const data1Item = el.items[2]!;
 
     fireEvent.click(data1Item);
@@ -151,8 +164,7 @@ test('SourceList', async () => {
     expect(container.querySelectorAll('.sidebar-item__count')).toHaveLength(2);
     expect(container.querySelector('.sidebar-item__count')!.innerHTML).toBe('24');
 
-    expect(el.totalCount).toBe(26);
-
+    // click on preset
     const presetAll = el.items[0]!;
 
     fireEvent.click(presetAll);
@@ -160,6 +172,7 @@ test('SourceList', async () => {
     expect(data1Item).not.toHaveClass('active');
     expect(presetAll).toHaveClass('active');
 
+    // click on empty area
     fireEvent.click(el.list);
     expect(setCurrentSourceSpy).toBeCalledWith();
     expect(presetAll).not.toHaveClass('active');
@@ -168,20 +181,22 @@ test('SourceList', async () => {
     fireEvent.click(el.list);
     expect(setCurrentSourceSpy).toBeCalledTimes(count);
 
+    // context menu > unsubscribe
     fireEvent.contextMenu(data1Item);
     expect(mockPopup).toBeCalledTimes(1);
-    expect(menu.map((x) => x.label)).toEqual(['unsubscribe', 'edit']);
+    expect(getMenu().map((x) => x.label)).toEqual(['unsubscribe', 'edit']);
 
-    await act(() => menu[0]!.click());
+    await act(() => getMenu()[0]!.click());
 
     expect(unsubscribeSpy).toBeCalledWith(1);
+    expect(el.list).toMatchSnapshot();
     expect(el.totalCount).toBe(2);
     expect(el.items).toHaveLength(4);
 
-    menu = [];
+    // context menu > edit
     const data2Item = el.items[2]!;
     fireEvent.contextMenu(data2Item);
-    act(() => menu[1]!.click());
+    act(() => getMenu()[1]!.click());
 
     const input = container.querySelector('input')!;
     const button = container.querySelector('.sidebar-item__confirm-icon')!;
@@ -199,4 +214,5 @@ test('SourceList', async () => {
         name: 'data-2-new-value',
     });
     expect(data2Item).toContainHTML('data-2-new-value');
+    expect(el.list).toMatchSnapshot();
 });
