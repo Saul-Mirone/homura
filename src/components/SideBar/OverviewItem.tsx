@@ -12,7 +12,7 @@ export type OverViewItemProps = {
 
 export const OverviewItem: React.FC<OverViewItemProps> = ({ activeId, target, icon, count, onClick }) => (
     <div
-        role="listitem"
+        role="menuitem"
         tabIndex={0}
         className={`${activeId === target ? 'active' : ''} rss-item`}
         onKeyDown={() => onClick(target)}

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+
 // organize-imports-ignore
 // make sure mock file on the top of imports
 import { mockChannel } from '../../test-tools/mockChannel';
@@ -72,9 +74,9 @@ function setup(
         ...utils,
         store,
         el: {
-            list: utils.getByRole('list'),
+            list: utils.getByRole('menu'),
             get items() {
-                return utils.getAllByRole('listitem');
+                return utils.getAllByRole('menuitem');
             },
             get totalCount() {
                 return Number(utils.container.querySelector('.sidebar-overview-item__count')!.innerHTML);

@@ -20,6 +20,7 @@ type Fn = (...args: any[]) => any;
 
 type Tail<T extends unknown[]> = T extends [unknown, ...infer U] ? U : [];
 
+/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 type MakePromise<T> = T extends Promise<any> ? T : Promise<T>;
 
 type Child<T extends Record<string, Fn>> = {

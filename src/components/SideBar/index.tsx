@@ -4,11 +4,18 @@ import './style.pcss';
 export type SideBarProps = {
     overview: JSX.Element;
     bottom: JSX.Element;
-    onClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+    onClick: () => void;
 };
 
 export const SideBar: React.FC<SideBarProps> = ({ overview, bottom, children, onClick }) => (
-    <div role="list" onClick={onClick} className="sidebar-container">
+    <div
+        role="menu"
+        tabIndex={0}
+        aria-label="Sources"
+        onClick={onClick}
+        onKeyDown={onClick}
+        className="sidebar-container"
+    >
         <div className="relative flex-1 thin-scroll">
             {overview}
             <div className="pt-10" />

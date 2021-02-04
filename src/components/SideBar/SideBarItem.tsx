@@ -95,7 +95,7 @@ export const SideBarItem: React.FC<SideBarItemProps> = ({
     return (
         <div
             ref={divRef}
-            role="listitem"
+            role="menuitem"
             tabIndex={0}
             className={`${active ? 'active' : ''} rss-item`}
             onKeyDown={onClick}
