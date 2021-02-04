@@ -133,7 +133,7 @@ describe('reducers', () => {
             describe('fetchSources', () => {
                 it('should action list match snapshot', async () => {
                     const store = mockStore();
-                    mockChannel.getSourceList.mockReturnValue([
+                    mockChannel.getSourceList.mockResolvedValue([
                         {
                             id: 1,
                             name: 'data-1',
@@ -200,7 +200,7 @@ describe('reducers', () => {
             describe('syncSources', () => {
                 it('should action list match snapshot', async () => {
                     const store = mockStore();
-                    mockChannel.getSourceList.mockReturnValue([
+                    mockChannel.getSourceList.mockResolvedValue([
                         {
                             id: 1,
                             name: 'data-1-sync',
@@ -408,7 +408,7 @@ describe('reducers', () => {
             describe('subscribeToSource', () => {
                 it('should action list match snapshot', async () => {
                     const store = mockStore();
-                    mockChannel.confirm.mockReturnValue({
+                    mockChannel.confirm.mockResolvedValue({
                         id: 4,
                         name: '',
                         link: 'fake-link',
@@ -420,7 +420,7 @@ describe('reducers', () => {
 
                 it('should action list match snapshot when mode is Starred', async () => {
                     const store = mockStore();
-                    mockChannel.confirm.mockReturnValue({
+                    mockChannel.confirm.mockResolvedValue({
                         id: 4,
                         name: '',
                         link: 'fake-link',
