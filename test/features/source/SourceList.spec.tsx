@@ -113,6 +113,7 @@ test('SourceList', async () => {
     ]);
     mockChannel.sync.mockResolvedValue();
     mockChannel.removeSourceById.mockResolvedValue();
+    mockChannel.updateSourceNameById.mockResolvedValue();
 
     let menu: Array<Menu> = [];
     mockAppend.mockImplementation((x) => menu.push(x));
@@ -192,8 +193,10 @@ test('SourceList', async () => {
 
     fireEvent.click(button);
 
+    await waitFor(() => expect(updateSourceByIdSpy).toHaveBeenCalledTimes(1));
     expect(updateSourceByIdSpy).toBeCalledWith({
         id: 2,
         name: 'data-2-new-value',
     });
+    expect(data2Item).toContainHTML('data-2-new-value');
 });
