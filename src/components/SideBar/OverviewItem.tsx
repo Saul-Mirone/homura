@@ -3,7 +3,6 @@ import { Preset } from '../../constants/Preset';
 import { LogoIcon } from '../LogoIcon';
 
 export type OverViewItemProps = {
-    testId?: string;
     activeId: Preset | number | undefined;
     target: Preset;
     count: number;
@@ -11,10 +10,9 @@ export type OverViewItemProps = {
     onClick: (target: Preset) => void;
 };
 
-export const OverviewItem: React.FC<OverViewItemProps> = ({ testId, activeId, target, icon, count, onClick }) => (
+export const OverviewItem: React.FC<OverViewItemProps> = ({ activeId, target, icon, count, onClick }) => (
     <div
-        role="button"
-        data-testid={testId}
+        role="menuitem"
         tabIndex={0}
         className={`${activeId === target ? 'active' : ''} rss-item`}
         onKeyDown={() => onClick(target)}

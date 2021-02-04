@@ -51,7 +51,6 @@ export const SourceList: React.FC<{ bottom: JSX.Element }> = ({ bottom }) => {
             list.map(({ id, name, count, icon }) => (
                 <SideBarItem
                     key={id.toString()}
-                    id={id}
                     url={icon}
                     name={name}
                     count={count}

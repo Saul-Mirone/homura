@@ -9,5 +9,5 @@ export type UpdateSourceOptions = {
 };
 
 export function updateSource(db: Database, options: UpdateSourceOptions) {
-    return db.prepare<UpdateSourceOptions>(updateSourceNameById).run(options);
+    db.prepare<UpdateSourceOptions>(updateSourceNameById).run(options);
 }

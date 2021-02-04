@@ -4,13 +4,12 @@ import { CheckCircleFilledIcon, RssIcon } from '../Icon';
 import { IconContainer, LogoIcon } from '../LogoIcon';
 
 type NameEditorProps = {
-    id: number;
     name: string;
     finishEdit(): void;
     onConfirmModify: (nextName: string) => void;
 };
 
-const NameEditor: React.FC<NameEditorProps> = ({ id, name, finishEdit, onConfirmModify }) => {
+const NameEditor: React.FC<NameEditorProps> = ({ name, finishEdit, onConfirmModify }) => {
     const [editedName, setEditedName] = React.useState(name);
 
     const onConfirmEdit = () => {
@@ -21,7 +20,6 @@ const NameEditor: React.FC<NameEditorProps> = ({ id, name, finishEdit, onConfirm
     return (
         <>
             <input
-                data-testid={`source-list-item-${id}:edit-input`}
                 className="sidebar-item__input"
                 value={editedName}
                 onChange={(e) => setEditedName(e.target.value)}
@@ -31,7 +29,7 @@ const NameEditor: React.FC<NameEditorProps> = ({ id, name, finishEdit, onConfirm
                     finishEdit();
                 }}
             />
-            <div className="sidebar-item__confirm-container" data-testid={`source-list-item-${id}:edit-button`}>
+            <div className="sidebar-item__confirm-container">
                 <IconContainer mini className="sidebar-item__confirm-icon" onClick={onConfirmEdit}>
                     <CheckCircleFilledIcon />
                 </IconContainer>
@@ -43,7 +41,6 @@ const NameEditor: React.FC<NameEditorProps> = ({ id, name, finishEdit, onConfirm
 const PureNameContent: React.FC<{ name: string }> = ({ name }) => <div className="ml-2 text-xs truncate">{name}</div>;
 
 export type SideBarItemProps = {
-    id: number;
     name: string;
     count: number;
     onClick: () => void;
@@ -56,7 +53,6 @@ export type SideBarItemProps = {
 };
 
 export const SideBarItem: React.FC<SideBarItemProps> = ({
-    id,
     active,
     name,
     count,
@@ -99,9 +95,8 @@ export const SideBarItem: React.FC<SideBarItemProps> = ({
     return (
         <div
             ref={divRef}
-            role="button"
-            tabIndex={id}
-            data-testid={`source-list-item-${id}`}
+            role="menuitem"
+            tabIndex={0}
             className={`${active ? 'active' : ''} rss-item`}
             onKeyDown={onClick}
             onClick={interceptClick}
@@ -109,7 +104,7 @@ export const SideBarItem: React.FC<SideBarItemProps> = ({
             <div className="sidebar-item__container">
                 <LogoIcon url={url} icon={icon} />
                 {isEditing ? (
-                    <NameEditor id={id} name={name} onConfirmModify={onConfirmModify} finishEdit={finishEdit} />
+                    <NameEditor name={name} onConfirmModify={onConfirmModify} finishEdit={finishEdit} />
                 ) : (
                     <PureNameContent name={name} />
                 )}
