@@ -10,9 +10,9 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { Mode } from '../../../src/constants/Mode';
 import { Status } from '../../../src/constants/Status';
-import * as modeSlice from '../../../src/features/mode/modeSlice';
 import { SourceList } from '../../../src/features/source/SourceList';
 import * as sourceSlice from '../../../src/features/source/sourceSlice';
+import * as modeSlice from '../../../src/features/mode/modeSlice';
 import { Preset } from '../../../src/constants/Preset';
 import userEvent from '@testing-library/user-event';
 
@@ -73,6 +73,9 @@ function setup(
     return {
         ...utils,
         store,
+        switchMode(mode: Mode) {
+            store.dispatch(modeSlice.switchMode(mode));
+        },
         el: {
             list: utils.getByRole('menu'),
             get items() {
@@ -141,7 +144,7 @@ test('SourceList', async () => {
     const updateSourceByIdSpy = jest.spyOn(sourceSlice, 'updateSourceById');
 
     // setup
-    const { el, container } = setup();
+    const { el, container, switchMode } = setup();
 
     // first init
     expect(el.list).toMatchSnapshot();
@@ -200,8 +203,22 @@ test('SourceList', async () => {
     fireEvent.contextMenu(data2Item);
     act(() => getMenu()[1]!.click());
 
-    const input = container.querySelector('input')!;
-    const button = container.querySelector('.sidebar-item__confirm-icon')!;
+    let input = container.querySelector('input')!;
+    let button = container.querySelector('.sidebar-item__confirm-icon')!;
+
+    expect(input).toHaveValue('data-2');
+
+    userEvent.type(input, '-new-value');
+    expect(input).toHaveValue('data-2-new-value');
+
+    fireEvent.blur(input);
+    expect(data2Item).not.toContainHTML('data-2-new-value');
+
+    fireEvent.contextMenu(data2Item);
+    act(() => getMenu()[1]!.click());
+
+    input = container.querySelector('input')!;
+    button = container.querySelector('.sidebar-item__confirm-icon')!;
 
     expect(input).toHaveValue('data-2');
 
@@ -216,5 +233,13 @@ test('SourceList', async () => {
         name: 'data-2-new-value',
     });
     expect(data2Item).toContainHTML('data-2-new-value');
+    expect(el.list).toMatchSnapshot();
+
+    switchMode(Mode.Unread);
+    expect(el.items).toHaveLength(2);
+    expect(el.list).toMatchSnapshot();
+
+    switchMode(Mode.Starred);
+    expect(el.items).toHaveLength(2);
     expect(el.list).toMatchSnapshot();
 });

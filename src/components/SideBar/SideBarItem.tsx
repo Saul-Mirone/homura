@@ -17,6 +17,11 @@ const NameEditor: React.FC<NameEditorProps> = ({ name, finishEdit, onConfirmModi
         finishEdit();
     };
 
+    const onCancel = () => {
+        setEditedName(name);
+        finishEdit();
+    };
+
     return (
         <>
             <input
@@ -25,8 +30,7 @@ const NameEditor: React.FC<NameEditorProps> = ({ name, finishEdit, onConfirmModi
                 onChange={(e) => setEditedName(e.target.value)}
                 onBlur={() => {
                     if (!document.hasFocus()) return;
-                    setEditedName(name);
-                    finishEdit();
+                    onCancel();
                 }}
             />
             <div className="sidebar-item__confirm-container">
