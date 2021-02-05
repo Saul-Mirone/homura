@@ -1,6 +1,304 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SourceList 1`] = `
+exports[`should context menu work 1`] = `
+<div
+  aria-label="Sources"
+  class="sidebar-container"
+  role="menu"
+  tabindex="0"
+>
+  <div
+    class="relative flex-1 thin-scroll"
+  >
+    <div
+      class=" rss-item"
+      role="menuitem"
+      tabindex="0"
+    >
+      <div
+        class="sidebar-overview-item"
+      >
+        <div
+          class="logo-icon"
+        >
+          <svg
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M4 6h16M4 10h16M4 14h16M4 18h16"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+          </svg>
+        </div>
+        <div
+          class="sidebar-overview-item__text"
+        >
+          All Items
+        </div>
+      </div>
+      <div
+        class="sidebar-overview-item__count"
+      >
+        2
+      </div>
+    </div>
+    <div
+      class=" rss-item"
+      role="menuitem"
+      tabindex="0"
+    >
+      <div
+        class="sidebar-overview-item"
+      >
+        <div
+          class="logo-icon"
+        >
+          <svg
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+          </svg>
+        </div>
+        <div
+          class="sidebar-overview-item__text"
+        >
+          Archive
+        </div>
+      </div>
+    </div>
+    <div
+      class="pt-10"
+    />
+    <div
+      class=" rss-item"
+      role="menuitem"
+      tabindex="0"
+    >
+      <div
+        class="sidebar-item__container"
+      >
+        <div
+          class="image-icon"
+        >
+          <div>
+            <img
+              alt="icon"
+              src="fake-icon-url"
+            />
+          </div>
+        </div>
+        <div
+          class="ml-2 text-xs truncate"
+        >
+          data-2
+        </div>
+      </div>
+    </div>
+    <div
+      class=" rss-item"
+      role="menuitem"
+      tabindex="0"
+    >
+      <div
+        class="sidebar-item__container"
+      >
+        <div
+          class="logo-icon"
+        >
+          <svg
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M6 5c7.18 0 13 5.82 13 13M6 11a7 7 0 017 7m-6 0a1 1 0 11-2 0 1 1 0 012 0z"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+          </svg>
+        </div>
+        <div
+          class="ml-2 text-xs truncate"
+        >
+          data-3
+        </div>
+      </div>
+      <div
+        class="sidebar-item__count"
+      >
+        2
+      </div>
+    </div>
+  </div>
+  <div />
+</div>
+`;
+
+exports[`should context menu work 2`] = `
+<div
+  aria-label="Sources"
+  class="sidebar-container"
+  role="menu"
+  tabindex="0"
+>
+  <div
+    class="relative flex-1 thin-scroll"
+  >
+    <div
+      class=" rss-item"
+      role="menuitem"
+      tabindex="0"
+    >
+      <div
+        class="sidebar-overview-item"
+      >
+        <div
+          class="logo-icon"
+        >
+          <svg
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M4 6h16M4 10h16M4 14h16M4 18h16"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+          </svg>
+        </div>
+        <div
+          class="sidebar-overview-item__text"
+        >
+          All Items
+        </div>
+      </div>
+      <div
+        class="sidebar-overview-item__count"
+      >
+        2
+      </div>
+    </div>
+    <div
+      class=" rss-item"
+      role="menuitem"
+      tabindex="0"
+    >
+      <div
+        class="sidebar-overview-item"
+      >
+        <div
+          class="logo-icon"
+        >
+          <svg
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+          </svg>
+        </div>
+        <div
+          class="sidebar-overview-item__text"
+        >
+          Archive
+        </div>
+      </div>
+    </div>
+    <div
+      class="pt-10"
+    />
+    <div
+      class=" rss-item"
+      role="menuitem"
+      tabindex="0"
+    >
+      <div
+        class="sidebar-item__container"
+      >
+        <div
+          class="image-icon"
+        >
+          <div>
+            <img
+              alt="icon"
+              src="fake-icon-url"
+            />
+          </div>
+        </div>
+        <div
+          class="ml-2 text-xs truncate"
+        >
+          data-2-new-value
+        </div>
+      </div>
+    </div>
+    <div
+      class=" rss-item"
+      role="menuitem"
+      tabindex="0"
+    >
+      <div
+        class="sidebar-item__container"
+      >
+        <div
+          class="logo-icon"
+        >
+          <svg
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M6 5c7.18 0 13 5.82 13 13M6 11a7 7 0 017 7m-6 0a1 1 0 11-2 0 1 1 0 012 0z"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+          </svg>
+        </div>
+        <div
+          class="ml-2 text-xs truncate"
+        >
+          data-3
+        </div>
+      </div>
+      <div
+        class="sidebar-item__count"
+      >
+        2
+      </div>
+    </div>
+  </div>
+  <div />
+</div>
+`;
+
+exports[`should first render called sync and fetch 1`] = `
 <div
   aria-label="Sources"
   class="sidebar-container"
@@ -82,7 +380,7 @@ exports[`SourceList 1`] = `
 </div>
 `;
 
-exports[`SourceList 2`] = `
+exports[`should first render called sync and fetch 2`] = `
 <div
   aria-label="Sources"
   class="sidebar-container"
@@ -268,305 +566,7 @@ exports[`SourceList 2`] = `
 </div>
 `;
 
-exports[`SourceList 3`] = `
-<div
-  aria-label="Sources"
-  class="sidebar-container"
-  role="menu"
-  tabindex="0"
->
-  <div
-    class="relative flex-1 thin-scroll"
-  >
-    <div
-      class=" rss-item"
-      role="menuitem"
-      tabindex="0"
-    >
-      <div
-        class="sidebar-overview-item"
-      >
-        <div
-          class="logo-icon"
-        >
-          <svg
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M4 6h16M4 10h16M4 14h16M4 18h16"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-            />
-          </svg>
-        </div>
-        <div
-          class="sidebar-overview-item__text"
-        >
-          All Items
-        </div>
-      </div>
-      <div
-        class="sidebar-overview-item__count"
-      >
-        2
-      </div>
-    </div>
-    <div
-      class=" rss-item"
-      role="menuitem"
-      tabindex="0"
-    >
-      <div
-        class="sidebar-overview-item"
-      >
-        <div
-          class="logo-icon"
-        >
-          <svg
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-            />
-          </svg>
-        </div>
-        <div
-          class="sidebar-overview-item__text"
-        >
-          Archive
-        </div>
-      </div>
-    </div>
-    <div
-      class="pt-10"
-    />
-    <div
-      class=" rss-item"
-      role="menuitem"
-      tabindex="0"
-    >
-      <div
-        class="sidebar-item__container"
-      >
-        <div
-          class="image-icon"
-        >
-          <div>
-            <img
-              alt="icon"
-              src="fake-icon-url"
-            />
-          </div>
-        </div>
-        <div
-          class="ml-2 text-xs truncate"
-        >
-          data-2
-        </div>
-      </div>
-    </div>
-    <div
-      class=" rss-item"
-      role="menuitem"
-      tabindex="0"
-    >
-      <div
-        class="sidebar-item__container"
-      >
-        <div
-          class="logo-icon"
-        >
-          <svg
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M6 5c7.18 0 13 5.82 13 13M6 11a7 7 0 017 7m-6 0a1 1 0 11-2 0 1 1 0 012 0z"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-            />
-          </svg>
-        </div>
-        <div
-          class="ml-2 text-xs truncate"
-        >
-          data-3
-        </div>
-      </div>
-      <div
-        class="sidebar-item__count"
-      >
-        2
-      </div>
-    </div>
-  </div>
-  <div />
-</div>
-`;
-
-exports[`SourceList 4`] = `
-<div
-  aria-label="Sources"
-  class="sidebar-container"
-  role="menu"
-  tabindex="0"
->
-  <div
-    class="relative flex-1 thin-scroll"
-  >
-    <div
-      class=" rss-item"
-      role="menuitem"
-      tabindex="0"
-    >
-      <div
-        class="sidebar-overview-item"
-      >
-        <div
-          class="logo-icon"
-        >
-          <svg
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M4 6h16M4 10h16M4 14h16M4 18h16"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-            />
-          </svg>
-        </div>
-        <div
-          class="sidebar-overview-item__text"
-        >
-          All Items
-        </div>
-      </div>
-      <div
-        class="sidebar-overview-item__count"
-      >
-        2
-      </div>
-    </div>
-    <div
-      class=" rss-item"
-      role="menuitem"
-      tabindex="0"
-    >
-      <div
-        class="sidebar-overview-item"
-      >
-        <div
-          class="logo-icon"
-        >
-          <svg
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-            />
-          </svg>
-        </div>
-        <div
-          class="sidebar-overview-item__text"
-        >
-          Archive
-        </div>
-      </div>
-    </div>
-    <div
-      class="pt-10"
-    />
-    <div
-      class=" rss-item"
-      role="menuitem"
-      tabindex="0"
-    >
-      <div
-        class="sidebar-item__container"
-      >
-        <div
-          class="image-icon"
-        >
-          <div>
-            <img
-              alt="icon"
-              src="fake-icon-url"
-            />
-          </div>
-        </div>
-        <div
-          class="ml-2 text-xs truncate"
-        >
-          data-2-new-value
-        </div>
-      </div>
-    </div>
-    <div
-      class=" rss-item"
-      role="menuitem"
-      tabindex="0"
-    >
-      <div
-        class="sidebar-item__container"
-      >
-        <div
-          class="logo-icon"
-        >
-          <svg
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M6 5c7.18 0 13 5.82 13 13M6 11a7 7 0 017 7m-6 0a1 1 0 11-2 0 1 1 0 012 0z"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-            />
-          </svg>
-        </div>
-        <div
-          class="ml-2 text-xs truncate"
-        >
-          data-3
-        </div>
-      </div>
-      <div
-        class="sidebar-item__count"
-      >
-        2
-      </div>
-    </div>
-  </div>
-  <div />
-</div>
-`;
-
-exports[`SourceList 5`] = `
+exports[`should render presets work 1`] = `
 <div
   aria-label="Sources"
   class="sidebar-container"
@@ -609,12 +609,49 @@ exports[`SourceList 5`] = `
       <div
         class="sidebar-overview-item__count"
       >
-        2
+        26
       </div>
     </div>
     <div
       class="pt-10"
     />
+    <div
+      class=" rss-item"
+      role="menuitem"
+      tabindex="0"
+    >
+      <div
+        class="sidebar-item__container"
+      >
+        <div
+          class="logo-icon"
+        >
+          <svg
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M6 5c7.18 0 13 5.82 13 13M6 11a7 7 0 017 7m-6 0a1 1 0 11-2 0 1 1 0 012 0z"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+          </svg>
+        </div>
+        <div
+          class="ml-2 text-xs truncate"
+        >
+          data-1
+        </div>
+      </div>
+      <div
+        class="sidebar-item__count"
+      >
+        24
+      </div>
+    </div>
     <div
       class=" rss-item"
       role="menuitem"
@@ -657,7 +694,7 @@ exports[`SourceList 5`] = `
 </div>
 `;
 
-exports[`SourceList 6`] = `
+exports[`should render presets work 2`] = `
 <div
   aria-label="Sources"
   class="sidebar-container"
@@ -697,12 +734,49 @@ exports[`SourceList 6`] = `
       <div
         class="sidebar-overview-item__count"
       >
-        2
+        26
       </div>
     </div>
     <div
       class="pt-10"
     />
+    <div
+      class=" rss-item"
+      role="menuitem"
+      tabindex="0"
+    >
+      <div
+        class="sidebar-item__container"
+      >
+        <div
+          class="logo-icon"
+        >
+          <svg
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M6 5c7.18 0 13 5.82 13 13M6 11a7 7 0 017 7m-6 0a1 1 0 11-2 0 1 1 0 012 0z"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+          </svg>
+        </div>
+        <div
+          class="ml-2 text-xs truncate"
+        >
+          data-1
+        </div>
+      </div>
+      <div
+        class="sidebar-item__count"
+      >
+        24
+      </div>
+    </div>
     <div
       class=" rss-item"
       role="menuitem"

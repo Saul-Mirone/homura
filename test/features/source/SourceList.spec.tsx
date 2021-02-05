@@ -132,19 +132,19 @@ function prepareMenu() {
     return () => menu;
 }
 
-test('SourceList', async () => {
+beforeEach(() => {
     prepareChannel();
+});
 
-    const getMenu = prepareMenu();
+afterEach(() => {
+    jest.clearAllMocks();
+});
 
+test('should first render called sync and fetch', async () => {
     const syncSourcesSpy = jest.spyOn(sourceSlice, 'syncSources');
-    const unsubscribeSpy = jest.spyOn(sourceSlice, 'unsubscribeById');
     const fetchSourcesSpy = jest.spyOn(sourceSlice, 'fetchSources');
-    const setCurrentSourceSpy = jest.spyOn(sourceSlice, 'setCurrentSource');
-    const updateSourceByIdSpy = jest.spyOn(sourceSlice, 'updateSourceById');
 
-    // setup
-    const { el, container, switchMode } = setup();
+    const { el } = setup();
 
     // first init
     expect(el.list).toMatchSnapshot();
@@ -158,8 +158,30 @@ test('SourceList', async () => {
     expect(el.list).toMatchSnapshot();
 
     expect(el.totalCount).toBe(26);
+});
 
-    // click on item
+test('should render presets work', async () => {
+    const fetchSourcesSpy = jest.spyOn(sourceSlice, 'fetchSources');
+    const { el, switchMode } = setup();
+
+    switchMode(Mode.Unread);
+    await waitFor(() => expect(fetchSourcesSpy).toHaveBeenCalledWith(Mode.Unread));
+    expect(el.items).toHaveLength(3);
+    expect(el.list).toMatchSnapshot();
+
+    switchMode(Mode.Starred);
+    await waitFor(() => expect(fetchSourcesSpy).toHaveBeenCalledWith(Mode.Starred));
+    expect(el.items).toHaveLength(3);
+    expect(el.list).toMatchSnapshot();
+});
+
+test('should click on items work', async () => {
+    const setCurrentSourceSpy = jest.spyOn(sourceSlice, 'setCurrentSource');
+    const fetchSourcesSpy = jest.spyOn(sourceSlice, 'fetchSources');
+    const { el, container } = setup();
+
+    await waitFor(() => expect(fetchSourcesSpy).toHaveBeenCalledTimes(1));
+
     const data1Item = el.items[2]!;
 
     fireEvent.click(data1Item);
@@ -169,7 +191,6 @@ test('SourceList', async () => {
     expect(container.querySelectorAll('.sidebar-item__count')).toHaveLength(2);
     expect(container.querySelector('.sidebar-item__count')!.innerHTML).toBe('24');
 
-    // click on preset
     const presetAll = el.items[0]!;
 
     fireEvent.click(presetAll);
@@ -177,7 +198,6 @@ test('SourceList', async () => {
     expect(data1Item).not.toHaveClass('active');
     expect(presetAll).toHaveClass('active');
 
-    // click on empty area
     fireEvent.click(el.list);
     expect(setCurrentSourceSpy).toBeCalledWith();
     expect(presetAll).not.toHaveClass('active');
@@ -185,8 +205,19 @@ test('SourceList', async () => {
     const count = setCurrentSourceSpy.mock.calls.length;
     fireEvent.click(el.list);
     expect(setCurrentSourceSpy).toBeCalledTimes(count);
+});
 
-    // context menu > unsubscribe
+test('should context menu work', async () => {
+    const updateSourceByIdSpy = jest.spyOn(sourceSlice, 'updateSourceById');
+    const unsubscribeSpy = jest.spyOn(sourceSlice, 'unsubscribeById');
+    const fetchSourcesSpy = jest.spyOn(sourceSlice, 'fetchSources');
+    const getMenu = prepareMenu();
+    const { el, container } = setup();
+
+    await waitFor(() => expect(fetchSourcesSpy).toHaveBeenCalledTimes(1));
+
+    const data1Item = el.items[2]!;
+
     fireEvent.contextMenu(data1Item);
     expect(mockPopup).toBeCalledTimes(1);
     expect(getMenu().map((x) => x.label)).toEqual(['unsubscribe', 'edit']);
@@ -204,7 +235,6 @@ test('SourceList', async () => {
     act(() => getMenu()[1]!.click());
 
     let input = container.querySelector('input')!;
-    let button = container.querySelector('.sidebar-item__confirm-icon')!;
 
     expect(input).toHaveValue('data-2');
 
@@ -218,7 +248,8 @@ test('SourceList', async () => {
     act(() => getMenu()[1]!.click());
 
     input = container.querySelector('input')!;
-    button = container.querySelector('.sidebar-item__confirm-icon')!;
+
+    const button = container.querySelector('.sidebar-item__confirm-icon')!;
 
     expect(input).toHaveValue('data-2');
 
@@ -233,13 +264,5 @@ test('SourceList', async () => {
         name: 'data-2-new-value',
     });
     expect(data2Item).toContainHTML('data-2-new-value');
-    expect(el.list).toMatchSnapshot();
-
-    switchMode(Mode.Unread);
-    expect(el.items).toHaveLength(2);
-    expect(el.list).toMatchSnapshot();
-
-    switchMode(Mode.Starred);
-    expect(el.items).toHaveLength(2);
     expect(el.list).toMatchSnapshot();
 });
