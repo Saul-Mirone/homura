@@ -82,8 +82,8 @@ export const SourceOperationBar: React.FC = () => {
         <BottomBar
             step={subscribeStep}
             loading={loading}
-            onClickPlus={showSubscribeBarDispatch}
-            onClickSync={syncSourcesDispatch}
+            onClickPlus={() => showSubscribeBarDispatch()}
+            onClickSync={() => syncSourcesDispatch()}
             render={renderBottom}
         />
     );

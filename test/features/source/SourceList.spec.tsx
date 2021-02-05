@@ -77,7 +77,9 @@ function setup(
             store.dispatch(modeSlice.switchMode(mode));
         },
         el: {
-            list: utils.getByRole('menu'),
+            get list() {
+                return utils.getByRole('menu');
+            },
             get items() {
                 return utils.getAllByRole('menuitem');
             },
@@ -146,7 +148,6 @@ test('should first render called sync and fetch', async () => {
 
     const { el } = setup();
 
-    // first init
     expect(el.list).toMatchSnapshot();
     expect(el.items).toHaveLength(2);
     expect(syncSourcesSpy).toBeCalledTimes(1);

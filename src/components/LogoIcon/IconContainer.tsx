@@ -2,15 +2,22 @@ import React from 'react';
 
 export type IconContainerProps = {
     mini?: boolean;
+    label?: string;
     className?: string;
     size?: number;
     disabled?: boolean;
     onClick?: () => void;
 };
 
-const ButtonDiv: React.FC<Pick<IconContainerProps, 'className' | 'onClick'>> = ({ className, onClick, children }) => (
+const ButtonDiv: React.FC<Pick<IconContainerProps, 'className' | 'onClick' | 'label'>> = ({
+    className,
+    onClick,
+    children,
+    label,
+}) => (
     <div
         role="button"
+        aria-label={label}
         tabIndex={0}
         className={className}
         onMouseDown={(e) => e.preventDefault()}
@@ -23,6 +30,7 @@ const ButtonDiv: React.FC<Pick<IconContainerProps, 'className' | 'onClick'>> = (
 
 export const IconContainer: React.FC<IconContainerProps> = ({
     children,
+    label = '',
     mini = false,
     size = 5,
     disabled = false,
@@ -46,7 +54,7 @@ export const IconContainer: React.FC<IconContainerProps> = ({
     ]);
 
     return (
-        <ButtonDiv className={outerClassName} onClick={onClick}>
+        <ButtonDiv label={label} className={outerClassName} onClick={onClick}>
             {child}
         </ButtonDiv>
     );

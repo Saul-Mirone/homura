@@ -37,6 +37,7 @@ export const FeedSearchBar: React.FC<FeedSearchBarProps> = ({
             <div className="sidebar-feed-search-bar__container">
                 <div className="flex-1">
                     <input
+                        aria-label="Feed search input"
                         ref={inputEl}
                         className="sidebar-feed-search-bar__input"
                         placeholder="Feed URL"
@@ -49,6 +50,7 @@ export const FeedSearchBar: React.FC<FeedSearchBarProps> = ({
                     />
                 </div>
                 <IconContainer
+                    label="Search URL"
                     className={`sidebar-feed-search-bar__icon ${!loading ? 'show' : 'loading'}`}
                     disabled={loading}
                     onClick={() => {

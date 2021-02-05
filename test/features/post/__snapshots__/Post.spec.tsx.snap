@@ -8,6 +8,7 @@ exports[`Post component should match snapshot when has post 1`] = `
     class="inline-flex my-1 mr-1 text-gray-800"
   >
     <div
+      aria-label=""
       class="p-2  py-1"
       role="button"
       tabindex="0"
@@ -27,6 +28,7 @@ exports[`Post component should match snapshot when has post 1`] = `
       </div>
     </div>
     <div
+      aria-label=""
       class="p-2  py-1"
       role="button"
       tabindex="0"
@@ -50,6 +52,7 @@ exports[`Post component should match snapshot when has post 1`] = `
       </div>
     </div>
     <div
+      aria-label=""
       class="p-2  py-1"
       role="button"
       tabindex="0"

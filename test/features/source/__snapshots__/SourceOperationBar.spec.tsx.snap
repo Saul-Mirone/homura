@@ -1,54 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SourceOperationBar component should match snapshot enterNameStep 1`] = `
+exports[`SourceOperationBar 1`] = `
 <div
   class="sidebar-bottom-bar"
   role="toolbar"
 >
   <div
-    class="sidebar-bottom-bar__step"
-  >
-    <div
-      class="sidebar-subscribe-bar__link"
-    />
-    <div
-      class="sidebar-subscribe-bar__content"
-      data-testid="sidebar-subscribe-bar-content"
-    >
-      <div
-        class="flex-1"
-      >
-        <input
-          aria-label="subscribed-source-name"
-          class="sidebar-subscribe-bar__input"
-          placeholder="Save as Name"
-          value=""
-        />
-      </div>
-      <div
-        class="p-2  sidebar-subscribe-bar__icon"
-        role="button"
-        tabindex="0"
-      >
-        <div
-          class="w-5 h-5 m-auto  "
-        >
-          <svg
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              clip-rule="evenodd"
-              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-              fill-rule="evenodd"
-            />
-          </svg>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div
+    aria-label="Add a source"
     class="p-2  "
     role="button"
     tabindex="0"
@@ -72,6 +30,7 @@ exports[`SourceOperationBar component should match snapshot enterNameStep 1`] = 
     </div>
   </div>
   <div
+    aria-label="Sync sources"
     class="p-2  "
     role="button"
     tabindex="0"
@@ -98,7 +57,7 @@ exports[`SourceOperationBar component should match snapshot enterNameStep 1`] = 
 </div>
 `;
 
-exports[`SourceOperationBar component should match snapshot enterUrlStep 1`] = `
+exports[`SourceOperationBar 2`] = `
 <div
   class="sidebar-bottom-bar"
   role="toolbar"
@@ -113,12 +72,14 @@ exports[`SourceOperationBar component should match snapshot enterUrlStep 1`] = `
         class="flex-1"
       >
         <input
+          aria-label="Feed search input"
           class="sidebar-feed-search-bar__input"
           placeholder="Feed URL"
           value=""
         />
       </div>
       <div
+        aria-label="Search URL"
         class="p-2  sidebar-feed-search-bar__icon show"
         role="button"
         tabindex="0"
@@ -145,6 +106,7 @@ exports[`SourceOperationBar component should match snapshot enterUrlStep 1`] = `
     </div>
   </div>
   <div
+    aria-label="Add a source"
     class="p-2  "
     role="button"
     tabindex="0"
@@ -168,6 +130,7 @@ exports[`SourceOperationBar component should match snapshot enterUrlStep 1`] = `
     </div>
   </div>
   <div
+    aria-label="Sync sources"
     class="p-2  "
     role="button"
     tabindex="0"
@@ -194,12 +157,13 @@ exports[`SourceOperationBar component should match snapshot enterUrlStep 1`] = `
 </div>
 `;
 
-exports[`SourceOperationBar component should match snapshot when not rendered 1`] = `
+exports[`SourceOperationBar 3`] = `
 <div
   class="sidebar-bottom-bar"
   role="toolbar"
 >
   <div
+    aria-label="Add a source"
     class="p-2  "
     role="button"
     tabindex="0"
@@ -223,6 +187,7 @@ exports[`SourceOperationBar component should match snapshot when not rendered 1`
     </div>
   </div>
   <div
+    aria-label="Sync sources"
     class="p-2  "
     role="button"
     tabindex="0"

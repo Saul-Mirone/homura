@@ -26,10 +26,10 @@ export const FeedSubscribeBar: React.FC<FeedSubscribeBarProps> = ({ link, initia
     return (
         <>
             <div className="sidebar-subscribe-bar__link">{link}</div>
-            <div data-testid="sidebar-subscribe-bar-content" className="sidebar-subscribe-bar__content">
+            <div className="sidebar-subscribe-bar__content">
                 <div className="flex-1">
                     <input
-                        aria-label="subscribed-source-name"
+                        aria-label="Subscribed name input"
                         ref={inputEl}
                         value={name}
                         onChange={onChange}
@@ -38,7 +38,7 @@ export const FeedSubscribeBar: React.FC<FeedSubscribeBarProps> = ({ link, initia
                         placeholder="Save as Name"
                     />
                 </div>
-                <IconContainer onClick={onClick} className="sidebar-subscribe-bar__icon">
+                <IconContainer label="Confirm subscribe" onClick={onClick} className="sidebar-subscribe-bar__icon">
                     <CheckCircleFilledIcon />
                 </IconContainer>
             </div>

@@ -1,13 +1,19 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+
+// organize-imports-ignore
+// make sure mock file on the top of imports
+import { mockChannel } from '../../test-tools/mockChannel';
+
 import { configureStore } from '@reduxjs/toolkit';
-import { fireEvent, getByLabelText, getByRole, render, screen } from '@testing-library/react';
+import { fireEvent, render, waitFor } from '@testing-library/react';
 import React from 'react';
 import { Provider } from 'react-redux';
-import { Step } from '../../../src/components/SideBar/BottomBar';
 import { Mode } from '../../../src/constants/Mode';
 import { Status } from '../../../src/constants/Status';
 import * as modeSlice from '../../../src/features/mode/modeSlice';
 import { SourceOperationBar } from '../../../src/features/source/SourceOperationBar';
 import * as sourceSlice from '../../../src/features/source/sourceSlice';
+import userEvent from '@testing-library/user-event';
 
 function setup(
     preloadedState: {
@@ -41,58 +47,128 @@ function setup(
         preloadedState: state,
     });
 
-    render(
+    const utils = render(
         <Provider store={store}>
             <SourceOperationBar />
         </Provider>,
     );
 
     return {
+        ...utils,
         store,
+        el: {
+            get bar() {
+                return utils.getByRole('toolbar');
+            },
+            get addButton() {
+                return utils.getByLabelText('Add a source');
+            },
+            get syncButton() {
+                return utils.getByLabelText('Sync sources');
+            },
+            get urlInput() {
+                return utils.getByLabelText('Feed search input');
+            },
+            get urlSearchButton() {
+                return utils.getByLabelText('Search URL');
+            },
+            get alert() {
+                return utils.getByRole('alert');
+            },
+            get closeAlertButton() {
+                return utils.getByLabelText('Close alert');
+            },
+            get nameInput() {
+                return utils.getByLabelText('Subscribed name input');
+            },
+            get confirmButton() {
+                return utils.getByLabelText('Confirm subscribe');
+            },
+        },
     };
 }
 
-describe('SourceOperationBar component', () => {
-    it('should match snapshot when not rendered', () => {
-        setup();
+test('SourceOperationBar', async () => {
+    const subscribeToSourceSpy = jest.spyOn(sourceSlice, 'subscribeToSource');
+    const syncSourcesSpy = jest.spyOn(sourceSlice, 'syncSources');
+    const resetSubscribeStateSpy = jest.spyOn(sourceSlice, 'resetSubscribeState');
 
-        expect(screen.getByRole('toolbar')).toMatchSnapshot();
+    const { el, queryByRole } = setup();
+    expect(el.bar).toMatchSnapshot();
+
+    mockChannel.sync.mockResolvedValue();
+    fireEvent.click(el.syncButton);
+
+    await waitFor(() => expect(syncSourcesSpy).toBeCalledTimes(1));
+
+    fireEvent.click(el.addButton);
+    expect(el.bar).toMatchSnapshot();
+
+    fireEvent.click(el.addButton);
+
+    expect(el.urlInput).toHaveValue('');
+    userEvent.type(el.urlInput, 'cancel value');
+
+    fireEvent.blur(el.urlInput);
+    expect(resetSubscribeStateSpy).toBeCalledTimes(1);
+
+    fireEvent.click(el.addButton);
+
+    expect(el.urlInput).toHaveValue('');
+    userEvent.type(el.urlInput, 'wrong value');
+
+    mockChannel.checkUrl.mockResolvedValue('');
+
+    fireEvent.click(el.urlSearchButton);
+
+    await waitFor(() => expect(mockChannel.checkUrl).toBeCalledTimes(1));
+
+    expect(mockChannel.checkUrl).toBeCalledWith('wrong value');
+
+    expect(el.alert).not.toBeNull();
+
+    fireEvent.blur(el.urlInput);
+
+    expect(el.alert).not.toBeNull();
+
+    fireEvent.click(el.closeAlertButton);
+
+    expect(queryByRole('alert')).not.toBeInTheDocument();
+
+    fireEvent.click(el.addButton);
+    userEvent.type(el.urlInput, ' sub');
+
+    mockChannel.checkUrl.mockResolvedValue('Fake Feed');
+
+    fireEvent.click(el.urlSearchButton);
+
+    await waitFor(() => expect(mockChannel.checkUrl).toBeCalledWith('wrong value sub'));
+
+    expect(queryByRole('alert')).not.toBeInTheDocument();
+    expect(el.nameInput).toHaveValue('Fake Feed');
+
+    fireEvent.blur(el.nameInput);
+    expect(resetSubscribeStateSpy).toBeCalledTimes(2);
+
+    fireEvent.click(el.addButton);
+    userEvent.type(el.urlInput, 'right value');
+    fireEvent.click(el.urlSearchButton);
+
+    await waitFor(() => expect(mockChannel.checkUrl).toBeCalledWith('right value'));
+    expect(el.nameInput).toHaveValue('Fake Feed');
+    userEvent.type(el.nameInput, ' Sub');
+
+    mockChannel.confirm.mockResolvedValue({
+        id: 1,
+        name: 'fake-name',
+        link: 'fake-link',
+        count: 10,
     });
 
-    it('should match snapshot enterUrlStep', () => {
-        setup({
-            source: {
-                subscribeStep: Step.EnterUrl,
-            },
-        });
+    fireEvent.click(el.confirmButton);
 
-        expect(screen.getByRole('toolbar')).toMatchSnapshot();
-    });
+    await waitFor(() => expect(mockChannel.confirm).toBeCalledWith('Fake Feed Sub'));
 
-    it('should match snapshot enterNameStep', () => {
-        setup({
-            source: {
-                subscribeStep: Step.EnterName,
-            },
-        });
-
-        expect(screen.getByRole('toolbar')).toMatchSnapshot();
-    });
-
-    it('should click button', () => {
-        const subscribeToSourceSpy = jest.spyOn(sourceSlice, 'subscribeToSource');
-        setup({
-            source: {
-                subscribeStep: Step.EnterName,
-            },
-            mode: Mode.Starred,
-        });
-
-        const subscribeContent = screen.getByTestId('sidebar-subscribe-bar-content');
-        const input = getByLabelText(subscribeContent, 'subscribed-source-name');
-        const button = getByRole(subscribeContent, 'button');
-        fireEvent.change(input, { target: { value: 'test name' } });
-        fireEvent.click(button);
-        expect(subscribeToSourceSpy).toBeCalledWith({ mode: Mode.Starred, name: 'test name' });
-    });
+    expect(subscribeToSourceSpy).toBeCalledWith({ mode: Mode.All, name: 'Fake Feed Sub' });
+    expect(el.bar).toMatchSnapshot();
 });

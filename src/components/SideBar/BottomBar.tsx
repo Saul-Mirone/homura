@@ -18,10 +18,10 @@ export type BottomBarProps = {
 export const BottomBar: React.FC<BottomBarProps> = ({ step, onClickPlus, onClickSync, render, loading }) => (
     <div role="toolbar" className="sidebar-bottom-bar">
         {step !== undefined && <div className="sidebar-bottom-bar__step">{render(step)}</div>}
-        <IconContainer onClick={onClickPlus}>
+        <IconContainer label="Add a source" onClick={onClickPlus}>
             <PlusIcon />
         </IconContainer>
-        <IconContainer onClick={onClickSync}>
+        <IconContainer label="Sync sources" onClick={onClickSync}>
             <RefreshIcon spin={loading} />
         </IconContainer>
     </div>
