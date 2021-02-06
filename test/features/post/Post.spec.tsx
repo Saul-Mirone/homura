@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 // organize-imports-ignore
 // make sure mock file on the top of imports
 import { mockChannel } from '../../test-tools/mockChannel';
