@@ -18,7 +18,7 @@ export const Reader: React.FC<ReaderProps> = ({ post, toolkit }) => {
 
     React.useEffect(() => {
         postContainerRef.current?.scrollTo(0, 0);
-    }, []);
+    }, [post]);
 
     return (
         <div role="article" className="reader-container">

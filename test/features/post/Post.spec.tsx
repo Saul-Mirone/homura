@@ -1,15 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import React from 'react';
 import { Provider } from 'react-redux';
 import * as listSlice from '../../../src/features/list/listSlice';
 import { Post } from '../../../src/features/post/Post';
 import * as postSlice from '../../../src/features/post/postSlice';
-
-jest.mock('../../../src/components/Reader', () => {
-    const FakeReader = ({ toolkit }: { toolkit: JSX.Element }) => toolkit;
-    return { Reader: FakeReader };
-});
+import { mockChannel } from '../../test-tools/mockChannel';
 
 function setup(
     preloadedState: {
@@ -23,7 +19,30 @@ function setup(
     },
 ) {
     const initialListState = {
-        posts: [],
+        posts: [
+            {
+                id: 1,
+                sourceId: 0,
+                title: 'test-title-1',
+                unread: false,
+                starred: true,
+                link: 'test-link-1',
+                date: 'test-date-1',
+                icon: 'test-icon-1',
+                sourceName: 'test-source-name-1',
+            },
+            {
+                id: 2,
+                sourceId: 1,
+                title: 'test-title-2',
+                unread: true,
+                starred: false,
+                link: 'test-link-2',
+                date: 'test-date-2',
+                icon: 'test-icon-2',
+                sourceName: 'test-source-name-2',
+            },
+        ],
         activeId: undefined,
         filter: '',
     };
@@ -39,74 +58,42 @@ function setup(
         preloadedState: state,
     });
 
-    const rendered = render(
+    const utils = render(
         <Provider store={store}>
             <Post />
         </Provider>,
     );
 
     return {
+        ...utils,
         store,
-        rendered,
+        setActiveId: (id: number) => store.dispatch(listSlice.setActiveId(id)),
+        el: {
+            get post() {
+                return utils.getByRole('article');
+            },
+        },
     };
 }
 
-describe('Post component', () => {
-    it('should match snapshot when no post', () => {
-        const { rendered } = setup();
+test('Post', async () => {
+    const mockScrollTo = jest.fn();
+    HTMLElement.prototype.scrollTo = mockScrollTo;
 
-        expect(rendered.container.firstChild).toBeNull();
-    });
+    const getPostContentByIdSpy = jest.spyOn(postSlice, 'getPostContentById');
 
-    it('should match snapshot when target not exist', () => {
-        const { rendered } = setup({
-            list: {
-                activeId: 20,
-                posts: [
-                    {
-                        id: 1,
-                        sourceId: 0,
-                        title: 'test-title',
-                        unread: false,
-                        starred: true,
-                        link: 'test-link',
-                        date: 'test-date',
-                        icon: 'test-icon',
-                        sourceName: 'test-source-name',
-                    },
-                ],
-            },
-            post: {
-                content: 'test-content',
-            },
-        });
+    const { el, setActiveId, getByAltText } = setup();
 
-        expect(rendered.container.firstChild).toBeNull();
-    });
+    expect(getByAltText('homura')).toHaveAttribute('src');
+    expect(el.post).toMatchSnapshot();
 
-    it('should match snapshot when has post', () => {
-        const { rendered } = setup({
-            list: {
-                activeId: 1,
-                posts: [
-                    {
-                        id: 1,
-                        sourceId: 0,
-                        title: 'test-title',
-                        unread: false,
-                        starred: true,
-                        link: 'test-link',
-                        date: 'test-date',
-                        icon: 'test-icon',
-                        sourceName: 'test-source-name',
-                    },
-                ],
-            },
-            post: {
-                content: 'test-content',
-            },
-        });
+    mockChannel.getPostById.mockResolvedValue({ content: 'fake-content' } as any);
 
-        expect(rendered.container.firstChild).toMatchSnapshot();
-    });
+    setActiveId(1);
+
+    await waitFor(() => expect(getPostContentByIdSpy).toBeCalledWith(1));
+
+    expect(mockScrollTo).toBeCalledWith(0, 0);
+
+    expect(el.post).toMatchSnapshot();
 });
