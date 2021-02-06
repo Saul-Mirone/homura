@@ -1,11 +1,14 @@
+// organize-imports-ignore
+// make sure mock file on the top of imports
+import { mockChannel } from '../../test-tools/mockChannel';
+
 import { configureStore } from '@reduxjs/toolkit';
-import { render, waitFor } from '@testing-library/react';
+import { fireEvent, render, waitFor } from '@testing-library/react';
 import React from 'react';
 import { Provider } from 'react-redux';
 import * as listSlice from '../../../src/features/list/listSlice';
 import { Post } from '../../../src/features/post/Post';
 import * as postSlice from '../../../src/features/post/postSlice';
-import { mockChannel } from '../../test-tools/mockChannel';
 
 function setup(
     preloadedState: {
@@ -72,6 +75,18 @@ function setup(
             get post() {
                 return utils.getByRole('article');
             },
+            get toolkit() {
+                return utils.getByRole('group');
+            },
+            get starButton() {
+                return utils.getByLabelText('Mark as starred');
+            },
+            get unreadButton() {
+                return utils.getByLabelText('Mark as unread');
+            },
+            get shareButton() {
+                return utils.getByLabelText('Open in browser');
+            },
         },
     };
 }
@@ -80,14 +95,24 @@ test('Post', async () => {
     const mockScrollTo = jest.fn();
     HTMLElement.prototype.scrollTo = mockScrollTo;
 
+    const mockOpen = jest.fn();
+    global.open = mockOpen;
+
+    mockChannel.setPostStarred.mockResolvedValue(undefined as any);
+    mockChannel.setPostUnread.mockResolvedValue(undefined as any);
+    mockChannel.getPostById.mockResolvedValue({ content: 'fake-content' } as any);
+
     const getPostContentByIdSpy = jest.spyOn(postSlice, 'getPostContentById');
+    const markActiveStarredAsSpy = jest.spyOn(listSlice, 'markActiveStarredAs');
+    const markActiveUnreadAsSpy = jest.spyOn(listSlice, 'markActiveUnreadAs');
 
     const { el, setActiveId, getByAltText } = setup();
 
     expect(getByAltText('homura')).toHaveAttribute('src');
     expect(el.post).toMatchSnapshot();
 
-    mockChannel.getPostById.mockResolvedValue({ content: 'fake-content' } as any);
+    setActiveId(20);
+    expect(el.post).toMatchSnapshot();
 
     setActiveId(1);
 
@@ -96,4 +121,15 @@ test('Post', async () => {
     expect(mockScrollTo).toBeCalledWith(0, 0);
 
     expect(el.post).toMatchSnapshot();
+
+    fireEvent.click(el.starButton);
+    await waitFor(() => expect(markActiveStarredAsSpy).toBeCalledWith(false));
+    expect(mockChannel.setPostStarred).toBeCalledWith(1, false);
+
+    fireEvent.click(el.unreadButton);
+    await waitFor(() => expect(markActiveUnreadAsSpy).toBeCalledWith(true));
+    expect(mockChannel.setPostUnread).toBeCalledWith(1, true);
+
+    fireEvent.click(el.shareButton);
+    expect(mockOpen).toBeCalledWith('test-link-1');
 });
