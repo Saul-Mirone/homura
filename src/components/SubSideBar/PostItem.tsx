@@ -8,9 +8,8 @@ type PostItemProps = {
     active: boolean;
     unread: boolean;
     starred: boolean;
-    onClick(): void;
-
     icon?: string;
+    onClick(): void;
 };
 
 export const PostItem: React.FC<PostItemProps> = ({ icon, name, source, onClick, active, unread, starred }) => (
