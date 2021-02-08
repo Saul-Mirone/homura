@@ -1,4 +1,5 @@
 import { IpcMainInvokeEvent } from 'electron';
+import { pick } from 'lodash';
 import Parser from 'rss-parser';
 import { Preset } from '../constants/Preset';
 import { Model } from '../model';
@@ -110,13 +111,7 @@ export class ChannelMain {
             link: tmp.link,
             sourceUrl: tmp.sourceUrl,
             icon: tmp.icon,
-            posts: tmp.items.map(({ title, content, date, guid, link }) => ({
-                link,
-                guid,
-                title,
-                content,
-                date,
-            })),
+            posts: tmp.items.map((x) => pick(x, ['title', 'content', 'date', 'guid', 'link'])),
         });
     }
 

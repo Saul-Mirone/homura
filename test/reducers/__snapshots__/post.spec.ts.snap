@@ -1,12 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`reducers post should handle initial state 1`] = `
-Object {
-  "content": "",
-}
-`;
-
-exports[`reducers post thunk getPostContentById should action list match snapshot 1`] = `
+exports[`getPostContentById should action list match snapshot 1`] = `
 Array [
   Object {
     "meta": Object {
@@ -29,10 +23,16 @@ Array [
 ]
 `;
 
-exports[`reducers post thunk getPostContentById should handle getPostContentById.fulfilled 1`] = `
+exports[`getPostContentById should handle getPostContentById.fulfilled 1`] = `
 Object {
   "content": Object {
     "content": "fake-content",
   },
+}
+`;
+
+exports[`should handle initial state 1`] = `
+Object {
+  "content": "",
 }
 `;

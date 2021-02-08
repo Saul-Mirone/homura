@@ -28,18 +28,18 @@ const initialState: State = {
     filter: '',
 };
 
-export const getListBySourceId = createAsyncThunk('list/getListBySourceId', (payload: { id: number; mode: Mode }) => {
-    const { mode, id } = payload;
-    if (mode === Mode.All) {
-        return channel.getSourceById(id);
-    }
+export const getListBySourceId = createAsyncThunk(
+    'list/getListBySourceId',
+    ({ id, mode }: { id: number; mode: Mode }) => {
+        const status = mode === Mode.All ? undefined : mode === Mode.Unread ? 'unread' : 'starred';
 
-    return channel.getSourceById(id, mode === Mode.Unread ? 'unread' : 'starred');
-});
+        return channel.getSourceById(id, status);
+    },
+);
 
-export const getListByPreset = createAsyncThunk('list/getListByPreset', (preset: Preset) => {
-    return channel.getPostByPreset(preset);
-});
+export const getListByPreset = createAsyncThunk('list/getListByPreset', (preset: Preset) =>
+    channel.getPostByPreset(preset),
+);
 
 export const markAsUnread = createAsyncThunk(
     'list/markAsUnread',
@@ -87,21 +87,19 @@ const listSlice = createSlice({
     extraReducers: (builder) =>
         builder
             .addCase(getListBySourceId.fulfilled, (state, action) => {
-                state.posts = [...action.payload];
+                state.posts = action.payload;
             })
             .addCase(getListByPreset.fulfilled, (state, action) => {
-                state.posts = [...action.payload];
+                state.posts = action.payload;
             })
             .addCase(markAsUnread.fulfilled, (state, action) => {
                 const target = state.posts.find((x) => x.id === action.payload.id);
-
                 if (!target) return;
 
                 target.unread = action.payload.unread;
             })
             .addCase(markAsStarred.fulfilled, (state, action) => {
                 const target = state.posts.find((x) => x.id === action.payload.id);
-
                 if (!target) return;
 
                 target.starred = action.payload.starred;

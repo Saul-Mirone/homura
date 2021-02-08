@@ -1,0 +1,402 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getListByPreset should action list match snapshot 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "arg": "Unread",
+      "requestId": "fake-request-id",
+      "requestStatus": "pending",
+    },
+    "payload": undefined,
+    "type": "list/getListByPreset/pending",
+  },
+  Object {
+    "meta": Object {
+      "arg": "Unread",
+      "requestId": "fake-request-id",
+      "requestStatus": "fulfilled",
+    },
+    "payload": Array [
+      Object {
+        "date": "test-date-1",
+        "icon": "test-icon-1",
+        "id": 1,
+        "link": "test-link-1",
+        "name": "test-source-name-1",
+        "sourceId": 0,
+        "starred": true,
+        "title": "test-title-1",
+        "unread": false,
+      },
+      Object {
+        "date": "test-date-2",
+        "icon": "test-icon-2",
+        "id": 2,
+        "link": "test-link-2",
+        "name": "test-source-name-2",
+        "sourceId": 1,
+        "starred": false,
+        "title": "test-title-2",
+        "unread": true,
+      },
+    ],
+    "type": "list/getListByPreset/fulfilled",
+  },
+]
+`;
+
+exports[`getListByPreset should handle fulfilled 1`] = `
+Object {
+  "activeId": undefined,
+  "filter": "",
+  "posts": Array [
+    Object {
+      "date": "test-date-1",
+      "icon": "test-icon-1",
+      "id": 1,
+      "link": "test-link-1",
+      "name": "test-source-name-1",
+      "sourceId": 0,
+      "starred": true,
+      "title": "test-title-1",
+      "unread": false,
+    },
+    Object {
+      "date": "test-date-2",
+      "icon": "test-icon-2",
+      "id": 2,
+      "link": "test-link-2",
+      "name": "test-source-name-2",
+      "sourceId": 1,
+      "starred": false,
+      "title": "test-title-2",
+      "unread": true,
+    },
+  ],
+}
+`;
+
+exports[`getListBySourceId should action list match snapshot 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "arg": Object {
+        "id": 5,
+        "mode": "All",
+      },
+      "requestId": "fake-request-id",
+      "requestStatus": "pending",
+    },
+    "payload": undefined,
+    "type": "list/getListBySourceId/pending",
+  },
+  Object {
+    "meta": Object {
+      "arg": Object {
+        "id": 5,
+        "mode": "All",
+      },
+      "requestId": "fake-request-id",
+      "requestStatus": "fulfilled",
+    },
+    "payload": Array [
+      Object {
+        "date": "test-date-1",
+        "icon": "test-icon-1",
+        "id": 1,
+        "link": "test-link-1",
+        "name": "test-source-name-1",
+        "sourceId": 0,
+        "starred": true,
+        "title": "test-title-1",
+        "unread": false,
+      },
+      Object {
+        "date": "test-date-2",
+        "icon": "test-icon-2",
+        "id": 2,
+        "link": "test-link-2",
+        "name": "test-source-name-2",
+        "sourceId": 1,
+        "starred": false,
+        "title": "test-title-2",
+        "unread": true,
+      },
+    ],
+    "type": "list/getListBySourceId/fulfilled",
+  },
+]
+`;
+
+exports[`getListBySourceId should handle fulfilled 1`] = `
+Object {
+  "activeId": undefined,
+  "filter": "",
+  "posts": Array [
+    Object {
+      "date": "test-date-1",
+      "icon": "test-icon-1",
+      "id": 1,
+      "link": "test-link-1",
+      "name": "test-source-name-1",
+      "sourceId": 0,
+      "starred": true,
+      "title": "test-title-1",
+      "unread": false,
+    },
+    Object {
+      "date": "test-date-2",
+      "icon": "test-icon-2",
+      "id": 2,
+      "link": "test-link-2",
+      "name": "test-source-name-2",
+      "sourceId": 1,
+      "starred": false,
+      "title": "test-title-2",
+      "unread": true,
+    },
+  ],
+}
+`;
+
+exports[`markAsRead should array payload action list match snapshot 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "arg": Array [
+        1,
+        2,
+      ],
+      "requestId": "fake-request-id",
+      "requestStatus": "pending",
+    },
+    "payload": undefined,
+    "type": "list/markAsRead/pending",
+  },
+  Object {
+    "meta": Object {
+      "arg": Array [
+        1,
+        2,
+      ],
+      "requestId": "fake-request-id",
+      "requestStatus": "fulfilled",
+    },
+    "payload": undefined,
+    "type": "list/markAsRead/fulfilled",
+  },
+]
+`;
+
+exports[`markAsRead should handle fulfilled 1`] = `
+Object {
+  "activeId": 1,
+  "filter": "",
+  "posts": Array [
+    Object {
+      "date": "test-date-1",
+      "icon": "test-icon-1",
+      "id": 1,
+      "link": "test-link-1",
+      "name": "test-source-name-1",
+      "sourceId": 0,
+      "starred": true,
+      "title": "test-title-1",
+      "unread": false,
+    },
+    Object {
+      "date": "test-date-2",
+      "icon": "test-icon-2",
+      "id": 2,
+      "link": "test-link-2",
+      "name": "test-source-name-2",
+      "sourceId": 1,
+      "starred": false,
+      "title": "test-title-2",
+      "unread": false,
+    },
+  ],
+}
+`;
+
+exports[`markAsRead should number payload action list match snapshot 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "arg": 1,
+      "requestId": "fake-request-id",
+      "requestStatus": "pending",
+    },
+    "payload": undefined,
+    "type": "list/markAsRead/pending",
+  },
+  Object {
+    "meta": Object {
+      "arg": 1,
+      "requestId": "fake-request-id",
+      "requestStatus": "fulfilled",
+    },
+    "payload": undefined,
+    "type": "list/markAsRead/fulfilled",
+  },
+]
+`;
+
+exports[`markAsStarred should action list match snapshot 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "arg": Object {
+        "id": 1,
+        "starred": false,
+      },
+      "requestId": "fake-request-id",
+      "requestStatus": "pending",
+    },
+    "payload": undefined,
+    "type": "list/markAsStarred/pending",
+  },
+  Object {
+    "meta": Object {
+      "arg": Object {
+        "id": 1,
+        "starred": false,
+      },
+      "requestId": "fake-request-id",
+      "requestStatus": "fulfilled",
+    },
+    "payload": Object {
+      "id": 1,
+      "starred": false,
+    },
+    "type": "list/markAsStarred/fulfilled",
+  },
+]
+`;
+
+exports[`markAsStarred should handle fulfilled 1`] = `
+Object {
+  "activeId": 1,
+  "filter": "",
+  "posts": Array [
+    Object {
+      "date": "test-date-1",
+      "icon": "test-icon-1",
+      "id": 1,
+      "link": "test-link-1",
+      "name": "test-source-name-1",
+      "sourceId": 0,
+      "starred": false,
+      "title": "test-title-1",
+      "unread": false,
+    },
+    Object {
+      "date": "test-date-2",
+      "icon": "test-icon-2",
+      "id": 2,
+      "link": "test-link-2",
+      "name": "test-source-name-2",
+      "sourceId": 1,
+      "starred": false,
+      "title": "test-title-2",
+      "unread": true,
+    },
+  ],
+}
+`;
+
+exports[`markAsUnread should action list match snapshot 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "arg": Object {
+        "id": 1,
+        "unread": true,
+      },
+      "requestId": "fake-request-id",
+      "requestStatus": "pending",
+    },
+    "payload": undefined,
+    "type": "list/markAsUnread/pending",
+  },
+  Object {
+    "meta": Object {
+      "arg": Object {
+        "id": 1,
+        "unread": true,
+      },
+      "requestId": "fake-request-id",
+      "requestStatus": "fulfilled",
+    },
+    "payload": Object {
+      "id": 1,
+      "unread": true,
+    },
+    "type": "list/markAsUnread/fulfilled",
+  },
+]
+`;
+
+exports[`markAsUnread should handle fulfilled 1`] = `
+Object {
+  "activeId": 1,
+  "filter": "",
+  "posts": Array [
+    Object {
+      "date": "test-date-1",
+      "icon": "test-icon-1",
+      "id": 1,
+      "link": "test-link-1",
+      "name": "test-source-name-1",
+      "sourceId": 0,
+      "starred": true,
+      "title": "test-title-1",
+      "unread": true,
+    },
+    Object {
+      "date": "test-date-2",
+      "icon": "test-icon-2",
+      "id": 2,
+      "link": "test-link-2",
+      "name": "test-source-name-2",
+      "sourceId": 1,
+      "starred": false,
+      "title": "test-title-2",
+      "unread": true,
+    },
+  ],
+}
+`;
+
+exports[`should handle initial state 1`] = `
+Object {
+  "activeId": undefined,
+  "filter": "",
+  "posts": Array [],
+}
+`;
+
+exports[`should handle reset 1`] = `
+Object {
+  "activeId": undefined,
+  "filter": "",
+  "posts": Array [],
+}
+`;
+
+exports[`should handle setActiveId 1`] = `
+Object {
+  "activeId": 1,
+  "filter": "",
+  "posts": Array [],
+}
+`;
+
+exports[`should handle setFilter 1`] = `
+Object {
+  "activeId": undefined,
+  "filter": "filter",
+  "posts": Array [],
+}
+`;
