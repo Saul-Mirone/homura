@@ -1,16 +1,16 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { SubSideBar } from '../../components/SubSideBar';
 import { DateItem } from '../../components/SubSideBar/DateItem';
 import { PostItem } from '../../components/SubSideBar/PostItem';
 import { Mode } from '../../constants/Mode';
+import { Preset } from '../../constants/Preset';
 import { useActions } from '../../hooks';
-import { AppDispatch } from '../../store';
-import { decCountById } from '../source/sourceSlice';
+import { clearCountById, decCountById } from '../source/sourceSlice';
 import {
     getListByPreset,
     getListBySourceId,
-    markAllAsRead,
+    markAsRead,
     markAsUnread,
     reset,
     selectList,
@@ -19,18 +19,29 @@ import {
 } from './listSlice';
 
 export const List: React.FC<{ header: JSX.Element }> = ({ header }) => {
-    const dispatch = useDispatch<AppDispatch>();
-    const { groups, activeId, activeSourceId, mode } = useSelector(selectList);
+    const { groups, activeId, activeSourceId, mode, sourceIdList } = useSelector(selectList);
 
     const [
         resetDispatch,
         setActiveIdDispatch,
-        markAllAsReadDispatch,
+        markAsReadDispatch,
         setFilterDispatch,
         getListBySourceIdDispatch,
         getListByPresetDispatch,
         markAsUnreadDispatch,
-    ] = useActions([reset, setActiveId, markAllAsRead, setFilter, getListBySourceId, getListByPreset, markAsUnread]);
+        clearCountByIdDispatch,
+        decCountByIdDispatch,
+    ] = useActions([
+        reset,
+        setActiveId,
+        markAsRead,
+        setFilter,
+        getListBySourceId,
+        getListByPreset,
+        markAsUnread,
+        clearCountById,
+        decCountById,
+    ]);
 
     React.useEffect(() => {
         if (!activeSourceId) {
@@ -55,13 +66,23 @@ export const List: React.FC<{ header: JSX.Element }> = ({ header }) => {
         setActiveIdDispatch();
     }, [activeId, setActiveIdDispatch]);
 
+    const onReadAll = React.useCallback(() => {
+        if (!activeSourceId) return;
+
+        if (typeof activeSourceId === 'number') {
+            markAsReadDispatch(activeSourceId);
+            clearCountByIdDispatch(activeSourceId);
+            return;
+        }
+
+        if ([Preset.Unread, Preset.All].includes(activeSourceId)) {
+            markAsReadDispatch(sourceIdList);
+            sourceIdList.forEach(clearCountByIdDispatch);
+        }
+    }, [activeSourceId, clearCountByIdDispatch, markAsReadDispatch, sourceIdList]);
+
     return (
-        <SubSideBar
-            onClick={clickOnEmpty}
-            header={header}
-            onReadAll={markAllAsReadDispatch}
-            onSearch={setFilterDispatch}
-        >
+        <SubSideBar header={header} onClick={clickOnEmpty} onReadAll={onReadAll} onSearch={setFilterDispatch}>
             {groups.map(({ time, posts }) => (
                 <DateItem key={time} date={time}>
                     {posts.map(({ id, name, title, icon, unread, starred, sourceId }) => (
@@ -81,7 +102,7 @@ export const List: React.FC<{ header: JSX.Element }> = ({ header }) => {
                                 markAsUnreadDispatch({ id, unread: false });
 
                                 if (mode === Mode.Starred) return;
-                                dispatch(decCountById(sourceId));
+                                decCountByIdDispatch(sourceId);
                             }}
                         />
                     ))}

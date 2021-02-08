@@ -5,8 +5,7 @@ import { format } from '../../constants/Date';
 import { Mode } from '../../constants/Mode';
 import { Preset } from '../../constants/Preset';
 import { Post, Source } from '../../model/types';
-import type { AppThunk, RootState } from '../../store';
-import { clearCountById, State as SourceState } from '../source/sourceSlice';
+import type { RootState } from '../../store';
 
 type PostKeys = 'id' | 'sourceId' | 'title' | 'unread' | 'starred' | 'link' | 'date';
 
@@ -60,24 +59,13 @@ export const markAsStarred = createAsyncThunk(
     },
 );
 
-export const markAllAsRead = createAsyncThunk('list/markAllAsRead', async (_: undefined, thunkAPI) => {
-    const state = thunkAPI.getState() as { source: SourceState };
-    const { activeId, list } = state.source;
-
-    if (typeof activeId === 'number') {
-        await channel.markAllAsReadBySourceId(activeId);
-
-        clearCountById(activeId);
+export const markAsRead = createAsyncThunk('list/markAsRead', async (idOrList: number | number[]) => {
+    if (typeof idOrList === 'number') {
+        await channel.markAllAsReadBySourceId(idOrList);
         return;
     }
 
-    if (activeId && [Preset.Unread, Preset.All].includes(activeId)) {
-        await Promise.all(list.map((x) => channel.markAllAsReadBySourceId(x.id)));
-        list.forEach((x) => {
-            clearCountById(x.id);
-        });
-    }
-    // dispatch(markAllRead());
+    await Promise.all(idOrList.map(channel.markAllAsReadBySourceId));
 });
 
 const listSlice = createSlice({
@@ -91,11 +79,6 @@ const listSlice = createSlice({
         },
         setActiveId: (state, action: PayloadAction<number | undefined>) => {
             state.activeId = action.payload;
-        },
-        markAllRead: (state) => {
-            state.posts.forEach((post) => {
-                post.unread = false;
-            });
         },
         setFilter: (state, action: PayloadAction<string>) => {
             state.filter = action.payload;
@@ -122,33 +105,23 @@ const listSlice = createSlice({
                 if (!target) return;
 
                 target.starred = action.payload.starred;
+            })
+            .addCase(markAsRead.fulfilled, (state) => {
+                state.posts.forEach((post) => {
+                    post.unread = false;
+                });
             }),
 });
 
-export const { setActiveId, markAllRead, setFilter, reset } = listSlice.actions;
-
-export const markAllAsRead = (): AppThunk => async (dispatch, getState) => {
-    const state = getState();
-    const { activeId, list } = state.source;
-
-    if (typeof activeId === 'number') {
-        await channel.markAllAsReadBySourceId(activeId);
-
-        clearCountById(activeId);
-    } else if (activeId && [Preset.Unread, Preset.All].includes(activeId)) {
-        await Promise.all(list.map((x) => channel.markAllAsReadBySourceId(x.id)));
-        list.forEach((x) => {
-            clearCountById(x.id);
-        });
-    }
-    dispatch(markAllRead());
-};
+export const { setActiveId, setFilter, reset } = listSlice.actions;
 
 export const listReducer = listSlice.reducer;
 
 export const selectList = (state: RootState) => {
     const { posts, activeId, filter } = state.list;
-    const groups = [...posts]
+    const { activeId: activeSourceId, list: sourceList } = state.source;
+
+    const groups = posts
         .map(({ date, ...x }) => ({
             ...x,
             date: DateTime.fromISO(date),
@@ -159,34 +132,23 @@ export const selectList = (state: RootState) => {
             date: date.toFormat(format),
         }))
         .filter((x) => x.title.toLowerCase().includes(filter.toLowerCase()))
-        .reduce((acc, cur) => {
-            const result = acc.findIndex((x) => x.time === cur.date);
+        .reduce((acc: TimeGroup[], cur: PostItem) => {
+            const target = acc.find((x) => x.time === cur.date);
 
-            if (result < 0) {
-                return [
-                    ...acc,
-                    {
-                        time: cur.date,
-                        posts: [cur],
-                    },
-                ];
+            if (!target) {
+                return acc.concat({ time: cur.date, posts: [cur] });
             }
 
-            const target = acc[result];
+            target.posts.push(cur);
 
-            return [
-                ...acc.slice(0, result),
-                {
-                    ...target,
-                    posts: [...target.posts, cur],
-                },
-                ...acc.slice(result + 1),
-            ];
-        }, [] as any[]) as TimeGroup[];
+            return acc;
+        }, []);
+
     return {
         activeId,
         groups,
-        activeSourceId: state.source.activeId,
+        activeSourceId,
+        sourceIdList: sourceList.map((x) => x.id),
         mode: state.mode,
     };
 };
