@@ -24,7 +24,7 @@ export const SubSideBar: React.FC<SubSideBarProps> = ({ header, children, onRead
     <div role="presentation" onClick={onClick} onKeyDown={onClick} className="sub-side-bar__container">
         {header}
 
-        <div role="list" className="flex-1 thin-scroll">
+        <div role="menu" className="flex-1 thin-scroll">
             {children}
         </div>
 

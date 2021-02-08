@@ -14,7 +14,8 @@ type PostItemProps = {
 
 export const PostItem: React.FC<PostItemProps> = ({ icon, name, source, onClick, active, unread, starred }) => (
     <div
-        role="button"
+        role="menuitemradio"
+        aria-checked={active ? 'true' : 'false'}
         tabIndex={0}
         onKeyDown={() => onClick()}
         onClick={(e) => {
