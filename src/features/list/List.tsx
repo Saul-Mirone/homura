@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { SubSideBar } from '../../components/SubSideBar';
+import { SubSideBar } from '../../components';
 import { DateItem } from '../../components/SubSideBar/DateItem';
 import { PostItem } from '../../components/SubSideBar/PostItem';
 import { Mode } from '../../constants/Mode';
