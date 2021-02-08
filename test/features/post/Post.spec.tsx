@@ -11,16 +11,20 @@ import { Provider } from 'react-redux';
 import * as listSlice from '../../../src/features/list/listSlice';
 import { Post } from '../../../src/features/post/Post';
 import * as postSlice from '../../../src/features/post/postSlice';
+import * as modeSlice from '../../../src/features/mode/modeSlice';
+import { Mode } from '../../../src/constants/Mode';
 
 function setup(
     preloadedState: {
         list: Partial<listSlice.State>;
         post: postSlice.State;
+        mode: Mode;
     } = {
         list: {},
         post: {
             content: '',
         },
+        mode: Mode.All,
     },
 ) {
     const initialListState = {
@@ -34,7 +38,7 @@ function setup(
                 link: 'test-link-1',
                 date: 'test-date-1',
                 icon: 'test-icon-1',
-                sourceName: 'test-source-name-1',
+                name: 'test-source-name-1',
             },
             {
                 id: 2,
@@ -45,7 +49,7 @@ function setup(
                 link: 'test-link-2',
                 date: 'test-date-2',
                 icon: 'test-icon-2',
-                sourceName: 'test-source-name-2',
+                name: 'test-source-name-2',
             },
         ],
         activeId: undefined,
@@ -54,12 +58,14 @@ function setup(
     const state: {
         list: listSlice.State;
         post: postSlice.State;
+        mode: Mode;
     } = {
         list: { ...initialListState, ...preloadedState.list },
         post: preloadedState.post,
+        mode: preloadedState.mode,
     };
     const store = configureStore({
-        reducer: { list: listSlice.listReducer, post: postSlice.postReducer },
+        reducer: { list: listSlice.listReducer, post: postSlice.postReducer, mode: modeSlice.modeReducer },
         preloadedState: state,
     });
 
@@ -73,6 +79,7 @@ function setup(
         ...utils,
         store,
         setActiveId: (id: number) => store.dispatch(listSlice.setActiveId(id)),
+        setMode: (mode: Mode) => store.dispatch(modeSlice.switchMode(mode)),
         el: {
             get post() {
                 return utils.getByRole('article');
@@ -105,8 +112,8 @@ test('Post', async () => {
     mockChannel.getPostById.mockResolvedValue({ content: 'fake-content' } as any);
 
     const getPostContentByIdSpy = jest.spyOn(postSlice, 'getPostContentById');
-    const markActiveStarredAsSpy = jest.spyOn(listSlice, 'markActiveStarredAs');
-    const markActiveUnreadAsSpy = jest.spyOn(listSlice, 'markActiveUnreadAs');
+    const markAsStarredSpy = jest.spyOn(listSlice, 'markAsStarred');
+    const markActiveUnreadAsSpy = jest.spyOn(listSlice, 'markAsUnread');
 
     const { el, setActiveId, getByAltText } = setup();
 
@@ -125,11 +132,11 @@ test('Post', async () => {
     expect(el.post).toMatchSnapshot();
 
     fireEvent.click(el.starButton);
-    await waitFor(() => expect(markActiveStarredAsSpy).toBeCalledWith(false));
+    await waitFor(() => expect(markAsStarredSpy).toBeCalledTimes(1));
     expect(mockChannel.setPostStarred).toBeCalledWith(1, false);
 
     fireEvent.click(el.unreadButton);
-    await waitFor(() => expect(markActiveUnreadAsSpy).toBeCalledWith(true));
+    await waitFor(() => expect(markActiveUnreadAsSpy).toBeCalledTimes(1));
     expect(mockChannel.setPostUnread).toBeCalledWith(1, true);
 
     fireEvent.click(el.shareButton);

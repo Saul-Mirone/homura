@@ -99,7 +99,7 @@ exports[`reducers source thunk fetchSources should action list match snapshot 1`
 Array [
   Object {
     "meta": Object {
-      "arg": 0,
+      "arg": "All",
       "requestId": "fake-request-id",
       "requestStatus": "pending",
     },
@@ -108,7 +108,7 @@ Array [
   },
   Object {
     "meta": Object {
-      "arg": 0,
+      "arg": "All",
       "requestId": "fake-request-id",
       "requestStatus": "fulfilled",
     },
@@ -274,7 +274,7 @@ Array [
   Object {
     "meta": Object {
       "arg": Object {
-        "mode": 0,
+        "mode": "All",
         "name": "fake-name",
       },
       "requestId": "fake-request-id",
@@ -286,7 +286,7 @@ Array [
   Object {
     "meta": Object {
       "arg": Object {
-        "mode": 0,
+        "mode": "All",
         "name": "fake-name",
       },
       "requestId": "fake-request-id",
@@ -309,7 +309,7 @@ Array [
   Object {
     "meta": Object {
       "arg": Object {
-        "mode": 2,
+        "mode": "Starred",
         "name": "fake-name",
       },
       "requestId": "fake-request-id",
@@ -321,7 +321,7 @@ Array [
   Object {
     "meta": Object {
       "arg": Object {
-        "mode": 2,
+        "mode": "Starred",
         "name": "fake-name",
       },
       "requestId": "fake-request-id",
