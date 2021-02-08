@@ -14,13 +14,13 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "cross-env NODE_ENV=development eslint --cache"
+      "cross-env NODE_ENV=development eslint . --cache --ext .js,.jsx,.ts,.tsx"
     ],
     "{*.json,.{babelrc,eslintrc,prettierrc,stylelintrc}}": [
       "prettier --ignore-path .eslintignore --parser json --write"
     ],
     "*.{css,pcss}": [
-      "stylelint --ignore-path .eslintignore --syntax scss --fix",
+      "stylelint --ignore-path .eslintignore --fix",
       "prettier --ignore-path .eslintignore --single-quote --write"
     ],
     "*.{html,md,yml}": [

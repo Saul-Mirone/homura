@@ -38,7 +38,7 @@ export class ChannelMain {
             getSourceList: (_: Event, status: PostStatus) => this.db.getSourceList(status),
             checkUrl: (_: Event, url: string) => this.handleCheckUrl(url),
             confirm: (_: Event, name: string) => this.confirm(name),
-            getSourceById: (_: Event, id: number) => this.db.getPostList({ id }),
+            getSourceById: (_: Event, id: number, status?: PostStatus) => this.db.getPostList({ id, type: status }),
             getPostById: (_: Event, id: number) => this.db.getPost(id),
             setPostUnread: (_: Event, id: number, unread: boolean) =>
                 this.db.updatePostStatus({ id, type: 'unread', value: unread }),

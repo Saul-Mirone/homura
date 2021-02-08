@@ -28,6 +28,7 @@ const NameEditor: React.FC<NameEditorProps> = ({ name, finishEdit, onConfirmModi
                 className="sidebar-item__input"
                 value={editedName}
                 onChange={(e) => setEditedName(e.target.value)}
+                onKeyDown={(e) => e.stopPropagation()}
                 onBlur={() => {
                     if (!document.hasFocus()) return;
                     onCancel();

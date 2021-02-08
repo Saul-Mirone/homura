@@ -6,7 +6,7 @@ type ReaderProps = {
     post?: {
         content: string;
         date: string;
-        sourceName: string;
+        name: string;
         link: string;
         title: string;
     };
@@ -29,7 +29,7 @@ export const Reader: React.FC<ReaderProps> = ({ post, toolkit }) => {
                     <div className="reader-post">
                         <hgroup>
                             <small>{post.date}</small>
-                            <div>{post.sourceName}</div>
+                            <div>{post.name}</div>
                             <h1>{post.title}</h1>
                         </hgroup>
                         <main dangerouslySetInnerHTML={{ __html: post.content }} />

@@ -46,7 +46,7 @@ export const selectPost = (state: RootState) => {
             activeId,
         };
 
-    const data = pick(target, ['title', 'sourceName', 'unread', 'starred', 'link']);
+    const data = pick(target, ['title', 'name', 'unread', 'starred', 'link', 'sourceId']);
     const { date } = target;
 
     const post = {
@@ -56,7 +56,8 @@ export const selectPost = (state: RootState) => {
     };
 
     return {
-        activeId,
         post,
+        activeId,
+        mode: state.mode,
     };
 };

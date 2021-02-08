@@ -1,5 +1,5 @@
 export enum Mode {
-    All,
-    Unread,
-    Starred,
+    All = 'All',
+    Unread = 'Unread',
+    Starred = 'Starred',
 }

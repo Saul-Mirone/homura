@@ -1,16 +1,15 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { DateTime } from 'luxon';
 import { channel } from '../../channel/child';
 import { format } from '../../constants/Date';
 import { Mode } from '../../constants/Mode';
 import { Preset } from '../../constants/Preset';
 import { Post, Source } from '../../model/types';
-import type { AppThunk, RootState } from '../../store';
-import { clearCountById, decCountById, incCountById } from '../source/sourceSlice';
+import type { RootState } from '../../store';
 
 type PostKeys = 'id' | 'sourceId' | 'title' | 'unread' | 'starred' | 'link' | 'date';
 
-type PostItem = Pick<Post, PostKeys> & Pick<Source, 'icon'> & { sourceName: string };
+type PostItem = Pick<Post, PostKeys> & Pick<Source, 'icon' | 'name'>;
 
 type TimeGroup = {
     time: string;
@@ -29,6 +28,46 @@ const initialState: State = {
     filter: '',
 };
 
+export const getListBySourceId = createAsyncThunk('list/getListBySourceId', (payload: { id: number; mode: Mode }) => {
+    const { mode, id } = payload;
+    if (mode === Mode.All) {
+        return channel.getSourceById(id);
+    }
+
+    return channel.getSourceById(id, mode === Mode.Unread ? 'unread' : 'starred');
+});
+
+export const getListByPreset = createAsyncThunk('list/getListByPreset', (preset: Preset) => {
+    return channel.getPostByPreset(preset);
+});
+
+export const markAsUnread = createAsyncThunk(
+    'list/markAsUnread',
+    async ({ id, unread }: { unread: boolean; id: number }) => {
+        await channel.setPostUnread(id, unread);
+
+        return { id, unread };
+    },
+);
+
+export const markAsStarred = createAsyncThunk(
+    'list/markAsStarred',
+    async ({ id, starred }: { starred: boolean; id: number }) => {
+        await channel.setPostStarred(id, starred);
+
+        return { id, starred };
+    },
+);
+
+export const markAsRead = createAsyncThunk('list/markAsRead', async (idOrList: number | number[]) => {
+    if (typeof idOrList === 'number') {
+        await channel.markAllAsReadBySourceId(idOrList);
+        return;
+    }
+
+    await Promise.all(idOrList.map(channel.markAllAsReadBySourceId));
+});
+
 const listSlice = createSlice({
     name: 'list',
     initialState,
@@ -38,155 +77,51 @@ const listSlice = createSlice({
             state.activeId = undefined;
             state.filter = '';
         },
-        loadAll: (state, action: PayloadAction<PostItem[]>) => {
-            state.posts = action.payload;
-        },
         setActiveId: (state, action: PayloadAction<number | undefined>) => {
             state.activeId = action.payload;
-        },
-        markActiveUnread: (state, action: PayloadAction<boolean>) => {
-            const target = state.posts.find((x) => x.id === state.activeId);
-
-            if (!target) return;
-
-            target.unread = action.payload;
-        },
-        markActiveStarred: (state, action: PayloadAction<boolean>) => {
-            const target = state.posts.find((x) => x.id === state.activeId);
-
-            if (!target) return;
-
-            target.starred = action.payload;
-        },
-        markAllRead: (state) => {
-            state.posts.forEach((post) => {
-                post.unread = false;
-            });
         },
         setFilter: (state, action: PayloadAction<string>) => {
             state.filter = action.payload;
         },
     },
+    extraReducers: (builder) =>
+        builder
+            .addCase(getListBySourceId.fulfilled, (state, action) => {
+                state.posts = [...action.payload];
+            })
+            .addCase(getListByPreset.fulfilled, (state, action) => {
+                state.posts = [...action.payload];
+            })
+            .addCase(markAsUnread.fulfilled, (state, action) => {
+                const target = state.posts.find((x) => x.id === action.payload.id);
+
+                if (!target) return;
+
+                target.unread = action.payload.unread;
+            })
+            .addCase(markAsStarred.fulfilled, (state, action) => {
+                const target = state.posts.find((x) => x.id === action.payload.id);
+
+                if (!target) return;
+
+                target.starred = action.payload.starred;
+            })
+            .addCase(markAsRead.fulfilled, (state) => {
+                state.posts.forEach((post) => {
+                    post.unread = false;
+                });
+            }),
 });
 
-export const {
-    loadAll,
-    setActiveId,
-    markActiveUnread,
-    markActiveStarred,
-    markAllRead,
-    setFilter,
-    reset,
-} = listSlice.actions;
-
-const loadBySourceId = async (sourceId: number, mode: Mode) => {
-    const posts = await channel.getSourceById(sourceId);
-
-    return posts
-        .map(({ id, title, unread, date, starred, name, icon, link }) => ({
-            id,
-            sourceId,
-            title,
-            sourceName: name,
-            icon,
-            date,
-            link,
-            unread,
-            starred,
-        }))
-        .filter((x) => {
-            switch (mode) {
-                case Mode.Starred:
-                    return x.starred;
-                case Mode.Unread:
-                    return x.unread;
-                case Mode.All:
-                default:
-                    return true;
-            }
-        });
-};
-const loadByPreset = async (preset: Preset) => {
-    return (await channel.getPostByPreset(preset)).map(
-        ({ id, title, unread, date, starred, name, icon, sourceId, link }) => ({
-            id,
-            sourceId,
-            title,
-            sourceName: name,
-            link,
-            icon,
-            unread,
-            starred,
-            date,
-        }),
-    );
-};
-
-export const loadListBySourceId = (sourceIdOrPreset: number | Preset, mode: Mode): AppThunk => async (dispatch) => {
-    if (typeof sourceIdOrPreset === 'number') {
-        const posts = await loadBySourceId(sourceIdOrPreset, mode);
-
-        dispatch(loadAll(posts));
-        return;
-    }
-
-    const posts = await loadByPreset(sourceIdOrPreset);
-    dispatch(loadAll(posts));
-};
-
-export const markAllAsRead = (): AppThunk => async (dispatch, getState) => {
-    const state = getState();
-    const { activeId, list } = state.source;
-
-    if (typeof activeId === 'number') {
-        await channel.markAllAsReadBySourceId(activeId);
-
-        clearCountById(activeId);
-    } else if (activeId && [Preset.Unread, Preset.All].includes(activeId)) {
-        await Promise.all(list.map((x) => channel.markAllAsReadBySourceId(x.id)));
-        list.forEach((x) => {
-            clearCountById(x.id);
-        });
-    }
-    dispatch(markAllRead());
-};
-
-export const markActiveUnreadAs = (unread: boolean): AppThunk => async (dispatch, getState) => {
-    const state = getState();
-    if (!state.list.activeId) return;
-    await channel.setPostUnread(state.list.activeId, unread);
-    const { posts } = state.list;
-    const active = posts.find((x) => x.id === state.list.activeId);
-    if (active && state.mode !== Mode.Starred) {
-        if (unread) {
-            dispatch(incCountById(active.sourceId));
-        } else {
-            dispatch(decCountById(active.sourceId));
-        }
-    }
-    dispatch(markActiveUnread(unread));
-};
-export const markActiveStarredAs = (starred: boolean): AppThunk => async (dispatch, getState) => {
-    const state = getState();
-    if (!state.list.activeId) return;
-    await channel.setPostStarred(state.list.activeId, starred);
-    const { posts } = state.list;
-    const active = posts.find((x) => x.id === state.list.activeId);
-    if (active && state.mode === Mode.Starred) {
-        if (starred) {
-            dispatch(incCountById(active.sourceId));
-        } else {
-            dispatch(decCountById(active.sourceId));
-        }
-    }
-    dispatch(markActiveStarred(starred));
-};
+export const { setActiveId, setFilter, reset } = listSlice.actions;
 
 export const listReducer = listSlice.reducer;
 
 export const selectList = (state: RootState) => {
     const { posts, activeId, filter } = state.list;
-    const groups = [...posts]
+    const { activeId: activeSourceId, list: sourceList } = state.source;
+
+    const groups = posts
         .map(({ date, ...x }) => ({
             ...x,
             date: DateTime.fromISO(date),
@@ -197,34 +132,23 @@ export const selectList = (state: RootState) => {
             date: date.toFormat(format),
         }))
         .filter((x) => x.title.toLowerCase().includes(filter.toLowerCase()))
-        .reduce((acc, cur) => {
-            const result = acc.findIndex((x) => x.time === cur.date);
+        .reduce((acc: TimeGroup[], cur: PostItem) => {
+            const target = acc.find((x) => x.time === cur.date);
 
-            if (result < 0) {
-                return [
-                    ...acc,
-                    {
-                        time: cur.date,
-                        posts: [cur],
-                    },
-                ];
+            if (!target) {
+                return acc.concat({ time: cur.date, posts: [cur] });
             }
 
-            const target = acc[result];
+            target.posts.push(cur);
 
-            return [
-                ...acc.slice(0, result),
-                {
-                    ...target,
-                    posts: [...target.posts, cur],
-                },
-                ...acc.slice(result + 1),
-            ];
-        }, [] as any[]) as TimeGroup[];
+            return acc;
+        }, []);
+
     return {
         activeId,
         groups,
-        activeSourceId: state.source.activeId,
+        activeSourceId,
+        sourceIdList: sourceList.map((x) => x.id),
         mode: state.mode,
     };
 };
