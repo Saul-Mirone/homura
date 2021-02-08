@@ -59,7 +59,9 @@ function setup(
         ...utils,
         store,
         setActiveId: (id: number) => store.dispatch(listSlice.setActiveId(id)),
-        el: {},
+        el: {
+            sidebar: utils.getByRole('presentation'),
+        },
     };
 }
 
@@ -72,5 +74,7 @@ beforeEach(() => {
 });
 
 test('List items', () => {
-    setup();
+    const { el } = setup();
+
+    expect(el.sidebar).toMatchSnapshot();
 });

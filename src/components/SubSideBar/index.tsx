@@ -21,10 +21,12 @@ export type SubSideBarProps = {
 };
 
 export const SubSideBar: React.FC<SubSideBarProps> = ({ header, children, onReadAll, onSearch, onClick }) => (
-    <div role="presentation" onClick={onClick} className="sub-side-bar__container">
+    <div role="presentation" onClick={onClick} onKeyDown={onClick} className="sub-side-bar__container">
         {header}
 
-        <div className="flex-1 thin-scroll">{children}</div>
+        <div role="list" className="flex-1 thin-scroll">
+            {children}
+        </div>
 
         <div className="sub-side-bar__bottom-container">
             <IconContainer onClick={onReadAll}>
