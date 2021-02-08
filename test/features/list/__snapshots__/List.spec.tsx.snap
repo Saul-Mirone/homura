@@ -8,7 +8,7 @@ exports[`List items 1`] = `
   <div />
   <div
     class="flex-1 thin-scroll"
-    role="list"
+    role="menu"
   />
   <div
     class="sub-side-bar__bottom-container"
