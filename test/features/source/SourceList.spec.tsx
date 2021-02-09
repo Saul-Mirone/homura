@@ -15,6 +15,7 @@ import * as sourceSlice from '../../../src/features/source/sourceSlice';
 import * as modeSlice from '../../../src/features/mode/modeSlice';
 import { Preset } from '../../../src/constants/Preset';
 import userEvent from '@testing-library/user-event';
+import { source } from '../../fixture/source';
 
 const mockAppend = jest.fn();
 const mockPopup = jest.fn();
@@ -96,27 +97,7 @@ type Menu = {
 };
 
 function prepareChannel() {
-    mockChannel.getSourceList.mockResolvedValue([
-        {
-            id: 1,
-            name: 'data-1',
-            count: 24,
-            link: 'link-1',
-        },
-        {
-            id: 2,
-            name: 'data-2',
-            count: 0,
-            icon: 'fake-icon-url',
-            link: 'link-2',
-        },
-        {
-            id: 3,
-            name: 'data-3',
-            count: 2,
-            link: 'link-3',
-        },
-    ]);
+    mockChannel.getSourceList.mockResolvedValue(source);
     mockChannel.sync.mockResolvedValue();
     mockChannel.removeSourceById.mockResolvedValue();
     mockChannel.updateSourceNameById.mockResolvedValue();

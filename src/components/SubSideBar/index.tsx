@@ -29,7 +29,7 @@ export const SubSideBar: React.FC<SubSideBarProps> = ({ header, children, onRead
         </div>
 
         <div className="sub-side-bar__bottom-container">
-            <IconContainer onClick={onReadAll}>
+            <IconContainer label="Mark all as read" onClick={onReadAll}>
                 <MailOpenIcon />
             </IconContainer>
             <SearchBar onSearch={onSearch} />

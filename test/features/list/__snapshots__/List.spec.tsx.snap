@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`List items 1`] = `
+exports[`List item 1`] = `
 <div
   class="sub-side-bar__container"
   role="presentation"
@@ -14,7 +14,7 @@ exports[`List items 1`] = `
     class="sub-side-bar__bottom-container"
   >
     <div
-      aria-label=""
+      aria-label="Mark all as read"
       class="p-2  "
       role="button"
       tabindex="0"
