@@ -17,6 +17,7 @@ import { Mode } from '../../../src/constants/Mode';
 import { modeReducer } from '../../../src/features/mode/modeSlice';
 import { Preset } from '../../../src/constants/Preset';
 import { source } from '../../fixture/source';
+import userEvent from '@testing-library/user-event';
 
 function setup(
     preloadedState: {
@@ -80,6 +81,15 @@ function setup(
             },
             get readAllButton() {
                 return utils.getByLabelText('Mark all as read');
+            },
+            get searchButton() {
+                return utils.getByLabelText('Search post');
+            },
+            get cancelButton() {
+                return utils.getByLabelText('Cancel search');
+            },
+            get searchInput() {
+                return utils.container.querySelector('input')!;
             },
         },
     };
@@ -177,4 +187,25 @@ test('Mark all as read for preset', () => {
     fireEvent.click(el.readAllButton);
     expect(markAsReadSpy).toBeCalledWith([1, 2, 3]);
     expect(clearCountByIdSpy).toBeCalledTimes(3);
+});
+
+test('Search', () => {
+    const setFilterSpy = jest.spyOn(listSlice, 'setFilter');
+
+    const { el } = setup();
+    fireEvent.click(el.searchButton);
+
+    expect(el.searchInput).not.toBeNull();
+    expect(el.sidebar).toMatchSnapshot();
+    expect(el.searchInput).toHaveValue('');
+
+    userEvent.type(el.searchInput, 'search key word');
+    expect(el.searchInput).toHaveValue('search key word');
+
+    fireEvent.click(el.searchButton);
+    expect(setFilterSpy).toBeCalledWith('search key word');
+
+    fireEvent.click(el.cancelButton);
+    expect(el.searchInput).toBeNull();
+    expect(el.sidebar).toMatchSnapshot();
 });

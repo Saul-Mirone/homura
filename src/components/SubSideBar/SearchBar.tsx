@@ -13,21 +13,23 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
 
     React.useEffect(() => {
         const { current } = inputRef;
-        if (current) {
-            current.focus();
-        }
+
+        current?.focus();
     }, [active]);
 
     return (
         <div className={`sub-side-bar__search ${active ? 'active' : ''}`}>
             <IconContainer
                 mini
+                label="Search post"
                 onClick={() => {
                     if (!active) {
                         setActive(true);
                         return;
                     }
-                    onSearch(value);
+                    if (value.length > 0) {
+                        onSearch(value);
+                    }
                 }}
             >
                 <SearchIcon />
@@ -41,6 +43,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
                         onChange={(e) => setValue(e.target.value)}
                     />
                     <IconContainer
+                        label="Cancel search"
                         mini
                         onClick={() => {
                             setActive(false);

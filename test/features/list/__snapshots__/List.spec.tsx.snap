@@ -41,7 +41,161 @@ exports[`List item 1`] = `
       class="sub-side-bar__search "
     >
       <div
-        aria-label=""
+        aria-label="Search post"
+        class="w-5 h-5 m-auto   "
+        role="button"
+        tabindex="0"
+      >
+        <svg
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          />
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Search 1`] = `
+<div
+  class="sub-side-bar__container"
+  role="presentation"
+>
+  <div />
+  <div
+    class="flex-1 thin-scroll"
+    role="menu"
+  />
+  <div
+    class="sub-side-bar__bottom-container"
+  >
+    <div
+      aria-label="Mark all as read"
+      class="p-2  "
+      role="button"
+      tabindex="0"
+    >
+      <div
+        class="w-5 h-5 m-auto  "
+      >
+        <svg
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M3 19v-8.93a2 2 0 01.89-1.664l7-4.666a2 2 0 012.22 0l7 4.666A2 2 0 0121 10.07V19M3 19a2 2 0 002 2h14a2 2 0 002-2M3 19l6.75-4.5M21 19l-6.75-4.5M3 10l6.75 4.5M21 10l-6.75 4.5m0 0l-1.14.76a2 2 0 01-2.22 0l-1.14-.76"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          />
+        </svg>
+      </div>
+    </div>
+    <div
+      class="sub-side-bar__search active"
+    >
+      <div
+        aria-label="Search post"
+        class="w-5 h-5 m-auto   "
+        role="button"
+        tabindex="0"
+      >
+        <svg
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          />
+        </svg>
+      </div>
+      <input
+        class="sub-side-bar__search-input"
+        value=""
+      />
+      <div
+        aria-label="Cancel search"
+        class="w-5 h-5 m-auto   "
+        role="button"
+        tabindex="0"
+      >
+        <svg
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M6 18L18 6M6 6l12 12"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          />
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Search 2`] = `
+<div
+  class="sub-side-bar__container"
+  role="presentation"
+>
+  <div />
+  <div
+    class="flex-1 thin-scroll"
+    role="menu"
+  />
+  <div
+    class="sub-side-bar__bottom-container"
+  >
+    <div
+      aria-label="Mark all as read"
+      class="p-2  "
+      role="button"
+      tabindex="0"
+    >
+      <div
+        class="w-5 h-5 m-auto  "
+      >
+        <svg
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M3 19v-8.93a2 2 0 01.89-1.664l7-4.666a2 2 0 012.22 0l7 4.666A2 2 0 0121 10.07V19M3 19a2 2 0 002 2h14a2 2 0 002-2M3 19l6.75-4.5M21 19l-6.75-4.5M3 10l6.75 4.5M21 10l-6.75 4.5m0 0l-1.14.76a2 2 0 01-2.22 0l-1.14-.76"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          />
+        </svg>
+      </div>
+    </div>
+    <div
+      class="sub-side-bar__search "
+    >
+      <div
+        aria-label="Search post"
         class="w-5 h-5 m-auto   "
         role="button"
         tabindex="0"
