@@ -21,7 +21,10 @@ const ButtonDiv: React.FC<Pick<IconContainerProps, 'className' | 'onClick' | 'la
         tabIndex={0}
         className={className}
         onMouseDown={(e) => e.preventDefault()}
-        onClick={onClick}
+        onClick={(e) => {
+            e.stopPropagation();
+            onClick?.();
+        }}
         onKeyDown={onClick}
     >
         {children}

@@ -2,7 +2,7 @@
 
 exports[`SourceOperationBar 1`] = `
 <div
-  class="sidebar-bottom-bar"
+  class="sidebar-bottom-bar "
   role="toolbar"
 >
   <div
@@ -81,7 +81,7 @@ exports[`SourceOperationBar 1`] = `
 
 exports[`SourceOperationBar 2`] = `
 <div
-  class="sidebar-bottom-bar"
+  class="sidebar-bottom-bar "
   role="toolbar"
 >
   <div
@@ -203,7 +203,7 @@ exports[`SourceOperationBar 2`] = `
 
 exports[`SourceOperationBar 3`] = `
 <div
-  class="sidebar-bottom-bar"
+  class="sidebar-bottom-bar "
   role="toolbar"
 >
   <div
@@ -282,7 +282,7 @@ exports[`SourceOperationBar 3`] = `
 
 exports[`SourceOperationBar 4`] = `
 <div
-  class="sidebar-bottom-bar"
+  class="sidebar-bottom-bar fold"
   role="toolbar"
 >
   <div
@@ -312,7 +312,7 @@ exports[`SourceOperationBar 4`] = `
 
 exports[`SourceOperationBar 5`] = `
 <div
-  class="sidebar-bottom-bar"
+  class="sidebar-bottom-bar "
   role="toolbar"
 >
   <div

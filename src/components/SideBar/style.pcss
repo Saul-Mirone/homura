@@ -1,8 +1,8 @@
 .sidebar-container {
-    @apply flex flex-col w-1/6 h-screen bg-gray-700 select-none;
+    @apply transition-all duration-300 ease-in-out flex flex-col w-1/6 h-screen bg-gray-700 select-none;
 }
 .sidebar-container.fold {
-    @apply w-auto;
+    @apply w-14;
 }
 
 .sidebar-alert {
@@ -23,6 +23,10 @@
 
 .sidebar-bottom-bar {
     @apply flex relative justify-between text-gray-300;
+}
+
+.sidebar-bottom-bar.fold {
+    @apply justify-center;
 }
 
 .sidebar-bottom-bar__step {

@@ -41,7 +41,7 @@ export const BottomBar: React.FC<BottomBarProps> = ({
         </>
     );
     return (
-        <div role="toolbar" className="sidebar-bottom-bar">
+        <div role="toolbar" className={`sidebar-bottom-bar ${fold ? 'fold' : ''}`}>
             {!fold ? (
                 expanded
             ) : (
