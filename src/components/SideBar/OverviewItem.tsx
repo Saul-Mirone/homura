@@ -7,10 +7,11 @@ export type OverViewItemProps = {
     target: Preset;
     count: number;
     icon: JSX.Element;
+    fold: boolean;
     onClick: (target: Preset) => void;
 };
 
-export const OverviewItem: React.FC<OverViewItemProps> = ({ activeId, target, icon, count, onClick }) => (
+export const OverviewItem: React.FC<OverViewItemProps> = ({ activeId, target, icon, count, fold, onClick }) => (
     <div
         role="menuitem"
         tabIndex={0}
@@ -23,8 +24,8 @@ export const OverviewItem: React.FC<OverViewItemProps> = ({ activeId, target, ic
     >
         <div className="sidebar-overview-item">
             <LogoIcon icon={icon} />
-            <div className="sidebar-overview-item__text">{target}</div>
+            {!fold && <div className="sidebar-overview-item__text">{target}</div>}
         </div>
-        {count > 0 && <div className="sidebar-overview-item__count">{count}</div>}
+        {!fold && count > 0 && <div className="sidebar-overview-item__count">{count}</div>}
     </div>
 );

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { SideBar } from '../../components/SideBar';
+import { SideBar } from '../../components';
 import { Header } from '../../components/SideBar/Header';
 import { SideBarItem } from '../../components/SideBar/SideBarItem';
 import { Status } from '../../constants/Status';
@@ -23,7 +23,7 @@ export const SourceList: React.FC<{ bottom: JSX.Element }> = ({ bottom }) => {
         fetchSourcesDispatch,
     ] = useActions([setCurrentSource, syncSources, updateSourceById, unsubscribeById, fetchSources]);
 
-    const { list, activeId, mode, totalCount, syncStatus } = useSelector(selectSourceList);
+    const { list, activeId, mode, totalCount, syncStatus, fold } = useSelector(selectSourceList);
 
     React.useEffect(() => {
         syncSourcesDispatch();
@@ -42,8 +42,10 @@ export const SourceList: React.FC<{ bottom: JSX.Element }> = ({ bottom }) => {
     }, [activeId, setCurrentSourceDispatch]);
 
     const overview = React.useMemo(
-        () => <Header mode={mode} active={activeId} count={totalCount} onClick={setCurrentSourceDispatch} />,
-        [activeId, mode, setCurrentSourceDispatch, totalCount],
+        () => (
+            <Header fold={fold} mode={mode} active={activeId} count={totalCount} onClick={setCurrentSourceDispatch} />
+        ),
+        [activeId, fold, mode, setCurrentSourceDispatch, totalCount],
     );
 
     const renderList = React.useMemo(
@@ -51,6 +53,7 @@ export const SourceList: React.FC<{ bottom: JSX.Element }> = ({ bottom }) => {
             list.map(({ id, name, count, icon }) => (
                 <SideBarItem
                     key={id.toString()}
+                    fold={fold}
                     url={icon}
                     name={name}
                     count={count}
@@ -60,11 +63,11 @@ export const SourceList: React.FC<{ bottom: JSX.Element }> = ({ bottom }) => {
                     onClick={() => setCurrentSourceDispatch(id)}
                 />
             )),
-        [activeId, list, setCurrentSourceDispatch, unsubscribeByIdDispatch, updateSourceByIdDispatch],
+        [activeId, fold, list, setCurrentSourceDispatch, unsubscribeByIdDispatch, updateSourceByIdDispatch],
     );
 
     return (
-        <SideBar onClick={onClickEmptyArea} overview={overview} bottom={bottom}>
+        <SideBar fold={fold} onClick={onClickEmptyArea} overview={overview} bottom={bottom}>
             {renderList}
         </SideBar>
     );

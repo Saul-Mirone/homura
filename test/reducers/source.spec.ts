@@ -22,6 +22,7 @@ import {
     clearCountById,
     incCountById,
     decCountById,
+    toggleFold,
 } from '../../src/features/source/sourceSlice';
 import { formatActions } from '../test-tools/formatActions';
 import { mockStore } from '../test-tools/mockStore';
@@ -67,6 +68,19 @@ test('should handle resetSubscribeState', () => {
             } as State,
             {
                 type: resetSubscribeState,
+            },
+        ),
+    ).toMatchSnapshot();
+});
+
+test('should handle toggleFold', () => {
+    expect(
+        sourceReducer(
+            {
+                fold: true,
+            } as State,
+            {
+                type: toggleFold,
             },
         ),
     ).toMatchSnapshot();

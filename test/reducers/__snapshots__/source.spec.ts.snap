@@ -223,6 +223,7 @@ exports[`should handle initial state 1`] = `
 Object {
   "activeId": undefined,
   "fetchListStatus": 0,
+  "fold": false,
   "list": Array [],
   "subscribeError": undefined,
   "subscribeLink": "",
@@ -260,6 +261,12 @@ Object {
   "activeId": undefined,
   "subscribeStatus": 0,
   "subscribeStep": 0,
+}
+`;
+
+exports[`should handle toggleFold 1`] = `
+Object {
+  "fold": false,
 }
 `;
 

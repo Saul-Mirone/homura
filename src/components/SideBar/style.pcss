@@ -1,6 +1,9 @@
 .sidebar-container {
     @apply flex flex-col w-1/6 h-screen bg-gray-700 select-none;
 }
+.sidebar-container.fold {
+    @apply w-auto;
+}
 
 .sidebar-alert {
     @apply relative py-3 px-4 text-xs text-red-700 bg-red-100 rounded border border-red-400;

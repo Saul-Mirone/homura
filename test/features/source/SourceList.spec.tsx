@@ -43,6 +43,7 @@ function setup(
     },
 ) {
     const initialSourceState = {
+        fold: false,
         list: [],
         activeId: undefined,
         fetchListStatus: Status.Idle,
@@ -246,5 +247,14 @@ test('should context menu work', async () => {
         name: 'data-2-new-value',
     });
     expect(data2Item).toContainHTML('data-2-new-value');
+    expect(el.list).toMatchSnapshot();
+});
+
+test('should fold match snapshot', async () => {
+    const fetchSourcesSpy = jest.spyOn(sourceSlice, 'fetchSources');
+    const { el } = setup({ source: { fold: true } });
+
+    await waitFor(() => expect(fetchSourcesSpy).toHaveBeenCalledTimes(1));
+
     expect(el.list).toMatchSnapshot();
 });

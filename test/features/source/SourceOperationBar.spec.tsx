@@ -25,6 +25,7 @@ function setup(
     },
 ) {
     const initialSourceState = {
+        fold: false,
         list: [],
         activeId: undefined,
         fetchListStatus: Status.Idle,
@@ -83,6 +84,12 @@ function setup(
             },
             get confirmButton() {
                 return utils.getByLabelText('Confirm subscribe');
+            },
+            get foldButton() {
+                return utils.getByLabelText('Fold source menu');
+            },
+            get unfoldButton() {
+                return utils.getByLabelText('Unfold source menu');
             },
         },
     };
@@ -170,5 +177,15 @@ test('SourceOperationBar', async () => {
     await waitFor(() => expect(mockChannel.confirm).toBeCalledWith('Fake Feed Sub'));
 
     expect(subscribeToSourceSpy).toBeCalledWith({ mode: Mode.All, name: 'Fake Feed Sub' });
+    expect(el.bar).toMatchSnapshot();
+
+    fireEvent.click(el.foldButton);
+
+    expect(el.unfoldButton).not.toBeNull();
+    expect(el.bar).toMatchSnapshot();
+
+    fireEvent.click(el.unfoldButton);
+
+    expect(el.foldButton).not.toBeNull();
     expect(el.bar).toMatchSnapshot();
 });

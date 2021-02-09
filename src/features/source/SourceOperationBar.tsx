@@ -12,10 +12,11 @@ import {
     showSubscribeBar,
     subscribeToSource,
     syncSources,
+    toggleFold,
 } from './sourceSlice';
 
 export const SourceOperationBar: React.FC = () => {
-    const { mode, loading, subscribeStep, subscribeName, subscribeLink, subscribeError } = useSelector(
+    const { mode, loading, fold, subscribeStep, subscribeName, subscribeLink, subscribeError } = useSelector(
         selectSourceOperation,
     );
     const [
@@ -25,6 +26,7 @@ export const SourceOperationBar: React.FC = () => {
         subscribeToSourceDispatch,
         showSubscribeBarDispatch,
         syncSourcesDispatch,
+        toggleFoldDispatch,
     ] = useActions([
         searchUrlForSource,
         resetSubscribeState,
@@ -32,6 +34,7 @@ export const SourceOperationBar: React.FC = () => {
         subscribeToSource,
         showSubscribeBar,
         syncSources,
+        toggleFold,
     ]);
 
     const renderBottom = React.useCallback(
@@ -80,8 +83,10 @@ export const SourceOperationBar: React.FC = () => {
 
     return (
         <BottomBar
+            fold={fold}
             step={subscribeStep}
             loading={loading}
+            onToggleFold={() => toggleFoldDispatch()}
             onClickPlus={() => showSubscribeBarDispatch()}
             onClickSync={() => syncSourcesDispatch()}
             render={renderBottom}

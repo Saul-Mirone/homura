@@ -11,6 +11,7 @@ type SourceKeys = 'id' | 'name' | 'link' | 'icon';
 type SourceItem = Pick<Source, SourceKeys> & { count: number };
 
 type SourceListState = {
+    fold: boolean;
     activeId: number | Preset | undefined;
     list: SourceItem[];
     fetchListStatus: Status;
@@ -28,6 +29,7 @@ type SourceSubscribeState = {
 export type State = SourceListState & SourceSubscribeState;
 
 const initialSourceList: SourceListState = {
+    fold: false,
     list: [],
     activeId: undefined,
     fetchListStatus: Status.Idle,
@@ -114,6 +116,9 @@ const sourceSlice = createSlice({
             state.subscribeName = '';
             state.subscribeStatus = Status.Idle;
         },
+        toggleFold: (state) => {
+            state.fold = !state.fold;
+        },
 
         clearCountById: (state, action: PayloadAction<number>) => {
             const target = state.list.find((x) => x.id === action.payload);
@@ -194,6 +199,7 @@ export const {
     incCountById,
     decCountById,
     clearCountById,
+    toggleFold,
 } = sourceSlice.actions;
 
 export const sourceReducer = sourceSlice.reducer;
@@ -201,12 +207,13 @@ export const sourceReducer = sourceSlice.reducer;
 export const selectSourceList = (state: RootState) => {
     const { source, mode } = state;
     const totalCount = source.list.reduce((acc, cur) => acc + cur.count, 0);
-    const { list, activeId, syncListStatus } = source;
+    const { list, activeId, syncListStatus, fold } = source;
 
     return {
         activeId,
         totalCount,
         mode,
+        fold,
         syncStatus: syncListStatus,
         list: list.filter((x) => {
             if (mode === Mode.All || activeId === x.id) return true;
@@ -225,10 +232,12 @@ export const selectSourceOperation = (state: RootState) => {
         subscribeError,
         fetchListStatus,
         syncListStatus,
+        fold,
     } = source;
     const loading =
         subscribeStatus === Status.Pending || fetchListStatus === Status.Pending || syncListStatus === Status.Pending;
     return {
+        fold,
         mode,
         subscribeLink,
         subscribeName,

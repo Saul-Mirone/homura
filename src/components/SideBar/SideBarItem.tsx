@@ -48,16 +48,19 @@ const PureNameContent: React.FC<{ name: string }> = ({ name }) => <div className
 export type SideBarItemProps = {
     name: string;
     count: number;
-    onClick: () => void;
-    onUnsubscribe: () => void;
-    onConfirmModify: (nextName: string) => void;
     active: boolean;
+    fold: boolean;
 
     url?: string;
     icon?: JSX.Element;
+
+    onClick: () => void;
+    onUnsubscribe: () => void;
+    onConfirmModify: (nextName: string) => void;
 };
 
 export const SideBarItem: React.FC<SideBarItemProps> = ({
+    fold,
     active,
     name,
     count,
@@ -108,13 +111,13 @@ export const SideBarItem: React.FC<SideBarItemProps> = ({
         >
             <div className="sidebar-item__container">
                 <LogoIcon url={url} icon={icon} />
-                {isEditing ? (
+                {fold ? null : isEditing ? (
                     <NameEditor name={name} onConfirmModify={onConfirmModify} finishEdit={finishEdit} />
                 ) : (
                     <PureNameContent name={name} />
                 )}
             </div>
-            {count > 0 && <div className="sidebar-item__count">{count}</div>}
+            {!fold && count > 0 && <div className="sidebar-item__count">{count}</div>}
         </div>
     );
 };
