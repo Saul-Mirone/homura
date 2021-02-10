@@ -16,7 +16,6 @@ const ToolkitItem: React.FC<ToolKitProps & { target: Mode; icon: JSX.Element }> 
 }) => (
     <IconContainer
         className={`py-1 ${mode === target ? 'bg-gray-300 text-gray-800' : ''}`}
-        size={4}
         onClick={() => onSwitchMode(target)}
     >
         {icon}

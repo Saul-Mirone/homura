@@ -4,7 +4,6 @@ export type IconContainerProps = {
     mini?: boolean;
     label?: string;
     className?: string;
-    size?: number;
     disabled?: boolean;
     onClick?: () => void;
 };
@@ -35,16 +34,12 @@ export const IconContainer: React.FC<IconContainerProps> = ({
     children,
     label = '',
     mini = false,
-    size = 5,
     disabled = false,
     className = '',
     onClick,
 }) => {
     const disabledClassName = React.useMemo(() => (disabled ? 'cursor-not-allowed' : ''), [disabled]);
-    const innerClassName = React.useMemo(() => `w-${size} h-${size} m-auto ${disabledClassName} `, [
-        disabledClassName,
-        size,
-    ]);
+    const innerClassName = React.useMemo(() => `w-5 h-5 m-auto ${disabledClassName} `, [disabledClassName]);
     const outerClassName = React.useMemo(
         () => (mini ? `${innerClassName} ${className}` : `p-2 ${disabledClassName} ${className}`),
         [className, disabledClassName, innerClassName, mini],
