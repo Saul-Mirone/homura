@@ -1,5 +1,6 @@
 import Database from 'better-sqlite3';
 import { app } from 'electron';
+import { ensureDirSync } from 'fs-extra';
 import path from 'path';
 import { getPost } from './getPost';
 import { getPostList, GetPostListOptions } from './getPostList';
@@ -18,7 +19,9 @@ export class Model {
 
     constructor() {
         // const dbPath = ':memory:';
-        const dbPath = path.resolve(app.getPath('appData'), 'homura', '0.0.2', 'database.sqlite');
+        const dbDir = path.resolve(app.getPath('appData'), 'homura', '0.0.2');
+        ensureDirSync(dbDir);
+        const dbPath = path.resolve(dbDir, 'database.sqlite');
         this.sqlite = new Database(dbPath, { verbose: console.log });
         this.initialize();
     }
