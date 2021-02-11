@@ -2,7 +2,7 @@
   "main": ".webpack/main",
   "name": "homura",
   "productName": "Homura",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Homura RSS Reader",
   "scripts": {
     "start": "cross-env NODE_ENV=development electron-forge start",

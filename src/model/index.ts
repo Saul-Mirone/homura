@@ -2,6 +2,7 @@ import Database from 'better-sqlite3';
 import { app } from 'electron';
 import { ensureDirSync } from 'fs-extra';
 import path from 'path';
+import { version } from '../../package.json';
 import { getPost } from './getPost';
 import { getPostList, GetPostListOptions } from './getPostList';
 import { getSourceList } from './getSourceList';
@@ -19,7 +20,7 @@ export class Model {
 
     constructor() {
         // const dbPath = ':memory:';
-        const dbDir = path.resolve(app.getPath('appData'), 'homura', '0.0.2');
+        const dbDir = path.resolve(app.getPath('appData'), 'homura', version);
         ensureDirSync(dbDir);
         const dbPath = path.resolve(dbDir, 'database.sqlite');
         this.sqlite = new Database(dbPath, { verbose: console.log });
