@@ -22,46 +22,42 @@ type CheckResult = {
 };
 
 type Event = IpcMainInvokeEvent;
-export type Listener = ReturnType<ChannelMain['listener']>;
+export type Listener = ChannelMain['listener'];
 
 export class ChannelMain {
     private parser: Parser;
 
-    private checkResult: CheckResult | null;
+    private checkResult?: CheckResult;
 
     constructor(private readonly db: Model) {
         this.parser = new Parser();
-        this.checkResult = null;
     }
 
-    public listener() {
-        return {
-            getSourceList: (_: Event, status: PostStatus) => this.db.getSourceList(status),
-            checkUrl: (_: Event, url: string) => this.handleCheckUrl(url),
-            confirm: (_: Event, name: string) => this.confirm(name),
-            getSourceById: (_: Event, id: number, status?: PostStatus) => this.db.getPostList({ id, type: status }),
-            getPostById: (_: Event, id: number) => this.db.getPost(id),
-            setPostUnread: (_: Event, id: number, unread: boolean) =>
-                this.db.updatePostStatus({ id, type: 'unread', value: unread }),
-            setPostStarred: (_: Event, id: number, starred: boolean) =>
-                this.db.updatePostStatus({ id, type: 'starred', value: starred }),
-            getPostByPreset: (_: Event, preset: Preset) => this.db.getPostList(preset),
-            markAllAsReadBySourceId: (_: Event, sourceId?: number) => this.db.markPostsAsRead(sourceId),
-            sync: () => this.sync(),
-            removeSourceById: (_: Event, sourceId: number) => this.db.unsubscribe(sourceId),
-            updateSourceNameById: (_: Event, sourceId: number, name: string) =>
-                this.db.updateSource({ id: sourceId, name }),
-        };
-    }
+    public listener = {
+        getSourceList: (_: Event, status: PostStatus) => this.db.getSourceList(status),
+        checkUrl: (_: Event, url: string) => this.handleCheckUrl(url),
+        confirm: (_: Event, name: string) => this.confirm(name),
+        getSourceById: (_: Event, id: number, status?: PostStatus) => this.db.getPostList({ id, type: status }),
+        getPostById: (_: Event, id: number) => this.db.getPost(id),
+        setPostUnread: (_: Event, id: number, unread: boolean) =>
+            this.db.updatePostStatus({ id, type: 'unread', value: unread }),
+        setPostStarred: (_: Event, id: number, starred: boolean) =>
+            this.db.updatePostStatus({ id, type: 'starred', value: starred }),
+        getPostByPreset: (_: Event, preset: Preset) => this.db.getPostList(preset),
+        markAllAsReadBySourceId: (_: Event, sourceId?: number) => this.db.markPostsAsRead(sourceId),
+        sync: () => this.sync(),
+        removeSourceById: (_: Event, sourceId: number) => this.db.unsubscribe(sourceId),
+        updateSourceNameById: (_: Event, sourceId: number, name: string) =>
+            this.db.updateSource({ id: sourceId, name }),
+    };
 
     public listen(): void {
-        listenToMain(this.listener());
+        listenToMain(this.listener);
     }
 
     private async sync() {
         await this.db.sync(async ({ sourceUrl }) => {
-            const { link = '', items = [] } = await this.checkURL(sourceUrl);
-            const faviconUrl = await getFaviconByUrl(link);
+            const { link, items, faviconUrl } = await this.parseDataByURL(sourceUrl);
             return {
                 link,
                 icon: faviconUrl,
@@ -78,8 +74,7 @@ export class ChannelMain {
 
     private async handleCheckUrl(url: string): Promise<string> {
         try {
-            const { title = '', link = '', items = [] } = await this.checkURL(url);
-            const faviconUrl = await getFaviconByUrl(link);
+            const { title, link, items, faviconUrl } = await this.parseDataByURL(url);
             this.checkResult = {
                 name: title,
                 link,
@@ -100,10 +95,10 @@ export class ChannelMain {
     }
 
     private confirm(name: string) {
-        const tmp: CheckResult | null = {
+        const tmp: CheckResult | undefined = {
             ...this.checkResult,
-        } as CheckResult | null;
-        this.checkResult = null;
+        } as CheckResult | undefined;
+        this.checkResult = undefined;
 
         if (!tmp) throw new Error();
         return this.db.subscribe({
@@ -115,7 +110,15 @@ export class ChannelMain {
         });
     }
 
-    private checkURL(url: string) {
-        return this.parser.parseURL(url);
+    private async parseDataByURL(url: string) {
+        const { title = '', link = '', items = [] } = await this.parser.parseURL(url);
+        const faviconUrl = await getFaviconByUrl(link);
+
+        return {
+            title,
+            link,
+            items,
+            faviconUrl,
+        };
     }
 }

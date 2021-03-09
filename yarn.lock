@@ -14,6 +14,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/code-frame@npm:^7.12.13":
+  version: 7.12.13
+  resolution: "@babel/code-frame@npm:7.12.13::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Fcode-frame%2Fdownload%2F%40babel%2Fcode-frame-7.12.13.tgz"
+  dependencies:
+    "@babel/highlight": ^7.12.13
+  checksum: 471532bb7cb4a300bd1a3201e75e7c0c83ebfb4e0e6610fdb53270521505d7efe0961258de61e7b1970ef3092a97ed675248ee1a44597912a1f61f903d85ef41
+  languageName: node
+  linkType: hard
+
 "@babel/compat-data@npm:^7.12.5, @babel/compat-data@npm:^7.12.7":
   version: 7.12.7
   resolution: "@babel/compat-data@npm:7.12.7::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Fcompat-data%2Fdownload%2F%40babel%2Fcompat-data-7.12.7.tgz"
@@ -52,6 +61,17 @@ __metadata:
     jsesc: ^2.5.1
     source-map: ^0.5.0
   checksum: eb76477ff89b609393fc002975fe7f9aafe91e915218e56a5f3cc6c5b54690762a06ff654b3d322ab454823b271c14e40bc8c92e97fa0a91a29f7f2047973b54
+  languageName: node
+  linkType: hard
+
+"@babel/generator@npm:^7.13.0":
+  version: 7.13.9
+  resolution: "@babel/generator@npm:7.13.9::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Fgenerator%2Fdownload%2F%40babel%2Fgenerator-7.13.9.tgz"
+  dependencies:
+    "@babel/types": ^7.13.0
+    jsesc: ^2.5.1
+    source-map: ^0.5.0
+  checksum: d9cf7db910dd703a55c3ba147a8024564d51de06f5e3e61aef6ca197bcd80a6cb0a633fe4688c8c9f6226c70ee6f32a747050a8e420972b45cc98a6b3fc5ae66
   languageName: node
   linkType: hard
 
@@ -113,6 +133,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/helper-create-class-features-plugin@npm:^7.13.0":
+  version: 7.13.10
+  resolution: "@babel/helper-create-class-features-plugin@npm:7.13.10::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Fhelper-create-class-features-plugin%2Fdownload%2F%40babel%2Fhelper-create-class-features-plugin-7.13.10.tgz"
+  dependencies:
+    "@babel/helper-function-name": ^7.12.13
+    "@babel/helper-member-expression-to-functions": ^7.13.0
+    "@babel/helper-optimise-call-expression": ^7.12.13
+    "@babel/helper-replace-supers": ^7.13.0
+    "@babel/helper-split-export-declaration": ^7.12.13
+  peerDependencies:
+    "@babel/core": ^7.0.0
+  checksum: 9d331528e12807a1697d4d24a5e98ca3587944d38927fe389880bb7882eaf6b004295d0c459aa3870090dfeb177bb787be1b2062a2e2587f34700c9c620681b8
+  languageName: node
+  linkType: hard
+
 "@babel/helper-create-regexp-features-plugin@npm:^7.12.1":
   version: 7.12.7
   resolution: "@babel/helper-create-regexp-features-plugin@npm:7.12.7::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Fhelper-create-regexp-features-plugin%2Fdownload%2F%40babel%2Fhelper-create-regexp-features-plugin-7.12.7.tgz"
@@ -156,12 +191,32 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/helper-function-name@npm:^7.12.13":
+  version: 7.12.13
+  resolution: "@babel/helper-function-name@npm:7.12.13::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Fhelper-function-name%2Fdownload%2F%40babel%2Fhelper-function-name-7.12.13.tgz"
+  dependencies:
+    "@babel/helper-get-function-arity": ^7.12.13
+    "@babel/template": ^7.12.13
+    "@babel/types": ^7.12.13
+  checksum: 25f03f303be790618437dc49c6df758d362112a564361d2eae66b58fda4f5ec09e62875473b18090b939c8d3d60b36aa7c9f688768b7fade511512d02ac9d3d0
+  languageName: node
+  linkType: hard
+
 "@babel/helper-get-function-arity@npm:^7.12.10":
   version: 7.12.10
   resolution: "@babel/helper-get-function-arity@npm:7.12.10::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Fhelper-get-function-arity%2Fdownload%2F%40babel%2Fhelper-get-function-arity-7.12.10.tgz"
   dependencies:
     "@babel/types": ^7.12.10
   checksum: 5c645ed43c320e207bdc46006f5ffc05a090e6ef639a84be324e6acba311b4e2d5213305137142bd1fb17d957d8b528e0b34362da6d9e2504a6496af17954090
+  languageName: node
+  linkType: hard
+
+"@babel/helper-get-function-arity@npm:^7.12.13":
+  version: 7.12.13
+  resolution: "@babel/helper-get-function-arity@npm:7.12.13::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Fhelper-get-function-arity%2Fdownload%2F%40babel%2Fhelper-get-function-arity-7.12.13.tgz"
+  dependencies:
+    "@babel/types": ^7.12.13
+  checksum: cfb5c39959ea9f1cc21ee0f4a23054be66a615fa5392f25763ea98f0c690a5b47500af9a63f28a42a2fb3f699684c113c45a95c4ce6303dfecb3358e32e56c76
   languageName: node
   linkType: hard
 
@@ -180,6 +235,15 @@ __metadata:
   dependencies:
     "@babel/types": ^7.12.7
   checksum: 313e78a21713886062826cc146422a3e5f5576a233b1ee5b6360735171638bacdec8809b625e49d0448ef7c16232b753a8af374ecf6347496182960e9ecdd0e2
+  languageName: node
+  linkType: hard
+
+"@babel/helper-member-expression-to-functions@npm:^7.13.0":
+  version: 7.13.0
+  resolution: "@babel/helper-member-expression-to-functions@npm:7.13.0::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Fhelper-member-expression-to-functions%2Fdownload%2F%40babel%2Fhelper-member-expression-to-functions-7.13.0.tgz"
+  dependencies:
+    "@babel/types": ^7.13.0
+  checksum: 9baaab9910a96c0f201b71c6cc39037dce5d32a321f61347ac489ddbef2bcbd232adcadeaa8e44d8c9a7216226c009b57f9d65697d90d7a8ed2c27682932d959
   languageName: node
   linkType: hard
 
@@ -218,10 +282,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/helper-optimise-call-expression@npm:^7.12.13":
+  version: 7.12.13
+  resolution: "@babel/helper-optimise-call-expression@npm:7.12.13::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Fhelper-optimise-call-expression%2Fdownload%2F%40babel%2Fhelper-optimise-call-expression-7.12.13.tgz"
+  dependencies:
+    "@babel/types": ^7.12.13
+  checksum: 5e4df5da4a45d7b7c100307efdc11f9fb460f943b4db1c60ddbdf57c3a7cbeecc8dea8980f4a9d4f3c38071b04d0e7c95af213229bcc1c13f17eb7293a6298a9
+  languageName: node
+  linkType: hard
+
 "@babel/helper-plugin-utils@npm:^7.0.0, @babel/helper-plugin-utils@npm:^7.10.4, @babel/helper-plugin-utils@npm:^7.8.0, @babel/helper-plugin-utils@npm:^7.8.3":
   version: 7.10.4
   resolution: "@babel/helper-plugin-utils@npm:7.10.4::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Fhelper-plugin-utils%2Fdownload%2F%40babel%2Fhelper-plugin-utils-7.10.4.tgz"
   checksum: 9f617e619a3557cb5fae8885e91cd94ba4ee16fb345e0360de0d7dc037efb10cc604939ecc1038ccdb71aa37e7e78f20133d7bbbebecb8f6dcdb557650366d92
+  languageName: node
+  linkType: hard
+
+"@babel/helper-plugin-utils@npm:^7.13.0":
+  version: 7.13.0
+  resolution: "@babel/helper-plugin-utils@npm:7.13.0::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Fhelper-plugin-utils%2Fdownload%2F%40babel%2Fhelper-plugin-utils-7.13.0.tgz"
+  checksum: 229ac1917b43ad38732d2d4a9a826f87d8945719249efe1d6191f3e25ba6027a289af70380d82d62a03fc9e82558a0ea6f12739cbb55b64bb280d6b511b4ca65
   languageName: node
   linkType: hard
 
@@ -245,6 +325,18 @@ __metadata:
     "@babel/traverse": ^7.12.10
     "@babel/types": ^7.12.11
   checksum: 0696dcff97b1069a01169df99c4ee39b6b966065e8587ad96d38247087967fccac00f52358730a4238d8907993acf98e6c2eef129399a8aa409751cf558c9e7d
+  languageName: node
+  linkType: hard
+
+"@babel/helper-replace-supers@npm:^7.13.0":
+  version: 7.13.0
+  resolution: "@babel/helper-replace-supers@npm:7.13.0::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Fhelper-replace-supers%2Fdownload%2F%40babel%2Fhelper-replace-supers-7.13.0.tgz"
+  dependencies:
+    "@babel/helper-member-expression-to-functions": ^7.13.0
+    "@babel/helper-optimise-call-expression": ^7.12.13
+    "@babel/traverse": ^7.13.0
+    "@babel/types": ^7.13.0
+  checksum: b32ab3f4d6a4e7f80c361eb9c0a001c2ae498f885248cb567c8de2475fb3dcbdf7ddd32a9e9a926abf55cf4f46faad7ceebfd3d035dea5508c3d9ba55d4083cc
   languageName: node
   linkType: hard
 
@@ -272,6 +364,15 @@ __metadata:
   dependencies:
     "@babel/types": ^7.12.11
   checksum: c2c8525116c2963effd7b1e57ebcd955f7c5f00c9ca90772c20e3f80548f8e1f71d5b82e3e99e80e5e0b3923124a60a2adfdfe21002fa7426ef67a8316dd7686
+  languageName: node
+  linkType: hard
+
+"@babel/helper-split-export-declaration@npm:^7.12.13":
+  version: 7.12.13
+  resolution: "@babel/helper-split-export-declaration@npm:7.12.13::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Fhelper-split-export-declaration%2Fdownload%2F%40babel%2Fhelper-split-export-declaration-7.12.13.tgz"
+  dependencies:
+    "@babel/types": ^7.12.13
+  checksum: c8d529558c45855542b7094de7b08e6c6de34922037a71596545dbb7a3be6ebf61b8b3193afe85fa5c9c35bcb0cc94110866deab8028f73e500bdc62427532c9
   languageName: node
   linkType: hard
 
@@ -323,12 +424,32 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/highlight@npm:^7.12.13":
+  version: 7.13.10
+  resolution: "@babel/highlight@npm:7.13.10::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Fhighlight%2Fdownload%2F%40babel%2Fhighlight-7.13.10.tgz"
+  dependencies:
+    "@babel/helper-validator-identifier": ^7.12.11
+    chalk: ^2.0.0
+    js-tokens: ^4.0.0
+  checksum: 8f23d3b728422713bfab45bee1e7584f2a3d2e20c9c4d6153312b898c82e776bdc5b1b2afaf9433fddb21d70417f5b477c0bb1a48613324fd761117e19a5702b
+  languageName: node
+  linkType: hard
+
 "@babel/parser@npm:^7.1.0, @babel/parser@npm:^7.12.10, @babel/parser@npm:^7.12.11, @babel/parser@npm:^7.12.7, @babel/parser@npm:^7.7.0":
   version: 7.12.11
   resolution: "@babel/parser@npm:7.12.11::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Fparser%2Fdownload%2F%40babel%2Fparser-7.12.11.tgz"
   bin:
     parser: ./bin/babel-parser.js
   checksum: 2f650e8e57342bdd1b624ba89d6df2332ee8e6ec0287316aa47d49a7bee8a6d9bab4581e753a4b72a2ddd8f272a2f9947f6c7f1ca191a0006a297789226f4b55
+  languageName: node
+  linkType: hard
+
+"@babel/parser@npm:^7.12.13, @babel/parser@npm:^7.13.0":
+  version: 7.13.10
+  resolution: "@babel/parser@npm:7.13.10::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Fparser%2Fdownload%2F%40babel%2Fparser-7.13.10.tgz"
+  bin:
+    parser: ./bin/babel-parser.js
+  checksum: 2eec48a075e11ad45031e82acf51061970ca8044cc296df1281512d8de0a8b478b04416ae411aa56f4ac99ed8cf2f40b9eeec27b6a99062c7b06628a1a7c6a69
   languageName: node
   linkType: hard
 
@@ -354,6 +475,18 @@ __metadata:
   peerDependencies:
     "@babel/core": ^7.0.0-0
   checksum: 690cbec3df2c4a1ec12c8a99b87dd4cc9aee07627dea957031549997267ee6ce59727ba44266dd83d3c6fb4cf759d14017ad9a530bf3d8f4447780947031449a
+  languageName: node
+  linkType: hard
+
+"@babel/plugin-proposal-class-properties@npm:^7.13.0":
+  version: 7.13.0
+  resolution: "@babel/plugin-proposal-class-properties@npm:7.13.0::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Fplugin-proposal-class-properties%2Fdownload%2F%40babel%2Fplugin-proposal-class-properties-7.13.0.tgz"
+  dependencies:
+    "@babel/helper-create-class-features-plugin": ^7.13.0
+    "@babel/helper-plugin-utils": ^7.13.0
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: c96bd172765edf25ec821f5b4d0620d26bd94f8a4cce9614458f7b3626d5ef8933b20cf031263fb4672ad1d5d72f3cd87fd65cc3c621846d179a1fb7acd65a20
   languageName: node
   linkType: hard
 
@@ -1469,6 +1602,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/template@npm:^7.12.13":
+  version: 7.12.13
+  resolution: "@babel/template@npm:7.12.13::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Ftemplate%2Fdownload%2F%40babel%2Ftemplate-7.12.13.tgz"
+  dependencies:
+    "@babel/code-frame": ^7.12.13
+    "@babel/parser": ^7.12.13
+    "@babel/types": ^7.12.13
+  checksum: 665977068a7036233b017396c0cd4856b6bb2ad9759e95e2325cbd198b98d2e26796f25977c8e12b5936d7d94f49cf883df9cffa3c91c797abdf27fc9b6bec65
+  languageName: node
+  linkType: hard
+
 "@babel/traverse@npm:^7.1.0, @babel/traverse@npm:^7.10.4, @babel/traverse@npm:^7.12.1, @babel/traverse@npm:^7.12.10, @babel/traverse@npm:^7.12.5, @babel/traverse@npm:^7.7.0":
   version: 7.12.12
   resolution: "@babel/traverse@npm:7.12.12::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Ftraverse%2Fdownload%2F%40babel%2Ftraverse-7.12.12.tgz"
@@ -1486,6 +1630,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/traverse@npm:^7.13.0":
+  version: 7.13.0
+  resolution: "@babel/traverse@npm:7.13.0::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Ftraverse%2Fdownload%2F%40babel%2Ftraverse-7.13.0.tgz"
+  dependencies:
+    "@babel/code-frame": ^7.12.13
+    "@babel/generator": ^7.13.0
+    "@babel/helper-function-name": ^7.12.13
+    "@babel/helper-split-export-declaration": ^7.12.13
+    "@babel/parser": ^7.13.0
+    "@babel/types": ^7.13.0
+    debug: ^4.1.0
+    globals: ^11.1.0
+    lodash: ^4.17.19
+  checksum: e5d1b690157da325b5bea98e472f4df0fff16048242a70880e2da7939b005ccd5b63d2b4527e203cfc71a422da0fa513c0ad84114bff002d583ebd7dbd2c8576
+  languageName: node
+  linkType: hard
+
 "@babel/types@npm:^7.0.0, @babel/types@npm:^7.10.4, @babel/types@npm:^7.10.5, @babel/types@npm:^7.12.1, @babel/types@npm:^7.12.10, @babel/types@npm:^7.12.11, @babel/types@npm:^7.12.12, @babel/types@npm:^7.12.5, @babel/types@npm:^7.12.7, @babel/types@npm:^7.3.0, @babel/types@npm:^7.3.3, @babel/types@npm:^7.4.4, @babel/types@npm:^7.7.0, @babel/types@npm:^7.8.3":
   version: 7.12.12
   resolution: "@babel/types@npm:7.12.12::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Ftypes%2Fdownload%2F%40babel%2Ftypes-7.12.12.tgz"
@@ -1494,6 +1655,17 @@ __metadata:
     lodash: ^4.17.19
     to-fast-properties: ^2.0.0
   checksum: 928554396cb6b367e00cb6d41aee4ea0228872e8cda221d81abe786462799ecc63993f3c16845b30cd68e673269704f8007f4edc105a32c6d7e03e68a670a676
+  languageName: node
+  linkType: hard
+
+"@babel/types@npm:^7.12.13, @babel/types@npm:^7.13.0":
+  version: 7.13.0
+  resolution: "@babel/types@npm:7.13.0::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Ftypes%2Fdownload%2F%40babel%2Ftypes-7.13.0.tgz"
+  dependencies:
+    "@babel/helper-validator-identifier": ^7.12.11
+    lodash: ^4.17.19
+    to-fast-properties: ^2.0.0
+  checksum: a47357647a92c08ee2f5059210d37fd7fe190e8d4ef71dd97ba61c6ca7b7e979660bc8ba00fdc51249c037199b634dd984fde8d7a622fdd5e3e2161fe65e94c3
   languageName: node
   linkType: hard
 
@@ -8623,7 +8795,7 @@ fsevents@^1.2.7:
   resolution: "homura@workspace:."
   dependencies:
     "@babel/core": ^7.12.9
-    "@babel/plugin-proposal-class-properties": ^7.12.1
+    "@babel/plugin-proposal-class-properties": ^7.13.0
     "@babel/plugin-proposal-decorators": ^7.12.1
     "@babel/plugin-proposal-do-expressions": ^7.12.1
     "@babel/plugin-proposal-export-default-from": ^7.12.1
